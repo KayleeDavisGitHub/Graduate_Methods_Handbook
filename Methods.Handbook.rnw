@@ -5,6 +5,13 @@
 %%! Document created using R's .rnw document editing, not LaTeX
 %   platform (although both should work). UTF-8
 %   Consider knitr, index, and bibliography when compiling.
+%   Please read preamble, change file locations as neccesary.
+%   Similarly, some data are called file a local file-path.
+
+%%! All data are free and fair use, but please consider proper citation.
+%   Some data have been collected via Google Big Query and TwittR;
+%      These data have only partially been deidentified; please consider online
+%      privacy when publishing/sharing data used here.
 
 
 %------------ Quick Note on Coding Conventions -----------------
@@ -21,14 +28,6 @@
 
 %----------------------- Preamble ------------------------------
 
-%!              Previously used Packages:
-%     bm, multirow, subfigure,
-%     Setspace is what messes up with the header I think
-%     \usepackage{color}
-%     \newcolumntype{d}[1]{D{.}{.}{#1}}
-%     \usepackage{url}
-%     \usepackage[utf8]{inputenc}
-
 \documentclass[12pt]{article}
 
 % Margins:
@@ -38,6 +37,9 @@
 \usepackage{scrextend}
 \usepackage{graphicx, fullpage, relsize, epsfig}    % tex tools
 \usepackage{amsfonts, amsmath, amsthm, amssymb, mathtools, fdsymbol} % Math tools/ symbols
+
+% Setting local graphics pathing:
+\graphicspath{{C:/Users/Shing/Documents/GLM/Graduate_Methods_Handbook/figure/}}
 
 % No idea:
 \usepackage{siunitx}
@@ -108,9 +110,9 @@
 \usepackage{titling}
 \date{\today} % so that it's today (specified)
 
-%-------------------------------------------------------------------
-%------------------------- Begin Document --------------------------
-%-------------------------------------------------------------------
+% -------------------------------------------------------------------
+% ------------------------- Begin Document --------------------------
+% -------------------------------------------------------------------
 \makeindex
 \begin{document}
 %\graphicspath{Data Files}
@@ -132,7 +134,7 @@ The document here also follows a small dataset on beer rankings initially then c
 \url{https://www.rdocumentation.org/packages/faraway/versions/1.0.7}
 \end{center}
 
-Code for visualizations is included often but not always feel free to email me for any code or data, including for \LaTeX. But ultimately this tutorial is less about replicating my results but to provide easily accessible tools for social scientists to use in their own research. That is, this document really is only a first pass at a lot of these methods, to learn them better I would sugguest using them. This is also not an exaustive list, I may reference something but never cover it later on. This only covers courses I've taken in my PhD program at Ohio State.
+Code for visualizations is included often but not always feel free to email me for any code or data, including for \LaTeX. But ultimately this tutorial is less about replicating my results but to provide easily accessible tools for social scientists to use in their own research. That is, this document is only a first pass at a lot of these methods, to learn them better I would sugguest using them and failing over and over until something is learned. This is also not an exaustive list, I may reference something but never cover it later on. This only covers courses I've taken in my PhD program at Ohio State.
 
 Code in this document will appear as follows:
 
@@ -163,7 +165,16 @@ inverse_logit <- function(x){
 
 \begin{center}
 Created by Kyle Davis; davis.5211@osu.edu.\\ Summer 2017 --- \thedate ~(last updated)
+
+For the most recent version:
+
+\begin{center}
+\url{https://github.com/KyleDavisGithub/Graduate_Methods_Handbook}
 \end{center}
+
+Any questions or concerns can be sent to me directly: davis.5211@osu.edu
+\end{center}
+
 
 
 
@@ -178,8 +189,6 @@ Created by Kyle Davis; davis.5211@osu.edu.\\ Summer 2017 --- \thedate ~(last upd
 %%! Page for Table of Contents:
 \tableofcontents
 \thispagestyle{empty}
-
-
 
 
 %%! Clear page; set page counter at page "1"
@@ -218,8 +227,6 @@ $X_{it}$ & All Rows Within X (i) and At Each Time (t)\\
 
 \clearpage
 %-----------------------------------------------------------------------------------
-
-
 
 \subsection{Pearl vs. Rubin Models of Causal Inference}
 \hfill \\
