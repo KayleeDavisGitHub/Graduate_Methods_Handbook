@@ -1,0 +1,56 @@
+\indexentry{cause|hyperpage}{1}
+\indexentry{Curse of Dimensionality|hyperpage}{3}
+\indexentry{DAG|hyperpage}{3}
+\indexentry{Back-Door-Paths|hyperpage}{3}
+\indexentry{colliders|hyperpage}{3}
+\indexentry{Naive Differences in Means|hyperpage}{3}
+\indexentry{SUTVA|hyperpage}{4}
+\indexentry{confounding|hyperpage}{4}
+\indexentry{selection on observables|hyperpage}{4}
+\indexentry{ignorability|hyperpage}{4}
+\indexentry{blocking|hyperpage}{4}
+\indexentry{selection on observables|hyperpage}{4}
+\indexentry{back door paths|hyperpage}{4}
+\indexentry{saturated modeling|hyperpage}{5}
+\indexentry{imputation|hyperpage}{5}
+\indexentry{p-values|hyperpage}{5}
+\indexentry{sharp null hypothesis|hyperpage}{5}
+\indexentry{MLE|hyperpage}{9}
+\indexentry{Marginal Structural Modeling|hyperpage}{9}
+\indexentry{matching|hyperpage}{11}
+\indexentry{propensity scores|hyperpage}{11}
+\indexentry{coarse matching|hyperpage}{11}
+\indexentry{nearest-neighbor|hyperpage}{11}
+\indexentry{subclassification|hyperpage}{11}
+\indexentry{Fixed Effects|hyperpage}{11}
+\indexentry{Marginal Structural Models|hyperpage}{11}
+\indexentry{Differences in Differences|hyperpage}{12}
+\indexentry{loading data|hyperpage}{15}
+\indexentry{recoding data|hyperpage}{15}
+\indexentry{texreg package|hyperpage}{16}
+\indexentry{R$^2$|hyperpage}{17}
+\indexentry{Simulation|hyperpage}{17}
+\indexentry{base-R plotting|hyperpage}{17}
+\indexentry{checking linear models|hyperpage}{20}
+\indexentry{link function|hyperpage}{26}
+\indexentry{texreg package|hyperpage}{27}
+\indexentry{texreg package|hyperpage}{29}
+\indexentry{``divide by four''|hyperpage}{29}
+\indexentry{Binned Residuals|hyperpage}{31}
+\indexentry{Rope Ladder Ploting|hyperpage}{33}
+\indexentry{link function|hyperpage}{44}
+\indexentry{Kaplan-Meier|hyperpage}{63}
+\indexentry{Augmented Dicky Fuller|hyperpage}{67}
+\indexentry{KPSS Test|hyperpage}{67}
+\indexentry{Granger Causality|hyperpage}{67}
+\indexentry{Vector Auto Regression|hyperpage}{68}
+\indexentry{Innovation Accounting|hyperpage}{69}
+\indexentry{recoding data|hyperpage}{74}
+\indexentry{ggplot|hyperpage}{80}
+\indexentry{ggplot|hyperpage}{90}
+\indexentry{DAG|hyperpage}{93}
+\indexentry{utility|hyperpage}{93}
+\indexentry{First Best|hyperpage}{93}
+\indexentry{Nash Equilibrium|hyperpage}{93}
+\indexentry{subgame perfect Nash Equilibrium|hyperpage}{94}
+\indexentry{comparative static|hyperpage}{94}

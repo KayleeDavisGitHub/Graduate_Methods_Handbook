@@ -1,0 +1,73 @@
+\select@language {american}
+\contentsline {section}{\numberline {1}Causal Inference and Assumptions}{1}{section.1}
+\contentsline {subsection}{\numberline {1.1}Pearl vs. Rubin Models of Causal Inference}{2}{subsection.1.1}
+\contentsline {subsubsection}{The DAG Plot}{2}{equation.1.2}
+\contentsline {subsection}{\numberline {1.2}Treatment (Causal) Effects, SUTVA, Confounding}{3}{subsection.1.2}
+\contentsline {subsection}{\numberline {1.3}Identification Through Randomization, Hypothesis Testing}{5}{subsection.1.3}
+\contentsline {subsection}{\numberline {1.4}Frequentism and Bayesianism: What are we really doing here?}{7}{subsection.1.4}
+\contentsline {subsection}{\numberline {1.5}Running Assumptions}{9}{subsection.1.5}
+\contentsline {subsection}{\numberline {1.6}Non-parametric Modeling}{9}{subsection.1.6}
+\contentsline {subsubsection}{\numberline {1.6.1}Multiple Comparisons}{9}{subsubsection.1.6.1}
+\contentsline {subsubsection}{\numberline {1.6.2}Marginal Structural Models (MSM)}{9}{subsubsection.1.6.2}
+\contentsline {subsection}{\numberline {1.7}Finding Causal Estimands:}{11}{subsection.1.7}
+\contentsline {subsubsection}{\numberline {1.7.1}Matching and Propensity Scores:}{11}{subsubsection.1.7.1}
+\contentsline {subsubsection}{\numberline {1.7.2}Fixed Effects:}{11}{subsubsection.1.7.2}
+\contentsline {subsubsection}{\numberline {1.7.3}Differences in Differences}{12}{subsubsection.1.7.3}
+\contentsline {subsubsection}{\numberline {1.7.4}Instrumental Variables}{12}{subsubsection.1.7.4}
+\contentsline {section}{\numberline {2}Survey Design}{13}{section.2}
+\contentsline {subsection}{\numberline {2.1}The Survey Experiment}{13}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}Types of Questions}{13}{subsection.2.2}
+\contentsline {subsection}{\numberline {2.3}Psychology of Design}{13}{subsection.2.3}
+\contentsline {subsubsection}{\numberline {2.3.1}The "Don't Know" Option:}{13}{subsubsection.2.3.1}
+\contentsline {subsection}{\numberline {2.4}Useful Rules of Thumb}{13}{subsection.2.4}
+\contentsline {subsection}{\numberline {2.5}Research on Survey Biases}{13}{subsection.2.5}
+\contentsline {section}{\numberline {3}Regression:}{14}{section.3}
+\contentsline {subsection}{\numberline {3.1}Modeling Assumptions, Diagnostics}{19}{subsection.3.1}
+\contentsline {subsubsection}{\numberline {3.1.1}Missing Data}{23}{subsubsection.3.1.1}
+\contentsline {subsubsection}{\numberline {3.1.2}Model Specificiation, Distributional Functions}{25}{subsubsection.3.1.2}
+\contentsline {subsection}{\numberline {3.2}Logit and Probit Modeling:}{26}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.3}Poisson Modeling:}{36}{subsection.3.3}
+\contentsline {subsubsection}{Likelihood Ratio Test, Deviance, AIC, and BIC}{41}{table.caption.14}
+\contentsline {subsection}{\numberline {3.4}Ordered Logistic Modeling:}{44}{subsection.3.4}
+\contentsline {subsubsection}{Bootstrapping}{44}{table.caption.15}
+\contentsline {subsection}{\numberline {3.5}Multinomial Nominal Modeling:}{51}{subsection.3.5}
+\contentsline {subsection}{\numberline {3.6}Survival Modeling:}{54}{subsection.3.6}
+\contentsline {subsection}{\numberline {3.7}Conclusion, Quick Reference}{61}{subsection.3.7}
+\contentsline {section}{\numberline {4}Machine Learning}{64}{section.4}
+\contentsline {subsection}{\numberline {4.1}Simulation, Replication, Bootstrapping}{64}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.2}Cross Validation}{64}{subsection.4.2}
+\contentsline {subsection}{\numberline {4.3}Penalized Regression}{64}{subsection.4.3}
+\contentsline {subsection}{\numberline {4.4}K Nearest Neighbors, Nearest Means}{64}{subsection.4.4}
+\contentsline {subsection}{\numberline {4.5}Support Vector Models}{64}{subsection.4.5}
+\contentsline {subsection}{\numberline {4.6}Regression Trees}{64}{subsection.4.6}
+\contentsline {section}{\numberline {5}Timeseries Data}{65}{section.5}
+\contentsline {subsection}{\numberline {5.1}Data Concerns}{65}{subsection.5.1}
+\contentsline {subsection}{\numberline {5.2}Differencing}{65}{subsection.5.2}
+\contentsline {subsection}{\numberline {5.3}Identifying AR;MA - ACF, PACF}{65}{subsection.5.3}
+\contentsline {subsection}{\numberline {5.4}Unit Roots}{65}{subsection.5.4}
+\contentsline {subsection}{\numberline {5.5}ARIMA}{65}{subsection.5.5}
+\contentsline {subsection}{\numberline {5.6}VAR}{65}{subsection.5.6}
+\contentsline {subsubsection}{\numberline {5.6.1}Example VAR}{65}{subsubsection.5.6.1}
+\contentsline {section}{\numberline {6}Network Analysis}{74}{section.6}
+\contentsline {subsection}{\numberline {6.1}Network Theory}{74}{subsection.6.1}
+\contentsline {subsection}{\numberline {6.2}Network Data, Nodes, and Edges}{74}{subsection.6.2}
+\contentsline {subsection}{\numberline {6.3}Summary Statistics of Networks}{74}{subsection.6.3}
+\contentsline {subsection}{\numberline {6.4}Centrality}{74}{subsection.6.4}
+\contentsline {subsubsection}{\numberline {6.4.1}Data Viz}{85}{subsubsection.6.4.1}
+\contentsline {section}{\numberline {7}Field Research Design: The Qualitative Alternative}{91}{section.7}
+\contentsline {subsection}{\numberline {7.1}Qualitative Value}{91}{subsection.7.1}
+\contentsline {subsection}{\numberline {7.2}Advice, Tools, Resources}{91}{subsection.7.2}
+\contentsline {subsection}{\numberline {7.3}How to Use Qualitative Evidence}{91}{subsection.7.3}
+\contentsline {section}{\numberline {8}Content Analysis}{92}{section.8}
+\contentsline {subsection}{\numberline {8.1}The Protocol}{92}{subsection.8.1}
+\contentsline {subsection}{\numberline {8.2}The Coding Sheet}{92}{subsection.8.2}
+\contentsline {subsection}{\numberline {8.3}Reliability Measurements}{92}{subsection.8.3}
+\contentsline {subsection}{\numberline {8.4}Analysis}{92}{subsection.8.4}
+\contentsline {section}{\numberline {9}Formal Modeling}{93}{section.9}
+\contentsline {subsection}{\numberline {9.1}How can Formal Modeling Help?}{93}{subsection.9.1}
+\contentsline {subsection}{\numberline {9.2}Components of Game Theory}{93}{subsection.9.2}
+\contentsline {subsection}{\numberline {9.3}Popular Games for Neat Examples}{94}{subsection.9.3}
+\contentsline {subsection}{\numberline {9.4}Games with Political Relevance}{94}{subsection.9.4}
+\contentsline {subsection}{\numberline {9.5}Structuring Your Own Formal Model}{94}{subsection.9.5}
+\contentsline {section}{Further Reading:}{95}{subsection.9.5}
+\contentsline {section}{Index}{95}{subsection.9.5}

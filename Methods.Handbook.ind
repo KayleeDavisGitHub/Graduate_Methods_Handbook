@@ -1,0 +1,104 @@
+\begin{theindex}
+
+  \item ``divide by four'', \hyperpage{29}
+
+  \indexspace
+
+  \item Augmented Dicky Fuller, \hyperpage{67}
+
+  \indexspace
+
+  \item back door paths, \hyperpage{4}
+  \item Back-Door-Paths, \hyperpage{3}
+  \item base-R plotting, \hyperpage{17}
+  \item Binned Residuals, \hyperpage{31}
+  \item blocking, \hyperpage{4}
+
+  \indexspace
+
+  \item cause, \hyperpage{1}
+  \item checking linear models, \hyperpage{20}
+  \item coarse matching, \hyperpage{11}
+  \item colliders, \hyperpage{3}
+  \item comparative static, \hyperpage{94}
+  \item confounding, \hyperpage{4}
+  \item Curse of Dimensionality, \hyperpage{3}
+
+  \indexspace
+
+  \item DAG, \hyperpage{3}, \hyperpage{93}
+  \item Differences in Differences, \hyperpage{12}
+
+  \indexspace
+
+  \item First Best, \hyperpage{93}
+  \item Fixed Effects, \hyperpage{11}
+
+  \indexspace
+
+  \item ggplot, \hyperpage{80}, \hyperpage{90}
+  \item Granger Causality, \hyperpage{67}
+
+  \indexspace
+
+  \item ignorability, \hyperpage{4}
+  \item imputation, \hyperpage{5}
+  \item Innovation Accounting, \hyperpage{69}
+
+  \indexspace
+
+  \item Kaplan-Meier, \hyperpage{63}
+  \item KPSS Test, \hyperpage{67}
+
+  \indexspace
+
+  \item link function, \hyperpage{26}, \hyperpage{44}
+  \item loading data, \hyperpage{15}
+
+  \indexspace
+
+  \item Marginal Structural Modeling, \hyperpage{9}
+  \item Marginal Structural Models, \hyperpage{11}
+  \item matching, \hyperpage{11}
+  \item MLE, \hyperpage{9}
+
+  \indexspace
+
+  \item Naive Differences in Means, \hyperpage{3}
+  \item Nash Equilibrium, \hyperpage{93}
+  \item nearest-neighbor, \hyperpage{11}
+
+  \indexspace
+
+  \item p-values, \hyperpage{5}
+  \item propensity scores, \hyperpage{11}
+
+  \indexspace
+
+  \item R$^2$, \hyperpage{17}
+  \item recoding data, \hyperpage{15}, \hyperpage{74}
+  \item Rope Ladder Ploting, \hyperpage{33}
+
+  \indexspace
+
+  \item saturated modeling, \hyperpage{5}
+  \item selection on observables, \hyperpage{4}
+  \item sharp null hypothesis, \hyperpage{5}
+  \item Simulation, \hyperpage{17}
+  \item subclassification, \hyperpage{11}
+  \item subgame perfect Nash Equilibrium, \hyperpage{94}
+  \item SUTVA, \hyperpage{4}
+
+  \indexspace
+
+  \item texreg package, \hyperpage{16}, \hyperpage{27}, \hyperpage{29}
+
+  \indexspace
+
+  \item utility, \hyperpage{93}
+
+  \indexspace
+
+  \item Vector Auto Regression, \hyperpage{68}
+
+\end{theindex}
