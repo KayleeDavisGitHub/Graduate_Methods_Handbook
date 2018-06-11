@@ -25,7 +25,7 @@
 %  %!   usually indicates an important comment, or section
 %  #    The same is true for notes in R code (##!) and (#---)
 
-
+% heyo internet!
 %----------------------- Preamble ------------------------------
 
 \documentclass[12pt]{article}
@@ -2710,7 +2710,6 @@ corrplot(x, type="upper", order="hclust")
 
 
 I find it easier to think about correlation by looking at the plot (albiet a very rough plot). The two ``darkest'' or most correlated measures was the in-degree with degree, and the degree with the out-degree. This makes sense because the degree is encapsulating both of those measures. All measures are positively correlated, except the eigenvector centrality measure compared to closeness and betweeness. This is likely because of the different assumptions and properties each of these measures have. For example, eigenvector centrality Trafic moves along unrestricted walks, Trafic can effect subsequent nodes simultaneously, and eigenvector centrality measures long-term and indirect risks. Other measures may not have these properties, so it is probably best that they are not too closely correlated.
-
 
 
 %--------------------------------------
