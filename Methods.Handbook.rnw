@@ -25,7 +25,6 @@
 %  %!   usually indicates an important comment, or section
 %  #    The same is true for notes in R code (##!) and (#---)
 
-% heyo internet!
 %----------------------- Preamble ------------------------------
 
 \documentclass[12pt]{article}
