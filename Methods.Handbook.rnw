@@ -2513,10 +2513,205 @@ multiplot(p1, p2, p3, predictm5, cols=3, rows=2)
 Here we see the three estimates from our simulation and our model's prediction based upon the R \texttt{predict()} command. Our estimates are definately off and our predictions seem to be off because of this. Perhaps running a proper logit or probit model will help. We could run the same DGP but with the proper modeling using the \texttt{glm()} function, and the proper link function if we so desired.
 
 
+\subsection{Penalized Regression: LASSO, Ridge, Elastic Net}
 
-\subsection{Cross Validation}
+Let's use simulation to test out a few penalized regression models in R, starting with making a new DGP:
 
-\subsection{Penalized Regression}
+<<PenRegressDGP1>>=
+set.seed(12345)
+library(caret) #! for train() and Penalized Regression Functions
+library(MASS) # mvrnorm()
+library(Rlab) # for rbern()
+
+N <- 1000
+P <- 100
+# Wishart distribution for positive definite matricies
+Sigma <- rWishart(n=1, df=P, Sigma=diag(P))[,,1]
+X <- mvrnorm(N, runif(P, -10, 10), Sigma)
+p <- rbern(P, 0.1)
+b <- p * rnorm(P, 5, 5) + (1-p) * rnorm(P, 0, 0.1)
+e <- rnorm(N, 0, sd=sqrt(10))
+y = X%*%b + e
+m1 <- lm(y~X)
+# Set data frame
+my_data = data.frame(X,y)
+@
+
+Then we can use a few other functions to make a test set training set: \index{Test Set Training Set}
+
+<<TSTSPenRegress1>>=
+## Test Set (20%); Training Set (80%)
+# Get 800 random index from y
+trainidx <- createDataPartition(y, times = 1, p=.80, list=FALSE)
+trainy <- y[trainidx]  # Get traniing set index numbers; sample y's values
+testy <- y[-trainidx]  # Other 20% for test set (y)
+trainx <- X[trainidx,] # same for setting up X variable:
+testx <- X[-trainidx,]
+
+# Create Data Frames for these:
+train_data = data.frame(trainx, trainy)
+test_data = data.frame(testx, testy)
+@
+
+The idea here is to do data manipulation and all testing for significance just on a training set, using the test set to come in later to ``prove'' that everything is good-to-go independent of your training manipulations. It's a great practice, with many ways to do it in R; which will be showcased throughout this chapter. I prefer the \texttt{createDataPartition()} function myself.
+
+Let us first plot the correlation between the true $\beta$ and our model's predicted $\beta$:
+
+\begin{center}
+<<betabetatestPenRegress1>>=
+library(ggplot2) # Graphing
+
+qplot(b, coef(m1)[-1])+
+     xlab( expression(paste("True " , beta)))+
+     ylab( expression(paste("Model " , hat(beta), " Values")))+
+     theme_bw()+
+     theme(axis.text=element_text(size=12),
+           axis.title=element_text(size=14,face="bold"))
+@
+\end{center}
+
+These results make sense, most of our beta’s cluster with a mean around zero and some of our beta’s are outward with a mean around five and a larger standard deviation. Now, using our training data and leaving the test data aside, let’s run the same model within the training data, and examine the errors in a few different ways:
+
+\begin{center}
+<<examineerrorsML>>=
+
+## Training Model:
+trainmod <- lm(train_data$trainy ~ trainx, data = train_data)
+# summary(trainmod) # Check that this makes sense
+
+error <- train_data$trainy - predict(trainmod)
+# head(error) # Check this makes sense
+
+# Ideally we want normality here, mean zero
+qplot(error, bins=50, fill=I("grey10"))+
+     xlab( "Model Errors")+
+     ylab( "Count")+
+     theme_bw()+
+     theme(axis.text=element_text(size=12),
+           axis.title=element_text(size=14))
+@
+\end{center}
+
+<<errorsinafewwaysML>>=
+## Root Mean Squred Error
+sqrt(mean(error^2))
+## [1] 3.039912
+
+## Mean Aboslute Error
+mean(abs(error))
+## [1] 2.415841
+@
+
+Using just our training data with the linear model we see our root mean squared error and mean absolute error are about around 3, pretty low. More intutitvely, our errors when plotted are normally distributed with a mean of zero. We can revisit this with a LASSO and Ridge regression to penalize us for having so many parameters for so few observations. Using penalized regression is especially helpful with models that have a large number of predictors relative to our sample size. The ``elastic net'' is particularly useful because it ``switches'' between two other penalties (using $\alpha$), the ``LASSO'' (Least Aboslute Shrinkage and Selection Operator uses a squared transformation) and “Ridge” (using the absolute value of our coefficents), applying both of these in an ever-checking gradient descent down our distribution to the point of least error. Ideally we would like a smooth distribution in this process instead of quick-changing erratic distribution and the elastic net provides the previously mentioned functions to accomplish this via the transformation of our coecents as they travel farther away from zero.\index{LASSO} \index{Ridge} \index{Elastic Net}
+
+Let's begin with the LASSO:
+
+\begin{center}
+<<LASSO1ML>>=
+# Remember our training data frame:
+train_data = data.frame(trainx, trainy)
+
+mod_lasso = train(trainy~., method="glmnet",# formula and method
+     tuneGrid=expand.grid(alpha=0, # alpha=0 is the LASSO
+     lambda=seq(0,100,1)), #gradient descent to zero
+     data=train_data,
+     preProcess=c("center"),# centering standardization of points
+     trControl=trainControl(method="cv",number=2, search="grid"))
+# "trainControl" sets a resampling method per a "search" parameter grid
+# mod_lasso ## final values were around lambda = 14 using RMSE
+
+## Narrowing lambda sequence closer to what the lambda reported earlier:
+mod_lasso = train(trainy~., method="glmnet",
+     tuneGrid=expand.grid(alpha=0,
+     # *setting bounds closer around 14; smaller "steps" (0.01)
+     lambda=seq(0,40,0.01)),
+     data=train_data,
+     preProcess=c("center"),
+     trControl=trainControl(method="cv",number=2, search="grid"))
+     # mod_lasso ## Narrowing in, we found a new best lambda of around 14.5!
+
+## Predictions:
+yhat = predict(mod_lasso)
+# alpha allows transparent points to see density
+qplot(trainy, yhat, alpha=I(0.25))+
+     xlab( expression(paste("Training ", y)))+
+     ylab( expression(paste("Ridge ", hat(y))))+
+     theme_bw()+
+     theme(axis.text=element_text(size=12),
+     axis.title=element_text(size=14))
+@
+\end{center}
+\index{GGplot}
+
+\begin{center}
+<<LASSOvaluesML1>>=
+# best values using best lambda:
+lasso_beta = coef(mod_lasso$finalModel, mod_lasso$bestTune$lambda)
+
+qplot(b, lasso_beta[-1])+ # removing intercept
+     xlab( expression(paste("True ", beta)))+
+     ylab( expression(paste("LASSO ", beta)))+
+     theme_bw()+
+     theme(axis.text=element_text(size=12),
+     axis.title=element_text(size=14))
+@
+\end{center}
+
+What this tells us is that our predicted values from the LASSO model does well with our training $y$ data. Specifcally, in the first figure we see that our training dependent variable and our penalized LASSO predictions match with each other positively. In the second figure, we see our actual beta’s more accurately plotted in conjunction with the LASSO’s best fit betas.
+Similarly, let’s see how the Ridge and elastic net’s hold up:
+
+\begin{center}
+<<RidgeNetML1>>=
+## Running Ridge:
+mod_ridge = train(trainy~., method="glmnet",
+          tuneGrid=expand.grid(alpha=1,
+               lambda=seq(0,10,0.01)),
+          data=train_data,
+          preProcess=c("center"),
+          trControl=trainControl(method="cv",number=2, search="grid"))
+# Best lambda (RMSE) is 1.01
+
+mod_ridge = train(trainy~., method="glmnet",
+          tuneGrid=expand.grid(alpha=1,
+               lambda=seq(0,3,0.01)),
+          data=train_data,
+          preProcess=c("center"),
+          trControl=trainControl(method="cv",number=2, search="grid"))
+
+# New best lambda of .94
+yhat = predict(mod_ridge)
+
+qplot(trainy, yhat, alpha=I(0.25))+
+     xlab( expression(paste("Training ", y)))+
+     ylab( expression(paste("Ridge ", hat(y))))+
+     theme_bw()+
+     theme(axis.text=element_text(size=12),
+     axis.title=element_text(size=14))
+
+@
+\end{center}
+
+\begin{center}
+<<Ridgenet2MLthing>>=
+ridge_beta = coef(mod_ridge$finalModel, mod_ridge$bestTune$lambda)
+
+qplot(b, ridge_beta[-1])+
+     xlab( expression(paste("True ", beta)))+
+     ylab( expression(paste("Ridge ", beta)))+
+     theme_bw()+
+     theme(axis.text=element_text(size=12),
+     axis.title=element_text(size=14))
+@
+\end{center}
+
+Our ridge regression shows less variability, our training set $y$ values and ridge predicted values are more tightly linear, and there is less variability in our comparative $\beta$ values in the plot above. This is interesting and is perhaps explained in the difference between the mathematical formula between Ridge and LASSO themselves (letting $\lambda$ control the amount of regulation in gradient descent):
+
+
+%%%
+% Left off on lab 3 midway; before describing math.
+%%%
+
+
 
 \subsection{K Nearest Neighbors, Nearest Means}
 

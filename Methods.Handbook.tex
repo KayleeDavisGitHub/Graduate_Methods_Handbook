@@ -2713,10 +2713,139 @@ That perhaps seemed too complicated, but I wanted to show the MASS and RLab pack
 Here we see the three estimates from our simulation and our model's prediction based upon the R \texttt{predict()} command. Our estimates are definately off and our predictions seem to be off because of this. Perhaps running a proper logit or probit model will help. We could run the same DGP but with the proper modeling using the \texttt{glm()} function, and the proper link function if we so desired.
 
 
+\subsection{Penalized Regression: LASSO, Ridge, Elastic Net}
 
-\subsection{Cross Validation}
+Let's use simulation to test out a few penalized regression models in R, starting with making a new DGP:
 
-\subsection{Penalized Regression}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.165, 0.169, 0.184}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{> }\hlkwd{set.seed}\hlstd{(}\hlnum{12345}\hlstd{)}
+\hlstd{> }\hlkwd{library}\hlstd{(caret)} \hlcom{#! for train() and Penalized Regression Functions}
+\end{alltt}
+
+
+{\ttfamily\noindent\color{warningcolor}{\#\# Warning: package 'caret' was built under R version 3.3.3}}\begin{alltt}
+\hlstd{> }\hlkwd{library}\hlstd{(MASS)} \hlcom{# mvrnorm()}
+\hlstd{> }\hlkwd{library}\hlstd{(Rlab)} \hlcom{# for rbern()}
+\hlstd{> }
+\hlstd{> }\hlstd{N} \hlkwb{<-} \hlnum{1000}
+\hlstd{> }\hlstd{P} \hlkwb{<-} \hlnum{100}
+\hlstd{> }\hlcom{# Wishart distribution for positive definite matricies}
+\hlstd{> }\hlstd{Sigma} \hlkwb{<-} \hlkwd{rWishart}\hlstd{(}\hlkwc{n}\hlstd{=}\hlnum{1}\hlstd{,} \hlkwc{df}\hlstd{=P,} \hlkwc{Sigma}\hlstd{=}\hlkwd{diag}\hlstd{(P))[,,}\hlnum{1}\hlstd{]}
+\hlstd{> }\hlstd{X} \hlkwb{<-} \hlkwd{mvrnorm}\hlstd{(N,} \hlkwd{runif}\hlstd{(P,} \hlopt{-}\hlnum{10}\hlstd{,} \hlnum{10}\hlstd{), Sigma)}
+\hlstd{> }\hlstd{p} \hlkwb{<-} \hlkwd{rbern}\hlstd{(P,} \hlnum{0.1}\hlstd{)}
+\hlstd{> }\hlstd{b} \hlkwb{<-} \hlstd{p} \hlopt{*} \hlkwd{rnorm}\hlstd{(P,} \hlnum{5}\hlstd{,} \hlnum{5}\hlstd{)} \hlopt{+} \hlstd{(}\hlnum{1}\hlopt{-}\hlstd{p)} \hlopt{*} \hlkwd{rnorm}\hlstd{(P,} \hlnum{0}\hlstd{,} \hlnum{0.1}\hlstd{)}
+\hlstd{> }\hlstd{e} \hlkwb{<-} \hlkwd{rnorm}\hlstd{(N,} \hlnum{0}\hlstd{,} \hlkwc{sd}\hlstd{=}\hlkwd{sqrt}\hlstd{(}\hlnum{10}\hlstd{))}
+\hlstd{> }\hlstd{y} \hlkwb{=} \hlstd{X}\hlopt{%*%}\hlstd{b} \hlopt{+} \hlstd{e}
+\hlstd{> }\hlstd{m1} \hlkwb{<-} \hlkwd{lm}\hlstd{(y}\hlopt{~}\hlstd{X)}
+\hlstd{> }\hlcom{# Set data frame}
+\hlstd{> }\hlstd{my_data} \hlkwb{=} \hlkwd{data.frame}\hlstd{(X,y)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+Then we can use a few other functions to make a test set training set: \index{Test Set Training Set}
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.165, 0.169, 0.184}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{> }\hlcom{## Test Set (20%); Training Set (80%)}
+\hlstd{> }\hlcom{# Get 800 random index from y}
+\hlstd{> }\hlstd{trainidx} \hlkwb{<-} \hlkwd{createDataPartition}\hlstd{(y,} \hlkwc{times} \hlstd{=} \hlnum{1}\hlstd{,} \hlkwc{p}\hlstd{=}\hlnum{.80}\hlstd{,} \hlkwc{list}\hlstd{=}\hlnum{FALSE}\hlstd{)}
+\hlstd{> }\hlstd{trainy} \hlkwb{<-} \hlstd{y[trainidx]}  \hlcom{# Get traniing set index numbers; sample y's values}
+\hlstd{> }\hlstd{testy} \hlkwb{<-} \hlstd{y[}\hlopt{-}\hlstd{trainidx]}  \hlcom{# Other 20% for test set (y)}
+\hlstd{> }\hlstd{trainx} \hlkwb{<-} \hlstd{X[trainidx,]} \hlcom{# same for setting up X variable:}
+\hlstd{> }\hlstd{testx} \hlkwb{<-} \hlstd{X[}\hlopt{-}\hlstd{trainidx,]}
+\hlstd{> }
+\hlstd{> }\hlcom{# Create Data Frames for these:}
+\hlstd{> }\hlstd{train_data} \hlkwb{=} \hlkwd{data.frame}\hlstd{(trainx, trainy)}
+\hlstd{> }\hlstd{test_data} \hlkwb{=} \hlkwd{data.frame}\hlstd{(testx, testy)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+The idea here is to do data manipulation and all testing for significance just on a training set, using the test set to come in later to ``prove'' that everything is good-to-go independent of your training manipulations. It's a great practice, with many ways to do it in R; which will be showcased throughout this chapter. I prefer the \texttt{createDataPartition()} function myself.
+
+Let us first plot the correlation between the true $\beta$ and our model's predicted $\beta$:
+
+\begin{center}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.165, 0.169, 0.184}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{> }\hlkwd{library}\hlstd{(ggplot2)} \hlcom{# Graphing}
+\hlstd{> }
+\hlstd{> }\hlkwd{qplot}\hlstd{(b,} \hlkwd{coef}\hlstd{(m1)[}\hlopt{-}\hlnum{1}\hlstd{])}\hlopt{+}
+\hlstd{+ }     \hlkwd{xlab}\hlstd{(} \hlkwd{expression}\hlstd{(}\hlkwd{paste}\hlstd{(}\hlstr{"True "} \hlstd{, beta)))}\hlopt{+}
+\hlstd{+ }     \hlkwd{ylab}\hlstd{(} \hlkwd{expression}\hlstd{(}\hlkwd{paste}\hlstd{(}\hlstr{"Model "} \hlstd{,} \hlkwd{hat}\hlstd{(beta),} \hlstr{" Values"}\hlstd{)))}\hlopt{+}
+\hlstd{+ }     \hlkwd{theme_bw}\hlstd{()}\hlopt{+}
+\hlstd{+ }     \hlkwd{theme}\hlstd{(}\hlkwc{axis.text}\hlstd{=}\hlkwd{element_text}\hlstd{(}\hlkwc{size}\hlstd{=}\hlnum{12}\hlstd{),}
+\hlstd{+ }           \hlkwc{axis.title}\hlstd{=}\hlkwd{element_text}\hlstd{(}\hlkwc{size}\hlstd{=}\hlnum{14}\hlstd{,}\hlkwc{face}\hlstd{=}\hlstr{"bold"}\hlstd{))}
+\end{alltt}
+\end{kframe}
+\includegraphics[width=\maxwidth]{figure/betabetatestPenRegress1-1} 
+
+\end{knitrout}
+\end{center}
+
+These results make sense, most of our beta’s cluster with a mean around zero and some of our beta’s are outward with a mean around five and a larger standard deviation. Now, using our training data and leaving the test data aside, let’s run the same model within the training data, and examine the errors in a few different ways:
+
+\begin{center}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.165, 0.169, 0.184}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{> }\hlcom{## Training Model:}
+\hlstd{> }\hlstd{trainmod} \hlkwb{<-} \hlkwd{lm}\hlstd{(train_data}\hlopt{$}\hlstd{trainy} \hlopt{~} \hlstd{trainx,} \hlkwc{data} \hlstd{= train_data)}
+\hlstd{> }\hlcom{# summary(trainmod) # Check that this makes sense}
+\hlstd{> }
+\hlstd{> }\hlstd{error} \hlkwb{<-} \hlstd{train_data}\hlopt{$}\hlstd{trainy} \hlopt{-} \hlkwd{predict}\hlstd{(trainmod)}
+\hlstd{> }\hlcom{# head(error) # Check this makes sense}
+\hlstd{> }
+\hlstd{> }\hlcom{# Ideally we want normality here, mean zero}
+\hlstd{> }\hlkwd{qplot}\hlstd{(error,} \hlkwc{bins}\hlstd{=}\hlnum{50}\hlstd{,} \hlkwc{fill}\hlstd{=}\hlkwd{I}\hlstd{(}\hlstr{"grey10"}\hlstd{))}\hlopt{+}
+\hlstd{+ }     \hlkwd{xlab}\hlstd{(} \hlstr{"Model Errors"}\hlstd{)}\hlopt{+}
+\hlstd{+ }     \hlkwd{ylab}\hlstd{(} \hlstr{"Count"}\hlstd{)}\hlopt{+}
+\hlstd{+ }     \hlkwd{theme_bw}\hlstd{()}\hlopt{+}
+\hlstd{+ }     \hlkwd{theme}\hlstd{(}\hlkwc{axis.text}\hlstd{=}\hlkwd{element_text}\hlstd{(}\hlkwc{size}\hlstd{=}\hlnum{12}\hlstd{),}
+\hlstd{+ }           \hlkwc{axis.title}\hlstd{=}\hlkwd{element_text}\hlstd{(}\hlkwc{size}\hlstd{=}\hlnum{14}\hlstd{))}
+\end{alltt}
+\end{kframe}
+\includegraphics[width=\maxwidth]{figure/examineerrorsML-1} 
+
+\end{knitrout}
+\end{center}
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.165, 0.169, 0.184}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{> }\hlcom{## Root Mean Squred Error}
+\hlstd{> }\hlkwd{sqrt}\hlstd{(}\hlkwd{mean}\hlstd{(error}\hlopt{^}\hlnum{2}\hlstd{))}
+\end{alltt}
+\begin{verbatim}
+## [1] 3.039912
+\end{verbatim}
+\begin{alltt}
+\hlstd{> }\hlcom{## [1] 3.039912}
+\hlstd{> }
+\hlstd{> }\hlcom{## Mean Aboslute Error}
+\hlstd{> }\hlkwd{mean}\hlstd{(}\hlkwd{abs}\hlstd{(error))}
+\end{alltt}
+\begin{verbatim}
+## [1] 2.415841
+\end{verbatim}
+\begin{alltt}
+\hlstd{> }\hlcom{## [1] 2.415841}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+Using just our training data with the linear model we see our root mean squared error and mean absolute error are about around 3, pretty low. More intutitvely, our errors when plotted are normally distributed with a mean of zero. We can revisit this with a LASSO and Ridge regression to penalize us for having so many parameters for so few observations. Using penalized regression is especially helpful with models that have a large number of predictors relative to our sample size. The ``elastic net'' is particularly useful because it ``switches'' between two other penalties (using $\alpha$), the ``LASSO'' (Least Aboslute Shrinkage and Selection Operator uses a squared transformation) and “Ridge” (using the absolute value of our coefficents), applying both of these in an ever-checking gradient descent down our distribution to the point of least error. Ideally we would like a smooth distribution in this process instead of quick-changing erratic distribution and the elastic net provides the previously mentioned functions to accomplish this via the transformation of our coecents as they travel farther away from zero.\index{LASSO} \index{Ridge} \index{Elastic Net}
+
+
+
+
+
+
 
 \subsection{K Nearest Neighbors, Nearest Means}
 
@@ -3027,7 +3156,7 @@ Now that we have the data read in and cleaned (mostly tracking the id numbers), 
 \hlstd{> }\hlkwd{summary}\hlstd{(graph.object)} \hlcom{# Basic statistics seem okay}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH e053341 DN-- 610 1043 -- 
+## IGRAPH 750ef71 DN-- 610 1043 -- 
 ## + attr: name (v/c)
 \end{verbatim}
 \begin{alltt}
@@ -3197,7 +3326,7 @@ The next part was difficult, and probably could be done better. I looked at a li
 \hlstd{> }\hlkwd{E}\hlstd{(graph.object)[}\hlkwd{order}\hlstd{(c.graph.object,} \hlkwc{decreasing}\hlstd{=T)[}\hlnum{1}\hlopt{:}\hlnum{10}\hlstd{]]}
 \end{alltt}
 \begin{verbatim}
-## + 10/924 edges from e054587 (vertex names):
+## + 10/924 edges from 7510300 (vertex names):
 ##  [1] yodatsracist       ->dewarr   SpecificallyGeneral->gacorley
 ##  [3] inh-uman           ->gacorley Shazbot_Nanu       ->Ramicus 
 ##  [5] Mentalpopcorn      ->PeechMan Drict              ->USMCLee 
@@ -3209,7 +3338,7 @@ The next part was difficult, and probably could be done better. I looked at a li
 \hlstd{> }\hlkwd{E}\hlstd{(graph.object)[}\hlkwd{order}\hlstd{(c.lg.graph.object,} \hlkwc{decreasing}\hlstd{=T)[}\hlnum{1}\hlopt{:}\hlnum{10}\hlstd{]]}
 \end{alltt}
 \begin{verbatim}
-## + 10/924 edges from e054587 (vertex names):
+## + 10/924 edges from 7510300 (vertex names):
 ##  [1] Atriox998         ->wellmanicuredman  
 ##  [2] Galileotierraplana->Atriox998         
 ##  [3] wellmanicuredman  ->Atriox998         
@@ -3234,7 +3363,7 @@ The next part was difficult, and probably could be done better. I looked at a li
 \hlstd{> }\hlkwd{E}\hlstd{(graph.object)[}\hlkwd{order}\hlstd{(b.graph.object,} \hlkwc{decreasing}\hlstd{=T)[}\hlnum{1}\hlopt{:}\hlnum{10}\hlstd{]]}
 \end{alltt}
 \begin{verbatim}
-## + 10/924 edges from e054587 (vertex names):
+## + 10/924 edges from 7510300 (vertex names):
 ##  [1] sambalchuck     ->orthag             
 ##  [2] DarkGamer       ->Cullen_Ingus       
 ##  [3] obamanisha      ->Aquifex            
@@ -3251,7 +3380,7 @@ The next part was difficult, and probably could be done better. I looked at a li
 \hlstd{> }\hlkwd{E}\hlstd{(graph.object)[}\hlkwd{order}\hlstd{(b.lg.graph.object,} \hlkwc{decreasing}\hlstd{=T)[}\hlnum{1}\hlopt{:}\hlnum{10}\hlstd{]]}
 \end{alltt}
 \begin{verbatim}
-## + 10/924 edges from e054587 (vertex names):
+## + 10/924 edges from 7510300 (vertex names):
 ##  [1] yodatsracist  ->Randomname64   Fibonacci35813->deathlock13   
 ##  [3] vulcan583     ->Fibonacci35813 Erinaceous    ->vulcan583     
 ##  [5] dewarr        ->yodatsracist   Randomname64  ->Erinaceous    
@@ -3271,19 +3400,19 @@ The next part was difficult, and probably could be done better. I looked at a li
 \hlstd{> }\hlkwd{E}\hlstd{(graph.object)[}\hlkwd{order}\hlstd{(e.graph.object}\hlopt{$}\hlstd{vector,} \hlkwc{decreasing}\hlstd{=T)[}\hlnum{1}\hlopt{:}\hlnum{10}\hlstd{]]}
 \end{alltt}
 \begin{verbatim}
-## + 10/924 edges from e054587 (vertex names):
+## + 10/924 edges from 7510300 (vertex names):
 ##  [1] MoralMidgetry  ->Dumble_dared        just_works_here->PM_ME_YOUR_SHEC0CK 
 ##  [3] timeimmemorial ->dewarr              Kai_Daigoji    ->Klumber            
 ##  [5] sambalchuck    ->orthag              HerrtomtomAZ   ->Newnews2           
 ##  [7] inh-uman       ->chroboo             emptynothing   ->sambalchuck        
-##  [9] Klumber        ->NoFascistAgreements nllanki        ->Klumber
+##  [9] nllanki        ->Klumber             Klumber        ->NoFascistAgreements
 \end{verbatim}
 \begin{alltt}
 \hlstd{> }\hlstd{evc_lg_graph.object} \hlkwb{<-} \hlkwd{evcent}\hlstd{(lg_graph.object)}
 \hlstd{> }\hlkwd{E}\hlstd{(graph.object)[}\hlkwd{order}\hlstd{(evc_lg_graph.object}\hlopt{$}\hlstd{vector,} \hlkwc{decreasing}\hlstd{=T)[}\hlnum{1}\hlopt{:}\hlnum{10}\hlstd{]]}
 \end{alltt}
 \begin{verbatim}
-## + 10/924 edges from e054587 (vertex names):
+## + 10/924 edges from 7510300 (vertex names):
 ##  [1] Dennis_Langley  ->MoralMidgetry  Dennis_Langley  ->MoralMidgetry 
 ##  [3] Dennis_Langley  ->MoralMidgetry  deathlock13     ->MoralMidgetry 
 ##  [5] deathlock13     ->MoralMidgetry  BuildBetterWorld->MoralMidgetry 
@@ -3359,7 +3488,7 @@ In this I will be using the Reddit data from "r/AskSocialScientists" from Octobe
 \hlstd{> }\hlkwd{summary}\hlstd{(g1)} \hlcom{#}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH e2ea934 DN-- 339 521 -- 
+## IGRAPH 77958ea DN-- 339 521 -- 
 ## + attr: name (v/c)
 \end{verbatim}
 \begin{alltt}
@@ -3369,7 +3498,7 @@ In this I will be using the Reddit data from "r/AskSocialScientists" from Octobe
 \hlstd{> }\hlkwd{summary}\hlstd{(g12)} \hlcom{#}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH e2eb1ae DN-- 327 522 -- 
+## IGRAPH 7796526 DN-- 327 522 -- 
 ## + attr: name (v/c)
 \end{verbatim}
 \end{kframe}
