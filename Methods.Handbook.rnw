@@ -127,7 +127,9 @@ The purpose of this document is to provide an overview and tutorial for executin
 
 Many of the notes come from Sean Gailmard' ``Statistical Modeling and Inference for Social Science,'' Skyler Cranmer's course in quantitative methods, and various other books on these topics including ``Event History Modeling, A Guide for Social Scientists'' by Janet M. Box-Steffensmeier and Bradford S. Jones.
 
-The document here also follows a small dataset on beer rankings initially then covers data from the R Faraway package found here:
+Beyond the more cannonic methods courses, there are sections on causal inference, time series modeling, network analysis, and even brief sections devoted to courses on qualitative methods and survey design. This document includes hyperlinks for the table of contents and index for quick access to brief information. The brevity comes as both an advantage and disadvantage so always default to how you learn best - for me making this document is how I learned best.
+
+The document initially follows a small dataset on beer rankings initially then covers data from the R Faraway package found here:
 
 \begin{center}
 \url{https://www.rdocumentation.org/packages/faraway/versions/1.0.7}
@@ -150,6 +152,8 @@ options(formatR.arrow=TRUE, width=78)
 ##! Check out Themes at: http://animation.r-forge.r-project.org/knitr/
 theme = knit_theme$get("kellys")
 knit_theme$set(theme)
+
+opts_chunk$set(prompt=TRUE)
 @
 
 
@@ -165,6 +169,8 @@ inverse_logit <- function(x){
 \begin{center}
 Created by Kyle Davis; davis.5211@osu.edu.\\ Summer 2017 --- \thedate ~(last updated)
 
+\
+
 For the most recent version:
 
 \begin{center}
@@ -173,7 +179,6 @@ For the most recent version:
 
 Any questions or concerns can be sent to me directly: davis.5211@osu.edu
 \end{center}
-
 
 
 
@@ -2184,6 +2189,10 @@ Mapping graphs as shown in full in Section 7, are a intuitive and attractive way
 \clearpage
 \section{Machine Learning}
 
+Machine learning has come to be popular among data scientists, chiefly for its ability to remove the researcher and have more streamlined ways to emperically examine categorization and estimands. By definition there are two types of machine learning, supervised and unsupervised. The prior includes researcher influence, classifications and penalizing regressions. The latter includes algarithmic detections of classifications and estimands through a (dare I say) machine-like process.
+
+\
+
 \textit{Types of Machine Learning}
 \begin{equation}\nonumber
 \begin{cases}
@@ -2192,8 +2201,318 @@ Mapping graphs as shown in full in Section 7, are a intuitive and attractive way
 \end{cases}
 \end{equation}
 
+A large benefit of this section will come in making synthetic data to test some fundemental assumptions of the GLM, all before introducing machine learning as a way to help us reach similar or better conclusions without the threat of researcher bias and ensured reproducability. For this reason, even an novice to graduate methods may find helpful the code and testing that exists in this section, as I have.
 
-\subsection{Simulation, Replication, Bootstrapping}
+\subsection{Simulation and Replication}
+
+Let's begin by setting up a simulated regression, which will have similar architecture throughout this chapter. This particular regression will have two random variables ($x_1$ and $x_2$) for $N$ observations. Then, we create our own coefficent values ($\beta$) and errors ($e$). A vector of ones is our intercept ($alpha$) and this is all neatly placed into a matrix. From this random data we can test some intial regressions.
+
+<<firstregressionML, prompt=TRUE>>=
+set.seed(12345)
+
+N <- 1000
+# Two random x variables, with same mean and same error. Distributed Normally
+x_1 <- rnorm(N, mean=5, sd=sqrt(16))
+x_2 <- rnorm(N, mean=5, sd=sqrt(16))
+# beta values to multiply with the Intercept, X_1, and X_2 matrix.
+b <- c(2, -1, 3)
+# Perfect-world errors: e~Normal(0, sig^2). set pretty low, Number=1000
+e <- rnorm(N, 0, sd=sqrt(4))
+# This vector of ones is to generate our intercept along with the "2" in our beta
+ones <- matrix(1, nrow=1000, ncol=1)
+X <- matrix(c(ones, x_1, x_2), nrow=N)
+# head(X)  # Checked that the Matrix comes out right, and is intuitive
+# y = intercept + b1*X_1 + b2*X_2 + some error
+y <- b[1]*X[,1]+ b[2]*X[,2]+ b[3]*X[,3] + e
+my_data <- data.frame(x_1, x_2, y)
+# After having y, we can run our formula, OLS using lm()
+m1 <- lm(y ~ x_1 + x_2, data=my_data)
+summary(m1)$coef
+
+@
+
+We find that our estimates in our model come very close to our defined beta estimates, this makes sense since our betas were pre-defined this way. Each variable is statistically significant given we entered a pretty low error value into the model. Let's take the above regression and simulate it 1,000 times through a loop:
+
+<<MLFirstsimulation>>=
+
+# Let's set up an Empty matrix
+simulation1 <- matrix(nrow = 1000, ncol = 6)
+# head(simulation1)  # Matrix of NA's to fill in simulated values later.
+
+for (i in 1:1000)
+{
+  N <- 1000
+  x_1 <- rnorm(N, mean=5, sd=sqrt(16))
+  x_2 <- rnorm(N, mean=5, sd=sqrt(16))
+  b <- c(2, -1, 3)
+  e <- rnorm(N, 0, sd=sqrt(4))
+  ones <- matrix(1, nrow=1000, ncol=1)
+  X <- matrix(c(ones, x_1, x_2), nrow=N)
+  y <- b[1]*X[,1]+ b[2]*X[,2]+ b[3]*X[,3] + e
+  my_data <- data.frame(x_1, x_2, y)
+  m1 <- lm(y ~ x_1 + x_2)
+
+  sm1 <- summary(m1)  # summary table is used to easily locate standard errors (se)
+
+  simulation1[i,1] <- m1$coef[1]    # storing models first coef: Intercept
+  simulation1[i,2] <- m1$coef[2]    # x_1 coef estimate
+  simulation1[i,3] <- m1$coef[3]    # x_2 coef estimate
+  simulation1[i,4] <- sm1$coefficients[1,2]   # standard error for Intercept
+  simulation1[i,5] <- sm1$coefficients[2,2]   # se x_1
+  simulation1[i,6] <- sm1$coefficients[3,2]   # se x_2
+}
+
+# head(simulation1)  # To check our now-full matrix to see if values make sense
+
+@
+
+Next, we will do the same simulation but removing x_2 in our model. Then we will plot each of the variables from the two simulations.The code for plotting has been witheld to save space on page, but it is done using ggplot and a function to make the plots appear next to one another.
+
+<<ThenextSimulationML>>=
+# Removing x_2 now
+#  New empty matrix
+simulation2 <- matrix(nrow = 1000, ncol = 4)
+# head(simulation2)
+
+for (i in 1:1000)
+{
+  N <- 1000
+  x_1 <- rnorm(N, mean=5, sd=sqrt(16))
+  x_2 <- rnorm(N, mean=5, sd=sqrt(16))
+  b <- c(2, -1, 3)
+  e <- rnorm(N, 0, sd=sqrt(4))
+  ones <- matrix(1, nrow=1000, ncol=1)
+  X <- matrix(c(ones, x_1, x_2), nrow=N)
+  y <- b[1]*X[,1]+ b[2]*X[,2]+ b[3]*X[,3] + e
+  m1 <- lm(y ~ x_1)                #! no X_2 regressed, but included in DGP
+
+  sm1 <- summary(m1)
+
+  simulation2[i,1] <- sm1$coef[1,1]     #Storing models first coef, Intercept
+  simulation2[i,2] <- sm1$coef[2,1]     #x_1 coef estimate
+  simulation2[i,3] <- sm1$coef[1,2]      #standard error for Intercept
+  simulation2[i,4] <- sm1$coef[2,2]      #se for x_1
+}
+
+# Full Model Means
+#   mean(simulation1[,1]) # mean estimate for b_0 (= 2)
+#   mean(simulation1[,2]) # mean estimate for b_1 X_1 estimate (= -1)
+#   mean(simulation1[,3]) # mean estimate for b_2 x_2 estimate (= 3)
+
+# Limited Model Means
+#   mean(simulation2[,1]) #mean b_0 (=2)
+#   mean(simulation2[,2]) #mean b_1 of x_1 (=-1)
+# This makes sense given our initial model data b=c(2, -1, 3)
+@
+
+\begin{center}
+<<PlottingSimulationML, echo=FALSE, message=FALSE, warning=FALSE>>=
+library(ggplot2)
+#Creating each graph as an object (p) and the location I wish
+#  the multiplot function to place them at. (there are better ways to do this,
+#    I just learned those ways a year later) See additional GGplot content in Networks section.
+
+#Intercept Simulation 1
+p1 <- qplot(simulation1[,1])+
+  theme_bw()+
+  ggtitle(expression(paste(beta[0], " Values (Sim. 1)")))+
+  xlab(expression(paste("Simulated ", beta[0])))
+
+#X_1 Simulation 1
+p3 <- qplot(simulation1[,2])+
+  theme_bw()+
+  ggtitle(expression(paste( x[1], " Values (Sim. 1)")))+
+  xlab(expression(paste("Simulated ", beta[1])))
+
+#X_2 Simulation 1
+p5 <- qplot(simulation1[,3])+
+  theme_bw()+
+  ggtitle(expression(paste( x[2], " Values (Sim. 1)")))+
+  xlab(expression(paste("Simulated ", beta[2])))
+
+
+#Intercept Simulation 2
+p2 <- qplot(simulation2[,1])+
+  theme_bw()+
+  ggtitle(expression(paste(beta[0], " Values (Sim. 2)")))+
+  xlab(expression(paste("Simulated ", beta[0])))
+
+#X_1 Simulation 2
+p4 <- qplot(simulation2[,2])+
+  theme_bw()+
+  ggtitle(expression(paste( x[1], " Values (Sim. 2)")))+
+  xlab(expression(paste("Simulated ", beta[1])))
+
+
+
+#Multiplot Function, This was created with help from the RBloggers Community
+
+multiplot <- function(..., plotlist=NULL, file, cols=1, layout=NULL) {
+  library(grid)
+
+  # Make a list from the ... arguments and plotlist
+  plots <- c(list(...), plotlist)
+
+  numPlots = length(plots)
+
+  # If layout is NULL, then use 'cols' to determine layout
+  if (is.null(layout)) {
+    # Make the panel
+    # ncol: Number of columns of plots
+    # nrow: Number of rows needed, calculated from # of cols
+    layout <- matrix(seq(1, cols * ceiling(numPlots/cols)),
+                     ncol = cols, nrow = ceiling(numPlots/cols))
+  }
+
+  if (numPlots==1) {
+    print(plots[[1]])
+
+  } else {
+    # Set up the page
+    grid.newpage()
+    pushViewport(viewport(layout = grid.layout(nrow(layout), ncol(layout))))
+
+    # Make each plot, in the correct location
+    for (i in 1:numPlots) {
+      # Get the i,j matrix positions of the regions that contain this subplot
+      matchidx <- as.data.frame(which(layout == i, arr.ind = TRUE))
+
+      print(plots[[i]], vp = viewport(layout.pos.row = matchidx$row,
+                                      layout.pos.col = matchidx$col))
+    }
+  }
+}
+
+# Call multiplot for each object, and (finally) generate our graph:
+# Simulation 1 on first row, and Simulation 2 on second row
+# And each variable on the columns. (Easily comparable)
+multiplot(p1, p2, p3, p4, p5, cols=3)
+@
+\end{center}
+
+As is expected, most things remain the same between the two simulations, however in simulation two removing a variable (imagine this being race, education, or some economic variable) biases our estimate of the intercept. More importantly, this will balloon the errors (hopefully because that's what errors are supposed to tell us): \index{Simulation}
+
+<<errorsforthissimulation>>=
+
+mean(simulation1[,5]) # Simulation 1's X_1 se's (0.0158)
+mean(simulation2[,4]) # Simulation 2's X_1 se's (0.0962)
+
+mean(simulation1[,4])  # Simulation 1's Intercept se (.128)
+mean(simulation2[,3])  # Simulation 2's Intercept se (.615)
+# Errors are larger when we take x_2 out of our analysis
+#   (less variation captured from DGP)
+
+@
+
+One advantage of using simulated data is the complete controll and education available from messing around with things without any consequences (most of the time). Now that we have tested some of the fundementals of the linear model and reporting estimates, let's use simulation to try to fit a linear model to binary data.
+
+Let us start with just making a fun function that creates inverse logit estimands.
+
+<<InverseLogitFunction>>=
+
+inv.logit = function(x){
+  if(!is.numeric(x)){return("Error 404: Numbers Not Found")}
+  exp(x)/(1+exp(x))
+}
+
+inv.logit(.95)
+inv.logit("Normative")
+@
+
+Now, like before, we will construct a DGP via simulation:
+
+<<BinaryDGPML, message=FALSE>>=
+
+library(Rlab) # for rbern() function
+simulation5 <- matrix(nrow = 1000, ncol = 6)
+# head(simulation5)
+
+for (i in 1:1000)
+{
+  N <- 1000
+  mu <- c(5,5)
+  Sigma <- matrix( c(2, .5, .5, 3 ), nrow = 2, ncol= 2)
+  mvr <- mvrnorm(N, mu, Sigma) # using MASS package
+  b <- c(.2, -1, 1.2)
+  e <- rnorm(N, 0, sd=sqrt(4))
+  ones <- matrix(1, nrow=1000, ncol=1)
+  X <- matrix(c(ones, mvr[,1], mvr[,2]), nrow=N)
+  y <- b[1]*X[,1]+ b[2]*X[,2]+ b[3]*X[,3] + e
+  y <- as.numeric(y >= median(y)) # Setting y 0-1 based around median.
+
+  # Inverse Logits
+  # Intercept
+  inv.logit.a <- inv.logit(b[1]*X[,1])
+  b0 <- matrix(inv.logit.a, nrow=N, ncol= 1)
+
+  #X_1
+  inv.logit.x2 <- inv.logit(b[2]*X[,2])
+  b1 <- matrix(inv.logit.x2, nrow=N, ncol= 1)
+
+  #X_2
+  inv.logit.x3 <- inv.logit(b[3]*X[,3])
+  b2 <- matrix(inv.logit.x3, nrow=N, ncol= 1)
+
+  pi <- matrix(c(b0, b1, b2), nrow=N, ncol=3)
+  y <- rbern(N, pi)
+
+  m5 <- lm(y ~ X[,2]+ X[,3]) # linear model to binary data...
+  sm5 <- summary(m5)
+
+  simulation5[i,1] <- sm5$coef[1,1] #Intercept estimate
+  simulation5[i,2] <- sm5$coef[2,1] #x_1 coef estimate
+  simulation5[i,3] <- sm5$coef[3,1] #x_2 coef estimate
+
+  simulation5[i,4] <- sm5$coef[1,2] #standard error for Intercept
+  simulation5[i,5] <- sm5$coef[2,2] #se x_1
+  simulation5[i,6] <- sm5$coef[3,2] #se x_2
+}
+
+# head(simulation5) #Check
+
+@
+
+That perhaps seemed too complicated, but I wanted to show the MASS and RLab packages for what they offer in creating simulated data. Similar to before I will plot the results:
+
+\begin{center}
+<<hiddenplotlineartologit, echo=FALSE, message=FALSE>>=
+
+library(ggplot2)
+#Creating each graph as an object (p) and the location I wish
+#  the multiplot function to place them at.
+
+#Intercept Simulation 5
+p1 <- qplot(simulation5[,1])+
+  theme_bw()+
+  ggtitle(expression(paste(beta[0], " Values (Sim. 5)")))+
+  xlab(expression(paste("Simulated ", beta[0])))
+
+#X_1 Simulation 5
+p2 <- qplot(simulation5[,2])+
+  theme_bw()+
+  ggtitle(expression(paste( x[1], " Values (Sim. 5)")))+
+  xlab(expression(paste("Simulated ", beta[1])))
+
+#X_2 Simulation 5
+p3 <- qplot(simulation5[,3])+
+  theme_bw()+
+  ggtitle(expression(paste( x[2], " Values (Sim. 5)")))+
+  xlab(expression(paste("Simulated ", beta[2])))
+
+
+predictm5 <- qplot(predict(m5))+
+  theme_bw()+
+  ggtitle("Pr. Values (Sim. 5)")
+
+#custom multiplot function, I rearranged some of the graph objects to arrange them better
+multiplot(p1, p2, p3, predictm5, cols=3, rows=2)
+
+@
+\end{center}
+
+Here we see the three estimates from our simulation and our model's prediction based upon the R \texttt{predict()} command. Our estimates are definately off and our predictions seem to be off because of this. Perhaps running a proper logit or probit model will help. We could run the same DGP but with the proper modeling using the \texttt{glm()} function, and the proper link function if we so desired.
+
+
 
 \subsection{Cross Validation}
 

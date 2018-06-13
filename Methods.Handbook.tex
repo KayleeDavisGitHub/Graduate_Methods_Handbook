@@ -5,6 +5,13 @@
 %%! Document created using R's .rnw document editing, not LaTeX
 %   platform (although both should work). UTF-8
 %   Consider knitr, index, and bibliography when compiling.
+%   Please read preamble, change file locations as neccesary.
+%   Similarly, some data are called file a local file-path.
+
+%%! All data are free and fair use, but please consider proper citation.
+%   Some data have been collected via Google Big Query and TwittR;
+%      These data have only partially been deidentified; please consider online
+%      privacy when publishing/sharing data used here.
 
 
 %------------ Quick Note on Coding Conventions -----------------
@@ -18,16 +25,7 @@
 %  %!   usually indicates an important comment, or section
 %  #    The same is true for notes in R code (##!) and (#---)
 
-
 %----------------------- Preamble ------------------------------
-
-%!              Previously used Packages:
-%     bm, multirow, subfigure,
-%     Setspace is what messes up with the header I think
-%     \usepackage{color}
-%     \newcolumntype{d}[1]{D{.}{.}{#1}}
-%     \usepackage{url}
-%     \usepackage[utf8]{inputenc}
 
 \documentclass[12pt]{article}\usepackage[]{graphicx}\usepackage[]{color}
 %% maxwidth is the original width if it is less than linewidth
@@ -88,6 +86,9 @@
 \usepackage{scrextend}
 \usepackage{graphicx, fullpage, relsize, epsfig}    % tex tools
 \usepackage{amsfonts, amsmath, amsthm, amssymb, mathtools, fdsymbol} % Math tools/ symbols
+
+% Setting local graphics pathing:
+\graphicspath{{C:/Users/Shing/Documents/GLM/Graduate_Methods_Handbook/figure/}}
 
 % No idea:
 \usepackage{siunitx}
@@ -158,9 +159,9 @@
 \usepackage{titling}
 \date{\today} % so that it's today (specified)
 
-%-------------------------------------------------------------------
-%------------------------- Begin Document --------------------------
-%-------------------------------------------------------------------
+% -------------------------------------------------------------------
+% ------------------------- Begin Document --------------------------
+% -------------------------------------------------------------------
 \makeindex
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 \begin{document}
@@ -177,13 +178,15 @@ The purpose of this document is to provide an overview and tutorial for executin
 
 Many of the notes come from Sean Gailmard' ``Statistical Modeling and Inference for Social Science,'' Skyler Cranmer's course in quantitative methods, and various other books on these topics including ``Event History Modeling, A Guide for Social Scientists'' by Janet M. Box-Steffensmeier and Bradford S. Jones.
 
-The document here also follows a small dataset on beer rankings initially then covers data from the R Faraway package found here:
+Beyond the more cannonic methods courses, there are sections on causal inference, time series modeling, network analysis, and even brief sections devoted to courses on qualitative methods and survey design. This document includes hyperlinks for the table of contents and index for quick access to brief information. The brevity comes as both an advantage and disadvantage so always default to how you learn best - for me making this document is how I learned best.
+
+The document initially follows a small dataset on beer rankings initially then covers data from the R Faraway package found here:
 
 \begin{center}
 \url{https://www.rdocumentation.org/packages/faraway/versions/1.0.7}
 \end{center}
 
-Code for visualizations is included often but not always feel free to email me for any code or data, including for \LaTeX. But ultimately this tutorial is less about replicating my results but to provide easily accessible tools for social scientists to use in their own research. That is, this document really is only a first pass at a lot of these methods, to learn them better I would sugguest using them. This is also not an exaustive list, I may reference something but never cover it later on. This only covers courses I've taken in my PhD program at Ohio State.
+Code for visualizations is included often but not always feel free to email me for any code or data, including for \LaTeX. But ultimately this tutorial is less about replicating my results but to provide easily accessible tools for social scientists to use in their own research. That is, this document is only a first pass at a lot of these methods, to learn them better I would sugguest using them and failing over and over until something is learned. This is also not an exaustive list, I may reference something but never cover it later on. This only covers courses I've taken in my PhD program at Ohio State.
 
 Code in this document will appear as follows:
 
@@ -205,6 +208,16 @@ Code in this document will appear as follows:
 
 \begin{center}
 Created by Kyle Davis; davis.5211@osu.edu.\\ Summer 2017 --- \thedate ~(last updated)
+
+\
+
+For the most recent version:
+
+\begin{center}
+\url{https://github.com/KyleDavisGithub/Graduate_Methods_Handbook}
+\end{center}
+
+Any questions or concerns can be sent to me directly: davis.5211@osu.edu
 \end{center}
 
 
@@ -220,8 +233,6 @@ Created by Kyle Davis; davis.5211@osu.edu.\\ Summer 2017 --- \thedate ~(last upd
 %%! Page for Table of Contents:
 \tableofcontents
 \thispagestyle{empty}
-
-
 
 
 %%! Clear page; set page counter at page "1"
@@ -260,8 +271,6 @@ $X_{it}$ & All Rows Within X (i) and At Each Time (t)\\
 
 \clearpage
 %-----------------------------------------------------------------------------------
-
-
 
 \subsection{Pearl vs. Rubin Models of Causal Inference}
 \hfill \\
@@ -2342,14 +2351,14 @@ Poisson, Quasi-Poisson, and Negative Binomial regression all take count level da
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.165, 0.169, 0.184}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlcom{# Poisson}
-\hlstd{object} \hlkwb{<-} \hlkwd{glm}\hlstd{(formula,} \hlkwc{family} \hlstd{= poisson)}
-
-\hlcom{# Quasi-Poisson}
-\hlstd{object} \hlkwb{<-} \hlkwd{glm}\hlstd{(formula,} \hlkwc{family} \hlstd{= quasipoisson)}
-
-\hlcom{# Negative Binomial/ Gamma-Poisson}
-\hlstd{object} \hlkwb{<-} \hlkwd{glm.nb}\hlstd{(formula)}
+\hlstd{> }\hlcom{# Poisson}
+\hlstd{> }\hlstd{object} \hlkwb{<-} \hlkwd{glm}\hlstd{(formula,} \hlkwc{family} \hlstd{= poisson)}
+\hlstd{> }
+\hlstd{> }\hlcom{# Quasi-Poisson}
+\hlstd{> }\hlstd{object} \hlkwb{<-} \hlkwd{glm}\hlstd{(formula,} \hlkwc{family} \hlstd{= quasipoisson)}
+\hlstd{> }
+\hlstd{> }\hlcom{# Negative Binomial/ Gamma-Poisson}
+\hlstd{> }\hlstd{object} \hlkwb{<-} \hlkwd{glm.nb}\hlstd{(formula)}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
@@ -2433,6 +2442,10 @@ Mapping graphs as shown in full in Section 7, are a intuitive and attractive way
 \clearpage
 \section{Machine Learning}
 
+Machine learning has come to be popular among data scientists, chiefly for its ability to remove the researcher and have more streamlined ways to emperically examine categorization and estimands. By definition there are two types of machine learning, supervised and unsupervised. The prior includes researcher influence, classifications and penalizing regressions. The latter includes algarithmic detections of classifications and estimands through a (dare I say) machine-like process.
+
+\
+
 \textit{Types of Machine Learning}
 \begin{equation}\nonumber
 \begin{cases}
@@ -2441,8 +2454,265 @@ Mapping graphs as shown in full in Section 7, are a intuitive and attractive way
 \end{cases}
 \end{equation}
 
+A large benefit of this section will come in making synthetic data to test some fundemental assumptions of the GLM, all before introducing machine learning as a way to help us reach similar or better conclusions without the threat of researcher bias and ensured reproducability. For this reason, even an novice to graduate methods may find helpful the code and testing that exists in this section, as I have.
 
-\subsection{Simulation, Replication, Bootstrapping}
+\subsection{Simulation and Replication}
+
+Let's begin by setting up a simulated regression, which will have similar architecture throughout this chapter. This particular regression will have two random variables ($x_1$ and $x_2$) for $N$ observations. Then, we create our own coefficent values ($\beta$) and errors ($e$). A vector of ones is our intercept ($alpha$) and this is all neatly placed into a matrix. From this random data we can test some intial regressions.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.165, 0.169, 0.184}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{> }\hlkwd{set.seed}\hlstd{(}\hlnum{12345}\hlstd{)}
+\hlstd{> }
+\hlstd{> }\hlstd{N} \hlkwb{<-} \hlnum{1000}
+\hlstd{> }\hlcom{# Two random x variables, with same mean and same error. Distributed Normally}
+\hlstd{> }\hlstd{x_1} \hlkwb{<-} \hlkwd{rnorm}\hlstd{(N,} \hlkwc{mean}\hlstd{=}\hlnum{5}\hlstd{,} \hlkwc{sd}\hlstd{=}\hlkwd{sqrt}\hlstd{(}\hlnum{16}\hlstd{))}
+\hlstd{> }\hlstd{x_2} \hlkwb{<-} \hlkwd{rnorm}\hlstd{(N,} \hlkwc{mean}\hlstd{=}\hlnum{5}\hlstd{,} \hlkwc{sd}\hlstd{=}\hlkwd{sqrt}\hlstd{(}\hlnum{16}\hlstd{))}
+\hlstd{> }\hlcom{# beta values to multiply with the Intercept, X_1, and X_2 matrix.}
+\hlstd{> }\hlstd{b} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlnum{2}\hlstd{,} \hlopt{-}\hlnum{1}\hlstd{,} \hlnum{3}\hlstd{)}
+\hlstd{> }\hlcom{# Perfect-world errors: e~Normal(0, sig^2). set pretty low, Number=1000}
+\hlstd{> }\hlstd{e} \hlkwb{<-} \hlkwd{rnorm}\hlstd{(N,} \hlnum{0}\hlstd{,} \hlkwc{sd}\hlstd{=}\hlkwd{sqrt}\hlstd{(}\hlnum{4}\hlstd{))}
+\hlstd{> }\hlcom{# This vector of ones is to generate our intercept along with the "2" in our beta}
+\hlstd{> }\hlstd{ones} \hlkwb{<-} \hlkwd{matrix}\hlstd{(}\hlnum{1}\hlstd{,} \hlkwc{nrow}\hlstd{=}\hlnum{1000}\hlstd{,} \hlkwc{ncol}\hlstd{=}\hlnum{1}\hlstd{)}
+\hlstd{> }\hlstd{X} \hlkwb{<-} \hlkwd{matrix}\hlstd{(}\hlkwd{c}\hlstd{(ones, x_1, x_2),} \hlkwc{nrow}\hlstd{=N)}
+\hlstd{> }\hlcom{# head(X)  # Checked that the Matrix comes out right, and is intuitive}
+\hlstd{> }\hlcom{# y = intercept + b1*X_1 + b2*X_2 + some error}
+\hlstd{> }\hlstd{y} \hlkwb{<-} \hlstd{b[}\hlnum{1}\hlstd{]}\hlopt{*}\hlstd{X[,}\hlnum{1}\hlstd{]}\hlopt{+} \hlstd{b[}\hlnum{2}\hlstd{]}\hlopt{*}\hlstd{X[,}\hlnum{2}\hlstd{]}\hlopt{+} \hlstd{b[}\hlnum{3}\hlstd{]}\hlopt{*}\hlstd{X[,}\hlnum{3}\hlstd{]} \hlopt{+} \hlstd{e}
+\hlstd{> }\hlstd{my_data} \hlkwb{<-} \hlkwd{data.frame}\hlstd{(x_1, x_2, y)}
+\hlstd{> }\hlcom{# After having y, we can run our formula, OLS using lm()}
+\hlstd{> }\hlstd{m1} \hlkwb{<-} \hlkwd{lm}\hlstd{(y} \hlopt{~} \hlstd{x_1} \hlopt{+} \hlstd{x_2,} \hlkwc{data}\hlstd{=my_data)}
+\hlstd{> }\hlkwd{summary}\hlstd{(m1)}\hlopt{$}\hlstd{coef}
+\end{alltt}
+\begin{verbatim}
+##              Estimate Std. Error   t value     Pr(>|t|)
+## (Intercept)  1.992134 0.12163219  16.37834 1.420043e-53
+## x_1         -1.005716 0.01517949 -66.25491 0.000000e+00
+## x_2          2.997224 0.01503489 199.35128 0.000000e+00
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+We find that our estimates in our model come very close to our defined beta estimates, this makes sense since our betas were pre-defined this way. Each variable is statistically significant given we entered a pretty low error value into the model. Let's take the above regression and simulate it 1,000 times through a loop:
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.165, 0.169, 0.184}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{> }\hlcom{# Let's set up an Empty matrix}
+\hlstd{> }\hlstd{simulation1} \hlkwb{<-} \hlkwd{matrix}\hlstd{(}\hlkwc{nrow} \hlstd{=} \hlnum{1000}\hlstd{,} \hlkwc{ncol} \hlstd{=} \hlnum{6}\hlstd{)}
+\hlstd{> }\hlcom{# head(simulation1)  # Matrix of NA's to fill in simulated values later.}
+\hlstd{> }
+\hlstd{> }\hlkwa{for} \hlstd{(i} \hlkwa{in} \hlnum{1}\hlopt{:}\hlnum{1000}\hlstd{)}
+\hlstd{+ }\hlstd{\{}
+\hlstd{+ }  \hlstd{N} \hlkwb{<-} \hlnum{1000}
+\hlstd{+ }  \hlstd{x_1} \hlkwb{<-} \hlkwd{rnorm}\hlstd{(N,} \hlkwc{mean}\hlstd{=}\hlnum{5}\hlstd{,} \hlkwc{sd}\hlstd{=}\hlkwd{sqrt}\hlstd{(}\hlnum{16}\hlstd{))}
+\hlstd{+ }  \hlstd{x_2} \hlkwb{<-} \hlkwd{rnorm}\hlstd{(N,} \hlkwc{mean}\hlstd{=}\hlnum{5}\hlstd{,} \hlkwc{sd}\hlstd{=}\hlkwd{sqrt}\hlstd{(}\hlnum{16}\hlstd{))}
+\hlstd{+ }  \hlstd{b} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlnum{2}\hlstd{,} \hlopt{-}\hlnum{1}\hlstd{,} \hlnum{3}\hlstd{)}
+\hlstd{+ }  \hlstd{e} \hlkwb{<-} \hlkwd{rnorm}\hlstd{(N,} \hlnum{0}\hlstd{,} \hlkwc{sd}\hlstd{=}\hlkwd{sqrt}\hlstd{(}\hlnum{4}\hlstd{))}
+\hlstd{+ }  \hlstd{ones} \hlkwb{<-} \hlkwd{matrix}\hlstd{(}\hlnum{1}\hlstd{,} \hlkwc{nrow}\hlstd{=}\hlnum{1000}\hlstd{,} \hlkwc{ncol}\hlstd{=}\hlnum{1}\hlstd{)}
+\hlstd{+ }  \hlstd{X} \hlkwb{<-} \hlkwd{matrix}\hlstd{(}\hlkwd{c}\hlstd{(ones, x_1, x_2),} \hlkwc{nrow}\hlstd{=N)}
+\hlstd{+ }  \hlstd{y} \hlkwb{<-} \hlstd{b[}\hlnum{1}\hlstd{]}\hlopt{*}\hlstd{X[,}\hlnum{1}\hlstd{]}\hlopt{+} \hlstd{b[}\hlnum{2}\hlstd{]}\hlopt{*}\hlstd{X[,}\hlnum{2}\hlstd{]}\hlopt{+} \hlstd{b[}\hlnum{3}\hlstd{]}\hlopt{*}\hlstd{X[,}\hlnum{3}\hlstd{]} \hlopt{+} \hlstd{e}
+\hlstd{+ }  \hlstd{my_data} \hlkwb{<-} \hlkwd{data.frame}\hlstd{(x_1, x_2, y)}
+\hlstd{+ }  \hlstd{m1} \hlkwb{<-} \hlkwd{lm}\hlstd{(y} \hlopt{~} \hlstd{x_1} \hlopt{+} \hlstd{x_2)}
+
+\hlstd{+ }  \hlstd{sm1} \hlkwb{<-} \hlkwd{summary}\hlstd{(m1)}  \hlcom{# summary table is used to easily locate standard errors (se)}
+
+\hlstd{+ }  \hlstd{simulation1[i,}\hlnum{1}\hlstd{]} \hlkwb{<-} \hlstd{m1}\hlopt{$}\hlstd{coef[}\hlnum{1}\hlstd{]}    \hlcom{# storing models first coef: Intercept}
+\hlstd{+ }  \hlstd{simulation1[i,}\hlnum{2}\hlstd{]} \hlkwb{<-} \hlstd{m1}\hlopt{$}\hlstd{coef[}\hlnum{2}\hlstd{]}    \hlcom{# x_1 coef estimate}
+\hlstd{+ }  \hlstd{simulation1[i,}\hlnum{3}\hlstd{]} \hlkwb{<-} \hlstd{m1}\hlopt{$}\hlstd{coef[}\hlnum{3}\hlstd{]}    \hlcom{# x_2 coef estimate}
+\hlstd{+ }  \hlstd{simulation1[i,}\hlnum{4}\hlstd{]} \hlkwb{<-} \hlstd{sm1}\hlopt{$}\hlstd{coefficients[}\hlnum{1}\hlstd{,}\hlnum{2}\hlstd{]}   \hlcom{# standard error for Intercept}
+\hlstd{+ }  \hlstd{simulation1[i,}\hlnum{5}\hlstd{]} \hlkwb{<-} \hlstd{sm1}\hlopt{$}\hlstd{coefficients[}\hlnum{2}\hlstd{,}\hlnum{2}\hlstd{]}   \hlcom{# se x_1}
+\hlstd{+ }  \hlstd{simulation1[i,}\hlnum{6}\hlstd{]} \hlkwb{<-} \hlstd{sm1}\hlopt{$}\hlstd{coefficients[}\hlnum{3}\hlstd{,}\hlnum{2}\hlstd{]}   \hlcom{# se x_2}
+\hlstd{+ }\hlstd{\}}
+\hlstd{> }
+\hlstd{> }\hlcom{# head(simulation1)  # To check our now-full matrix to see if values make sense}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+Next, we will do the same simulation but removing x_2 in our model. Then we will plot each of the variables from the two simulations.The code for plotting has been witheld to save space on page, but it is done using ggplot and a function to make the plots appear next to one another.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.165, 0.169, 0.184}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{> }\hlcom{# Removing x_2 now}
+\hlstd{> }\hlcom{#  New empty matrix}
+\hlstd{> }\hlstd{simulation2} \hlkwb{<-} \hlkwd{matrix}\hlstd{(}\hlkwc{nrow} \hlstd{=} \hlnum{1000}\hlstd{,} \hlkwc{ncol} \hlstd{=} \hlnum{4}\hlstd{)}
+\hlstd{> }\hlcom{# head(simulation2)}
+\hlstd{> }
+\hlstd{> }\hlkwa{for} \hlstd{(i} \hlkwa{in} \hlnum{1}\hlopt{:}\hlnum{1000}\hlstd{)}
+\hlstd{+ }\hlstd{\{}
+\hlstd{+ }  \hlstd{N} \hlkwb{<-} \hlnum{1000}
+\hlstd{+ }  \hlstd{x_1} \hlkwb{<-} \hlkwd{rnorm}\hlstd{(N,} \hlkwc{mean}\hlstd{=}\hlnum{5}\hlstd{,} \hlkwc{sd}\hlstd{=}\hlkwd{sqrt}\hlstd{(}\hlnum{16}\hlstd{))}
+\hlstd{+ }  \hlstd{x_2} \hlkwb{<-} \hlkwd{rnorm}\hlstd{(N,} \hlkwc{mean}\hlstd{=}\hlnum{5}\hlstd{,} \hlkwc{sd}\hlstd{=}\hlkwd{sqrt}\hlstd{(}\hlnum{16}\hlstd{))}
+\hlstd{+ }  \hlstd{b} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlnum{2}\hlstd{,} \hlopt{-}\hlnum{1}\hlstd{,} \hlnum{3}\hlstd{)}
+\hlstd{+ }  \hlstd{e} \hlkwb{<-} \hlkwd{rnorm}\hlstd{(N,} \hlnum{0}\hlstd{,} \hlkwc{sd}\hlstd{=}\hlkwd{sqrt}\hlstd{(}\hlnum{4}\hlstd{))}
+\hlstd{+ }  \hlstd{ones} \hlkwb{<-} \hlkwd{matrix}\hlstd{(}\hlnum{1}\hlstd{,} \hlkwc{nrow}\hlstd{=}\hlnum{1000}\hlstd{,} \hlkwc{ncol}\hlstd{=}\hlnum{1}\hlstd{)}
+\hlstd{+ }  \hlstd{X} \hlkwb{<-} \hlkwd{matrix}\hlstd{(}\hlkwd{c}\hlstd{(ones, x_1, x_2),} \hlkwc{nrow}\hlstd{=N)}
+\hlstd{+ }  \hlstd{y} \hlkwb{<-} \hlstd{b[}\hlnum{1}\hlstd{]}\hlopt{*}\hlstd{X[,}\hlnum{1}\hlstd{]}\hlopt{+} \hlstd{b[}\hlnum{2}\hlstd{]}\hlopt{*}\hlstd{X[,}\hlnum{2}\hlstd{]}\hlopt{+} \hlstd{b[}\hlnum{3}\hlstd{]}\hlopt{*}\hlstd{X[,}\hlnum{3}\hlstd{]} \hlopt{+} \hlstd{e}
+\hlstd{+ }  \hlstd{m1} \hlkwb{<-} \hlkwd{lm}\hlstd{(y} \hlopt{~} \hlstd{x_1)}                \hlcom{#! no X_2 regressed, but included in DGP}
+
+\hlstd{+ }  \hlstd{sm1} \hlkwb{<-} \hlkwd{summary}\hlstd{(m1)}
+
+\hlstd{+ }  \hlstd{simulation2[i,}\hlnum{1}\hlstd{]} \hlkwb{<-} \hlstd{sm1}\hlopt{$}\hlstd{coef[}\hlnum{1}\hlstd{,}\hlnum{1}\hlstd{]}     \hlcom{#Storing models first coef, Intercept}
+\hlstd{+ }  \hlstd{simulation2[i,}\hlnum{2}\hlstd{]} \hlkwb{<-} \hlstd{sm1}\hlopt{$}\hlstd{coef[}\hlnum{2}\hlstd{,}\hlnum{1}\hlstd{]}     \hlcom{#x_1 coef estimate}
+\hlstd{+ }  \hlstd{simulation2[i,}\hlnum{3}\hlstd{]} \hlkwb{<-} \hlstd{sm1}\hlopt{$}\hlstd{coef[}\hlnum{1}\hlstd{,}\hlnum{2}\hlstd{]}      \hlcom{#standard error for Intercept}
+\hlstd{+ }  \hlstd{simulation2[i,}\hlnum{4}\hlstd{]} \hlkwb{<-} \hlstd{sm1}\hlopt{$}\hlstd{coef[}\hlnum{2}\hlstd{,}\hlnum{2}\hlstd{]}      \hlcom{#se for x_1}
+\hlstd{+ }\hlstd{\}}
+\hlstd{> }
+\hlstd{> }\hlcom{# Full Model Means}
+\hlstd{> }\hlcom{#   mean(simulation1[,1]) # mean estimate for b_0 (= 2)}
+\hlstd{> }\hlcom{#   mean(simulation1[,2]) # mean estimate for b_1 X_1 estimate (= -1)}
+\hlstd{> }\hlcom{#   mean(simulation1[,3]) # mean estimate for b_2 x_2 estimate (= 3)}
+\hlstd{> }
+\hlstd{> }\hlcom{# Limited Model Means}
+\hlstd{> }\hlcom{#   mean(simulation2[,1]) #mean b_0 (=2)}
+\hlstd{> }\hlcom{#   mean(simulation2[,2]) #mean b_1 of x_1 (=-1)}
+\hlstd{> }\hlcom{# This makes sense given our initial model data b=c(2, -1, 3)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+\begin{center}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.165, 0.169, 0.184}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/PlottingSimulationML-1} 
+
+\end{knitrout}
+\end{center}
+
+As is expected, most things remain the same between the two simulations, however in simulation two removing a variable (imagine this being race, education, or some economic variable) biases our estimate of the intercept. More importantly, this will balloon the errors (hopefully because that's what errors are supposed to tell us): \index{Simulation}
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.165, 0.169, 0.184}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{> }\hlkwd{mean}\hlstd{(simulation1[,}\hlnum{5}\hlstd{])} \hlcom{# Simulation 1's X_1 se's (0.0158)}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.01581834
+\end{verbatim}
+\begin{alltt}
+\hlstd{> }\hlkwd{mean}\hlstd{(simulation2[,}\hlnum{4}\hlstd{])} \hlcom{# Simulation 2's X_1 se's (0.0962)}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.09632281
+\end{verbatim}
+\begin{alltt}
+\hlstd{> }\hlkwd{mean}\hlstd{(simulation1[,}\hlnum{4}\hlstd{])}  \hlcom{# Simulation 1's Intercept se (.128)}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.1285995
+\end{verbatim}
+\begin{alltt}
+\hlstd{> }\hlkwd{mean}\hlstd{(simulation2[,}\hlnum{3}\hlstd{])}  \hlcom{# Simulation 2's Intercept se (.615)}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.6168927
+\end{verbatim}
+\begin{alltt}
+\hlstd{> }\hlcom{# Errors are larger when we take x_2 out of our analysis}
+\hlstd{> }\hlcom{#   (less variation captured from DGP)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+One advantage of using simulated data is the complete controll and education available from messing around with things without any consequences (most of the time). Now that we have tested some of the fundementals of the linear model and reporting estimates, let's use simulation to try to fit a linear model to binary data.
+
+Let us start with just making a fun function that creates inverse logit estimands.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.165, 0.169, 0.184}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{> }\hlstd{inv.logit} \hlkwb{=} \hlkwa{function}\hlstd{(}\hlkwc{x}\hlstd{)\{}
+\hlstd{+ }  \hlkwa{if}\hlstd{(}\hlopt{!}\hlkwd{is.numeric}\hlstd{(x))\{}\hlkwd{return}\hlstd{(}\hlstr{"Error 404: Numbers Not Found"}\hlstd{)\}}
+\hlstd{+ }  \hlkwd{exp}\hlstd{(x)}\hlopt{/}\hlstd{(}\hlnum{1}\hlopt{+}\hlkwd{exp}\hlstd{(x))}
+\hlstd{+ }\hlstd{\}}
+\hlstd{> }
+\hlstd{> }\hlkwd{inv.logit}\hlstd{(}\hlnum{.95}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.7211152
+\end{verbatim}
+\begin{alltt}
+\hlstd{> }\hlkwd{inv.logit}\hlstd{(}\hlstr{"Normative"}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+## [1] "Error 404: Numbers Not Found"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+Now, like before, we will construct a DGP via simulation:
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.165, 0.169, 0.184}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{> }\hlkwd{library}\hlstd{(Rlab)} \hlcom{# for rbern() function}
+\hlstd{> }\hlstd{simulation5} \hlkwb{<-} \hlkwd{matrix}\hlstd{(}\hlkwc{nrow} \hlstd{=} \hlnum{1000}\hlstd{,} \hlkwc{ncol} \hlstd{=} \hlnum{6}\hlstd{)}
+\hlstd{> }\hlcom{# head(simulation5)}
+\hlstd{> }
+\hlstd{> }\hlkwa{for} \hlstd{(i} \hlkwa{in} \hlnum{1}\hlopt{:}\hlnum{1000}\hlstd{)}
+\hlstd{+ }\hlstd{\{}
+\hlstd{+ }  \hlstd{N} \hlkwb{<-} \hlnum{1000}
+\hlstd{+ }  \hlstd{mu} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlnum{5}\hlstd{,}\hlnum{5}\hlstd{)}
+\hlstd{+ }  \hlstd{Sigma} \hlkwb{<-} \hlkwd{matrix}\hlstd{(} \hlkwd{c}\hlstd{(}\hlnum{2}\hlstd{,} \hlnum{.5}\hlstd{,} \hlnum{.5}\hlstd{,} \hlnum{3} \hlstd{),} \hlkwc{nrow} \hlstd{=} \hlnum{2}\hlstd{,} \hlkwc{ncol}\hlstd{=} \hlnum{2}\hlstd{)}
+\hlstd{+ }  \hlstd{mvr} \hlkwb{<-} \hlkwd{mvrnorm}\hlstd{(N, mu, Sigma)} \hlcom{# using MASS package}
+\hlstd{+ }  \hlstd{b} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlnum{.2}\hlstd{,} \hlopt{-}\hlnum{1}\hlstd{,} \hlnum{1.2}\hlstd{)}
+\hlstd{+ }  \hlstd{e} \hlkwb{<-} \hlkwd{rnorm}\hlstd{(N,} \hlnum{0}\hlstd{,} \hlkwc{sd}\hlstd{=}\hlkwd{sqrt}\hlstd{(}\hlnum{4}\hlstd{))}
+\hlstd{+ }  \hlstd{ones} \hlkwb{<-} \hlkwd{matrix}\hlstd{(}\hlnum{1}\hlstd{,} \hlkwc{nrow}\hlstd{=}\hlnum{1000}\hlstd{,} \hlkwc{ncol}\hlstd{=}\hlnum{1}\hlstd{)}
+\hlstd{+ }  \hlstd{X} \hlkwb{<-} \hlkwd{matrix}\hlstd{(}\hlkwd{c}\hlstd{(ones, mvr[,}\hlnum{1}\hlstd{], mvr[,}\hlnum{2}\hlstd{]),} \hlkwc{nrow}\hlstd{=N)}
+\hlstd{+ }  \hlstd{y} \hlkwb{<-} \hlstd{b[}\hlnum{1}\hlstd{]}\hlopt{*}\hlstd{X[,}\hlnum{1}\hlstd{]}\hlopt{+} \hlstd{b[}\hlnum{2}\hlstd{]}\hlopt{*}\hlstd{X[,}\hlnum{2}\hlstd{]}\hlopt{+} \hlstd{b[}\hlnum{3}\hlstd{]}\hlopt{*}\hlstd{X[,}\hlnum{3}\hlstd{]} \hlopt{+} \hlstd{e}
+\hlstd{+ }  \hlstd{y} \hlkwb{<-} \hlkwd{as.numeric}\hlstd{(y} \hlopt{>=} \hlkwd{median}\hlstd{(y))} \hlcom{# Setting y 0-1 based around median.}
+
+\hlstd{+ }  \hlcom{# Inverse Logits}
+\hlstd{+ }  \hlcom{# Intercept}
+\hlstd{+ }  \hlstd{inv.logit.a} \hlkwb{<-} \hlkwd{inv.logit}\hlstd{(b[}\hlnum{1}\hlstd{]}\hlopt{*}\hlstd{X[,}\hlnum{1}\hlstd{])}
+\hlstd{+ }  \hlstd{b0} \hlkwb{<-} \hlkwd{matrix}\hlstd{(inv.logit.a,} \hlkwc{nrow}\hlstd{=N,} \hlkwc{ncol}\hlstd{=} \hlnum{1}\hlstd{)}
+
+\hlstd{+ }  \hlcom{#X_1}
+\hlstd{+ }  \hlstd{inv.logit.x2} \hlkwb{<-} \hlkwd{inv.logit}\hlstd{(b[}\hlnum{2}\hlstd{]}\hlopt{*}\hlstd{X[,}\hlnum{2}\hlstd{])}
+\hlstd{+ }  \hlstd{b1} \hlkwb{<-} \hlkwd{matrix}\hlstd{(inv.logit.x2,} \hlkwc{nrow}\hlstd{=N,} \hlkwc{ncol}\hlstd{=} \hlnum{1}\hlstd{)}
+
+\hlstd{+ }  \hlcom{#X_2}
+\hlstd{+ }  \hlstd{inv.logit.x3} \hlkwb{<-} \hlkwd{inv.logit}\hlstd{(b[}\hlnum{3}\hlstd{]}\hlopt{*}\hlstd{X[,}\hlnum{3}\hlstd{])}
+\hlstd{+ }  \hlstd{b2} \hlkwb{<-} \hlkwd{matrix}\hlstd{(inv.logit.x3,} \hlkwc{nrow}\hlstd{=N,} \hlkwc{ncol}\hlstd{=} \hlnum{1}\hlstd{)}
+
+\hlstd{+ }  \hlstd{pi} \hlkwb{<-} \hlkwd{matrix}\hlstd{(}\hlkwd{c}\hlstd{(b0, b1, b2),} \hlkwc{nrow}\hlstd{=N,} \hlkwc{ncol}\hlstd{=}\hlnum{3}\hlstd{)}
+\hlstd{+ }  \hlstd{y} \hlkwb{<-} \hlkwd{rbern}\hlstd{(N, pi)}
+
+\hlstd{+ }  \hlstd{m5} \hlkwb{<-} \hlkwd{lm}\hlstd{(y} \hlopt{~} \hlstd{X[,}\hlnum{2}\hlstd{]}\hlopt{+} \hlstd{X[,}\hlnum{3}\hlstd{])} \hlcom{# linear model to binary data...}
+\hlstd{+ }  \hlstd{sm5} \hlkwb{<-} \hlkwd{summary}\hlstd{(m5)}
+
+\hlstd{+ }  \hlstd{simulation5[i,}\hlnum{1}\hlstd{]} \hlkwb{<-} \hlstd{sm5}\hlopt{$}\hlstd{coef[}\hlnum{1}\hlstd{,}\hlnum{1}\hlstd{]} \hlcom{#Intercept estimate}
+\hlstd{+ }  \hlstd{simulation5[i,}\hlnum{2}\hlstd{]} \hlkwb{<-} \hlstd{sm5}\hlopt{$}\hlstd{coef[}\hlnum{2}\hlstd{,}\hlnum{1}\hlstd{]} \hlcom{#x_1 coef estimate}
+\hlstd{+ }  \hlstd{simulation5[i,}\hlnum{3}\hlstd{]} \hlkwb{<-} \hlstd{sm5}\hlopt{$}\hlstd{coef[}\hlnum{3}\hlstd{,}\hlnum{1}\hlstd{]} \hlcom{#x_2 coef estimate}
+
+\hlstd{+ }  \hlstd{simulation5[i,}\hlnum{4}\hlstd{]} \hlkwb{<-} \hlstd{sm5}\hlopt{$}\hlstd{coef[}\hlnum{1}\hlstd{,}\hlnum{2}\hlstd{]} \hlcom{#standard error for Intercept}
+\hlstd{+ }  \hlstd{simulation5[i,}\hlnum{5}\hlstd{]} \hlkwb{<-} \hlstd{sm5}\hlopt{$}\hlstd{coef[}\hlnum{2}\hlstd{,}\hlnum{2}\hlstd{]} \hlcom{#se x_1}
+\hlstd{+ }  \hlstd{simulation5[i,}\hlnum{6}\hlstd{]} \hlkwb{<-} \hlstd{sm5}\hlopt{$}\hlstd{coef[}\hlnum{3}\hlstd{,}\hlnum{2}\hlstd{]} \hlcom{#se x_2}
+\hlstd{+ }\hlstd{\}}
+\hlstd{> }
+\hlstd{> }\hlcom{# head(simulation5) #Check}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+That perhaps seemed too complicated, but I wanted to show the MASS and RLab packages for what they offer in creating simulated data. Similar to before I will plot the results:
+
+\begin{center}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.165, 0.169, 0.184}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/hiddenplotlineartologit-1} 
+\begin{kframe}\begin{verbatim}
+## [1] 2
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\end{center}
+
+Here we see the three estimates from our simulation and our model's prediction based upon the R \texttt{predict()} command. Our estimates are definately off and our predictions seem to be off because of this. Perhaps running a proper logit or probit model will help. We could run the same DGP but with the proper modeling using the \texttt{glm()} function, and the proper link function if we so desired.
+
+
 
 \subsection{Cross Validation}
 
@@ -2757,7 +3027,7 @@ Now that we have the data read in and cleaned (mostly tracking the id numbers), 
 \hlstd{> }\hlkwd{summary}\hlstd{(graph.object)} \hlcom{# Basic statistics seem okay}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH 29b700c DN-- 610 1043 -- 
+## IGRAPH e053341 DN-- 610 1043 -- 
 ## + attr: name (v/c)
 \end{verbatim}
 \begin{alltt}
@@ -2927,7 +3197,7 @@ The next part was difficult, and probably could be done better. I looked at a li
 \hlstd{> }\hlkwd{E}\hlstd{(graph.object)[}\hlkwd{order}\hlstd{(c.graph.object,} \hlkwc{decreasing}\hlstd{=T)[}\hlnum{1}\hlopt{:}\hlnum{10}\hlstd{]]}
 \end{alltt}
 \begin{verbatim}
-## + 10/924 edges from 29b83b2 (vertex names):
+## + 10/924 edges from e054587 (vertex names):
 ##  [1] yodatsracist       ->dewarr   SpecificallyGeneral->gacorley
 ##  [3] inh-uman           ->gacorley Shazbot_Nanu       ->Ramicus 
 ##  [5] Mentalpopcorn      ->PeechMan Drict              ->USMCLee 
@@ -2939,7 +3209,7 @@ The next part was difficult, and probably could be done better. I looked at a li
 \hlstd{> }\hlkwd{E}\hlstd{(graph.object)[}\hlkwd{order}\hlstd{(c.lg.graph.object,} \hlkwc{decreasing}\hlstd{=T)[}\hlnum{1}\hlopt{:}\hlnum{10}\hlstd{]]}
 \end{alltt}
 \begin{verbatim}
-## + 10/924 edges from 29b83b2 (vertex names):
+## + 10/924 edges from e054587 (vertex names):
 ##  [1] Atriox998         ->wellmanicuredman  
 ##  [2] Galileotierraplana->Atriox998         
 ##  [3] wellmanicuredman  ->Atriox998         
@@ -2964,7 +3234,7 @@ The next part was difficult, and probably could be done better. I looked at a li
 \hlstd{> }\hlkwd{E}\hlstd{(graph.object)[}\hlkwd{order}\hlstd{(b.graph.object,} \hlkwc{decreasing}\hlstd{=T)[}\hlnum{1}\hlopt{:}\hlnum{10}\hlstd{]]}
 \end{alltt}
 \begin{verbatim}
-## + 10/924 edges from 29b83b2 (vertex names):
+## + 10/924 edges from e054587 (vertex names):
 ##  [1] sambalchuck     ->orthag             
 ##  [2] DarkGamer       ->Cullen_Ingus       
 ##  [3] obamanisha      ->Aquifex            
@@ -2981,7 +3251,7 @@ The next part was difficult, and probably could be done better. I looked at a li
 \hlstd{> }\hlkwd{E}\hlstd{(graph.object)[}\hlkwd{order}\hlstd{(b.lg.graph.object,} \hlkwc{decreasing}\hlstd{=T)[}\hlnum{1}\hlopt{:}\hlnum{10}\hlstd{]]}
 \end{alltt}
 \begin{verbatim}
-## + 10/924 edges from 29b83b2 (vertex names):
+## + 10/924 edges from e054587 (vertex names):
 ##  [1] yodatsracist  ->Randomname64   Fibonacci35813->deathlock13   
 ##  [3] vulcan583     ->Fibonacci35813 Erinaceous    ->vulcan583     
 ##  [5] dewarr        ->yodatsracist   Randomname64  ->Erinaceous    
@@ -3001,19 +3271,19 @@ The next part was difficult, and probably could be done better. I looked at a li
 \hlstd{> }\hlkwd{E}\hlstd{(graph.object)[}\hlkwd{order}\hlstd{(e.graph.object}\hlopt{$}\hlstd{vector,} \hlkwc{decreasing}\hlstd{=T)[}\hlnum{1}\hlopt{:}\hlnum{10}\hlstd{]]}
 \end{alltt}
 \begin{verbatim}
-## + 10/924 edges from 29b83b2 (vertex names):
+## + 10/924 edges from e054587 (vertex names):
 ##  [1] MoralMidgetry  ->Dumble_dared        just_works_here->PM_ME_YOUR_SHEC0CK 
 ##  [3] timeimmemorial ->dewarr              Kai_Daigoji    ->Klumber            
 ##  [5] sambalchuck    ->orthag              HerrtomtomAZ   ->Newnews2           
 ##  [7] inh-uman       ->chroboo             emptynothing   ->sambalchuck        
-##  [9] nllanki        ->Klumber             Klumber        ->NoFascistAgreements
+##  [9] Klumber        ->NoFascistAgreements nllanki        ->Klumber
 \end{verbatim}
 \begin{alltt}
 \hlstd{> }\hlstd{evc_lg_graph.object} \hlkwb{<-} \hlkwd{evcent}\hlstd{(lg_graph.object)}
 \hlstd{> }\hlkwd{E}\hlstd{(graph.object)[}\hlkwd{order}\hlstd{(evc_lg_graph.object}\hlopt{$}\hlstd{vector,} \hlkwc{decreasing}\hlstd{=T)[}\hlnum{1}\hlopt{:}\hlnum{10}\hlstd{]]}
 \end{alltt}
 \begin{verbatim}
-## + 10/924 edges from 29b83b2 (vertex names):
+## + 10/924 edges from e054587 (vertex names):
 ##  [1] Dennis_Langley  ->MoralMidgetry  Dennis_Langley  ->MoralMidgetry 
 ##  [3] Dennis_Langley  ->MoralMidgetry  deathlock13     ->MoralMidgetry 
 ##  [5] deathlock13     ->MoralMidgetry  BuildBetterWorld->MoralMidgetry 
@@ -3073,7 +3343,6 @@ At least from above we know where to start looking for central nodes within our 
 I find it easier to think about correlation by looking at the plot (albiet a very rough plot). The two ``darkest'' or most correlated measures was the in-degree with degree, and the degree with the out-degree. This makes sense because the degree is encapsulating both of those measures. All measures are positively correlated, except the eigenvector centrality measure compared to closeness and betweeness. This is likely because of the different assumptions and properties each of these measures have. For example, eigenvector centrality Trafic moves along unrestricted walks, Trafic can effect subsequent nodes simultaneously, and eigenvector centrality measures long-term and indirect risks. Other measures may not have these properties, so it is probably best that they are not too closely correlated.
 
 
-
 %--------------------------------------
 \subsubsection{Data Viz}
 
@@ -3090,7 +3359,7 @@ In this I will be using the Reddit data from "r/AskSocialScientists" from Octobe
 \hlstd{> }\hlkwd{summary}\hlstd{(g1)} \hlcom{#}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH 2cacb51 DN-- 339 521 -- 
+## IGRAPH e2ea934 DN-- 339 521 -- 
 ## + attr: name (v/c)
 \end{verbatim}
 \begin{alltt}
@@ -3100,7 +3369,7 @@ In this I will be using the Reddit data from "r/AskSocialScientists" from Octobe
 \hlstd{> }\hlkwd{summary}\hlstd{(g12)} \hlcom{#}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH 2cadbd0 DN-- 327 522 -- 
+## IGRAPH e2eb1ae DN-- 327 522 -- 
 ## + attr: name (v/c)
 \end{verbatim}
 \end{kframe}
