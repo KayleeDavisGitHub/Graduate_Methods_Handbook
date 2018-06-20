@@ -2522,6 +2522,7 @@ set.seed(12345)
 library(caret) #! for train() and Penalized Regression Functions
 library(MASS) # mvrnorm()
 library(Rlab) # for rbern()
+library(glmnet)
 
 N <- 1000
 P <- 100
@@ -2558,7 +2559,7 @@ The idea here is to do data manipulation and all testing for significance just o
 Let us first plot the correlation between the true $\beta$ and our model's predicted $\beta$:
 
 \begin{center}
-<<betabetatestPenRegress1>>=
+<<betabetatestPenRegress1, out.width='5in'>>=
 library(ggplot2) # Graphing
 
 qplot(b, coef(m1)[-1])+
@@ -2573,7 +2574,7 @@ qplot(b, coef(m1)[-1])+
 These results make sense, most of our beta’s cluster with a mean around zero and some of our beta’s are outward with a mean around five and a larger standard deviation. Now, using our training data and leaving the test data aside, let’s run the same model within the training data, and examine the errors in a few different ways:
 
 \begin{center}
-<<examineerrorsML>>=
+<<examineerrorsML, out.width='5in'>>=
 
 ## Training Model:
 trainmod <- lm(train_data$trainy ~ trainx, data = train_data)
@@ -2607,7 +2608,7 @@ Using just our training data with the linear model we see our root mean squared 
 Let's begin with the LASSO:
 
 \begin{center}
-<<LASSO1ML>>=
+<<LASSO1ML, out.width='5in'>>=
 # Remember our training data frame:
 train_data = data.frame(trainx, trainy)
 
@@ -2644,7 +2645,7 @@ qplot(trainy, yhat, alpha=I(0.25))+
 \index{GGplot}
 
 \begin{center}
-<<LASSOvaluesML1>>=
+<<LASSOvaluesML1, out.width='5in'>>=
 # best values using best lambda:
 lasso_beta = coef(mod_lasso$finalModel, mod_lasso$bestTune$lambda)
 
@@ -2661,7 +2662,7 @@ What this tells us is that our predicted values from the LASSO model does well w
 Similarly, let’s see how the Ridge and elastic net’s hold up:
 
 \begin{center}
-<<RidgeNetML1>>=
+<<RidgeNetML1, out.width='5in'>>=
 ## Running Ridge:
 mod_ridge = train(trainy~., method="glmnet",
           tuneGrid=expand.grid(alpha=1,
@@ -2692,7 +2693,7 @@ qplot(trainy, yhat, alpha=I(0.25))+
 \end{center}
 
 \begin{center}
-<<Ridgenet2MLthing>>=
+<<Ridgenet2MLthing, out.width='5in'>>=
 ridge_beta = coef(mod_ridge$finalModel, mod_ridge$bestTune$lambda)
 
 qplot(b, ridge_beta[-1])+
@@ -2706,9 +2707,29 @@ qplot(b, ridge_beta[-1])+
 
 Our ridge regression shows less variability, our training set $y$ values and ridge predicted values are more tightly linear, and there is less variability in our comparative $\beta$ values in the plot above. This is interesting and is perhaps explained in the difference between the mathematical formula between Ridge and LASSO themselves (letting $\lambda$ control the amount of regulation in gradient descent):
 
+\textbf{Ridge:} ($\alpha = 0$ )
+
+\begin{equation}
+\lambda \sum_{j=1}^{p} \left[ \frac{1}{2} (1- \alpha) \beta^2 \right]
+\end{equation}
+
+\textbf{LASSO:} ($\alpha = 1$ )
+
+\begin{equation}
+\lambda \sum_{j=1}^{p} (\alpha) | \beta_j |
+\end{equation}
+
+We seek a set of sparse solutions because we beleive that many of our 100 $\beta_j$ paramenters should be zero; a large enough $\lambda$ will set these exactly or near zero for us! We saw our LASSO $\lambda$ values become higher than our Ridge $\lambda$ values; this is because, unlike Ridge, our $\beta_{\lambda}^{\text{lass}}}$ lasso values have no closed form – allowing more varriance. A third potential option is to allow our alpha parameter varry between zero and one eectively using both of these penalties and giving us the elastic net (litterally just adding LASSO and Ridge).
+
+\textbf{Elastic Net:} ($0 < \alpha < 1$)
+
+\begin{equation}
+\lambda \sum_{j=1}^{p} \left[ \frac{1}{2} (1- \alpha) \beta^2 \right] + \lambda \sum_{j=1}^{p} (\alpha) | \beta_j |
+\end{equation}
+
 
 %%%
-% Left off on lab 3 midway; before describing math.
+% Left off on lab 3 midway; describing math.
 %%%
 
 

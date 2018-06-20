@@ -42,20 +42,21 @@
 \indexentry{Kaplan-Meier|hyperpage}{63}
 \indexentry{Simulation|hyperpage}{67}
 \indexentry{Test Set Training Set|hyperpage}{71}
-\indexentry{LASSO|hyperpage}{76}
-\indexentry{Ridge|hyperpage}{76}
-\indexentry{Elastic Net|hyperpage}{76}
-\indexentry{Augmented Dicky Fuller|hyperpage}{79}
-\indexentry{KPSS Test|hyperpage}{79}
-\indexentry{Granger Causality|hyperpage}{79}
-\indexentry{Vector Auto Regression|hyperpage}{80}
-\indexentry{Innovation Accounting|hyperpage}{81}
-\indexentry{recoding data|hyperpage}{86}
-\indexentry{ggplot|hyperpage}{92}
-\indexentry{ggplot|hyperpage}{102}
-\indexentry{DAG|hyperpage}{105}
-\indexentry{utility|hyperpage}{105}
-\indexentry{First Best|hyperpage}{105}
-\indexentry{Nash Equilibrium|hyperpage}{105}
-\indexentry{subgame perfect Nash Equilibrium|hyperpage}{106}
-\indexentry{comparative static|hyperpage}{106}
+\indexentry{LASSO|hyperpage}{75}
+\indexentry{Ridge|hyperpage}{75}
+\indexentry{Elastic Net|hyperpage}{75}
+\indexentry{GGplot|hyperpage}{76}
+\indexentry{Augmented Dicky Fuller|hyperpage}{83}
+\indexentry{KPSS Test|hyperpage}{83}
+\indexentry{Granger Causality|hyperpage}{83}
+\indexentry{Vector Auto Regression|hyperpage}{84}
+\indexentry{Innovation Accounting|hyperpage}{85}
+\indexentry{recoding data|hyperpage}{90}
+\indexentry{ggplot|hyperpage}{96}
+\indexentry{ggplot|hyperpage}{106}
+\indexentry{DAG|hyperpage}{109}
+\indexentry{utility|hyperpage}{109}
+\indexentry{First Best|hyperpage}{109}
+\indexentry{Nash Equilibrium|hyperpage}{109}
+\indexentry{subgame perfect Nash Equilibrium|hyperpage}{110}
+\indexentry{comparative static|hyperpage}{110}
