@@ -4,7 +4,7 @@
 
   \indexspace
 
-  \item Augmented Dicky Fuller, \hyperpage{83}
+  \item Augmented Dicky Fuller, \hyperpage{91}
 
   \indexspace
 
@@ -20,44 +20,46 @@
   \item checking linear models, \hyperpage{20}
   \item coarse matching, \hyperpage{11}
   \item colliders, \hyperpage{3}
-  \item comparative static, \hyperpage{110}
+  \item comparative static, \hyperpage{118}
   \item confounding, \hyperpage{4}
   \item Curse of Dimensionality, \hyperpage{3}
 
   \indexspace
 
-  \item DAG, \hyperpage{3}, \hyperpage{109}
+  \item DAG, \hyperpage{3}, \hyperpage{117}
+  \item DGP, \hyperpage{83}
   \item Differences in Differences, \hyperpage{12}
 
   \indexspace
 
-  \item Elastic Net, \hyperpage{75}
+  \item Elastic Net, \hyperpage{74}
 
   \indexspace
 
-  \item First Best, \hyperpage{109}
+  \item First Best, \hyperpage{117}
   \item Fixed Effects, \hyperpage{11}
 
   \indexspace
 
   \item GGplot, \hyperpage{76}
-  \item ggplot, \hyperpage{96}, \hyperpage{106}
-  \item Granger Causality, \hyperpage{83}
+  \item ggplot, \hyperpage{104}, \hyperpage{114}
+  \item Granger Causality, \hyperpage{91}
 
   \indexspace
 
   \item ignorability, \hyperpage{4}
   \item imputation, \hyperpage{5}
-  \item Innovation Accounting, \hyperpage{85}
+  \item Innovation Accounting, \hyperpage{93}
 
   \indexspace
 
   \item Kaplan-Meier, \hyperpage{63}
-  \item KPSS Test, \hyperpage{83}
+  \item KPSS Test, \hyperpage{91}
 
   \indexspace
 
-  \item LASSO, \hyperpage{75}
+  \item LASSO, \hyperpage{74}
+  \item library() , \hyperpage{83}
   \item link function, \hyperpage{26}, \hyperpage{44}
   \item loading data, \hyperpage{15}
 
@@ -71,7 +73,7 @@
   \indexspace
 
   \item Naive Differences in Means, \hyperpage{3}
-  \item Nash Equilibrium, \hyperpage{109}
+  \item Nash Equilibrium, \hyperpage{117}
   \item nearest-neighbor, \hyperpage{11}
 
   \indexspace
@@ -82,8 +84,8 @@
   \indexspace
 
   \item R$^2$, \hyperpage{17}
-  \item recoding data, \hyperpage{15}, \hyperpage{90}
-  \item Ridge, \hyperpage{75}
+  \item recoding data, \hyperpage{15}, \hyperpage{98}
+  \item Ridge, \hyperpage{74}
   \item Rope Ladder Ploting, \hyperpage{33}
 
   \indexspace
@@ -93,20 +95,20 @@
   \item sharp null hypothesis, \hyperpage{5}
   \item Simulation, \hyperpage{17}, \hyperpage{67}
   \item subclassification, \hyperpage{11}
-  \item subgame perfect Nash Equilibrium, \hyperpage{110}
+  \item subgame perfect Nash Equilibrium, \hyperpage{118}
   \item SUTVA, \hyperpage{4}
 
   \indexspace
 
-  \item Test Set Training Set, \hyperpage{71}
+  \item Test Set Training Set, \hyperpage{71}, \hyperpage{82, 83}
   \item texreg package, \hyperpage{16}, \hyperpage{27}, \hyperpage{29}
 
   \indexspace
 
-  \item utility, \hyperpage{109}
+  \item utility, \hyperpage{117}
 
   \indexspace
 
-  \item Vector Auto Regression, \hyperpage{84}
+  \item Vector Auto Regression, \hyperpage{92}
 
 \end{theindex}

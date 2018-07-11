@@ -2475,7 +2475,7 @@ for (i in 1:1000)
 That perhaps seemed too complicated, but I wanted to show the MASS and RLab packages for what they offer in creating simulated data. Similar to before I will plot the results:
 
 \begin{center}
-<<hiddenplotlineartologit, echo=FALSE, message=FALSE>>=
+<<hiddenplotlineartologit, echo=FALSE, message=FALSE, out.width='5in'>>=
 
 library(ggplot2)
 #Creating each graph as an object (p) and the location I wish
@@ -2613,22 +2613,22 @@ Let's begin with the LASSO:
 train_data = data.frame(trainx, trainy)
 
 mod_lasso = train(trainy~., method="glmnet",# formula and method
-     tuneGrid=expand.grid(alpha=0, # alpha=0 is the LASSO
-     lambda=seq(0,100,1)), #gradient descent to zero
-     data=train_data,
-     preProcess=c("center"),# centering standardization of points
-     trControl=trainControl(method="cv",number=2, search="grid"))
+     tuneGrid=expand.grid(alpha = 0, # alpha=0 is the LASSO
+               lambda = seq(0,100,1)), #gradient descent to zero
+     data = train_data,
+     preProcess = c("center"),# centering standardization of points
+     trControl = trainControl(method="cv",number=2, search="grid"))
 # "trainControl" sets a resampling method per a "search" parameter grid
 # mod_lasso ## final values were around lambda = 14 using RMSE
 
 ## Narrowing lambda sequence closer to what the lambda reported earlier:
-mod_lasso = train(trainy~., method="glmnet",
-     tuneGrid=expand.grid(alpha=0,
+mod_lasso = train(trainy~., method = "glmnet",
+     tuneGrid = expand.grid(alpha = 0,
      # *setting bounds closer around 14; smaller "steps" (0.01)
-     lambda=seq(0,40,0.01)),
-     data=train_data,
-     preProcess=c("center"),
-     trControl=trainControl(method="cv",number=2, search="grid"))
+                         lambda = seq(0,40,0.01)),
+     data = train_data,
+     preProcess = c("center"),
+     trControl = trainControl(method="cv",number=2, search="grid"))
      # mod_lasso ## Narrowing in, we found a new best lambda of around 14.5!
 
 ## Predictions:
@@ -2638,8 +2638,8 @@ qplot(trainy, yhat, alpha=I(0.25))+
      xlab( expression(paste("Training ", y)))+
      ylab( expression(paste("Ridge ", hat(y))))+
      theme_bw()+
-     theme(axis.text=element_text(size=12),
-     axis.title=element_text(size=14))
+     theme(axis.text = element_text(size=12),
+          axis.title = element_text(size=14))
 @
 \end{center}
 \index{GGplot}
@@ -2653,8 +2653,8 @@ qplot(b, lasso_beta[-1])+ # removing intercept
      xlab( expression(paste("True ", beta)))+
      ylab( expression(paste("LASSO ", beta)))+
      theme_bw()+
-     theme(axis.text=element_text(size=12),
-     axis.title=element_text(size=14))
+     theme(axis.text = element_text(size=12),
+          axis.title = element_text(size=14))
 @
 \end{center}
 
@@ -2686,8 +2686,8 @@ qplot(trainy, yhat, alpha=I(0.25))+
      xlab( expression(paste("Training ", y)))+
      ylab( expression(paste("Ridge ", hat(y))))+
      theme_bw()+
-     theme(axis.text=element_text(size=12),
-     axis.title=element_text(size=14))
+     theme(axis.text = element_text(size=12),
+          axis.title = element_text(size=14))
 
 @
 \end{center}
@@ -2700,12 +2700,14 @@ qplot(b, ridge_beta[-1])+
      xlab( expression(paste("True ", beta)))+
      ylab( expression(paste("Ridge ", beta)))+
      theme_bw()+
-     theme(axis.text=element_text(size=12),
-     axis.title=element_text(size=14))
+     theme(axis.text = element_text(size=12),
+          axis.title = element_text(size=14))
 @
 \end{center}
 
 Our ridge regression shows less variability, our training set $y$ values and ridge predicted values are more tightly linear, and there is less variability in our comparative $\beta$ values in the plot above. This is interesting and is perhaps explained in the difference between the mathematical formula between Ridge and LASSO themselves (letting $\lambda$ control the amount of regulation in gradient descent):
+
+\
 
 \textbf{Ridge:} ($\alpha = 0$ )
 
@@ -2721,6 +2723,8 @@ Our ridge regression shows less variability, our training set $y$ values and rid
 
 We seek a set of sparse solutions because we beleive that many of our 100 $\beta_j$ paramenters should be zero; a large enough $\lambda$ will set these exactly or near zero for us! We saw our LASSO $\lambda$ values become higher than our Ridge $\lambda$ values; this is because, unlike Ridge, our $\beta_{\lambda}^{\text{lass}}}$ lasso values have no closed form – allowing more varriance. A third potential option is to allow our alpha parameter varry between zero and one eectively using both of these penalties and giving us the elastic net (litterally just adding LASSO and Ridge).
 
+\
+
 \textbf{Elastic Net:} ($0 < \alpha < 1$)
 
 \begin{equation}
@@ -2728,17 +2732,222 @@ We seek a set of sparse solutions because we beleive that many of our 100 $\beta
 \end{equation}
 
 
-%%%
-% Left off on lab 3 midway; describing math.
-%%%
+
+<<enetexampleML, prompt=TRUE, eval=TRUE>>=
+## Elastic Net:
+mod_enet = train(trainy~., method = "glmnet",
+            tuneGrid = expand.grid(alpha = seq(0, 1, 0.1),
+                                   lambda = seq(0, 100, 1)),
+            data = train_data,
+            preProcess = c("center"),
+            trControl = trainControl(method="cv", number=2, search="grid"))
+# alpha used was .9 and lambda ended up being 1.
+@
+
+This elastic net will give us similarlly better results with a varrying $\alpha$ along with it. However, these models work best for when we have data with many parameters, here we have only started with 100 (``only''). Let's ramp up the number of perameters (P) and really put these models to the test. I'll repost the DGP in full.
+
+<<DGPforML2, prompt=TRUE>>=
+N <- 1000
+P <- 1500 # Note this change
+Sigma <- rWishart(n=1, df=P, Sigma=diag(P))[,,1]
+X <- mvrnorm(N, runif(P, -10, 10), Sigma)
+p <- rbern(P, 0.1)
+b <- p * rnorm(P, 5, 5) + (1-p) * rnorm(P, 0, 0.1)
+e <- rnorm(N, 0, sd=sqrt(10))
+y = X%*%b + e
+m1 <- lm(y~X)
+my_data = data.frame(X,y)
+
+@
+
+With this DGP, let's see how our regular linear model holds up graphically:
+
+<<lmoutputML2, out.width='5in'>>=
+## Problematic:
+qplot(b, coef(m1)[-1], alpha=I(0.25))+
+     xlab( expression(paste("True " , beta)))+
+     ylab( expression(paste("Model " , hat(beta), " Values")))+
+     theme_bw()+
+     theme(axis.text = element_text(size=12),
+          axis.title = element_text(size=14))
+@
+
+We see quite a bit of noise, also our results will be outrageously significant because we are not penalizing ourselves for multiple parameters unless we are using the AIC and BIC. Now let's see if the elastic net does any better given the larger number of parameters. We'll start by chopping up the data into a testing set and a training set. \index{Test Set Training Set}
+
+<<testsettrainingset>>=
+# Test Set; Training Set (20% and 80% again)
+trainidx <- createDataPartition(y, times = 1, p=.80, list=FALSE)
+
+trainy <- y[trainidx]
+testy  <- y[-trainidx]
+trainx <- X[trainidx,]
+testx  <- X[-trainidx,]
+
+train_data = data.frame(trainx, trainy)
+test_data  = data.frame(testx, testy)
+
+# Training linear Model:
+trainmod <- lm(train_data$trainy ~ trainx, data = train_data)
+
+@
+
+Running the elastic net now looking for the best lambda.
+
+<<enetfinalML2>>=
+# Using Penalized Regression Helps Conceptualize This:
+# Elastic Net:
+mod_enet = train(trainy~., method = "glmnet",
+          tuneGrid = expand.grid(alpha = seq(0,1,0.1),
+                                lambda = seq(0,100,1)),
+          data = train_data,
+          preProcess = c("center"),
+          trControl = trainControl(method="cv",number=2, search="grid"))
+# alpha used was 1 and lambda ended up being 8.
+
+mod_enet = train(trainy~., method = "glmnet",
+          tuneGrid=expand.grid(alpha = seq(0.6,1,0.5), #narrowing
+                              lambda = seq(0,10,0.5)),
+          data = train_data,
+          preProcess = c("center"),
+          trControl = trainControl(method="cv",number=2, search="grid"))
+# alpha ended up at .6 and lambda at 10.
+@
+
+Great!
+
+<<plonewbetafromenetML2, out.width='5in'>>=
+
+enet_beta = coef(mod_enet$finalModel, mod_enet$bestTune$lambda)
+qplot(b, enet_beta[-1])+
+     xlab( expression(paste("True ", beta)))+
+     ylab( expression(paste("Elastic Net ", beta)))+
+     theme_bw()+
+     theme(axis.text = element_text(size=12),
+          axis.title = element_text(size=14))
+@
+
+Setting up a standard linear model with more estimators than number of observations is a fundemental assumption violation; it over-inates our coecents and gives us essentially no error. This can be really misleading to readers, and similar to how one might penalize their general linear models utilizing AIC and BIC we can use the elastic net to show more variance in our estimates and report our $\lambda$ values which are much larger than before ($\lambda$ = 10). Penalized regression is the intellectually honest thing to do when you have a model with a large number of parameters, the elastic net in this case has showed some uncertainty in our estimates whereas the normal model inflated our certainty (reported an $R^2$ of 1).
+
+
+\subsection{Support Vector Models, Regression Trees}
+
+Support Vector Models (SVMs) can be used to analize data with the least error given unsupervised machine learning. Many of these models require super computing, or a careful consideration of the data and the underlying calculus going on. Conisder the following DGP: ballanced data, split into a test set and training set. \index{DGP} \index{Test Set Training Set} \index{library() }
+
+<<SVMMLDGP, message=FALSE, warning=FALSE>>=
+# Need a lot of packages for this:
+packages <- c("caret", "MASS", "Rlab", "boot", "ggplot2", "ggridges", "dplyr")
+invisible( lapply(packages, library, character.only = TRUE))
+
+set.seed(12345)
+
+N <- 2000
+P <- 50 # P is cut down for computation time, (but could be much larger!)
+
+## Ballanced DGP creation
+mu <- runif(P, -1,1)
+Sigma <- rWishart(n=1, df=P, Sigma=diag(P))[,,1]
+Sigma <- ifelse(row(Sigma) != col(Sigma), 0, Sigma)
+X <- mvrnorm(N, mu=mu, Sigma = Sigma)
+p <- rbern(P, 1)
+beta <- p*rnorm(P,1,0.9) + (1-p)*rnorm(P,0,0.3)
+eta <- X%*%beta
+pi <- inv.logit(eta)
+Y <- rbern(N, pi)
+Y <- as.factor(Y)
+data.1.Bal <- data.frame(X, Y)
+
+## Test/Training Sets
+test.data.1.Bal <- data.1.Bal[1:500,]
+train.data.1.Bal <- data.1.Bal[501:2000,]
+
+@
+
+With the help of a few handy packages that help users run SVM's; consider the following:
+
+<<SVMrun1ML, message=FALSE, warning=FALSE>>=
+
+library(kernlab)
+library(microbenchmark)
+# Linear SVM
+linear.svm.bal <- train(Y~.,
+                       data=train.data.1.Bal,
+                       method = "svmLinear")
+
+linear.svm.bal$results$Accuracy
+
+# A polynomial kernal: (long computation!)
+# poly.svm.bal <- train(Y~.,
+#                      data=train.data.1.Bal,
+#                      method="svmPoly")
+
+# poly.svm.bal$results[as.numeric(rownames(poly.svm.bal$bestTune)),]
+# .951 Accuracy; .902 Kappa; AccuracySD of .011
+
+
+# Radial kernal:
+# radial.svm.bal = train(Y~.,
+#                        data=train.data.1.Bal,
+#                        method="svmRadialCost")
+
+# radial.svm.bal$results[as.numeric(rownames(radial.svm.bal$bestTune)),]
+# Accuracy of .54; AccuracySD .017
+
+@
+
+Dangerously simple, this is how an SVM is ran, and could be ran given the need for a polynomial or radial kernal. The microbenchmark package is included above for any timing related concerns conduciting research with more advanced kernals.
+
+So what's going on exactly? Well, an SVM classifies data “better” by calculating the distances between points and a line (or plane) drawn through the data. The minimal errors between these points and the plane generates more reliable classification models. This is different from a strandard regression least-squared-errors approach because this uses Euclidean distance, which is different from a vertically measured residual (commonly seen in linear models). Beyond this, we can specify various kernals to attempt to classify our data throughout various dimensions -- something the standard linear model would struggle to accomplish. Overall our data seem to classify about the same as the elastic net for ballanced data.
+
+Another option, however, is to use classification trees for visualization and confirmation of results paired with other machine learning techniques. Below is code to accomplish this if you so choose:
+
+
+<<treesML1, out.width='5in', warning=FALSE, message=FALSE>>=
+# Using "rpart", may need to reload R to get things to work.
+library(rpart)
+# grow tree with same DGP as above.
+tree.bal <- rpart(Y~.,
+                  method = "class",
+                  data = train.data.1.Bal)
+## other options include:
+# printcp(tree.bal) # display the results
+# plotcp(tree.bal)  # visualize cross-validation results
+# summary(tree.bal) # detailed summary of splits
+
+# plot tree
+plot(tree.bal, uniform = TRUE,
+     main = "Classification Tree for Ballanced Data")
+text(tree.bal, use.n = TRUE, all = TRUE, cex = .8)
+# create attractive postscript plot of tree
+post(tree.bal,
+     title = "Classification Tree for Ballanced Data")
+# then we have a lot of options off of this, including pruning the tree back,
+# or making -multiple- trees into a "forest" and
+# selecting the best one! (intutively a form of advanced bootstrapping!)
+# prune the tree, by the error that was previously generated above
+
+
+# prune function:
+ptree.bal <- prune(tree.bal,
+                   cp=tree.bal$cptable[which.min(tree.bal$cptable[,"xerror"]),
+                                       "CP"])
+
+# plot the pruned tree
+plot(ptree.bal, uniform = TRUE,
+     main ="Pruned Classification Tree for Ballanced Data")
+text(ptree.bal, use.n = TRUE, all = TRUE, cex = .8)
+post(ptree.bal,
+     title = "Pruned Classification Tree for Ballanced Data")
+
+@
+
+Overall, regression trees (here they are classification trees) can be used to see which predictors lead our classifications, and similar to how elastic nets will bring some predictors to zero; we can then ``prune'' these observations and vizualize this process better. In poorly predictive data, this will become well pruned to only a few key observations. Reporting these over other methods may be more intuitive for readers and reviewers!
+
+Those familiar to machine learning will note the similarity between these models to principle components analysis (PCA) -- because it is very close.
 
 
 
 \subsection{K Nearest Neighbors, Nearest Means}
 
-\subsection{Support Vector Models}
-
-\subsection{Regression Trees}
 
 
 
@@ -2943,8 +3152,6 @@ var1 <- VAR(varData, p=4, type="const") # Indicating lag length 4 here.
  granger2$Granger$method
  granger2$Granger$p.value
 @
-
-
 
 
 This hypothesis test takes as the null that $X$ is not a Granger-cause of $Y$ , and as such, a p-value below some $\alpha$ level would lead one to reject the null hypothesis. These tests lead me to confirm that neither series is Granger-causal of the other. Placed back in theory, neither liberals nor conservatives follow each others trends in weekly church attendence -- indicating other sociological, political, or economic forces to be at play.

@@ -1,231 +1,238 @@
-#### Preamble
-setwd("Data Files")
-library(foreign)
-library(arm) #curve, sim, other functions
-library(car) #recoding variables
-library(texreg)
-library(ggplot2)
+# Testing Trees
 
-#loading beer.dta, a ranking of beers and their specifications
-d <- read.dta(file.choose())
-d
-d$rating <- as.numeric(d$rating)
-d
-d$rating <- recode(d$rating,"3=0; 2=1; 1=2")
-d
-class(d$rating) #numeric and coded intuitively, could be better
-d$rating <- recode(d$rating,"0=-1")
-d$rating <- recode(d$rating,"1=0")
-d$rating <- recode(d$rating,"2=1")
-d
-class(d$rating)
-d$rating #having the median ranking be zero will give our intercepts more interprability
-
-hist(d$rating)
-hist(d$price)
-summary(d$price)
-
-
-
-
-
-
-#### Regression Initial Stuff
-
-set.seed(8675309)
-mod1 <- lm(d$rating ~ d$price)
-summary(mod1)
-
-texreg(l= list(mod1), stars = numeric(0),
-       custom.coef.names = c("Intercept", "Beer Price"),
-       caption.above = T, float.pos = "h!", custom.note = "Dependent variable: Beer Rating" )
-
-
-plot(d$price, jitter(d$rating), pch=19, xlab= "Price", ylab="Rating", main="Rating by Price of Beer: with 100 simulations")
-abline(mod1)
-m1sim <- sim(mod1)
-for (i in 1:100){
-  curve (coef(m1sim)[i,1] + coef(m1sim)[i,2]*x, add=T, col="grey")
-}
-curve (mod1$coef[1] + mod1$coef[2]*x, add=T, lwd=3)
-
-plot(mod1)
-
-
-
-
-
-
-  #Model 2
-mod2 <- lm(d$rating ~ d$price + d$alcohol)
-summary(mod2)
-plot(mod2)
-
-
-texreg(l= list(mod1, mod2), stars = numeric(0),
-       custom.coef.names = c("Intercept", "Beer Price", "Alcohol Content"),
-       caption.above = T, float.pos = "h!", custom.note = "Dependent variable: Beer Rating" )
-
-
-
-
-
-
-
-
-
-
-#### logit and probit Modeling
-logmod1 <- glm(d$verygood ~ d$price, family = binomial(link=logit))
-summary(logmod1)
-
-promod1 <- glm(d$verygood ~ d$price, family = binomial(link=probit))
-summary(posmod1)
-
-texreg(l= list(logmod1, promod1), stars = numeric(0),
-       custom.model.names = c("Logit Model", "Probit Model"),
-       custom.coef.names = c("Intercept", "Price"),
-       caption.above = T, float.pos = "h!", custom.note = "Dependent variable: Very Good Beer (1)" )
-
-
-logmod2 <- glm(d$verygood ~ d$price + d$avail + d$alcohol + d$calories, family = binomial(link=logit))
-summary(logmod2)
-plot(logmod2)
-
-promod2 <- glm(d$verygood ~ d$price + d$avail + d$alcohol + d$calories, family = binomial(link=probit))
-summary(promod2)
-plot(promod2)
-
-
-texreg(l= list(logmod2, promod2), stars = numeric(0),
-       bold = T, ci.force = T,
-       custom.model.names = c("Logit Model", "Probit Model"),
-       custom.coef.names = c("Intercept", "Price", "Availability", "Alcohol Content", "Caloric Content"),
-       caption.above = T, float.pos = "h!", custom.note = "Dependent variable: Very Good Beer (1)" )
-
-
-# Probability Curve
-logmod1 <- glm(d$verygood ~ d$price, family = binomial(link=logit))
-curve(invlogit(logmod1$coef[1] + logmod1$coef[2]*x), 1, 5, ylim=c(-.01,.9),
-      xlim=c(0,7.5), xaxt="n", xaxs="i", mgp=c(2,.5,0),
-      ylab="Pr(Very Good Beer)", xlab="Price", main="Price of Beer on Probability of Very Good Beer", lwd=4)
-curve(invlogit(logmod1$coef[1] + logmod1$coef[2]*x), -2, 8, lwd=5, add = T)
-axis(1, 1:7, mgp=c(2,.5,0))
-mtext ("(two dollars)", 1, 1.5, at=2, adj=.5)
-mtext ("(six dollars)", 1, 1.5, at=6, adj=.5)
-points(jitter(d$price, 1.5), jitter(d$verygood, 0.1), pch=20, cex=.1)
-
-
-
-# Binned Residual plotting
-par(mfrow=c(1,2))
-
-x <- predict(logmod1, type = "response")
-y <- resid(logmod1)
-binnedplot(x, y, nclass=NULL,
-           xlab="Expected Values", ylab="Average residual",
-           main="Binned residual plot: Model 1",
-           cex.pts=0.8, col.pts=1, col.int="gray")
-
-
-x <- predict(logmod2, type = "response")
-y <- resid(logmod2)
-binnedplot(x, y, nclass=NULL,
-           xlab="Expected Values", ylab="Average residual",
-           main="Binned residual plot: Model 2",
-           cex.pts=0.8, col.pts=1, col.int="gray")
-
-par(mfrow=c(1,1))
-
-
-# Rope Ladder Plotting
-f1<-data.frame(Variable=rownames(summary(logmod1)$coef),
-               Coefficient=summary(logmod1)$coef[,1],
-               SE=summary(logmod1)$coef[,2],
-               modelName= "Model 1")
-
-f2<-data.frame(Variable=rownames(summary(logmod2)$coef),
-               Coefficient=summary(logmod2)$coef[,1],
-               SE=summary(logmod2)$coef[,2],
-               modelName= "Model 2")
-
-combinedframe <- data.frame(rbind(f1, f2))
-interval1 <- qnorm((1-0.9)/2)
-interval2 <- qnorm((1-0.95)/2)
-
-rl1 <- ggplot(combinedframe)
-rl1 <- rl1 + geom_hline(yintercept = 0, color = grey(1/2), lty = 5)
-rl1 <- rl1 + geom_linerange(aes(x = Variable, ymin = Coefficient - SE*interval1,
-                                ymax = Coefficient + SE*interval1),
-                            lwd = 1, position = position_dodge(width = 1/2))
-rl1 <- rl1 + geom_pointrange(aes(x = Variable, y = Coefficient, ymin = Coefficient - SE*interval2,
-                                 ymax = Coefficient + SE*interval2),
-                             lwd = 1/2, position = position_dodge(width = 1/2), color=("Black"),
-                             shape = 21, fill = "BLACK")
-rl1 <- rl1 + coord_flip() + theme_bw()
-rl1 <- rl1 + ggtitle("Comparing Two Models:")
-print(rl1)
-
-
-#### Poisson Modeling was in Quant II Lecture 9/ HW 9
-install.packages("faraway")
-library(faraway)
-library(arm)
+library(caret)
 library(MASS)
-data(africa)
-## Examine Dataset ##
-`?`(africa)
-str(africa)  # There are some NAs in the data
+library(Rlab)
+library(boot)
+library(ggplot2)
+library(ggridges)
+library(dplyr)
+set.seed(12345)
+
+N <- 2000
+P <- 50
+
+## Ballanced
+mu <- runif(P, -1,1)
+Sigma <- rWishart(n=1, df=P, Sigma=diag(P))[,,1]
+Sigma <- ifelse(row(Sigma) != col(Sigma), 0, Sigma)
+X <- mvrnorm(N, mu=mu, Sigma = Sigma)
+p <- rbern(P, 1)
+beta <- p*rnorm(P,1,0.9) + (1-p)*rnorm(P,0,0.3)
+eta <- X%*%beta
+pi <- inv.logit(eta)
+Y <- rbern(N, pi)
+## sum(Y)/length(Y)
+Y <- as.factor(Y)
+data.1.Bal <- data.frame(X, Y)
+
+## High >> .5
+mu2 <- runif(P, 0.5, 1.5)
+Sigma2 <- rWishart(n=1, df=P, Sigma=diag(P))[,,1]
+Sigma2 <- ifelse(row(Sigma2) != col(Sigma2), 0, Sigma2)
+X2 <- mvrnorm(N, mu=mu2, Sigma = Sigma2)
+p2 <- rbern(P, 1)
+beta2 <- p2*rnorm(P,1,0.1) + (1-p2)*rnorm(P,0,1)
+eta2 <- X2%*%beta2
+pi2 <- inv.logit(eta2)
+Y2 <- rbern(N, pi2)
+## sum(Y2)/length(Y2)
+Y2 <- as.factor(Y2)
+data.2.High <- data.frame(X2, Y2)
+
+
+## Low << .5
+mu3 <- runif(P, -2, 0)
+Sigma3 <- rWishart(n=1, df=P, Sigma=diag(P))[,,1]
+Sigma3 <- ifelse(row(Sigma3) != col(Sigma3), 0, Sigma3)
+X3 <- mvrnorm(N, mu=mu3, Sigma = Sigma3)
+p3 <- rbern(P, 1)
+beta3 <- p3*rnorm(P,1,1.7) + (1-p3)*rnorm(P,0,0.01)
+eta3 <- X3%*%beta3
+pi3 <- inv.logit(eta3)
+Y3 <- rbern(N, pi3)
+## sum(Y3)/length(Y3)
+Y3 <- as.factor(Y3)
+data.3.Low <- data.frame(X3, Y3)
+
+# creating all of the test sets training sets
+## Test/Training Sets for Even Data
+test.data.1.Bal <- data.1.Bal[1:500,]
+train.data.1.Bal <- data.1.Bal[501:2000,]
+
+## Test/Training Sets for High Success Data
+test.data.2.High <- data.2.High[1:500,]
+train.data.2.High <- data.2.High[501:2000,]
+
+## Test/Training Sets for Low Success Data
+test.data.3.Low <- data.3.Low[1:500,]
+train.data.3.Low <- data.3.Low[501:2000,]
+
+
+### All of these elastic net lambda's for the assignment have
+#    been narrowed from 0-200 and ## Elastic Net:
+enet.Bal <- train(Y~., method="glmnet",
+                  tuneGrid=expand.grid(alpha=seq(0, 1, .1),
+                                       lambda=seq(0, 5,.05)),
+                  data=train.data.1.Bal,
+                  preProcess=c("center"),
+                  trControl=trainControl(method="cv",number=2, search="grid"))
+
+
+ggplot(enet.Bal, aes(x=enet.Bal$results$lambda,
+                     y=enet.Bal$results$Accuracy))+
+     geom_point( aes(colour = factor(enet.Bal$results$alpha)) )+
+     guides(shape = "none")+
+     ggtitle("Elastic Net For Ballanced Data")+
+     xlab(expression(paste("Regularization Parameter ", lambda)))+
+     theme_bw()+
+     theme(axis.text=element_text(size=12),
+           axis.title=element_text(size=14))+
+     theme(legend.position = c(.85, .65))
+
+
+
+## High
+enet.High <- train(Y2~., method="glmnet",
+                   tuneGrid=expand.grid(alpha=seq(0, 1, .1),
+                                        lambda=seq(0,.3,.005)),
+                   data=train.data.2.High,
+                   preProcess=c("center"),
+                   trControl=trainControl(method="cv",number=2, search="grid"))
+
+
+ggplot(enet.High, aes(x=enet.High$results$lambda,
+                      y=enet.High$results$Accuracy))+
+     geom_point( aes(colour = factor(enet.High$results$alpha)) )+
+     guides(shape = "none")+
+     ggtitle("Elastic Net For High Success DGP")+
+     xlab(expression(paste("Regularization Parameter ", lambda)))+
+     theme_bw()+
+     theme(axis.text=element_text(size=12),
+           axis.title=element_text(size=14))+
+     theme(legend.position = c(.85, .65))
+
+## Low
+enet.Low <- train(Y3~., method = "glmnet",
+                  tuneGrid = expand.grid(alpha = seq(0, 1, .1),
+                                        lambda = seq(0, .7, .005)),
+                  data = train.data.3.Low,
+                  preProcess = c("center"),
+                  trControl = trainControl(method="cv",number=2, search="grid"))
+
+
+ggplot(enet.Low, aes(x = enet.Low$results$lambda,
+                     y = enet.Low$results$Accuracy))+
+     geom_point( aes(colour = factor(enet.Low$results$alpha)) )+
+     guides(shape = "none")+
+     ggtitle("Elastic Net For Low Success DGP")+
+     xlab(expression(paste("Regularization Parameter ", lambda)))+
+     theme_bw()+
+     theme(axis.text = element_text(size=12),
+          axis.title = element_text(size=14))+
+     theme(legend.position = c(.85, .65))
+
+######################
+# Ballanced:
+yhat = predict(enet.Bal)
+
+qplot(train.data.1.Bal$Y, yhat, alpha=I(0.25))+
+     geom_jitter()+
+     xlab( expression(paste("Training ", hat(y))))+
+     ylab( expression(paste("Elastic Net ", y)))+
+     theme_bw()+
+theme(axis.text = element_text(size=12),
+     axis.title = element_text(size=14))+
+     ggtitle("Comparing Y Values: Ballanced Data")
 
 
 
 
+# need a lot of packages for this:
+packages <- c("caret", "MASS", "Rlab", "boot", "ggplot2", "ggridges", "dplyr")
+invisible( lapply(packages, library, character.only = TRUE))
 
-#### Multinomial Modeling
-library(nnet)
-install.packages("faraway")
-library(faraway)
-nes96
+set.seed(12345)
 
-nes96$PID
-nes96$PID3 <-  recode(nes96$PID,"c( 'strRep', 'weakRep', 'indRep') = 'Republican'; c('strDem', 'weakDem', 'indDem')='Democrat'; c('indind')='Independent'")
-nes96$PID3
+N <- 2000
+P <- 25 # P is cut down for computation time, (but could be much larger!)
 
+## Ballanced
+mu <- runif(P, -1,1)
+Sigma <- rWishart(n=1, df=P, Sigma=diag(P))[,,1]
+Sigma <- ifelse(row(Sigma) != col(Sigma), 0, Sigma)
+X <- mvrnorm(N, mu=mu, Sigma = Sigma)
+p <- rbern(P, 1)
+beta <- p*rnorm(P,1,0.9) + (1-p)*rnorm(P,0,0.3)
+eta <- X%*%beta
+pi <- inv.logit(eta)
+Y <- rbern(N, pi)
+Y <- as.factor(Y)
+data.1.Bal <- data.frame(X, Y)
 
+## Test/Training Sets for Even Data
+test.data.1.Bal <- data.1.Bal[1:500,]
+train.data.1.Bal <- data.1.Bal[501:2000,]
 
-mul1 <- multinom(PID3 ~ age + TVnews, data = nes96)
-mul1
+library(kernlab)
+library(microbenchmark)
+# Linear SVM
+linear.svm.bal <- train(Y~.,
+                       data=train.data.1.Bal,
+                       method = "svmLinear")
 
-library(texreg)
-texreg(l= list(mul1), stars = numeric(0),
-       bold = T, ci.force = T,
-       custom.model.names = c("Model"),
-       custom.coef.names = c("Intercept", "Age", "TV News"),
-       caption.above = T, float.pos = "h!")
+linear.svm.bal$results$Accuracy
 
+# A polynomial kernal: (long computation!)
+# poly.svm.bal <- train(Y~.,
+#                      data=train.data.1.Bal,
+#                      method="svmPoly")
 
-mul11 <- step(mul1)
-
-
-#######
-
-?mice
-
-library(mice)
-## Refering to the mice help file on imputation on medical data:
-
-# do default multiple imputation on a numeric matrix
-imp <- mice(nhanes)
-#  head(imp)  # Checking, lots of useful information in here
-
-# list the actual imputations for BMI
-imp$imp$bmi
-
-# first completed data matrix, can save this for analysis
-complete(imp)
-
-# imputation on mixed data with a different method per column:
-# mice(nhanes2, meth=c('sample','pmm','logreg','norm'))
-# This will give you all information per column like before.
+# poly.svm.bal$results[as.numeric(rownames(poly.svm.bal$bestTune)),]
+# .951 Accuracy; .902 Kappa; AccuracySD of .011
 
 
+# Radial kernal:
+# radial.svm.bal = train(Y~.,
+#                        data=train.data.1.Bal,
+#                        method="svmRadialCost")
+
+# radial.svm.bal$results[as.numeric(rownames(radial.svm.bal$bestTune)),]
+# Accuracy of .54; AccuracySD .017
+
+
+
+### Trees
+# Using "rpart", may need to reload R to get things to work.
+library(rpart)
+# grow tree
+tree.bal <- rpart(Y~.,
+                  method="class", data=train.data.1.Bal)
+## printcp(tree.bal) # display the results
+## plotcp(tree.bal) # visualize cross-validation results
+## summary(tree.bal) # detailed summary of splits
+
+# plot tree
+plot(tree.bal, uniform=TRUE,
+     main="Classification Tree for Ballanced Data")
+text(tree.bal, use.n=TRUE, all=TRUE, cex=.8)
+
+# create attractive postscript plot of tree
+post(tree.bal,
+     title = "Classification Tree for Ballanced Data")
+# then we have a lot of options off of this, including pruning the tree back,
+# or making -multiple- trees into a forrest and
+# selecting the best one! (intutively a form of advanced bootstrapping!)
+# prune the tree, by the error that was previously generated above
+ptree.bal <- prune(tree.bal,
+                   cp=tree.bal$cptable[which.min(tree.bal$cptable[,"xerror"]),
+                                       "CP"])
+
+# plot the pruned tree
+plot(ptree.bal, uniform=TRUE,
+     main ="Pruned Classification Tree for Ballanced Data")
+text(ptree.bal, use.n=TRUE, all=TRUE, cex=.8)
+
+
+post(ptree.bal,
+     title = "Pruned Classification Tree for Ballanced Data")

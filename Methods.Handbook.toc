@@ -35,38 +35,37 @@
 \contentsline {subsection}{\numberline {3.7}Conclusion, Quick Reference}{61}{subsection.3.7}
 \contentsline {section}{\numberline {4}Machine Learning}{64}{section.4}
 \contentsline {subsection}{\numberline {4.1}Simulation and Replication}{64}{subsection.4.1}
-\contentsline {subsection}{\numberline {4.2}Penalized Regression: LASSO, Ridge, Elastic Net}{71}{subsection.4.2}
-\contentsline {subsection}{\numberline {4.3}K Nearest Neighbors, Nearest Means}{80}{subsection.4.3}
-\contentsline {subsection}{\numberline {4.4}Support Vector Models}{80}{subsection.4.4}
-\contentsline {subsection}{\numberline {4.5}Regression Trees}{80}{subsection.4.5}
-\contentsline {section}{\numberline {5}Timeseries Data}{81}{section.5}
-\contentsline {subsection}{\numberline {5.1}Data Concerns}{81}{subsection.5.1}
-\contentsline {subsection}{\numberline {5.2}Differencing}{81}{subsection.5.2}
-\contentsline {subsection}{\numberline {5.3}Identifying AR;MA - ACF, PACF}{81}{subsection.5.3}
-\contentsline {subsection}{\numberline {5.4}Unit Roots}{81}{subsection.5.4}
-\contentsline {subsection}{\numberline {5.5}ARIMA}{81}{subsection.5.5}
-\contentsline {subsection}{\numberline {5.6}VAR}{81}{subsection.5.6}
-\contentsline {subsubsection}{\numberline {5.6.1}Example VAR}{81}{subsubsection.5.6.1}
-\contentsline {section}{\numberline {6}Network Analysis}{90}{section.6}
-\contentsline {subsection}{\numberline {6.1}Network Theory}{90}{subsection.6.1}
-\contentsline {subsection}{\numberline {6.2}Network Data, Nodes, and Edges}{90}{subsection.6.2}
-\contentsline {subsection}{\numberline {6.3}Summary Statistics of Networks}{90}{subsection.6.3}
-\contentsline {subsection}{\numberline {6.4}Centrality}{90}{subsection.6.4}
-\contentsline {subsubsection}{\numberline {6.4.1}Data Viz}{101}{subsubsection.6.4.1}
-\contentsline {section}{\numberline {7}Field Research Design: The Qualitative Alternative}{107}{section.7}
-\contentsline {subsection}{\numberline {7.1}Qualitative Value}{107}{subsection.7.1}
-\contentsline {subsection}{\numberline {7.2}Advice, Tools, Resources}{107}{subsection.7.2}
-\contentsline {subsection}{\numberline {7.3}How to Use Qualitative Evidence}{107}{subsection.7.3}
-\contentsline {section}{\numberline {8}Content Analysis}{108}{section.8}
-\contentsline {subsection}{\numberline {8.1}The Protocol}{108}{subsection.8.1}
-\contentsline {subsection}{\numberline {8.2}The Coding Sheet}{108}{subsection.8.2}
-\contentsline {subsection}{\numberline {8.3}Reliability Measurements}{108}{subsection.8.3}
-\contentsline {subsection}{\numberline {8.4}Analysis}{108}{subsection.8.4}
-\contentsline {section}{\numberline {9}Formal Modeling}{109}{section.9}
-\contentsline {subsection}{\numberline {9.1}How can Formal Modeling Help?}{109}{subsection.9.1}
-\contentsline {subsection}{\numberline {9.2}Components of Game Theory}{109}{subsection.9.2}
-\contentsline {subsection}{\numberline {9.3}Popular Games for Neat Examples}{110}{subsection.9.3}
-\contentsline {subsection}{\numberline {9.4}Games with Political Relevance}{110}{subsection.9.4}
-\contentsline {subsection}{\numberline {9.5}Structuring Your Own Formal Model}{110}{subsection.9.5}
-\contentsline {section}{Further Reading:}{111}{subsection.9.5}
-\contentsline {section}{Index}{111}{subsection.9.5}
+\contentsline {subsection}{\numberline {4.2}Penalized Regression: LASSO, Ridge, Elastic Net}{70}{subsection.4.2}
+\contentsline {subsection}{\numberline {4.3}Support Vector Models, Regression Trees}{83}{subsection.4.3}
+\contentsline {subsection}{\numberline {4.4}K Nearest Neighbors, Nearest Means}{88}{subsection.4.4}
+\contentsline {section}{\numberline {5}Timeseries Data}{89}{section.5}
+\contentsline {subsection}{\numberline {5.1}Data Concerns}{89}{subsection.5.1}
+\contentsline {subsection}{\numberline {5.2}Differencing}{89}{subsection.5.2}
+\contentsline {subsection}{\numberline {5.3}Identifying AR;MA - ACF, PACF}{89}{subsection.5.3}
+\contentsline {subsection}{\numberline {5.4}Unit Roots}{89}{subsection.5.4}
+\contentsline {subsection}{\numberline {5.5}ARIMA}{89}{subsection.5.5}
+\contentsline {subsection}{\numberline {5.6}VAR}{89}{subsection.5.6}
+\contentsline {subsubsection}{\numberline {5.6.1}Example VAR}{89}{subsubsection.5.6.1}
+\contentsline {section}{\numberline {6}Network Analysis}{98}{section.6}
+\contentsline {subsection}{\numberline {6.1}Network Theory}{98}{subsection.6.1}
+\contentsline {subsection}{\numberline {6.2}Network Data, Nodes, and Edges}{98}{subsection.6.2}
+\contentsline {subsection}{\numberline {6.3}Summary Statistics of Networks}{98}{subsection.6.3}
+\contentsline {subsection}{\numberline {6.4}Centrality}{98}{subsection.6.4}
+\contentsline {subsubsection}{\numberline {6.4.1}Data Viz}{109}{subsubsection.6.4.1}
+\contentsline {section}{\numberline {7}Field Research Design: The Qualitative Alternative}{115}{section.7}
+\contentsline {subsection}{\numberline {7.1}Qualitative Value}{115}{subsection.7.1}
+\contentsline {subsection}{\numberline {7.2}Advice, Tools, Resources}{115}{subsection.7.2}
+\contentsline {subsection}{\numberline {7.3}How to Use Qualitative Evidence}{115}{subsection.7.3}
+\contentsline {section}{\numberline {8}Content Analysis}{116}{section.8}
+\contentsline {subsection}{\numberline {8.1}The Protocol}{116}{subsection.8.1}
+\contentsline {subsection}{\numberline {8.2}The Coding Sheet}{116}{subsection.8.2}
+\contentsline {subsection}{\numberline {8.3}Reliability Measurements}{116}{subsection.8.3}
+\contentsline {subsection}{\numberline {8.4}Analysis}{116}{subsection.8.4}
+\contentsline {section}{\numberline {9}Formal Modeling}{117}{section.9}
+\contentsline {subsection}{\numberline {9.1}How can Formal Modeling Help?}{117}{subsection.9.1}
+\contentsline {subsection}{\numberline {9.2}Components of Game Theory}{117}{subsection.9.2}
+\contentsline {subsection}{\numberline {9.3}Popular Games for Neat Examples}{118}{subsection.9.3}
+\contentsline {subsection}{\numberline {9.4}Games with Political Relevance}{118}{subsection.9.4}
+\contentsline {subsection}{\numberline {9.5}Structuring Your Own Formal Model}{118}{subsection.9.5}
+\contentsline {section}{Further Reading:}{119}{subsection.9.5}
+\contentsline {section}{Index}{119}{subsection.9.5}

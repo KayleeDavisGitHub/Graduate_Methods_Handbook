@@ -2702,7 +2702,7 @@ That perhaps seemed too complicated, but I wanted to show the MASS and RLab pack
 \begin{center}
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.165, 0.169, 0.184}\color{fgcolor}
-\includegraphics[width=\maxwidth]{figure/hiddenplotlineartologit-1} 
+\includegraphics[width=5in]{figure/hiddenplotlineartologit-1} 
 \begin{kframe}\begin{verbatim}
 ## [1] 2
 \end{verbatim}
@@ -2861,22 +2861,22 @@ Let's begin with the LASSO:
 \hlstd{> }\hlstd{train_data} \hlkwb{=} \hlkwd{data.frame}\hlstd{(trainx, trainy)}
 \hlstd{> }
 \hlstd{> }\hlstd{mod_lasso} \hlkwb{=} \hlkwd{train}\hlstd{(trainy}\hlopt{~}\hlstd{.,} \hlkwc{method}\hlstd{=}\hlstr{"glmnet"}\hlstd{,}\hlcom{# formula and method}
-\hlstd{+ }     \hlkwc{tuneGrid}\hlstd{=}\hlkwd{expand.grid}\hlstd{(}\hlkwc{alpha}\hlstd{=}\hlnum{0}\hlstd{,} \hlcom{# alpha=0 is the LASSO}
-\hlstd{+ }     \hlkwc{lambda}\hlstd{=}\hlkwd{seq}\hlstd{(}\hlnum{0}\hlstd{,}\hlnum{100}\hlstd{,}\hlnum{1}\hlstd{)),} \hlcom{#gradient descent to zero}
-\hlstd{+ }     \hlkwc{data}\hlstd{=train_data,}
-\hlstd{+ }     \hlkwc{preProcess}\hlstd{=}\hlkwd{c}\hlstd{(}\hlstr{"center"}\hlstd{),}\hlcom{# centering standardization of points}
-\hlstd{+ }     \hlkwc{trControl}\hlstd{=}\hlkwd{trainControl}\hlstd{(}\hlkwc{method}\hlstd{=}\hlstr{"cv"}\hlstd{,}\hlkwc{number}\hlstd{=}\hlnum{2}\hlstd{,} \hlkwc{search}\hlstd{=}\hlstr{"grid"}\hlstd{))}
+\hlstd{+ }     \hlkwc{tuneGrid}\hlstd{=}\hlkwd{expand.grid}\hlstd{(}\hlkwc{alpha} \hlstd{=} \hlnum{0}\hlstd{,} \hlcom{# alpha=0 is the LASSO}
+\hlstd{+ }               \hlkwc{lambda} \hlstd{=} \hlkwd{seq}\hlstd{(}\hlnum{0}\hlstd{,}\hlnum{100}\hlstd{,}\hlnum{1}\hlstd{)),} \hlcom{#gradient descent to zero}
+\hlstd{+ }     \hlkwc{data} \hlstd{= train_data,}
+\hlstd{+ }     \hlkwc{preProcess} \hlstd{=} \hlkwd{c}\hlstd{(}\hlstr{"center"}\hlstd{),}\hlcom{# centering standardization of points}
+\hlstd{+ }     \hlkwc{trControl} \hlstd{=} \hlkwd{trainControl}\hlstd{(}\hlkwc{method}\hlstd{=}\hlstr{"cv"}\hlstd{,}\hlkwc{number}\hlstd{=}\hlnum{2}\hlstd{,} \hlkwc{search}\hlstd{=}\hlstr{"grid"}\hlstd{))}
 \hlstd{> }\hlcom{# "trainControl" sets a resampling method per a "search" parameter grid}
 \hlstd{> }\hlcom{# mod_lasso ## final values were around lambda = 14 using RMSE}
 \hlstd{> }
 \hlstd{> }\hlcom{## Narrowing lambda sequence closer to what the lambda reported earlier:}
-\hlstd{> }\hlstd{mod_lasso} \hlkwb{=} \hlkwd{train}\hlstd{(trainy}\hlopt{~}\hlstd{.,} \hlkwc{method}\hlstd{=}\hlstr{"glmnet"}\hlstd{,}
-\hlstd{+ }     \hlkwc{tuneGrid}\hlstd{=}\hlkwd{expand.grid}\hlstd{(}\hlkwc{alpha}\hlstd{=}\hlnum{0}\hlstd{,}
+\hlstd{> }\hlstd{mod_lasso} \hlkwb{=} \hlkwd{train}\hlstd{(trainy}\hlopt{~}\hlstd{.,} \hlkwc{method} \hlstd{=} \hlstr{"glmnet"}\hlstd{,}
+\hlstd{+ }     \hlkwc{tuneGrid} \hlstd{=} \hlkwd{expand.grid}\hlstd{(}\hlkwc{alpha} \hlstd{=} \hlnum{0}\hlstd{,}
 \hlstd{+ }     \hlcom{# *setting bounds closer around 14; smaller "steps" (0.01)}
-\hlstd{+ }     \hlkwc{lambda}\hlstd{=}\hlkwd{seq}\hlstd{(}\hlnum{0}\hlstd{,}\hlnum{40}\hlstd{,}\hlnum{0.01}\hlstd{)),}
-\hlstd{+ }     \hlkwc{data}\hlstd{=train_data,}
-\hlstd{+ }     \hlkwc{preProcess}\hlstd{=}\hlkwd{c}\hlstd{(}\hlstr{"center"}\hlstd{),}
-\hlstd{+ }     \hlkwc{trControl}\hlstd{=}\hlkwd{trainControl}\hlstd{(}\hlkwc{method}\hlstd{=}\hlstr{"cv"}\hlstd{,}\hlkwc{number}\hlstd{=}\hlnum{2}\hlstd{,} \hlkwc{search}\hlstd{=}\hlstr{"grid"}\hlstd{))}
+\hlstd{+ }                         \hlkwc{lambda} \hlstd{=} \hlkwd{seq}\hlstd{(}\hlnum{0}\hlstd{,}\hlnum{40}\hlstd{,}\hlnum{0.01}\hlstd{)),}
+\hlstd{+ }     \hlkwc{data} \hlstd{= train_data,}
+\hlstd{+ }     \hlkwc{preProcess} \hlstd{=} \hlkwd{c}\hlstd{(}\hlstr{"center"}\hlstd{),}
+\hlstd{+ }     \hlkwc{trControl} \hlstd{=} \hlkwd{trainControl}\hlstd{(}\hlkwc{method}\hlstd{=}\hlstr{"cv"}\hlstd{,}\hlkwc{number}\hlstd{=}\hlnum{2}\hlstd{,} \hlkwc{search}\hlstd{=}\hlstr{"grid"}\hlstd{))}
 \hlstd{> }     \hlcom{# mod_lasso ## Narrowing in, we found a new best lambda of around 14.5!}
 \hlstd{> }
 \hlstd{> }\hlcom{## Predictions:}
@@ -2886,8 +2886,8 @@ Let's begin with the LASSO:
 \hlstd{+ }     \hlkwd{xlab}\hlstd{(} \hlkwd{expression}\hlstd{(}\hlkwd{paste}\hlstd{(}\hlstr{"Training "}\hlstd{, y)))}\hlopt{+}
 \hlstd{+ }     \hlkwd{ylab}\hlstd{(} \hlkwd{expression}\hlstd{(}\hlkwd{paste}\hlstd{(}\hlstr{"Ridge "}\hlstd{,} \hlkwd{hat}\hlstd{(y))))}\hlopt{+}
 \hlstd{+ }     \hlkwd{theme_bw}\hlstd{()}\hlopt{+}
-\hlstd{+ }     \hlkwd{theme}\hlstd{(}\hlkwc{axis.text}\hlstd{=}\hlkwd{element_text}\hlstd{(}\hlkwc{size}\hlstd{=}\hlnum{12}\hlstd{),}
-\hlstd{+ }     \hlkwc{axis.title}\hlstd{=}\hlkwd{element_text}\hlstd{(}\hlkwc{size}\hlstd{=}\hlnum{14}\hlstd{))}
+\hlstd{+ }     \hlkwd{theme}\hlstd{(}\hlkwc{axis.text} \hlstd{=} \hlkwd{element_text}\hlstd{(}\hlkwc{size}\hlstd{=}\hlnum{12}\hlstd{),}
+\hlstd{+ }          \hlkwc{axis.title} \hlstd{=} \hlkwd{element_text}\hlstd{(}\hlkwc{size}\hlstd{=}\hlnum{14}\hlstd{))}
 \end{alltt}
 \end{kframe}
 \includegraphics[width=5in]{figure/LASSO1ML-1} 
@@ -2907,8 +2907,8 @@ Let's begin with the LASSO:
 \hlstd{+ }     \hlkwd{xlab}\hlstd{(} \hlkwd{expression}\hlstd{(}\hlkwd{paste}\hlstd{(}\hlstr{"True "}\hlstd{, beta)))}\hlopt{+}
 \hlstd{+ }     \hlkwd{ylab}\hlstd{(} \hlkwd{expression}\hlstd{(}\hlkwd{paste}\hlstd{(}\hlstr{"LASSO "}\hlstd{, beta)))}\hlopt{+}
 \hlstd{+ }     \hlkwd{theme_bw}\hlstd{()}\hlopt{+}
-\hlstd{+ }     \hlkwd{theme}\hlstd{(}\hlkwc{axis.text}\hlstd{=}\hlkwd{element_text}\hlstd{(}\hlkwc{size}\hlstd{=}\hlnum{12}\hlstd{),}
-\hlstd{+ }     \hlkwc{axis.title}\hlstd{=}\hlkwd{element_text}\hlstd{(}\hlkwc{size}\hlstd{=}\hlnum{14}\hlstd{))}
+\hlstd{+ }     \hlkwd{theme}\hlstd{(}\hlkwc{axis.text} \hlstd{=} \hlkwd{element_text}\hlstd{(}\hlkwc{size}\hlstd{=}\hlnum{12}\hlstd{),}
+\hlstd{+ }          \hlkwc{axis.title} \hlstd{=} \hlkwd{element_text}\hlstd{(}\hlkwc{size}\hlstd{=}\hlnum{14}\hlstd{))}
 \end{alltt}
 \end{kframe}
 \includegraphics[width=5in]{figure/LASSOvaluesML1-1} 
@@ -2946,8 +2946,8 @@ Similarly, let’s see how the Ridge and elastic net’s hold up:
 \hlstd{+ }     \hlkwd{xlab}\hlstd{(} \hlkwd{expression}\hlstd{(}\hlkwd{paste}\hlstd{(}\hlstr{"Training "}\hlstd{, y)))}\hlopt{+}
 \hlstd{+ }     \hlkwd{ylab}\hlstd{(} \hlkwd{expression}\hlstd{(}\hlkwd{paste}\hlstd{(}\hlstr{"Ridge "}\hlstd{,} \hlkwd{hat}\hlstd{(y))))}\hlopt{+}
 \hlstd{+ }     \hlkwd{theme_bw}\hlstd{()}\hlopt{+}
-\hlstd{+ }     \hlkwd{theme}\hlstd{(}\hlkwc{axis.text}\hlstd{=}\hlkwd{element_text}\hlstd{(}\hlkwc{size}\hlstd{=}\hlnum{12}\hlstd{),}
-\hlstd{+ }     \hlkwc{axis.title}\hlstd{=}\hlkwd{element_text}\hlstd{(}\hlkwc{size}\hlstd{=}\hlnum{14}\hlstd{))}
+\hlstd{+ }     \hlkwd{theme}\hlstd{(}\hlkwc{axis.text} \hlstd{=} \hlkwd{element_text}\hlstd{(}\hlkwc{size}\hlstd{=}\hlnum{12}\hlstd{),}
+\hlstd{+ }          \hlkwc{axis.title} \hlstd{=} \hlkwd{element_text}\hlstd{(}\hlkwc{size}\hlstd{=}\hlnum{14}\hlstd{))}
 \end{alltt}
 \end{kframe}
 \includegraphics[width=5in]{figure/RidgeNetML1-1} 
@@ -2965,8 +2965,8 @@ Similarly, let’s see how the Ridge and elastic net’s hold up:
 \hlstd{+ }     \hlkwd{xlab}\hlstd{(} \hlkwd{expression}\hlstd{(}\hlkwd{paste}\hlstd{(}\hlstr{"True "}\hlstd{, beta)))}\hlopt{+}
 \hlstd{+ }     \hlkwd{ylab}\hlstd{(} \hlkwd{expression}\hlstd{(}\hlkwd{paste}\hlstd{(}\hlstr{"Ridge "}\hlstd{, beta)))}\hlopt{+}
 \hlstd{+ }     \hlkwd{theme_bw}\hlstd{()}\hlopt{+}
-\hlstd{+ }     \hlkwd{theme}\hlstd{(}\hlkwc{axis.text}\hlstd{=}\hlkwd{element_text}\hlstd{(}\hlkwc{size}\hlstd{=}\hlnum{12}\hlstd{),}
-\hlstd{+ }     \hlkwc{axis.title}\hlstd{=}\hlkwd{element_text}\hlstd{(}\hlkwc{size}\hlstd{=}\hlnum{14}\hlstd{))}
+\hlstd{+ }     \hlkwd{theme}\hlstd{(}\hlkwc{axis.text} \hlstd{=} \hlkwd{element_text}\hlstd{(}\hlkwc{size}\hlstd{=}\hlnum{12}\hlstd{),}
+\hlstd{+ }          \hlkwc{axis.title} \hlstd{=} \hlkwd{element_text}\hlstd{(}\hlkwc{size}\hlstd{=}\hlnum{14}\hlstd{))}
 \end{alltt}
 \end{kframe}
 \includegraphics[width=5in]{figure/Ridgenet2MLthing-1} 
@@ -2975,6 +2975,8 @@ Similarly, let’s see how the Ridge and elastic net’s hold up:
 \end{center}
 
 Our ridge regression shows less variability, our training set $y$ values and ridge predicted values are more tightly linear, and there is less variability in our comparative $\beta$ values in the plot above. This is interesting and is perhaps explained in the difference between the mathematical formula between Ridge and LASSO themselves (letting $\lambda$ control the amount of regulation in gradient descent):
+
+\
 
 \textbf{Ridge:} ($\alpha = 0$ )
 
@@ -2990,6 +2992,8 @@ Our ridge regression shows less variability, our training set $y$ values and rid
 
 We seek a set of sparse solutions because we beleive that many of our 100 $\beta_j$ paramenters should be zero; a large enough $\lambda$ will set these exactly or near zero for us! We saw our LASSO $\lambda$ values become higher than our Ridge $\lambda$ values; this is because, unlike Ridge, our $\beta_{\lambda}^{\text{lass}}}$ lasso values have no closed form – allowing more varriance. A third potential option is to allow our alpha parameter varry between zero and one eectively using both of these penalties and giving us the elastic net (litterally just adding LASSO and Ridge).
 
+\
+
 \textbf{Elastic Net:} ($0 < \alpha < 1$)
 
 \begin{equation}
@@ -2997,17 +3001,269 @@ We seek a set of sparse solutions because we beleive that many of our 100 $\beta
 \end{equation}
 
 
-%%%
-% Left off on lab 3 midway; describing math.
-%%%
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.165, 0.169, 0.184}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{> }\hlcom{## Elastic Net:}
+\hlstd{> }\hlstd{mod_enet} \hlkwb{=} \hlkwd{train}\hlstd{(trainy}\hlopt{~}\hlstd{.,} \hlkwc{method} \hlstd{=} \hlstr{"glmnet"}\hlstd{,}
+\hlstd{+ }            \hlkwc{tuneGrid} \hlstd{=} \hlkwd{expand.grid}\hlstd{(}\hlkwc{alpha} \hlstd{=} \hlkwd{seq}\hlstd{(}\hlnum{0}\hlstd{,} \hlnum{1}\hlstd{,} \hlnum{0.1}\hlstd{),}
+\hlstd{+ }                                   \hlkwc{lambda} \hlstd{=} \hlkwd{seq}\hlstd{(}\hlnum{0}\hlstd{,} \hlnum{100}\hlstd{,} \hlnum{1}\hlstd{)),}
+\hlstd{+ }            \hlkwc{data} \hlstd{= train_data,}
+\hlstd{+ }            \hlkwc{preProcess} \hlstd{=} \hlkwd{c}\hlstd{(}\hlstr{"center"}\hlstd{),}
+\hlstd{+ }            \hlkwc{trControl} \hlstd{=} \hlkwd{trainControl}\hlstd{(}\hlkwc{method}\hlstd{=}\hlstr{"cv"}\hlstd{,} \hlkwc{number}\hlstd{=}\hlnum{2}\hlstd{,} \hlkwc{search}\hlstd{=}\hlstr{"grid"}\hlstd{))}
+\hlstd{> }\hlcom{# alpha used was .9 and lambda ended up being 1.}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+This elastic net will give us similarlly better results with a varrying $\alpha$ along with it. However, these models work best for when we have data with many parameters, here we have only started with 100 (``only''). Let's ramp up the number of perameters (P) and really put these models to the test. I'll repost the DGP in full.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.165, 0.169, 0.184}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{> }\hlstd{N} \hlkwb{<-} \hlnum{1000}
+\hlstd{> }\hlstd{P} \hlkwb{<-} \hlnum{1500} \hlcom{# Note this change}
+\hlstd{> }\hlstd{Sigma} \hlkwb{<-} \hlkwd{rWishart}\hlstd{(}\hlkwc{n}\hlstd{=}\hlnum{1}\hlstd{,} \hlkwc{df}\hlstd{=P,} \hlkwc{Sigma}\hlstd{=}\hlkwd{diag}\hlstd{(P))[,,}\hlnum{1}\hlstd{]}
+\hlstd{> }\hlstd{X} \hlkwb{<-} \hlkwd{mvrnorm}\hlstd{(N,} \hlkwd{runif}\hlstd{(P,} \hlopt{-}\hlnum{10}\hlstd{,} \hlnum{10}\hlstd{), Sigma)}
+\hlstd{> }\hlstd{p} \hlkwb{<-} \hlkwd{rbern}\hlstd{(P,} \hlnum{0.1}\hlstd{)}
+\hlstd{> }\hlstd{b} \hlkwb{<-} \hlstd{p} \hlopt{*} \hlkwd{rnorm}\hlstd{(P,} \hlnum{5}\hlstd{,} \hlnum{5}\hlstd{)} \hlopt{+} \hlstd{(}\hlnum{1}\hlopt{-}\hlstd{p)} \hlopt{*} \hlkwd{rnorm}\hlstd{(P,} \hlnum{0}\hlstd{,} \hlnum{0.1}\hlstd{)}
+\hlstd{> }\hlstd{e} \hlkwb{<-} \hlkwd{rnorm}\hlstd{(N,} \hlnum{0}\hlstd{,} \hlkwc{sd}\hlstd{=}\hlkwd{sqrt}\hlstd{(}\hlnum{10}\hlstd{))}
+\hlstd{> }\hlstd{y} \hlkwb{=} \hlstd{X}\hlopt{%*%}\hlstd{b} \hlopt{+} \hlstd{e}
+\hlstd{> }\hlstd{m1} \hlkwb{<-} \hlkwd{lm}\hlstd{(y}\hlopt{~}\hlstd{X)}
+\hlstd{> }\hlstd{my_data} \hlkwb{=} \hlkwd{data.frame}\hlstd{(X,y)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+With this DGP, let's see how our regular linear model holds up graphically:
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.165, 0.169, 0.184}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{> }\hlcom{## Problematic:}
+\hlstd{> }\hlkwd{qplot}\hlstd{(b,} \hlkwd{coef}\hlstd{(m1)[}\hlopt{-}\hlnum{1}\hlstd{],} \hlkwc{alpha}\hlstd{=}\hlkwd{I}\hlstd{(}\hlnum{0.25}\hlstd{))}\hlopt{+}
+\hlstd{+ }     \hlkwd{xlab}\hlstd{(} \hlkwd{expression}\hlstd{(}\hlkwd{paste}\hlstd{(}\hlstr{"True "} \hlstd{, beta)))}\hlopt{+}
+\hlstd{+ }     \hlkwd{ylab}\hlstd{(} \hlkwd{expression}\hlstd{(}\hlkwd{paste}\hlstd{(}\hlstr{"Model "} \hlstd{,} \hlkwd{hat}\hlstd{(beta),} \hlstr{" Values"}\hlstd{)))}\hlopt{+}
+\hlstd{+ }     \hlkwd{theme_bw}\hlstd{()}\hlopt{+}
+\hlstd{+ }     \hlkwd{theme}\hlstd{(}\hlkwc{axis.text} \hlstd{=} \hlkwd{element_text}\hlstd{(}\hlkwc{size}\hlstd{=}\hlnum{12}\hlstd{),}
+\hlstd{+ }          \hlkwc{axis.title} \hlstd{=} \hlkwd{element_text}\hlstd{(}\hlkwc{size}\hlstd{=}\hlnum{14}\hlstd{))}
+\end{alltt}
+
+
+{\ttfamily\noindent\color{warningcolor}{\#\# Warning: Removed 501 rows containing missing values (geom\_point).}}\end{kframe}
+\includegraphics[width=5in]{figure/lmoutputML2-1} 
+
+\end{knitrout}
+
+We see quite a bit of noise, also our results will be outrageously significant because we are not penalizing ourselves for multiple parameters unless we are using the AIC and BIC. Now let's see if the elastic net does any better given the larger number of parameters. We'll start by chopping up the data into a testing set and a training set. \index{Test Set Training Set}
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.165, 0.169, 0.184}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{> }\hlcom{# Test Set; Training Set (20% and 80% again)}
+\hlstd{> }\hlstd{trainidx} \hlkwb{<-} \hlkwd{createDataPartition}\hlstd{(y,} \hlkwc{times} \hlstd{=} \hlnum{1}\hlstd{,} \hlkwc{p}\hlstd{=}\hlnum{.80}\hlstd{,} \hlkwc{list}\hlstd{=}\hlnum{FALSE}\hlstd{)}
+\hlstd{> }
+\hlstd{> }\hlstd{trainy} \hlkwb{<-} \hlstd{y[trainidx]}
+\hlstd{> }\hlstd{testy}  \hlkwb{<-} \hlstd{y[}\hlopt{-}\hlstd{trainidx]}
+\hlstd{> }\hlstd{trainx} \hlkwb{<-} \hlstd{X[trainidx,]}
+\hlstd{> }\hlstd{testx}  \hlkwb{<-} \hlstd{X[}\hlopt{-}\hlstd{trainidx,]}
+\hlstd{> }
+\hlstd{> }\hlstd{train_data} \hlkwb{=} \hlkwd{data.frame}\hlstd{(trainx, trainy)}
+\hlstd{> }\hlstd{test_data}  \hlkwb{=} \hlkwd{data.frame}\hlstd{(testx, testy)}
+\hlstd{> }
+\hlstd{> }\hlcom{# Training linear Model:}
+\hlstd{> }\hlstd{trainmod} \hlkwb{<-} \hlkwd{lm}\hlstd{(train_data}\hlopt{$}\hlstd{trainy} \hlopt{~} \hlstd{trainx,} \hlkwc{data} \hlstd{= train_data)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+Running the elastic net now looking for the best lambda.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.165, 0.169, 0.184}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{> }\hlcom{# Using Penalized Regression Helps Conceptualize This:}
+\hlstd{> }\hlcom{# Elastic Net:}
+\hlstd{> }\hlstd{mod_enet} \hlkwb{=} \hlkwd{train}\hlstd{(trainy}\hlopt{~}\hlstd{.,} \hlkwc{method} \hlstd{=} \hlstr{"glmnet"}\hlstd{,}
+\hlstd{+ }          \hlkwc{tuneGrid} \hlstd{=} \hlkwd{expand.grid}\hlstd{(}\hlkwc{alpha} \hlstd{=} \hlkwd{seq}\hlstd{(}\hlnum{0}\hlstd{,}\hlnum{1}\hlstd{,}\hlnum{0.1}\hlstd{),}
+\hlstd{+ }                                \hlkwc{lambda} \hlstd{=} \hlkwd{seq}\hlstd{(}\hlnum{0}\hlstd{,}\hlnum{100}\hlstd{,}\hlnum{1}\hlstd{)),}
+\hlstd{+ }          \hlkwc{data} \hlstd{= train_data,}
+\hlstd{+ }          \hlkwc{preProcess} \hlstd{=} \hlkwd{c}\hlstd{(}\hlstr{"center"}\hlstd{),}
+\hlstd{+ }          \hlkwc{trControl} \hlstd{=} \hlkwd{trainControl}\hlstd{(}\hlkwc{method}\hlstd{=}\hlstr{"cv"}\hlstd{,}\hlkwc{number}\hlstd{=}\hlnum{2}\hlstd{,} \hlkwc{search}\hlstd{=}\hlstr{"grid"}\hlstd{))}
+\hlstd{> }\hlcom{# alpha used was 1 and lambda ended up being 8.}
+\hlstd{> }
+\hlstd{> }\hlstd{mod_enet} \hlkwb{=} \hlkwd{train}\hlstd{(trainy}\hlopt{~}\hlstd{.,} \hlkwc{method} \hlstd{=} \hlstr{"glmnet"}\hlstd{,}
+\hlstd{+ }          \hlkwc{tuneGrid}\hlstd{=}\hlkwd{expand.grid}\hlstd{(}\hlkwc{alpha} \hlstd{=} \hlkwd{seq}\hlstd{(}\hlnum{0.6}\hlstd{,}\hlnum{1}\hlstd{,}\hlnum{0.5}\hlstd{),} \hlcom{#narrowing}
+\hlstd{+ }                              \hlkwc{lambda} \hlstd{=} \hlkwd{seq}\hlstd{(}\hlnum{0}\hlstd{,}\hlnum{10}\hlstd{,}\hlnum{0.5}\hlstd{)),}
+\hlstd{+ }          \hlkwc{data} \hlstd{= train_data,}
+\hlstd{+ }          \hlkwc{preProcess} \hlstd{=} \hlkwd{c}\hlstd{(}\hlstr{"center"}\hlstd{),}
+\hlstd{+ }          \hlkwc{trControl} \hlstd{=} \hlkwd{trainControl}\hlstd{(}\hlkwc{method}\hlstd{=}\hlstr{"cv"}\hlstd{,}\hlkwc{number}\hlstd{=}\hlnum{2}\hlstd{,} \hlkwc{search}\hlstd{=}\hlstr{"grid"}\hlstd{))}
+\hlstd{> }\hlcom{# alpha ended up at .6 and lambda at 10.}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+Great!
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.165, 0.169, 0.184}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{> }\hlstd{enet_beta} \hlkwb{=} \hlkwd{coef}\hlstd{(mod_enet}\hlopt{$}\hlstd{finalModel, mod_enet}\hlopt{$}\hlstd{bestTune}\hlopt{$}\hlstd{lambda)}
+\hlstd{> }\hlkwd{qplot}\hlstd{(b, enet_beta[}\hlopt{-}\hlnum{1}\hlstd{])}\hlopt{+}
+\hlstd{+ }     \hlkwd{xlab}\hlstd{(} \hlkwd{expression}\hlstd{(}\hlkwd{paste}\hlstd{(}\hlstr{"True "}\hlstd{, beta)))}\hlopt{+}
+\hlstd{+ }     \hlkwd{ylab}\hlstd{(} \hlkwd{expression}\hlstd{(}\hlkwd{paste}\hlstd{(}\hlstr{"Elastic Net "}\hlstd{, beta)))}\hlopt{+}
+\hlstd{+ }     \hlkwd{theme_bw}\hlstd{()}\hlopt{+}
+\hlstd{+ }     \hlkwd{theme}\hlstd{(}\hlkwc{axis.text} \hlstd{=} \hlkwd{element_text}\hlstd{(}\hlkwc{size}\hlstd{=}\hlnum{12}\hlstd{),}
+\hlstd{+ }          \hlkwc{axis.title} \hlstd{=} \hlkwd{element_text}\hlstd{(}\hlkwc{size}\hlstd{=}\hlnum{14}\hlstd{))}
+\end{alltt}
+\end{kframe}
+\includegraphics[width=5in]{figure/plonewbetafromenetML2-1} 
+
+\end{knitrout}
+
+Setting up a standard linear model with more estimators than number of observations is a fundemental assumption violation; it over-inates our coecents and gives us essentially no error. This can be really misleading to readers, and similar to how one might penalize their general linear models utilizing AIC and BIC we can use the elastic net to show more variance in our estimates and report our $\lambda$ values which are much larger than before ($\lambda$ = 10). Penalized regression is the intellectually honest thing to do when you have a model with a large number of parameters, the elastic net in this case has showed some uncertainty in our estimates whereas the normal model inflated our certainty (reported an $R^2$ of 1).
+
+
+\subsection{Support Vector Models, Regression Trees}
+
+Support Vector Models (SVMs) can be used to analize data with the least error given unsupervised machine learning. Many of these models require super computing, or a careful consideration of the data and the underlying calculus going on. Conisder the following DGP: ballanced data, split into a test set and training set. \index{DGP} \index{Test Set Training Set} \index{library() }
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.165, 0.169, 0.184}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{> }\hlcom{# Need a lot of packages for this:}
+\hlstd{> }\hlstd{packages} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlstr{"caret"}\hlstd{,} \hlstr{"MASS"}\hlstd{,} \hlstr{"Rlab"}\hlstd{,} \hlstr{"boot"}\hlstd{,} \hlstr{"ggplot2"}\hlstd{,} \hlstr{"ggridges"}\hlstd{,} \hlstr{"dplyr"}\hlstd{)}
+\hlstd{> }\hlkwd{invisible}\hlstd{(} \hlkwd{lapply}\hlstd{(packages, library,} \hlkwc{character.only} \hlstd{=} \hlnum{TRUE}\hlstd{))}
+\hlstd{> }
+\hlstd{> }\hlkwd{set.seed}\hlstd{(}\hlnum{12345}\hlstd{)}
+\hlstd{> }
+\hlstd{> }\hlstd{N} \hlkwb{<-} \hlnum{2000}
+\hlstd{> }\hlstd{P} \hlkwb{<-} \hlnum{50} \hlcom{# P is cut down for computation time, (but could be much larger!)}
+\hlstd{> }
+\hlstd{> }\hlcom{## Ballanced DGP creation}
+\hlstd{> }\hlstd{mu} \hlkwb{<-} \hlkwd{runif}\hlstd{(P,} \hlopt{-}\hlnum{1}\hlstd{,}\hlnum{1}\hlstd{)}
+\hlstd{> }\hlstd{Sigma} \hlkwb{<-} \hlkwd{rWishart}\hlstd{(}\hlkwc{n}\hlstd{=}\hlnum{1}\hlstd{,} \hlkwc{df}\hlstd{=P,} \hlkwc{Sigma}\hlstd{=}\hlkwd{diag}\hlstd{(P))[,,}\hlnum{1}\hlstd{]}
+\hlstd{> }\hlstd{Sigma} \hlkwb{<-} \hlkwd{ifelse}\hlstd{(}\hlkwd{row}\hlstd{(Sigma)} \hlopt{!=} \hlkwd{col}\hlstd{(Sigma),} \hlnum{0}\hlstd{, Sigma)}
+\hlstd{> }\hlstd{X} \hlkwb{<-} \hlkwd{mvrnorm}\hlstd{(N,} \hlkwc{mu}\hlstd{=mu,} \hlkwc{Sigma} \hlstd{= Sigma)}
+\hlstd{> }\hlstd{p} \hlkwb{<-} \hlkwd{rbern}\hlstd{(P,} \hlnum{1}\hlstd{)}
+\hlstd{> }\hlstd{beta} \hlkwb{<-} \hlstd{p}\hlopt{*}\hlkwd{rnorm}\hlstd{(P,}\hlnum{1}\hlstd{,}\hlnum{0.9}\hlstd{)} \hlopt{+} \hlstd{(}\hlnum{1}\hlopt{-}\hlstd{p)}\hlopt{*}\hlkwd{rnorm}\hlstd{(P,}\hlnum{0}\hlstd{,}\hlnum{0.3}\hlstd{)}
+\hlstd{> }\hlstd{eta} \hlkwb{<-} \hlstd{X}\hlopt{%*%}\hlstd{beta}
+\hlstd{> }\hlstd{pi} \hlkwb{<-} \hlkwd{inv.logit}\hlstd{(eta)}
+\hlstd{> }\hlstd{Y} \hlkwb{<-} \hlkwd{rbern}\hlstd{(N, pi)}
+\hlstd{> }\hlstd{Y} \hlkwb{<-} \hlkwd{as.factor}\hlstd{(Y)}
+\hlstd{> }\hlstd{data.1.Bal} \hlkwb{<-} \hlkwd{data.frame}\hlstd{(X, Y)}
+\hlstd{> }
+\hlstd{> }\hlcom{## Test/Training Sets}
+\hlstd{> }\hlstd{test.data.1.Bal} \hlkwb{<-} \hlstd{data.1.Bal[}\hlnum{1}\hlopt{:}\hlnum{500}\hlstd{,]}
+\hlstd{> }\hlstd{train.data.1.Bal} \hlkwb{<-} \hlstd{data.1.Bal[}\hlnum{501}\hlopt{:}\hlnum{2000}\hlstd{,]}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+With the help of a few handy packages that help users run SVM's; consider the following:
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.165, 0.169, 0.184}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{> }\hlkwd{library}\hlstd{(kernlab)}
+\hlstd{> }\hlkwd{library}\hlstd{(microbenchmark)}
+\hlstd{> }\hlcom{# Linear SVM}
+\hlstd{> }\hlstd{linear.svm.bal} \hlkwb{<-} \hlkwd{train}\hlstd{(Y}\hlopt{~}\hlstd{.,}
+\hlstd{+ }                       \hlkwc{data}\hlstd{=train.data.1.Bal,}
+\hlstd{+ }                       \hlkwc{method} \hlstd{=} \hlstr{"svmLinear"}\hlstd{)}
+\hlstd{> }
+\hlstd{> }\hlstd{linear.svm.bal}\hlopt{$}\hlstd{results}\hlopt{$}\hlstd{Accuracy}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.9651691
+\end{verbatim}
+\begin{alltt}
+\hlstd{> }\hlcom{# A polynomial kernal: (long computation!)}
+\hlstd{> }\hlcom{# poly.svm.bal <- train(Y~.,}
+\hlstd{> }\hlcom{#                      data=train.data.1.Bal,}
+\hlstd{> }\hlcom{#                      method="svmPoly")}
+\hlstd{> }
+\hlstd{> }\hlcom{# poly.svm.bal$results[as.numeric(rownames(poly.svm.bal$bestTune)),]}
+\hlstd{> }\hlcom{# .951 Accuracy; .902 Kappa; AccuracySD of .011}
+\hlstd{> }
+\hlstd{> }
+\hlstd{> }\hlcom{# Radial kernal:}
+\hlstd{> }\hlcom{# radial.svm.bal = train(Y~.,}
+\hlstd{> }\hlcom{#                        data=train.data.1.Bal,}
+\hlstd{> }\hlcom{#                        method="svmRadialCost")}
+\hlstd{> }
+\hlstd{> }\hlcom{# radial.svm.bal$results[as.numeric(rownames(radial.svm.bal$bestTune)),]}
+\hlstd{> }\hlcom{# Accuracy of .54; AccuracySD .017}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+Dangerously simple, this is how an SVM is ran, and could be ran given the need for a polynomial or radial kernal. The microbenchmark package is included above for any timing related concerns conduciting research with more advanced kernals.
+
+So what's going on exactly? Well, an SVM classifies data “better” by calculating the distances between points and a line (or plane) drawn through the data. The minimal errors between these points and the plane generates more reliable classification models. This is different from a strandard regression least-squared-errors approach because this uses Euclidean distance, which is different from a vertically measured residual (commonly seen in linear models). Beyond this, we can specify various kernals to attempt to classify our data throughout various dimensions -- something the standard linear model would struggle to accomplish. Overall our data seem to classify about the same as the elastic net for ballanced data.
+
+Another option, however, is to use classification trees for visualization and confirmation of results paired with other machine learning techniques. Below is code to accomplish this if you so choose:
+
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.165, 0.169, 0.184}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{> }\hlcom{# Using "rpart", may need to reload R to get things to work.}
+\hlstd{> }\hlkwd{library}\hlstd{(rpart)}
+\hlstd{> }\hlcom{# grow tree with same DGP as above.}
+\hlstd{> }\hlstd{tree.bal} \hlkwb{<-} \hlkwd{rpart}\hlstd{(Y}\hlopt{~}\hlstd{.,}
+\hlstd{+ }                  \hlkwc{method} \hlstd{=} \hlstr{"class"}\hlstd{,}
+\hlstd{+ }                  \hlkwc{data} \hlstd{= train.data.1.Bal)}
+\hlstd{> }\hlcom{## other options include:}
+\hlstd{> }\hlcom{# printcp(tree.bal) # display the results}
+\hlstd{> }\hlcom{# plotcp(tree.bal)  # visualize cross-validation results}
+\hlstd{> }\hlcom{# summary(tree.bal) # detailed summary of splits}
+\hlstd{> }
+\hlstd{> }\hlcom{# plot tree}
+\hlstd{> }\hlkwd{plot}\hlstd{(tree.bal,} \hlkwc{uniform} \hlstd{=} \hlnum{TRUE}\hlstd{,}
+\hlstd{+ }     \hlkwc{main} \hlstd{=} \hlstr{"Classification Tree for Ballanced Data"}\hlstd{)}
+\hlstd{> }\hlkwd{text}\hlstd{(tree.bal,} \hlkwc{use.n} \hlstd{=} \hlnum{TRUE}\hlstd{,} \hlkwc{all} \hlstd{=} \hlnum{TRUE}\hlstd{,} \hlkwc{cex} \hlstd{=} \hlnum{.8}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\includegraphics[width=5in]{figure/treesML1-1} 
+\begin{kframe}\begin{alltt}
+\hlstd{> }\hlcom{# create attractive postscript plot of tree}
+\hlstd{> }\hlkwd{post}\hlstd{(tree.bal,}
+\hlstd{+ }     \hlkwc{title} \hlstd{=} \hlstr{"Classification Tree for Ballanced Data"}\hlstd{)}
+\hlstd{> }\hlcom{# then we have a lot of options off of this, including pruning the tree back,}
+\hlstd{> }\hlcom{# or making -multiple- trees into a "forest" and}
+\hlstd{> }\hlcom{# selecting the best one! (intutively a form of advanced bootstrapping!)}
+\hlstd{> }\hlcom{# prune the tree, by the error that was previously generated above}
+\hlstd{> }
+\hlstd{> }
+\hlstd{> }\hlcom{# prune function:}
+\hlstd{> }\hlstd{ptree.bal} \hlkwb{<-} \hlkwd{prune}\hlstd{(tree.bal,}
+\hlstd{+ }                   \hlkwc{cp}\hlstd{=tree.bal}\hlopt{$}\hlstd{cptable[}\hlkwd{which.min}\hlstd{(tree.bal}\hlopt{$}\hlstd{cptable[,}\hlstr{"xerror"}\hlstd{]),}
+\hlstd{+ }                                       \hlstr{"CP"}\hlstd{])}
+\hlstd{> }
+\hlstd{> }\hlcom{# plot the pruned tree}
+\hlstd{> }\hlkwd{plot}\hlstd{(ptree.bal,} \hlkwc{uniform} \hlstd{=} \hlnum{TRUE}\hlstd{,}
+\hlstd{+ }     \hlkwc{main} \hlstd{=}\hlstr{"Pruned Classification Tree for Ballanced Data"}\hlstd{)}
+\hlstd{> }\hlkwd{text}\hlstd{(ptree.bal,} \hlkwc{use.n} \hlstd{=} \hlnum{TRUE}\hlstd{,} \hlkwc{all} \hlstd{=} \hlnum{TRUE}\hlstd{,} \hlkwc{cex} \hlstd{=} \hlnum{.8}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\includegraphics[width=5in]{figure/treesML1-2} 
+\begin{kframe}\begin{alltt}
+\hlstd{> }\hlkwd{post}\hlstd{(ptree.bal,}
+\hlstd{+ }     \hlkwc{title} \hlstd{=} \hlstr{"Pruned Classification Tree for Ballanced Data"}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+Overall, regression trees (here they are classification trees) can be used to see which predictors lead our classifications, and similar to how elastic nets will bring some predictors to zero; we can then ``prune'' these observations and vizualize this process better. In poorly predictive data, this will become well pruned to only a few key observations. Reporting these over other methods may be more intuitive for readers and reviewers!
+
+Those familiar to machine learning will note the similarity between these models to principle components analysis (PCA) -- because it is very close.
 
 
 
 \subsection{K Nearest Neighbors, Nearest Means}
 
-\subsection{Support Vector Models}
-
-\subsection{Regression Trees}
 
 
 
@@ -3312,7 +3568,7 @@ Now that we have the data read in and cleaned (mostly tracking the id numbers), 
 \hlstd{> }\hlkwd{summary}\hlstd{(graph.object)} \hlcom{# Basic statistics seem okay}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH 51fff46 DN-- 610 1043 -- 
+## IGRAPH 9f5b0a8 DN-- 610 1043 -- 
 ## + attr: name (v/c)
 \end{verbatim}
 \begin{alltt}
@@ -3482,7 +3738,7 @@ The next part was difficult, and probably could be done better. I looked at a li
 \hlstd{> }\hlkwd{E}\hlstd{(graph.object)[}\hlkwd{order}\hlstd{(c.graph.object,} \hlkwc{decreasing}\hlstd{=T)[}\hlnum{1}\hlopt{:}\hlnum{10}\hlstd{]]}
 \end{alltt}
 \begin{verbatim}
-## + 10/924 edges from 5203ced (vertex names):
+## + 10/924 edges from 9f5e21d (vertex names):
 ##  [1] yodatsracist       ->dewarr   SpecificallyGeneral->gacorley
 ##  [3] inh-uman           ->gacorley Shazbot_Nanu       ->Ramicus 
 ##  [5] Mentalpopcorn      ->PeechMan Drict              ->USMCLee 
@@ -3494,7 +3750,7 @@ The next part was difficult, and probably could be done better. I looked at a li
 \hlstd{> }\hlkwd{E}\hlstd{(graph.object)[}\hlkwd{order}\hlstd{(c.lg.graph.object,} \hlkwc{decreasing}\hlstd{=T)[}\hlnum{1}\hlopt{:}\hlnum{10}\hlstd{]]}
 \end{alltt}
 \begin{verbatim}
-## + 10/924 edges from 5203ced (vertex names):
+## + 10/924 edges from 9f5e21d (vertex names):
 ##  [1] Atriox998         ->wellmanicuredman  
 ##  [2] Galileotierraplana->Atriox998         
 ##  [3] wellmanicuredman  ->Atriox998         
@@ -3519,7 +3775,7 @@ The next part was difficult, and probably could be done better. I looked at a li
 \hlstd{> }\hlkwd{E}\hlstd{(graph.object)[}\hlkwd{order}\hlstd{(b.graph.object,} \hlkwc{decreasing}\hlstd{=T)[}\hlnum{1}\hlopt{:}\hlnum{10}\hlstd{]]}
 \end{alltt}
 \begin{verbatim}
-## + 10/924 edges from 5203ced (vertex names):
+## + 10/924 edges from 9f5e21d (vertex names):
 ##  [1] sambalchuck     ->orthag             
 ##  [2] DarkGamer       ->Cullen_Ingus       
 ##  [3] obamanisha      ->Aquifex            
@@ -3536,7 +3792,7 @@ The next part was difficult, and probably could be done better. I looked at a li
 \hlstd{> }\hlkwd{E}\hlstd{(graph.object)[}\hlkwd{order}\hlstd{(b.lg.graph.object,} \hlkwc{decreasing}\hlstd{=T)[}\hlnum{1}\hlopt{:}\hlnum{10}\hlstd{]]}
 \end{alltt}
 \begin{verbatim}
-## + 10/924 edges from 5203ced (vertex names):
+## + 10/924 edges from 9f5e21d (vertex names):
 ##  [1] yodatsracist  ->Randomname64   Fibonacci35813->deathlock13   
 ##  [3] vulcan583     ->Fibonacci35813 Erinaceous    ->vulcan583     
 ##  [5] dewarr        ->yodatsracist   Randomname64  ->Erinaceous    
@@ -3556,7 +3812,7 @@ The next part was difficult, and probably could be done better. I looked at a li
 \hlstd{> }\hlkwd{E}\hlstd{(graph.object)[}\hlkwd{order}\hlstd{(e.graph.object}\hlopt{$}\hlstd{vector,} \hlkwc{decreasing}\hlstd{=T)[}\hlnum{1}\hlopt{:}\hlnum{10}\hlstd{]]}
 \end{alltt}
 \begin{verbatim}
-## + 10/924 edges from 5203ced (vertex names):
+## + 10/924 edges from 9f5e21d (vertex names):
 ##  [1] MoralMidgetry  ->Dumble_dared        just_works_here->PM_ME_YOUR_SHEC0CK 
 ##  [3] timeimmemorial ->dewarr              Kai_Daigoji    ->Klumber            
 ##  [5] sambalchuck    ->orthag              HerrtomtomAZ   ->Newnews2           
@@ -3568,7 +3824,7 @@ The next part was difficult, and probably could be done better. I looked at a li
 \hlstd{> }\hlkwd{E}\hlstd{(graph.object)[}\hlkwd{order}\hlstd{(evc_lg_graph.object}\hlopt{$}\hlstd{vector,} \hlkwc{decreasing}\hlstd{=T)[}\hlnum{1}\hlopt{:}\hlnum{10}\hlstd{]]}
 \end{alltt}
 \begin{verbatim}
-## + 10/924 edges from 5203ced (vertex names):
+## + 10/924 edges from 9f5e21d (vertex names):
 ##  [1] Dennis_Langley  ->MoralMidgetry  Dennis_Langley  ->MoralMidgetry 
 ##  [3] Dennis_Langley  ->MoralMidgetry  deathlock13     ->MoralMidgetry 
 ##  [5] deathlock13     ->MoralMidgetry  BuildBetterWorld->MoralMidgetry 
@@ -3644,7 +3900,7 @@ In this I will be using the Reddit data from "r/AskSocialScientists" from Octobe
 \hlstd{> }\hlkwd{summary}\hlstd{(g1)} \hlcom{#}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH 56f02ec DN-- 339 521 -- 
+## IGRAPH a292ba9 DN-- 339 521 -- 
 ## + attr: name (v/c)
 \end{verbatim}
 \begin{alltt}
@@ -3654,7 +3910,7 @@ In this I will be using the Reddit data from "r/AskSocialScientists" from Octobe
 \hlstd{> }\hlkwd{summary}\hlstd{(g12)} \hlcom{#}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH 56f11d5 DN-- 327 522 -- 
+## IGRAPH a2937d6 DN-- 327 522 -- 
 ## + attr: name (v/c)
 \end{verbatim}
 \end{kframe}
