@@ -4,7 +4,7 @@
 
   \indexspace
 
-  \item Augmented Dicky Fuller, \hyperpage{91}
+  \item Augmented Dicky Fuller, \hyperpage{93}
 
   \indexspace
 
@@ -20,13 +20,14 @@
   \item checking linear models, \hyperpage{20}
   \item coarse matching, \hyperpage{11}
   \item colliders, \hyperpage{3}
-  \item comparative static, \hyperpage{118}
+  \item comparative static, \hyperpage{120}
   \item confounding, \hyperpage{4}
   \item Curse of Dimensionality, \hyperpage{3}
 
   \indexspace
 
-  \item DAG, \hyperpage{3}, \hyperpage{117}
+  \item DAG, \hyperpage{3}, \hyperpage{119}
+  \item Data Vintaging, \hyperpage{89}
   \item DGP, \hyperpage{83}
   \item Differences in Differences, \hyperpage{12}
 
@@ -36,25 +37,25 @@
 
   \indexspace
 
-  \item First Best, \hyperpage{117}
+  \item First Best, \hyperpage{119}
   \item Fixed Effects, \hyperpage{11}
 
   \indexspace
 
   \item GGplot, \hyperpage{76}
-  \item ggplot, \hyperpage{104}, \hyperpage{114}
-  \item Granger Causality, \hyperpage{91}
+  \item ggplot, \hyperpage{106}, \hyperpage{116}
+  \item Granger Causality, \hyperpage{93}
 
   \indexspace
 
   \item ignorability, \hyperpage{4}
   \item imputation, \hyperpage{5}
-  \item Innovation Accounting, \hyperpage{93}
+  \item Innovation Accounting, \hyperpage{94}
 
   \indexspace
 
   \item Kaplan-Meier, \hyperpage{63}
-  \item KPSS Test, \hyperpage{91}
+  \item KPSS Test, \hyperpage{93}
 
   \indexspace
 
@@ -73,7 +74,7 @@
   \indexspace
 
   \item Naive Differences in Means, \hyperpage{3}
-  \item Nash Equilibrium, \hyperpage{117}
+  \item Nash Equilibrium, \hyperpage{119}
   \item nearest-neighbor, \hyperpage{11}
 
   \indexspace
@@ -84,7 +85,7 @@
   \indexspace
 
   \item R$^2$, \hyperpage{17}
-  \item recoding data, \hyperpage{15}, \hyperpage{98}
+  \item recoding data, \hyperpage{15}, \hyperpage{100}
   \item Ridge, \hyperpage{74}
   \item Rope Ladder Ploting, \hyperpage{33}
 
@@ -95,8 +96,9 @@
   \item sharp null hypothesis, \hyperpage{5}
   \item Simulation, \hyperpage{17}, \hyperpage{67}
   \item subclassification, \hyperpage{11}
-  \item subgame perfect Nash Equilibrium, \hyperpage{118}
+  \item subgame perfect Nash Equilibrium, \hyperpage{120}
   \item SUTVA, \hyperpage{4}
+  \item systematic sampling, \hyperpage{89}
 
   \indexspace
 
@@ -105,10 +107,11 @@
 
   \indexspace
 
-  \item utility, \hyperpage{117}
+  \item utility, \hyperpage{119}
 
   \indexspace
 
-  \item Vector Auto Regression, \hyperpage{92}
+  \item VAR, \hyperpage{89}
+  \item Vector Auto Regression, \hyperpage{93}
 
 \end{theindex}

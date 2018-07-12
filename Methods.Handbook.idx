@@ -50,17 +50,20 @@
 \indexentry{DGP|hyperpage}{83}
 \indexentry{Test Set Training Set|hyperpage}{83}
 \indexentry{library() |hyperpage}{83}
-\indexentry{Augmented Dicky Fuller|hyperpage}{91}
-\indexentry{KPSS Test|hyperpage}{91}
-\indexentry{Granger Causality|hyperpage}{91}
-\indexentry{Vector Auto Regression|hyperpage}{92}
-\indexentry{Innovation Accounting|hyperpage}{93}
-\indexentry{recoding data|hyperpage}{98}
-\indexentry{ggplot|hyperpage}{104}
-\indexentry{ggplot|hyperpage}{114}
-\indexentry{DAG|hyperpage}{117}
-\indexentry{utility|hyperpage}{117}
-\indexentry{First Best|hyperpage}{117}
-\indexentry{Nash Equilibrium|hyperpage}{117}
-\indexentry{subgame perfect Nash Equilibrium|hyperpage}{118}
-\indexentry{comparative static|hyperpage}{118}
+\indexentry{Data Vintaging|hyperpage}{89}
+\indexentry{VAR|hyperpage}{89}
+\indexentry{systematic sampling|hyperpage}{89}
+\indexentry{Augmented Dicky Fuller|hyperpage}{93}
+\indexentry{KPSS Test|hyperpage}{93}
+\indexentry{Granger Causality|hyperpage}{93}
+\indexentry{Vector Auto Regression|hyperpage}{93}
+\indexentry{Innovation Accounting|hyperpage}{94}
+\indexentry{recoding data|hyperpage}{100}
+\indexentry{ggplot|hyperpage}{106}
+\indexentry{ggplot|hyperpage}{116}
+\indexentry{DAG|hyperpage}{119}
+\indexentry{utility|hyperpage}{119}
+\indexentry{First Best|hyperpage}{119}
+\indexentry{Nash Equilibrium|hyperpage}{119}
+\indexentry{subgame perfect Nash Equilibrium|hyperpage}{120}
+\indexentry{comparative static|hyperpage}{120}

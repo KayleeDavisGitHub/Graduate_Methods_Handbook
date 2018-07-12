@@ -2953,17 +2953,66 @@ Those familiar to machine learning will note the similarity between these models
 
 %--------------------------------------
 \clearpage
-\section{Timeseries Data}
+\section{Timeseries}
+
+Timeseries analysis allows us to address normative questions in a better more honest light. Timeseries operates around the difference function which will be introducted in an upcoming section. However, one benefit of timeseries is to aid humanitarian or government goals with forecasting - a worthwhile skill to develop. How parties move to an equilibrium or summarize their shocks, move together or towards a shifting eqilibrium, how they reach the equilibrium and at what rate, what structural changes effect these models, or how the very DGP itself changes are all questions best examined by timeseries.
+
+Much of this section on timeseries comes from a course and associated text from Janet M. Box-Steffensmeir, John R. Freeman, Jon C. W. Pevehouse, and Matthew P. Hitt titled `` Time Series Analysis for the Social Sciences.'' I would highly reccomend this text if a reader is serious about learning timeseries analysis, sections of the book will be referenced in this section of the document.
 
 \subsection{Data Concerns}
 
-\subsection{Differencing}
+Timeseries does not rid itself of serious data concerns, and actually new data concerns arise with time series data. First, one should be aware of data vintaging: or where data is not finalized and there is some recency bias in reporting. For example, government data or live polling data may not be finalized or the process of collecting data is not complete. Older data is less controversial (usually!) but recent data can be more debateable. Robertson and Tallman have a 1998 Economic Review article discussing this in more detail. \index{Data Vintaging} \index{VAR}
+
+Another potential concern to take seriously is systematic sampling and temporal aggregation. This is where regular interval (systematic sampling) occurs but not for the entire series. Naively a researcher may aggregate across the cross-sections but further arise if the reason why the data is missing relates to the variables in the data. For example, government data missing a few years around a particular scandal or tragety. Further, we might consider what the natural time-unit of data really is in the first place. What is the naturally occuring time of a vote, of opinions, or of healthcare? Is a vaccine or survey best distributed by the year, or by the month? This largely depends on the research question, and we may not always have the ability to best measure our natural time scale, creating noise or missing shocks where they may actually exist. \index{systematic sampling}
+
+Finally, less of a data concern but rather a justification of the methods to follow when one might consider just adding a lagged time variable within a regression model. Doing this does not solve exogenaity problems (there's a Journal of Politics article related to this) and we will just end up with an extra function that calculates the bias from aggregation. Further, if there are multiple frequencies we could instead just measure those with a variation of the VAR (upcoming section). Adding time into a regular regression is very restrictive when we could use a VAR to pick up lag lengths or a simultanious regression model built for such variables.
+
+\subsection{Differencing Equations and Operators}
+
+Much like mothers all around the world demanding their children eat vegetables, methodologists too have stressed the importance of learning differencing equations for timeseries analysis. This is well covered in the Box-Steffensmeier et al. appendix - giving students a full introduction to differencing equations and trends.
+
+Much like functions in R, or mathmatical operators, differencing equations too could be called a usages of various operators. For simplicity I will start by calling them differencing operators or a variant of the ``backshift operators.'' These are functions in the same way that $f(x)$ is a function being applied to $x$. Instead, with the differencing operators ($\Delta$) we mean, simply, $(1-B)$ where B is just a lag operator (or the backshift operator). The ``difference'' synonym comes from the subtraction of $1-B$.
+
+For clarity, these two are equivilent:
+
+\begin{equation}
+\Delta (.5^t) = .5^t - .5^{t-1}
+\end{equation}
+
+And the backshift operator acts simply:
+\begin{equation}
+B(.5^t) = .5^{t-1}
+\end{equation}
+
+And the square of this function works similarly:
+
+\begin{equation}
+\Delta^2 y(t) = (1-B)^2 y(t) = (1-2B + B^2) y(t) = y(t) - 2y(t-1) + y(t-2).
+\end{equation}
+
+Or with $.5^t$ as $y(t)$ we have:
+
+\begin{equation}
+\Delta^2(.5^t) = .5^t - 2(.5^{t-1}) +.5^{t-2} = .5^t
+\end{equation}
+
+Finally, we have a third operator to help us and that is the ``expectations'' or ``lead'' operator (E). Which brings our variable forward a time period.
+
+\begin{equation}
+Ey(t) = y(t+1)
+\end{equation}
+
+Difference equations, then, are the intregate combination of these operators to produce particular equalities. Standard regression models often do not consider these nuances, but the study of difference equations helps us understand the dynamics that are implicit in our time series related equations.
+
 
 \subsection{Identifying AR;MA - ACF, PACF}
 
+
 \subsection{Unit Roots}
 
+
 \subsection{ARIMA}
+
 
 \subsection{VAR}
 
@@ -3687,13 +3736,7 @@ A variation of the Nash Equilibrium is the \textit{subgame perfect Nash Equilibr
 Another term, the \textit{comparative static} is the component of a model that connects our theory to our emperics through game-theoretic reasoning. Typically the comparative static is deployed in papers to test hypotheses, arrive at novel findings, argue for an expansion of a particular model or theory, or just to describe a phenomenon with more precision than before.
 
 
-\subsection{Popular Games for Neat Examples}
-
-
-
-\subsection{Games with Political Relevance}
-
-
+\subsection{Popular Games as Examples}
 
 
 
