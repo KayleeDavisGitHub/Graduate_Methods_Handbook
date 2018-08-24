@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6210 64-bit) (preloaded format=pdflatex 2017.1.30)  12 JUL 2018 11:36
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6210 64-bit) (preloaded format=pdflatex 2017.1.30)  24 AUG 2018 13:29
 entering extended mode
 **./Methods.Handbook.tex
 (Methods.Handbook.tex
@@ -1622,7 +1622,7 @@ Overfull \vbox (8.14635pt too high) has occurred while \output is active []
 
 [6] [7]
 <C:/Users/Shing/Documents/GLM/Graduate_Methods_Handbook/figure/MLEex.png, id=22
-0, 152.4897pt x 82.6287pt>
+6, 152.4897pt x 82.6287pt>
 File: C:/Users/Shing/Documents/GLM/Graduate_Methods_Handbook/figure/MLEex.png G
 raphic file (type png)
 
@@ -1718,7 +1718,7 @@ Package xcolor Warning: Incompatible color definition on input line 978.
 
 Package xcolor Warning: Incompatible color definition on input line 1026.
 
-<figure/simulation1-1.pdf, id=276, 505.89pt x 505.89pt>
+<figure/simulation1-1.pdf, id=282, 505.89pt x 505.89pt>
 File: figure/simulation1-1.pdf Graphic file (type pdf)
 
 <use figure/simulation1-1.pdf>
@@ -1811,7 +1811,7 @@ LaTeX Font Info:    Font shape `U/FdSymbolF/b/n' will be
 
 Package xcolor Warning: Incompatible color definition on input line 1117.
 
-<figure/checkinglinear-1.pdf, id=292, 505.89pt x 505.89pt>
+<figure/checkinglinear-1.pdf, id=298, 505.89pt x 505.89pt>
 File: figure/checkinglinear-1.pdf Graphic file (type pdf)
 
 <use figure/checkinglinear-1.pdf>
@@ -1821,7 +1821,7 @@ Package pdftex.def Info: figure/checkinglinear-1.pdf used on input line 1123.
 
 ] [20 <./figure/checkinglinear-1.pdf>]
 [21]
-<C:/Users/Shing/Documents/GLM/Graduate_Methods_Handbook/figure/OVB.png, id=313,
+<C:/Users/Shing/Documents/GLM/Graduate_Methods_Handbook/figure/OVB.png, id=319,
  148.75575pt x 168.02776pt>
 File: C:/Users/Shing/Documents/GLM/Graduate_Methods_Handbook/figure/OVB.png Gra
 phic file (type png)
@@ -1863,7 +1863,7 @@ Underfull \vbox (badness 10000) detected at line 1269
 
 ]
 <C:/Users/Shing/Documents/GLM/Graduate_Methods_Handbook/figure/VarLogit.png, id
-=339, 591.71063pt x 434.37282pt>
+=345, 591.71063pt x 434.37282pt>
 File: C:/Users/Shing/Documents/GLM/Graduate_Methods_Handbook/figure/VarLogit.pn
 g Graphic file (type png)
 
@@ -1902,7 +1902,7 @@ Overfull \hbox (18.07022pt too wide) in paragraph at lines 1451--1451
 []8[][],[] []lwd[][]=[][]4.5[][],[] []add[] []= T)[][] 
  []
 
-<figure/probplotlogit-1.pdf, id=373, 505.89pt x 505.89pt>
+<figure/probplotlogit-1.pdf, id=379, 505.89pt x 505.89pt>
 File: figure/probplotlogit-1.pdf Graphic file (type pdf)
 
 <use figure/probplotlogit-1.pdf>
@@ -1913,7 +1913,7 @@ Package pdftex.def Info: figure/probplotlogit-1.pdf used on input line 1459.
 Package xcolor Warning: Incompatible color definition on input line 1471.
 
 [31 <./figure/probplotlogit-1.pdf>]
-<figure/binned-1.pdf, id=391, 505.89pt x 505.89pt>
+<figure/binned-1.pdf, id=397, 505.89pt x 505.89pt>
 File: figure/binned-1.pdf Graphic file (type pdf)
  <use figure/binned-1.pdf>
 Package pdftex.def Info: figure/binned-1.pdf used on input line 1501.
@@ -1923,7 +1923,7 @@ Package pdftex.def Info: figure/binned-1.pdf used on input line 1501.
 
 Package xcolor Warning: Incompatible color definition on input line 1519.
 
-[33 <./figure/binned-1.pdf>] <figure/rope-1.pdf, id=407, 505.89pt x 505.89pt>
+[33 <./figure/binned-1.pdf>] <figure/rope-1.pdf, id=413, 505.89pt x 505.89pt>
 File: figure/rope-1.pdf Graphic file (type pdf)
 
 <use figure/rope-1.pdf>
@@ -1966,7 +1966,7 @@ Package xcolor Warning: Incompatible color definition on input line 1825.
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
-<C:/Users/Shing/Documents/GLM/Graduate_Methods_Handbook/figure/best.png, id=469
+<C:/Users/Shing/Documents/GLM/Graduate_Methods_Handbook/figure/best.png, id=475
 , 580.41844pt x 434.37282pt>
 File: C:/Users/Shing/Documents/GLM/Graduate_Methods_Handbook/figure/best.png Gr
 aphic file (type png)
@@ -1981,7 +1981,7 @@ Package pdftex.def Info: C:/Users/Shing/Documents/GLM/Graduate_Methods_Handbook
 ] [45 <C:/Users/Shing/Documents/GLM/Graduate_Methods_Handbook/figure/best.png>]
 
 <C:/Users/Shing/Documents/GLM/Graduate_Methods_Handbook/figure/Nbest.png, id=48
-3, 580.41844pt x 434.37282pt>
+9, 580.41844pt x 434.37282pt>
 File: C:/Users/Shing/Documents/GLM/Graduate_Methods_Handbook/figure/Nbest.png G
 raphic file (type png)
 
@@ -1997,7 +1997,7 @@ Package xcolor Warning: Incompatible color definition on input line 1961.
 
  <C:/Users/Shing/Documents/GLM/Graduate_Methods_Handbook/figure/Nbest.png>]
 [47] [48] [49]
-<C:/Users/Shing/Documents/GLM/Graduate_Methods_Handbook/figure/yeah.png, id=504
+<C:/Users/Shing/Documents/GLM/Graduate_Methods_Handbook/figure/yeah.png, id=510
 , 566.115pt x 317.988pt>
 File: C:/Users/Shing/Documents/GLM/Graduate_Methods_Handbook/figure/yeah.png Gr
 aphic file (type png)
@@ -2030,7 +2030,7 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
 <C:/Users/Shing/Documents/GLM/Graduate_Methods_Handbook/figure/IncPlot.png, id=
-509, 558.58687pt x 434.37282pt>
+515, 558.58687pt x 434.37282pt>
 File: C:/Users/Shing/Documents/GLM/Graduate_Methods_Handbook/figure/IncPlot.png
  Graphic file (type png)
 
@@ -2052,7 +2052,7 @@ Package xcolor Warning: Incompatible color definition on input line 2182.
 [54
 
 ]
-<C:/Users/Shing/Documents/GLM/Graduate_Methods_Handbook/figure/Surv.png, id=535
+<C:/Users/Shing/Documents/GLM/Graduate_Methods_Handbook/figure/Surv.png, id=541
 , 591.71063pt x 434.37282pt>
 File: C:/Users/Shing/Documents/GLM/Graduate_Methods_Handbook/figure/Surv.png Gr
 aphic file (type png)
@@ -2063,7 +2063,7 @@ Package pdftex.def Info: C:/Users/Shing/Documents/GLM/Graduate_Methods_Handbook
 (pdftex.def)             Requested size: 384.60735pt x 282.33897pt.
 
 [55 <C:/Users/Shing/Documents/GLM/Graduate_Methods_Handbook/figure/Surv.png>]
-<C:/Users/Shing/Documents/GLM/Graduate_Methods_Handbook/figure/Cox.png, id=545,
+<C:/Users/Shing/Documents/GLM/Graduate_Methods_Handbook/figure/Cox.png, id=551,
  591.71063pt x 434.37282pt>
 File: C:/Users/Shing/Documents/GLM/Graduate_Methods_Handbook/figure/Cox.png Gra
 phic file (type png)
@@ -2080,8 +2080,8 @@ Package xcolor Warning: Incompatible color definition on input line 2250.
 
  <C:/Users/Shing/Documents/GLM/Graduate_Methods_Handbook/figure/Cox.png>]
 [57]
-<C:/Users/Shing/Documents/GLM/Graduate_Methods_Handbook/figure/SurvR.jpg, id=55
-7, 591.71063pt x 434.37282pt>
+<C:/Users/Shing/Documents/GLM/Graduate_Methods_Handbook/figure/SurvR.jpg, id=56
+3, 591.71063pt x 434.37282pt>
 File: C:/Users/Shing/Documents/GLM/Graduate_Methods_Handbook/figure/SurvR.jpg G
 raphic file (type jpg)
 
@@ -2215,7 +2215,7 @@ ef[[][]1[][],[][]1[][]][]     []#Storing models first coef, Intercept[][]
 
 Package xcolor Warning: Incompatible color definition on input line 2578.
 
-<figure/PlottingSimulationML-1.pdf, id=595, 505.89pt x 505.89pt>
+<figure/PlottingSimulationML-1.pdf, id=601, 505.89pt x 505.89pt>
 File: figure/PlottingSimulationML-1.pdf Graphic file (type pdf)
 
 <use figure/PlottingSimulationML-1.pdf>
@@ -2237,7 +2237,7 @@ Package xcolor Warning: Incompatible color definition on input line 2648.
 
 Package xcolor Warning: Incompatible color definition on input line 2704.
 
-<figure/hiddenplotlineartologit-1.pdf, id=614, 505.89pt x 505.89pt>
+<figure/hiddenplotlineartologit-1.pdf, id=620, 505.89pt x 505.89pt>
 File: figure/hiddenplotlineartologit-1.pdf Graphic file (type pdf)
 
 <use figure/hiddenplotlineartologit-1.pdf>
@@ -2270,7 +2270,7 @@ Package xcolor Warning: Incompatible color definition on input line 2761.
 
 Package xcolor Warning: Incompatible color definition on input line 2784.
 
-[71] <figure/betabetatestPenRegress1-1.pdf, id=635, 505.89pt x 505.89pt>
+[71] <figure/betabetatestPenRegress1-1.pdf, id=641, 505.89pt x 505.89pt>
 File: figure/betabetatestPenRegress1-1.pdf Graphic file (type pdf)
 
 <use figure/betabetatestPenRegress1-1.pdf>
@@ -2291,7 +2291,7 @@ Missing character: There is no ô in font cmr12!
 Package xcolor Warning: Incompatible color definition on input line 2805.
 
 [72 <./figure/betabetatestPenRegress1-1.pdf>]
-<figure/examineerrorsML-1.pdf, id=646, 505.89pt x 505.89pt>
+<figure/examineerrorsML-1.pdf, id=652, 505.89pt x 505.89pt>
 File: figure/examineerrorsML-1.pdf Graphic file (type pdf)
 
 <use figure/examineerrorsML-1.pdf>
@@ -2324,7 +2324,7 @@ Overfull \hbox (11.89522pt too wide) in paragraph at lines 2880--2880
 t lambda of around 14.5![][] 
  []
 
-[74] <figure/LASSO1ML-1.pdf, id=660, 505.89pt x 505.89pt>
+[74] <figure/LASSO1ML-1.pdf, id=666, 505.89pt x 505.89pt>
 File: figure/LASSO1ML-1.pdf Graphic file (type pdf)
 
 <use figure/LASSO1ML-1.pdf>
@@ -2334,7 +2334,7 @@ Package pdftex.def Info: figure/LASSO1ML-1.pdf used on input line 2893.
 
 Package xcolor Warning: Incompatible color definition on input line 2901.
 
-<figure/LASSOvaluesML1-1.pdf, id=666, 505.89pt x 505.89pt>
+<figure/LASSOvaluesML1-1.pdf, id=672, 505.89pt x 505.89pt>
 File: figure/LASSOvaluesML1-1.pdf Graphic file (type pdf)
 
 <use figure/LASSOvaluesML1-1.pdf>
@@ -2358,7 +2358,7 @@ Missing character: There is no ô in font cmr12!
 Package xcolor Warning: Incompatible color definition on input line 2924.
 
 [77 <./figure/LASSOvaluesML1-1.pdf>]
-<figure/RidgeNetML1-1.pdf, id=690, 505.89pt x 505.89pt>
+<figure/RidgeNetML1-1.pdf, id=696, 505.89pt x 505.89pt>
 File: figure/RidgeNetML1-1.pdf Graphic file (type pdf)
 
 <use figure/RidgeNetML1-1.pdf>
@@ -2369,7 +2369,7 @@ Package pdftex.def Info: figure/RidgeNetML1-1.pdf used on input line 2953.
 Package xcolor Warning: Incompatible color definition on input line 2960.
 
 [78 <./figure/RidgeNetML1-1.pdf>]
-<figure/Ridgenet2MLthing-1.pdf, id=704, 505.89pt x 505.89pt>
+<figure/Ridgenet2MLthing-1.pdf, id=710, 505.89pt x 505.89pt>
 File: figure/Ridgenet2MLthing-1.pdf Graphic file (type pdf)
 
 <use figure/Ridgenet2MLthing-1.pdf>
@@ -2447,7 +2447,7 @@ Package xcolor Warning: Incompatible color definition on input line 3042.
 
 Package xcolor Warning: Incompatible color definition on input line 3054.
 
-<figure/lmoutputML2-1.pdf, id=722, 505.89pt x 505.89pt>
+<figure/lmoutputML2-1.pdf, id=728, 505.89pt x 505.89pt>
 File: figure/lmoutputML2-1.pdf Graphic file (type pdf)
 
 <use figure/lmoutputML2-1.pdf>
@@ -2464,7 +2464,7 @@ Package xcolor Warning: Incompatible color definition on input line 3084.
 
 Package xcolor Warning: Incompatible color definition on input line 3110.
 
-[82] <figure/plonewbetafromenetML2-1.pdf, id=742, 505.89pt x 505.89pt>
+[82] <figure/plonewbetafromenetML2-1.pdf, id=748, 505.89pt x 505.89pt>
 File: figure/plonewbetafromenetML2-1.pdf Graphic file (type pdf)
 
 <use figure/plonewbetafromenetML2-1.pdf>
@@ -2508,7 +2508,7 @@ Missing character: There is no ù in font cmr12!
 
 Package xcolor Warning: Incompatible color definition on input line 3210.
 
-[85] <figure/treesML1-1.pdf, id=761, 505.89pt x 505.89pt>
+[85] <figure/treesML1-1.pdf, id=767, 505.89pt x 505.89pt>
 File: figure/treesML1-1.pdf Graphic file (type pdf)
 
 <use figure/treesML1-1.pdf>
@@ -2527,7 +2527,7 @@ Overfull \hbox (24.24522pt too wide) in paragraph at lines 3242--3242
  []
 
 [86 <./figure/treesML1-1.pdf>]
-<figure/treesML1-2.pdf, id=772, 505.89pt x 505.89pt>
+<figure/treesML1-2.pdf, id=778, 505.89pt x 505.89pt>
 File: figure/treesML1-2.pdf Graphic file (type pdf)
 
 <use figure/treesML1-2.pdf>
@@ -2548,7 +2548,7 @@ ents/GodGap/TS Final/anes_timeseries_cdf.dta[][])[][]
 
 Package xcolor Warning: Incompatible color definition on input line 3351.
 
-<figure/desc-1.pdf, id=792, 505.89pt x 505.89pt>
+<figure/desc-1.pdf, id=798, 505.89pt x 505.89pt>
 File: figure/desc-1.pdf Graphic file (type pdf)
  <use figure/desc-1.pdf>
 Package pdftex.def Info: figure/desc-1.pdf used on input line 3352.
@@ -2558,7 +2558,7 @@ Package pdftex.def Info: figure/desc-1.pdf used on input line 3352.
 
 Package xcolor Warning: Incompatible color definition on input line 3361.
 
-<figure/descriptiveplot-1.pdf, id=802, 505.89pt x 505.89pt>
+<figure/descriptiveplot-1.pdf, id=808, 505.89pt x 505.89pt>
 File: figure/descriptiveplot-1.pdf Graphic file (type pdf)
 
 <use figure/descriptiveplot-1.pdf>
@@ -2580,19 +2580,19 @@ Package xcolor Warning: Incompatible color definition on input line 3432.
 
 Package xcolor Warning: Incompatible color definition on input line 3486.
 
-<figure/inov-1.pdf, id=836, 505.89pt x 505.89pt>
+<figure/inov-1.pdf, id=842, 505.89pt x 505.89pt>
 File: figure/inov-1.pdf Graphic file (type pdf)
  <use figure/inov-1.pdf>
 Package pdftex.def Info: figure/inov-1.pdf used on input line 3493.
 (pdftex.def)             Requested size: 469.76265pt x 325.2197pt.
 
-[95] <figure/inov-2.pdf, id=841, 505.89pt x 505.89pt>
+[95] <figure/inov-2.pdf, id=847, 505.89pt x 505.89pt>
 File: figure/inov-2.pdf Graphic file (type pdf)
  <use figure/inov-2.pdf>
 Package pdftex.def Info: figure/inov-2.pdf used on input line 3499.
 (pdftex.def)             Requested size: 469.76265pt x 325.2197pt.
 
-[96 <./figure/inov-1.pdf>] <figure/inov-3.pdf, id=851, 505.89pt x 505.89pt>
+[96 <./figure/inov-1.pdf>] <figure/inov-3.pdf, id=857, 505.89pt x 505.89pt>
 File: figure/inov-3.pdf Graphic file (type pdf)
 
 <use figure/inov-3.pdf>
@@ -2727,7 +2727,7 @@ nt_id))[][]
 
 Package xcolor Warning: Incompatible color definition on input line 3598.
 
-[101] [102] <figure/starting-1.pdf, id=894, 505.89pt x 505.89pt>
+[101] [102] <figure/starting-1.pdf, id=900, 505.89pt x 505.89pt>
 File: figure/starting-1.pdf Graphic file (type pdf)
 
 <use figure/starting-1.pdf>
@@ -2738,7 +2738,7 @@ Package pdftex.def Info: figure/starting-1.pdf used on input line 3655.
 Package xcolor Warning: Incompatible color definition on input line 3667.
 
 [103 <./figure/starting-1.pdf>] [104]
-<figure/degree-1.pdf, id=908, 505.89pt x 505.89pt>
+<figure/degree-1.pdf, id=914, 505.89pt x 505.89pt>
 File: figure/degree-1.pdf Graphic file (type pdf)
  <use figure/degree-1.pdf>
 Package pdftex.def Info: figure/degree-1.pdf used on input line 3762.
@@ -2812,7 +2812,7 @@ Overfull \hbox (24.24522pt too wide) in paragraph at lines 3916--3916
 02671278  1.00000000[] 
  []
 
-<figure/comp-1.pdf, id=932, 505.89pt x 505.89pt>
+<figure/comp-1.pdf, id=938, 505.89pt x 505.89pt>
 File: figure/comp-1.pdf Graphic file (type pdf)
  <use figure/comp-1.pdf>
 Package pdftex.def Info: figure/comp-1.pdf used on input line 3925.
@@ -2831,7 +2831,7 @@ Overfull \hbox (11.89522pt too wide) in paragraph at lines 3954--3954
 
 Package xcolor Warning: Incompatible color definition on input line 3968.
 
-[111] <figure/plot1-1.pdf, id=951, 505.89pt x 505.89pt>
+[111] <figure/plot1-1.pdf, id=957, 505.89pt x 505.89pt>
 File: figure/plot1-1.pdf Graphic file (type pdf)
 
 <use figure/plot1-1.pdf>
@@ -2841,7 +2841,7 @@ Package pdftex.def Info: figure/plot1-1.pdf used on input line 3996.
 
 Package xcolor Warning: Incompatible color definition on input line 4008.
 
-[112 <./figure/plot1-1.pdf>] <figure/plot2-1.pdf, id=961, 505.89pt x 505.89pt>
+[112 <./figure/plot1-1.pdf>] <figure/plot2-1.pdf, id=967, 505.89pt x 505.89pt>
 File: figure/plot2-1.pdf Graphic file (type pdf)
 
 <use figure/plot2-1.pdf>
@@ -2858,7 +2858,7 @@ Overfull \hbox (36.59523pt too wide) in paragraph at lines 4074--4074
 e),[][]3[][]),[] []angle[][]=[][]-[][]90[][])[][] 
  []
 
-[114 <./figure/plot2-1.pdf>] <figure/plot3-1.pdf, id=975, 505.89pt x 505.89pt>
+[114 <./figure/plot2-1.pdf>] <figure/plot3-1.pdf, id=981, 505.89pt x 505.89pt>
 File: figure/plot3-1.pdf Graphic file (type pdf)
 
 <use figure/plot3-1.pdf>
@@ -2868,7 +2868,7 @@ Package pdftex.def Info: figure/plot3-1.pdf used on input line 4077.
 
 Package xcolor Warning: Incompatible color definition on input line 4086.
 
-<figure/what-1.pdf, id=985, 505.89pt x 505.89pt>
+<figure/what-1.pdf, id=991, 505.89pt x 505.89pt>
 File: figure/what-1.pdf Graphic file (type pdf)
  <use figure/what-1.pdf>
 Package pdftex.def Info: figure/what-1.pdf used on input line 4104.
@@ -2885,27 +2885,97 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 [119
 
 ] [120]
+! Missing $ inserted.
+<inserted text> 
+                $
+l.4226 
+       
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing } inserted.
+<inserted text> 
+                }
+l.4226 
+       
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Display math should end with $$.
+<to be read again> 
+                   \@@par 
+l.4226 
+       
+The `$' that I just saw supposedly matches a previous `$$'.
+So I shall assume that you typed `$$' both times.
+
+! Extra }, or forgotten \endgroup.
+\@par ... \@noitemerr {\@@par }\fi \else {\@@par }
+                                                  \fi 
+l.4226 
+       
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.4227 \text{Pr}(H_
+                   0 \text{true} | \text{data}) =/= \text{p-values}
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! You can't use `\eqno' in math mode.
+\endmathdisplay@a ...\df@tag \@empty \else \veqno 
+                                                  \alt@tag \df@tag \fi \ifx ...
+l.4228 \end{equation}
+                     
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.4228 \end{equation}
+                     
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+[121
+
+]
 No file Methods.Handbook.bbl.
-(Methods.Handbook.ind [121
+(Methods.Handbook.ind [122
 
 
 
 ])
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 4264.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 4264.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 4285.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 4285.
  (Methods.Handbook.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 4264.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 4264.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 4264.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 4285.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 4285.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 4285.
  ) 
 Here is how much of TeX's memory you used:
- 36628 strings out of 493333
- 723244 string characters out of 3139194
- 790914 words of memory out of 3000000
+ 36634 strings out of 493333
+ 723318 string characters out of 3139194
+ 790916 words of memory out of 3000000
  39272 multiletter control sequences out of 15000+200000
  45221 words of font info for 159 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 73i,16n,106p,10399b,1251s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 73i,16n,106p,10399b,1267s stack positions out of 5000i,500n,10000p,200000b,50000s
  <C:\Users\Shing\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\public\fdsymbol\dpi
 720\FdSymbolE-Book.pk> <C:\Users\Shing\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour
 \public\fdsymbol\dpi600\FdSymbolB-Book.pk> <C:\Users\Shing\AppData\Local\MiKTeX
@@ -2943,9 +3013,9 @@ es/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Program Files/MiKTe
 X 2.9/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Program Files/MiKTeX 2.9/fo
 nts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type
 1/public/amsfonts/cm/cmtt12.pfb>
-Output written on Methods.Handbook.pdf (125 pages, 2297262 bytes).
+Output written on Methods.Handbook.pdf (126 pages, 2302140 bytes).
 PDF statistics:
- 1780 PDF objects out of 2073 (max. 8388607)
- 271 named destinations out of 1000 (max. 500000)
+ 1795 PDF objects out of 2073 (max. 8388607)
+ 277 named destinations out of 1000 (max. 500000)
  208 words of extra memory for PDF output out of 10000 (max. 10000000)
 

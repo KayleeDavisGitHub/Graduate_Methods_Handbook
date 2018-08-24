@@ -3746,10 +3746,31 @@ Another term, the \textit{comparative static} is the component of a model that c
 \subsection{Structuring Your Own Formal Model}
 
 
+%-----------------------------------------------------------------------
+\clearpage
+
+\section{Meta-Analysis}
+
+Increasingly popular in the social sciences (and beyond!) is the ``analysis of analyses'' or meta-analysis.\footnote{A term coined by Gene Glass as far back as 1976; however the practice of meta-analysis can be found as far back as 1904 with notable statisticians such as Pearson and Fisher.} The practice, broadly speaking, involves the combination of many articles on a specific topic to see where the ``jury stands'' on the topic. This involves the combination of effect sizes, weighted by sample sizes and other important components of a papers methodology, controlling for any impending biases of the article (gender of the authors, or year the article was published as examples). While modern practice encourages the combination of effect sizes, early meta-analyses involved the combination of p-values to make theoretical statements about the given topic. These latter practices are still ongoing today, and are often met with criticism this is because of the popular misconception of p-values being a statement about seeing theory in data rather than the data being observed given the sharp null hypotheses. \index{p-values}
+
+That is,
+
+\begin{equation}
+\text{Pr}(\text{data}| H_0 \text{true}) = \text{p-values}
+
+\text{Pr}(H_0 \text{true} | \text{data}) =/= \text{p-values}
+\end{equation}
+
+Effect sizes will be calculated in the sections that follow.
 
 
+\subsection{The Art of Comparison}
 
+In academia especially, articles are compared and contrasted against each other all time time. This usually occurs in an articles ``literuature review'' section - often around a topic of a theoretically interesting puzzle or unanswered question that the research hopes to illuminate for the reader. However, these sorts of compartisons are often without recognition of bias, random sampling of selected readings, or without recognition of elite scholars being able to more easily market their results. In contrast to literary comparisons meta-analyses apply a more quantitative approach to article examination of a topic and often result in similar advantages.
 
+To highlight this point, an article by Bushman and Rothstein (2012) notes that often biases occur when one group is given sugguestive and attractive paper titles when others get dull scientific sounding titles. If studnets receive brief training in meta-analysis these biases go away. The article hits home the importance of empericial literature comparisons when something as small as the article title can bias the interpretation of an articles results.
+
+\subsection{Examples}
 
 
 %-----------------------------------------------------------------------

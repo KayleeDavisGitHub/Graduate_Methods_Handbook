@@ -66,5 +66,8 @@
 \contentsline {subsection}{\numberline {9.2}Components of Game Theory}{119}{subsection.9.2}
 \contentsline {subsection}{\numberline {9.3}Popular Games as Examples}{120}{subsection.9.3}
 \contentsline {subsection}{\numberline {9.4}Structuring Your Own Formal Model}{120}{subsection.9.4}
-\contentsline {section}{Further Reading:}{121}{subsection.9.4}
-\contentsline {section}{Index}{121}{subsection.9.4}
+\contentsline {section}{\numberline {10}Meta-Analysis}{121}{section.10}
+\contentsline {subsection}{\numberline {10.1}The Art of Comparison}{121}{subsection.10.1}
+\contentsline {subsection}{\numberline {10.2}Examples}{121}{subsection.10.2}
+\contentsline {section}{Further Reading:}{122}{subsection.10.2}
+\contentsline {section}{Index}{122}{subsection.10.2}
