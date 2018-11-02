@@ -806,10 +806,35 @@ Here imagine we are interested in the causal effect of D --> Y but our errors, o
 
 
 
+%----------------------------------------------------------------------------------
+\clearpage
+\section{Introductory Statistics}
+\hfill \\
+
+While causal effects are certainly the cream-of-the-crop in terms of statistical findings; it's not necessary to examine our social world. In fact, in many cases it's not possible to get causal effects for human behavior. I cannot, for example, randomly assign a population to become black, female, or hispanic to study the effects of discrimination. However, there is an intersection of causality and correlation: the likelihood. That is, how likely is X to happen, given a list of set assumptions?
+
+There's a famous example involving famous statistician Ronald Fisher, someone we've heard of. Story has it, someone in his office one day claimed that she was a passionate tea lover, so passionate that she could tell from taste alone whether tea was added to milk or milk to tea. Fisher, ever-fun at parties, questioned the lady's passion with statistical analysis. How would we set up a \textit{causal} analysis of this however? Well, we don't have multiple universes of passionate tea-loving ladies to examine; yet, we can test the lady's abilities against random chance. Assuming random guessing would lend us a 50/50 chance of success if the lady were to defy those odds to such a great detail we could claim her successful. As the story goes, the lady could not correctly guess the difference against random chance.
+
+But how do we statistically examine the degree to which someone ``defies odds'' or what can we call ``statistically significant'' success at something? Fisher, not leaving the world hanging, had other projects besides breaking old ladies hopes and dreams. In a study on manure on farming yields Fisher noted that ``statistical significance'' could be found at three seperate thresholds which could be best communicated using associated p-values. These p-values are simply representations of the ``probability of unusualness'' found via transformation of our standard errors giving a set distribution. The thresholds are usually on the 10\% tail (.10), 5\% tail (.05), and the most unusual 1\% tail observations (.01). If a set observation, or population distribution were to exist in these tail regions, passing these thresholds we could claim statistical significance. These thresholds were noted by Fisher to be ``usual, and convenient'' enough in the scientific enterprise to use them universally.
+
+In this section of the methods handbook I'll go over the fundementals of t-tests, population distributions, z-scores, chi-squared testing, and other tests that all come back to the same notion of testing ``unusualness'' in the world. This may not be causal observations but can be powerful, these tests are deployed by cancer researchers to aerospace engineers - it has saved lives and it's preversion has conversely caused great harm. These examples and many more will be included along the way.
 
 
 
+\subection{Assumptions and Testings}
 
+
+
+\subsection{Z-Testing}
+
+
+\subsection{T-Testing}
+
+
+\subsection{Chi-Squared Testing}
+
+
+\subsection{Rank-Ordering and Permutation Testing}
 
 
 
@@ -844,6 +869,11 @@ Here imagine we are interested in the causal effect of D --> Y but our errors, o
 
 \clearpage
 %-----------------------------------------------------------------------------------
+
+
+
+
+
 
 
 
@@ -3615,7 +3645,7 @@ Now that we have the data read in and cleaned (mostly tracking the id numbers), 
 \hlstd{> }\hlkwd{summary}\hlstd{(graph.object)} \hlcom{# Basic statistics seem okay}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH 26bd3b7 DN-- 610 1043 -- 
+## IGRAPH 534eee0 DN-- 610 1043 -- 
 ## + attr: name (v/c)
 \end{verbatim}
 \begin{alltt}
@@ -3785,7 +3815,7 @@ The next part was difficult, and probably could be done better. I looked at a li
 \hlstd{> }\hlkwd{E}\hlstd{(graph.object)[}\hlkwd{order}\hlstd{(c.graph.object,} \hlkwc{decreasing}\hlstd{=T)[}\hlnum{1}\hlopt{:}\hlnum{10}\hlstd{]]}
 \end{alltt}
 \begin{verbatim}
-## + 10/924 edges from 26bfaac (vertex names):
+## + 10/924 edges from 5350e6b (vertex names):
 ##  [1] yodatsracist       ->dewarr   SpecificallyGeneral->gacorley
 ##  [3] inh-uman           ->gacorley Shazbot_Nanu       ->Ramicus 
 ##  [5] Mentalpopcorn      ->PeechMan Drict              ->USMCLee 
@@ -3797,7 +3827,7 @@ The next part was difficult, and probably could be done better. I looked at a li
 \hlstd{> }\hlkwd{E}\hlstd{(graph.object)[}\hlkwd{order}\hlstd{(c.lg.graph.object,} \hlkwc{decreasing}\hlstd{=T)[}\hlnum{1}\hlopt{:}\hlnum{10}\hlstd{]]}
 \end{alltt}
 \begin{verbatim}
-## + 10/924 edges from 26bfaac (vertex names):
+## + 10/924 edges from 5350e6b (vertex names):
 ##  [1] Atriox998         ->wellmanicuredman  
 ##  [2] Galileotierraplana->Atriox998         
 ##  [3] wellmanicuredman  ->Atriox998         
@@ -3822,7 +3852,7 @@ The next part was difficult, and probably could be done better. I looked at a li
 \hlstd{> }\hlkwd{E}\hlstd{(graph.object)[}\hlkwd{order}\hlstd{(b.graph.object,} \hlkwc{decreasing}\hlstd{=T)[}\hlnum{1}\hlopt{:}\hlnum{10}\hlstd{]]}
 \end{alltt}
 \begin{verbatim}
-## + 10/924 edges from 26bfaac (vertex names):
+## + 10/924 edges from 5350e6b (vertex names):
 ##  [1] sambalchuck     ->orthag             
 ##  [2] DarkGamer       ->Cullen_Ingus       
 ##  [3] obamanisha      ->Aquifex            
@@ -3839,7 +3869,7 @@ The next part was difficult, and probably could be done better. I looked at a li
 \hlstd{> }\hlkwd{E}\hlstd{(graph.object)[}\hlkwd{order}\hlstd{(b.lg.graph.object,} \hlkwc{decreasing}\hlstd{=T)[}\hlnum{1}\hlopt{:}\hlnum{10}\hlstd{]]}
 \end{alltt}
 \begin{verbatim}
-## + 10/924 edges from 26bfaac (vertex names):
+## + 10/924 edges from 5350e6b (vertex names):
 ##  [1] yodatsracist  ->Randomname64   Fibonacci35813->deathlock13   
 ##  [3] vulcan583     ->Fibonacci35813 Erinaceous    ->vulcan583     
 ##  [5] dewarr        ->yodatsracist   Randomname64  ->Erinaceous    
@@ -3859,7 +3889,7 @@ The next part was difficult, and probably could be done better. I looked at a li
 \hlstd{> }\hlkwd{E}\hlstd{(graph.object)[}\hlkwd{order}\hlstd{(e.graph.object}\hlopt{$}\hlstd{vector,} \hlkwc{decreasing}\hlstd{=T)[}\hlnum{1}\hlopt{:}\hlnum{10}\hlstd{]]}
 \end{alltt}
 \begin{verbatim}
-## + 10/924 edges from 26bfaac (vertex names):
+## + 10/924 edges from 5350e6b (vertex names):
 ##  [1] MoralMidgetry  ->Dumble_dared        just_works_here->PM_ME_YOUR_SHEC0CK 
 ##  [3] timeimmemorial ->dewarr              Kai_Daigoji    ->Klumber            
 ##  [5] sambalchuck    ->orthag              HerrtomtomAZ   ->Newnews2           
@@ -3871,7 +3901,7 @@ The next part was difficult, and probably could be done better. I looked at a li
 \hlstd{> }\hlkwd{E}\hlstd{(graph.object)[}\hlkwd{order}\hlstd{(evc_lg_graph.object}\hlopt{$}\hlstd{vector,} \hlkwc{decreasing}\hlstd{=T)[}\hlnum{1}\hlopt{:}\hlnum{10}\hlstd{]]}
 \end{alltt}
 \begin{verbatim}
-## + 10/924 edges from 26bfaac (vertex names):
+## + 10/924 edges from 5350e6b (vertex names):
 ##  [1] Dennis_Langley  ->MoralMidgetry  Dennis_Langley  ->MoralMidgetry 
 ##  [3] Dennis_Langley  ->MoralMidgetry  deathlock13     ->MoralMidgetry 
 ##  [5] deathlock13     ->MoralMidgetry  BuildBetterWorld->MoralMidgetry 
@@ -3947,7 +3977,7 @@ In this I will be using the Reddit data from "r/AskSocialScientists" from Octobe
 \hlstd{> }\hlkwd{summary}\hlstd{(g1)} \hlcom{#}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH 2a72c36 DN-- 339 521 -- 
+## IGRAPH 55f420d DN-- 339 521 -- 
 ## + attr: name (v/c)
 \end{verbatim}
 \begin{alltt}
@@ -3957,7 +3987,7 @@ In this I will be using the Reddit data from "r/AskSocialScientists" from Octobe
 \hlstd{> }\hlkwd{summary}\hlstd{(g12)} \hlcom{#}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH 2a73aca DN-- 327 522 -- 
+## IGRAPH 55f4c84 DN-- 327 522 -- 
 ## + attr: name (v/c)
 \end{verbatim}
 \end{kframe}

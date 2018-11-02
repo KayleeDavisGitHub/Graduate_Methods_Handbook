@@ -25,46 +25,46 @@
 \indexentry{Fixed Effects|hyperpage}{11}
 \indexentry{Marginal Structural Models|hyperpage}{11}
 \indexentry{Differences in Differences|hyperpage}{12}
-\indexentry{loading data|hyperpage}{15}
-\indexentry{recoding data|hyperpage}{15}
-\indexentry{texreg package|hyperpage}{16}
-\indexentry{R$^2$|hyperpage}{17}
-\indexentry{Simulation|hyperpage}{17}
-\indexentry{base-R plotting|hyperpage}{17}
-\indexentry{checking linear models|hyperpage}{20}
-\indexentry{link function|hyperpage}{26}
-\indexentry{texreg package|hyperpage}{27}
-\indexentry{texreg package|hyperpage}{29}
-\indexentry{``divide by four''|hyperpage}{29}
-\indexentry{Binned Residuals|hyperpage}{31}
-\indexentry{Rope Ladder Ploting|hyperpage}{33}
-\indexentry{link function|hyperpage}{44}
-\indexentry{Kaplan-Meier|hyperpage}{63}
-\indexentry{Simulation|hyperpage}{67}
-\indexentry{Test Set Training Set|hyperpage}{71}
-\indexentry{LASSO|hyperpage}{74}
-\indexentry{Ridge|hyperpage}{74}
-\indexentry{Elastic Net|hyperpage}{74}
-\indexentry{GGplot|hyperpage}{76}
-\indexentry{Test Set Training Set|hyperpage}{82}
-\indexentry{DGP|hyperpage}{83}
+\indexentry{loading data|hyperpage}{16}
+\indexentry{recoding data|hyperpage}{16}
+\indexentry{texreg package|hyperpage}{17}
+\indexentry{R$^2$|hyperpage}{18}
+\indexentry{Simulation|hyperpage}{18}
+\indexentry{base-R plotting|hyperpage}{18}
+\indexentry{checking linear models|hyperpage}{21}
+\indexentry{link function|hyperpage}{27}
+\indexentry{texreg package|hyperpage}{28}
+\indexentry{texreg package|hyperpage}{30}
+\indexentry{``divide by four''|hyperpage}{30}
+\indexentry{Binned Residuals|hyperpage}{32}
+\indexentry{Rope Ladder Ploting|hyperpage}{34}
+\indexentry{link function|hyperpage}{45}
+\indexentry{Kaplan-Meier|hyperpage}{64}
+\indexentry{Simulation|hyperpage}{68}
+\indexentry{Test Set Training Set|hyperpage}{72}
+\indexentry{LASSO|hyperpage}{75}
+\indexentry{Ridge|hyperpage}{75}
+\indexentry{Elastic Net|hyperpage}{75}
+\indexentry{GGplot|hyperpage}{77}
 \indexentry{Test Set Training Set|hyperpage}{83}
-\indexentry{library() |hyperpage}{83}
-\indexentry{Data Vintaging|hyperpage}{89}
-\indexentry{VAR|hyperpage}{89}
-\indexentry{systematic sampling|hyperpage}{89}
-\indexentry{Augmented Dicky Fuller|hyperpage}{93}
-\indexentry{KPSS Test|hyperpage}{93}
-\indexentry{Granger Causality|hyperpage}{93}
-\indexentry{Vector Auto Regression|hyperpage}{93}
-\indexentry{Innovation Accounting|hyperpage}{94}
-\indexentry{recoding data|hyperpage}{100}
-\indexentry{ggplot|hyperpage}{106}
-\indexentry{ggplot|hyperpage}{116}
-\indexentry{DAG|hyperpage}{119}
-\indexentry{utility|hyperpage}{119}
-\indexentry{First Best|hyperpage}{119}
-\indexentry{Nash Equilibrium|hyperpage}{119}
-\indexentry{subgame perfect Nash Equilibrium|hyperpage}{120}
-\indexentry{comparative static|hyperpage}{120}
-\indexentry{p-values|hyperpage}{121}
+\indexentry{DGP|hyperpage}{84}
+\indexentry{Test Set Training Set|hyperpage}{84}
+\indexentry{library() |hyperpage}{84}
+\indexentry{Data Vintaging|hyperpage}{90}
+\indexentry{VAR|hyperpage}{90}
+\indexentry{systematic sampling|hyperpage}{90}
+\indexentry{Augmented Dicky Fuller|hyperpage}{94}
+\indexentry{KPSS Test|hyperpage}{94}
+\indexentry{Granger Causality|hyperpage}{94}
+\indexentry{Vector Auto Regression|hyperpage}{94}
+\indexentry{Innovation Accounting|hyperpage}{95}
+\indexentry{recoding data|hyperpage}{101}
+\indexentry{ggplot|hyperpage}{107}
+\indexentry{ggplot|hyperpage}{117}
+\indexentry{DAG|hyperpage}{120}
+\indexentry{utility|hyperpage}{120}
+\indexentry{First Best|hyperpage}{120}
+\indexentry{Nash Equilibrium|hyperpage}{120}
+\indexentry{subgame perfect Nash Equilibrium|hyperpage}{121}
+\indexentry{comparative static|hyperpage}{121}
+\indexentry{p-values|hyperpage}{122}

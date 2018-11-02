@@ -760,10 +760,34 @@ Here imagine we are interested in the causal effect of D --> Y but our errors, o
 
 
 
+%----------------------------------------------------------------------------------
+\clearpage
+\section{Introductory Statistics}
+\hfill \\
+
+While causal effects are certainly the cream-of-the-crop in terms of statistical findings; it's not necessary to examine our social world. In fact, in many cases it's not possible to get causal effects for human behavior. I cannot, for example, randomly assign a population to become black, female, or hispanic to study the effects of discrimination. However, there is an intersection of causality and correlation: the likelihood. That is, how likely is X to happen, given a list of set assumptions?
+
+There's a famous example involving famous statistician Ronald Fisher, someone we've heard of. Story has it, someone in his office one day claimed that she was a passionate tea lover, so passionate that she could tell from taste alone whether tea was added to milk or milk to tea. Fisher, ever-fun at parties, questioned the lady's passion with statistical analysis. How would we set up a \textit{causal} analysis of this however? Well, we don't have multiple universes of passionate tea-loving ladies to examine; yet, we can test the lady's abilities against random chance. Assuming random guessing would lend us a 50/50 chance of success if the lady were to defy those odds to such a great detail we could claim her successful. As the story goes, the lady could not correctly guess the difference against random chance.
+
+But how do we statistically examine the degree to which someone ``defies odds'' or what can we call ``statistically significant'' success at something? Fisher, not leaving the world hanging, had other projects besides breaking old ladies hopes and dreams. In a study on manure on farming yields Fisher noted that ``statistical significance'' could be found at three seperate thresholds which could be best communicated using associated p-values. These p-values are simply representations of the ``probability of unusualness'' found via transformation of our standard errors giving a set distribution. The thresholds are usually on the 10\% tail (.10), 5\% tail (.05), and the most unusual 1\% tail observations (.01). If a set observation, or population distribution were to exist in these tail regions, passing these thresholds we could claim statistical significance. These thresholds were noted by Fisher to be ``usual, and convenient'' enough in the scientific enterprise to use them universally.
+
+In this section of the methods handbook I'll go over the fundementals of t-tests, population distributions, z-scores, chi-squared testing, and other tests that all come back to the same notion of testing ``unusualness'' in the world. This may not be causal observations but can be powerful, these tests are deployed by cancer researchers to aerospace engineers - it has saved lives and it's preversion has conversely caused great harm. These examples and many more will be included along the way.
 
 
 
+\subsection{Assumptions and Testings}
 
+
+\subsection{Z-Testing}
+
+
+\subsection{T-Testing}
+
+
+\subsection{Chi-Squared Testing}
+
+
+\subsection{Rank-Ordering and Permutation Testing}
 
 
 
@@ -798,6 +822,11 @@ Here imagine we are interested in the causal effect of D --> Y but our errors, o
 
 \clearpage
 %-----------------------------------------------------------------------------------
+
+
+
+
+
 
 
 
