@@ -973,46 +973,6 @@ http://sphweb.bumc.bu.edu/otlt/MPH-Modules/BS/BS704_Confidence_Intervals/BS704_C
 
 
 
-%----------------------------------------------------------------------------------
-\clearpage
-\section{Survey Design}
-\hfill \\
-
-\subsection{The Survey Experiment}
-
-\subsection{Types of Questions}
-
-\subsection{Psychology of Design}
-
-
-
-\hfill \\
-\subsubsection{The "Don't Know" Option:}
-
-
-
-\subsection{Useful Rules of Thumb}
-
-\subsection{Research on Survey Biases}
-
-
-\clearpage
-%-----------------------------------------------------------------------------------
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 \clearpage
 \section{Regression:}
 
@@ -3774,7 +3734,7 @@ Now that we have the data read in and cleaned (mostly tracking the id numbers), 
 \hlstd{> }\hlkwd{summary}\hlstd{(graph.object)} \hlcom{# Basic statistics seem okay}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH 9e3a84e DN-- 610 1043 -- 
+## IGRAPH f5412fc DN-- 610 1043 -- 
 ## + attr: name (v/c)
 \end{verbatim}
 \begin{alltt}
@@ -3944,7 +3904,7 @@ The next part was difficult, and probably could be done better. I looked at a li
 \hlstd{> }\hlkwd{E}\hlstd{(graph.object)[}\hlkwd{order}\hlstd{(c.graph.object,} \hlkwc{decreasing}\hlstd{=T)[}\hlnum{1}\hlopt{:}\hlnum{10}\hlstd{]]}
 \end{alltt}
 \begin{verbatim}
-## + 10/924 edges from 9e3c7f8 (vertex names):
+## + 10/924 edges from f542dc5 (vertex names):
 ##  [1] yodatsracist       ->dewarr   SpecificallyGeneral->gacorley
 ##  [3] inh-uman           ->gacorley Shazbot_Nanu       ->Ramicus 
 ##  [5] Mentalpopcorn      ->PeechMan Drict              ->USMCLee 
@@ -3956,7 +3916,7 @@ The next part was difficult, and probably could be done better. I looked at a li
 \hlstd{> }\hlkwd{E}\hlstd{(graph.object)[}\hlkwd{order}\hlstd{(c.lg.graph.object,} \hlkwc{decreasing}\hlstd{=T)[}\hlnum{1}\hlopt{:}\hlnum{10}\hlstd{]]}
 \end{alltt}
 \begin{verbatim}
-## + 10/924 edges from 9e3c7f8 (vertex names):
+## + 10/924 edges from f542dc5 (vertex names):
 ##  [1] Atriox998         ->wellmanicuredman  
 ##  [2] Galileotierraplana->Atriox998         
 ##  [3] wellmanicuredman  ->Atriox998         
@@ -3981,7 +3941,7 @@ The next part was difficult, and probably could be done better. I looked at a li
 \hlstd{> }\hlkwd{E}\hlstd{(graph.object)[}\hlkwd{order}\hlstd{(b.graph.object,} \hlkwc{decreasing}\hlstd{=T)[}\hlnum{1}\hlopt{:}\hlnum{10}\hlstd{]]}
 \end{alltt}
 \begin{verbatim}
-## + 10/924 edges from 9e3c7f8 (vertex names):
+## + 10/924 edges from f542dc5 (vertex names):
 ##  [1] sambalchuck     ->orthag             
 ##  [2] DarkGamer       ->Cullen_Ingus       
 ##  [3] obamanisha      ->Aquifex            
@@ -3998,7 +3958,7 @@ The next part was difficult, and probably could be done better. I looked at a li
 \hlstd{> }\hlkwd{E}\hlstd{(graph.object)[}\hlkwd{order}\hlstd{(b.lg.graph.object,} \hlkwc{decreasing}\hlstd{=T)[}\hlnum{1}\hlopt{:}\hlnum{10}\hlstd{]]}
 \end{alltt}
 \begin{verbatim}
-## + 10/924 edges from 9e3c7f8 (vertex names):
+## + 10/924 edges from f542dc5 (vertex names):
 ##  [1] yodatsracist  ->Randomname64   Fibonacci35813->deathlock13   
 ##  [3] vulcan583     ->Fibonacci35813 Erinaceous    ->vulcan583     
 ##  [5] dewarr        ->yodatsracist   Randomname64  ->Erinaceous    
@@ -4018,7 +3978,7 @@ The next part was difficult, and probably could be done better. I looked at a li
 \hlstd{> }\hlkwd{E}\hlstd{(graph.object)[}\hlkwd{order}\hlstd{(e.graph.object}\hlopt{$}\hlstd{vector,} \hlkwc{decreasing}\hlstd{=T)[}\hlnum{1}\hlopt{:}\hlnum{10}\hlstd{]]}
 \end{alltt}
 \begin{verbatim}
-## + 10/924 edges from 9e3c7f8 (vertex names):
+## + 10/924 edges from f542dc5 (vertex names):
 ##  [1] MoralMidgetry  ->Dumble_dared        just_works_here->PM_ME_YOUR_SHEC0CK 
 ##  [3] timeimmemorial ->dewarr              Kai_Daigoji    ->Klumber            
 ##  [5] sambalchuck    ->orthag              HerrtomtomAZ   ->Newnews2           
@@ -4030,7 +3990,7 @@ The next part was difficult, and probably could be done better. I looked at a li
 \hlstd{> }\hlkwd{E}\hlstd{(graph.object)[}\hlkwd{order}\hlstd{(evc_lg_graph.object}\hlopt{$}\hlstd{vector,} \hlkwc{decreasing}\hlstd{=T)[}\hlnum{1}\hlopt{:}\hlnum{10}\hlstd{]]}
 \end{alltt}
 \begin{verbatim}
-## + 10/924 edges from 9e3c7f8 (vertex names):
+## + 10/924 edges from f542dc5 (vertex names):
 ##  [1] Dennis_Langley  ->MoralMidgetry  Dennis_Langley  ->MoralMidgetry 
 ##  [3] Dennis_Langley  ->MoralMidgetry  deathlock13     ->MoralMidgetry 
 ##  [5] deathlock13     ->MoralMidgetry  BuildBetterWorld->MoralMidgetry 
@@ -4106,7 +4066,7 @@ In this I will be using the Reddit data from "r/AskSocialScientists" from Octobe
 \hlstd{> }\hlkwd{summary}\hlstd{(g1)} \hlcom{#}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH a0e8c51 DN-- 339 521 -- 
+## IGRAPH f7f5411 DN-- 339 521 -- 
 ## + attr: name (v/c)
 \end{verbatim}
 \begin{alltt}
@@ -4116,7 +4076,7 @@ In this I will be using the Reddit data from "r/AskSocialScientists" from Octobe
 \hlstd{> }\hlkwd{summary}\hlstd{(g12)} \hlcom{#}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH a0eae68 DN-- 327 522 -- 
+## IGRAPH f7f5dce DN-- 327 522 -- 
 ## + attr: name (v/c)
 \end{verbatim}
 \end{kframe}
@@ -4276,6 +4236,34 @@ We might be interested in the same network statistic but reported with the help 
 \subsection{Advice, Tools, Resources}
 
 \subsection{How to Use Qualitative Evidence}
+
+
+
+%----------------------------------------------------------------------------------
+\clearpage
+\section{Survey Design}
+\hfill \\
+
+\subsection{The Survey Experiment}
+
+\subsection{Types of Questions}
+
+\subsection{Psychology of Design}
+
+
+
+\hfill \\
+\subsubsection{The "Don't Know" Option:}
+
+
+
+\subsection{Useful Rules of Thumb}
+
+\subsection{Research on Survey Biases}
+
+
+\clearpage
+%-----------------------------------------------------------------------------------
 
 
 

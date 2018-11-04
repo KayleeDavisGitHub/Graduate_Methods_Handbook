@@ -892,46 +892,6 @@ http://sphweb.bumc.bu.edu/otlt/MPH-Modules/BS/BS704_Confidence_Intervals/BS704_C
 
 
 
-%----------------------------------------------------------------------------------
-\clearpage
-\section{Survey Design}
-\hfill \\
-
-\subsection{The Survey Experiment}
-
-\subsection{Types of Questions}
-
-\subsection{Psychology of Design}
-
-
-
-\hfill \\
-\subsubsection{The "Don't Know" Option:}
-
-
-
-\subsection{Useful Rules of Thumb}
-
-\subsection{Research on Survey Biases}
-
-
-\clearpage
-%-----------------------------------------------------------------------------------
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 \clearpage
 \section{Regression:}
 
@@ -3775,6 +3735,34 @@ meow <- multicat(xs=x, Degree,
 \subsection{Advice, Tools, Resources}
 
 \subsection{How to Use Qualitative Evidence}
+
+
+
+%----------------------------------------------------------------------------------
+\clearpage
+\section{Survey Design}
+\hfill \\
+
+\subsection{The Survey Experiment}
+
+\subsection{Types of Questions}
+
+\subsection{Psychology of Design}
+
+
+
+\hfill \\
+\subsubsection{The "Don't Know" Option:}
+
+
+
+\subsection{Useful Rules of Thumb}
+
+\subsection{Research on Survey Biases}
+
+
+\clearpage
+%-----------------------------------------------------------------------------------
 
 
 
