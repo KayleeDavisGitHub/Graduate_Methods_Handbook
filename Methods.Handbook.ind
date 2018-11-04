@@ -1,68 +1,69 @@
 \begin{theindex}
 
-  \item ``divide by four'', \hyperpage{30}
+  \item ``divide by four'', \hyperpage{34}
 
   \indexspace
 
-  \item Augmented Dicky Fuller, \hyperpage{94}
+  \item Augmented Dicky Fuller, \hyperpage{98}
 
   \indexspace
 
   \item back door paths, \hyperpage{4}
   \item Back-Door-Paths, \hyperpage{3}
-  \item base-R plotting, \hyperpage{18}
-  \item Binned Residuals, \hyperpage{32}
+  \item base-R plotting, \hyperpage{22}
+  \item Binned Residuals, \hyperpage{36}
   \item blocking, \hyperpage{4}
 
   \indexspace
 
   \item cause, \hyperpage{1}
-  \item checking linear models, \hyperpage{21}
+  \item checking linear models, \hyperpage{25}
   \item coarse matching, \hyperpage{11}
   \item colliders, \hyperpage{3}
-  \item comparative static, \hyperpage{121}
+  \item comparative static, \hyperpage{125}
   \item confounding, \hyperpage{4}
   \item Curse of Dimensionality, \hyperpage{3}
 
   \indexspace
 
-  \item DAG, \hyperpage{3}, \hyperpage{120}
-  \item Data Vintaging, \hyperpage{90}
-  \item DGP, \hyperpage{84}
+  \item DAG, \hyperpage{3}, \hyperpage{124}
+  \item Data Vintaging, \hyperpage{94}
+  \item DGP, \hyperpage{88}
   \item Differences in Differences, \hyperpage{12}
 
   \indexspace
 
-  \item Elastic Net, \hyperpage{75}
+  \item Elastic Net, \hyperpage{79}
 
   \indexspace
 
-  \item First Best, \hyperpage{120}
+  \item F-test, \hyperpage{16}
+  \item First Best, \hyperpage{124}
   \item Fixed Effects, \hyperpage{11}
 
   \indexspace
 
-  \item GGplot, \hyperpage{77}
-  \item ggplot, \hyperpage{107}, \hyperpage{117}
-  \item Granger Causality, \hyperpage{94}
+  \item GGplot, \hyperpage{81}
+  \item ggplot, \hyperpage{111}, \hyperpage{121}
+  \item Granger Causality, \hyperpage{98}
 
   \indexspace
 
   \item ignorability, \hyperpage{4}
   \item imputation, \hyperpage{5}
-  \item Innovation Accounting, \hyperpage{95}
+  \item Innovation Accounting, \hyperpage{99}
 
   \indexspace
 
-  \item Kaplan-Meier, \hyperpage{64}
-  \item KPSS Test, \hyperpage{94}
+  \item Kaplan-Meier, \hyperpage{68}
+  \item KPSS Test, \hyperpage{98}
 
   \indexspace
 
-  \item LASSO, \hyperpage{75}
-  \item library() , \hyperpage{84}
-  \item link function, \hyperpage{27}, \hyperpage{45}
-  \item loading data, \hyperpage{16}
+  \item LASSO, \hyperpage{79}
+  \item library() , \hyperpage{88}
+  \item link function, \hyperpage{31}, \hyperpage{49}
+  \item loading data, \hyperpage{20}
 
   \indexspace
 
@@ -74,44 +75,45 @@
   \indexspace
 
   \item Naive Differences in Means, \hyperpage{3}
-  \item Nash Equilibrium, \hyperpage{120}
+  \item Nash Equilibrium, \hyperpage{124}
   \item nearest-neighbor, \hyperpage{11}
 
   \indexspace
 
-  \item p-values, \hyperpage{5}, \hyperpage{122}
+  \item p-values, \hyperpage{5}, \hyperpage{126}
   \item propensity scores, \hyperpage{11}
 
   \indexspace
 
-  \item R$^2$, \hyperpage{18}
-  \item recoding data, \hyperpage{16}, \hyperpage{101}
-  \item Ridge, \hyperpage{75}
-  \item Rope Ladder Ploting, \hyperpage{34}
+  \item R$^2$, \hyperpage{22}
+  \item recoding data, \hyperpage{20}, \hyperpage{105}
+  \item Ridge, \hyperpage{79}
+  \item Rope Ladder Ploting, \hyperpage{38}
 
   \indexspace
 
   \item saturated modeling, \hyperpage{5}
   \item selection on observables, \hyperpage{4}
   \item sharp null hypothesis, \hyperpage{5}
-  \item Simulation, \hyperpage{18}, \hyperpage{68}
+  \item Simulation, \hyperpage{22}, \hyperpage{72}
   \item subclassification, \hyperpage{11}
-  \item subgame perfect Nash Equilibrium, \hyperpage{121}
+  \item subgame perfect Nash Equilibrium, \hyperpage{125}
   \item SUTVA, \hyperpage{4}
-  \item systematic sampling, \hyperpage{90}
+  \item systematic sampling, \hyperpage{94}
 
   \indexspace
 
-  \item Test Set Training Set, \hyperpage{72}, \hyperpage{83, 84}
-  \item texreg package, \hyperpage{17}, \hyperpage{28}, \hyperpage{30}
+  \item t-test, \hyperpage{13}
+  \item Test Set Training Set, \hyperpage{76}, \hyperpage{87, 88}
+  \item texreg package, \hyperpage{21}, \hyperpage{32}, \hyperpage{34}
 
   \indexspace
 
-  \item utility, \hyperpage{120}
+  \item utility, \hyperpage{124}
 
   \indexspace
 
-  \item VAR, \hyperpage{90}
-  \item Vector Auto Regression, \hyperpage{94}
+  \item VAR, \hyperpage{94}
+  \item Vector Auto Regression, \hyperpage{98}
 
 \end{theindex}
