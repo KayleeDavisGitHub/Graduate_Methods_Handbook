@@ -125,9 +125,7 @@
 \hfill \\
 The purpose of this document is to provide an overview and tutorial for executing and critically interpreting various methods. A key contribution of this document is the ease to which you can swich between topics and search for conecpts, this was its inital purpose in helping me study for my minor exam.
 
-Many of the notes come from Sean Gailmard' ``Statistical Modeling and Inference for Social Science,'' Skyler Cranmer's course in quantitative methods, and various other books on these topics including ``Event History Modeling, A Guide for Social Scientists'' by Janet M. Box-Steffensmeier and Bradford S. Jones.
-
-Beyond the more cannonic methods courses, there are sections on causal inference, time series modeling, network analysis, and even brief sections devoted to courses on qualitative methods and survey design. This document includes hyperlinks for the table of contents and index for quick access to brief information. The brevity comes as both an advantage and disadvantage so always default to how you learn best - for me making this document is how I learned best.
+Beyond the more cannonic methods courses, there are sections on causal inference, time series modeling, network analysis, and even brief sections devoted to courses on qualitative methods and survey design. This document includes hyperlinks for the table of contents and index for quick access to brief information. The brevity comes as both an advantage and disadvantage so always default to how you learn best - for me making this document is how I processed this material best.
 
 The document initially follows a small dataset on beer rankings initially then covers data from the R Faraway package found here:
 
@@ -3779,6 +3777,70 @@ meow <- multicat(xs=x, Degree,
 \subsection{Reliability Measurements}
 
 \subsection{Analysis}
+
+
+
+%--------------------------------------
+
+\clearpage
+\section{Stochastic Epidemic Modeling}
+
+Stochastic Epidemic Modeling, at it's core, is the ability to track, predict, and ultimiately intervene upon epidemics during their lifespan. This has obvious applications in public health, but could also be applied to the social sciences. Consider an example where voters who identify as ``independent'' are not ``infected'' with the Republican or Democrat ``virus.'' Does framing public opinion this way yield interesting results? Perhaps! In the same way the H1N1 virus can only travel from person to person, geography too is important for political projections. Similarly for political communication online, the fact that we reference ``viral'' sensations and memes is forshadowing epidemic modeling's utility on the social sciences.
+
+Certainly most epidemics are stochastic in nature, that is, acting with a degree of randomness and variation. Deterministic models have additional assumptions and too can be useful as a first-pass analysis. Epidemics usually start as a stochastic event in the first place, but at a larger volume they reach deterministic levels. However, if we wish to comment on the degree of uncertainty we have about an epidemic we requie stochastic models. For these purposes we will primarily focus on stochastic models, however the first subsection will include a deterministic model to outline some useful definitions and practices.
+
+\subsection{Deterministic Epidemic Modeling}
+
+Consider the following simplified epidemic model: the SIR model. This model assumes a simplified epidemic where susceptibles (S) become infected (I) and then either become recovered or otherwised removed (R). This model can be complicated, adding conditional variables along the way (which would certainly be the case for the social sciences) but for now we will work with the following SIR model: a compartmented type model in theory. \index{SIR}
+
+\begin{center}
+
+\begin{tikzpicture}[%
+    ->,
+    shorten >=2pt,
+    >=stealth,
+    node distance=3cm,
+    noname/.style={%
+      rectangle,
+      minimum width=2em,
+      minimum height=2em,
+      draw
+    }
+  ]
+  % Nodes:
+    \node[noname] (S)                                   {S};
+    \node[noname] (I) [right=of S]        				{I};
+    \node[noname] (R) [right=of I]                      {R};
+
+  % Paths:
+    \path (S) edge     node {} (I);
+    \path (I) edge     node {} (R);
+\end{tikzpicture}
+\end{center}
+
+The other thing to mention is that for these models we do not consider ``time'' in the same sense as timeseries or as we usually think of it. Instead, ``time'' passes as each generational infection occurs, someone could remain dormant with a virus for a long time, but all that matters is the conversion periods not the waiting periods inbetween. Similarly, these are Markov models which only care about the probability of infection between generations, so one's history doesn't matter.
+
+
+\subsubsection{Reed-Frost Model}
+
+The Reed-Frost Model is the simplest example of a deterministic epidemic model, and is typically appicable for small-n scenarios (like a small household infection for example).
+
+Consider $q$ to be the probability of escaping infection from a single infected individual by a given suseptible. $X_i$ and $Y_i$ are the number of susceptibles and infectives at a given generational time.
+
+The logic behind this model is to map out all possiblities that could occur for a particular n-size and then calculate the probability of any one possibiliy occuring. Or mathematically:
+
+\begin{align*}
+& P(Y_{j+1} = y_{j+1} | X_0 = x_0, Y_0 = y_0 , ... , X_j = x_j, Y_j =y_j) \\
+&= P(Y_{j+1} = y_{j+1} | X_j = x_j, Y_j = y_j)\\
+&= \binom{x_i}{y_{j+1}} (1-q^{y_j})^{y_{j+1}} (q^{y_j})^{x_j - y_{j+1}}
+\end{align*}
+
+The final result includes (in the first module) a binomial of individual infected, those who didn't escape infection ($1-q$) and then the compliment of this ($q$).
+
+
+\subsection{Stochastic SIR Models}
+
+
 
 
 
