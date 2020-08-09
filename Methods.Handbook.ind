@@ -10,7 +10,7 @@
 
   \item back door paths, \hyperpage{4}
   \item Back-Door-Paths, \hyperpage{3}
-  \item base-R plotting, \hyperpage{22}
+  \item base-R plotting, \hyperpage{20}
   \item Binned Residuals, \hyperpage{36}
   \item blocking, \hyperpage{4}
 
@@ -20,13 +20,13 @@
   \item checking linear models, \hyperpage{25}
   \item coarse matching, \hyperpage{11}
   \item colliders, \hyperpage{3}
-  \item comparative static, \hyperpage{125}
+  \item comparative static, \hyperpage{176}
   \item confounding, \hyperpage{4}
   \item Curse of Dimensionality, \hyperpage{3}
 
   \indexspace
 
-  \item DAG, \hyperpage{3}, \hyperpage{124}
+  \item DAG, \hyperpage{3}, \hyperpage{175}
   \item Data Vintaging, \hyperpage{94}
   \item DGP, \hyperpage{88}
   \item Differences in Differences, \hyperpage{12}
@@ -38,13 +38,13 @@
   \indexspace
 
   \item F-test, \hyperpage{16}
-  \item First Best, \hyperpage{124}
+  \item First Best, \hyperpage{175}
   \item Fixed Effects, \hyperpage{11}
 
   \indexspace
 
   \item GGplot, \hyperpage{81}
-  \item ggplot, \hyperpage{111}, \hyperpage{121}
+  \item ggplot, \hyperpage{140}, \hyperpage{147}
   \item Granger Causality, \hyperpage{98}
 
   \indexspace
@@ -63,7 +63,7 @@
   \item LASSO, \hyperpage{79}
   \item library() , \hyperpage{88}
   \item link function, \hyperpage{31}, \hyperpage{49}
-  \item loading data, \hyperpage{20}
+  \item loading data, \hyperpage{19}
 
   \indexspace
 
@@ -75,18 +75,18 @@
   \indexspace
 
   \item Naive Differences in Means, \hyperpage{3}
-  \item Nash Equilibrium, \hyperpage{124}
+  \item Nash Equilibrium, \hyperpage{175}
   \item nearest-neighbor, \hyperpage{11}
 
   \indexspace
 
-  \item p-values, \hyperpage{5}, \hyperpage{126}
+  \item p-values, \hyperpage{5}, \hyperpage{177}
   \item propensity scores, \hyperpage{11}
 
   \indexspace
 
-  \item R$^2$, \hyperpage{22}
-  \item recoding data, \hyperpage{20}, \hyperpage{105}
+  \item R$^2$, \hyperpage{20}
+  \item recoding data, \hyperpage{19}, \hyperpage{134}
   \item Ridge, \hyperpage{79}
   \item Rope Ladder Ploting, \hyperpage{38}
 
@@ -95,9 +95,10 @@
   \item saturated modeling, \hyperpage{5}
   \item selection on observables, \hyperpage{4}
   \item sharp null hypothesis, \hyperpage{5}
-  \item Simulation, \hyperpage{22}, \hyperpage{72}
+  \item Simulation, \hyperpage{20}, \hyperpage{72}
+  \item SIR, \hyperpage{173}
   \item subclassification, \hyperpage{11}
-  \item subgame perfect Nash Equilibrium, \hyperpage{125}
+  \item subgame perfect Nash Equilibrium, \hyperpage{176}
   \item SUTVA, \hyperpage{4}
   \item systematic sampling, \hyperpage{94}
 
@@ -105,11 +106,11 @@
 
   \item t-test, \hyperpage{13}
   \item Test Set Training Set, \hyperpage{76}, \hyperpage{87, 88}
-  \item texreg package, \hyperpage{21}, \hyperpage{32}, \hyperpage{34}
+  \item texreg package, \hyperpage{20}, \hyperpage{32}, \hyperpage{34}
 
   \indexspace
 
-  \item utility, \hyperpage{124}
+  \item utility, \hyperpage{175}
 
   \indexspace
 

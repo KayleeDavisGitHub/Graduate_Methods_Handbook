@@ -27,12 +27,12 @@
 \indexentry{Differences in Differences|hyperpage}{12}
 \indexentry{t-test|hyperpage}{13}
 \indexentry{F-test|hyperpage}{16}
-\indexentry{loading data|hyperpage}{20}
-\indexentry{recoding data|hyperpage}{20}
-\indexentry{texreg package|hyperpage}{21}
-\indexentry{R$^2$|hyperpage}{22}
-\indexentry{Simulation|hyperpage}{22}
-\indexentry{base-R plotting|hyperpage}{22}
+\indexentry{loading data|hyperpage}{19}
+\indexentry{recoding data|hyperpage}{19}
+\indexentry{texreg package|hyperpage}{20}
+\indexentry{R$^2$|hyperpage}{20}
+\indexentry{Simulation|hyperpage}{20}
+\indexentry{base-R plotting|hyperpage}{20}
 \indexentry{checking linear models|hyperpage}{25}
 \indexentry{link function|hyperpage}{31}
 \indexentry{texreg package|hyperpage}{32}
@@ -60,13 +60,14 @@
 \indexentry{Granger Causality|hyperpage}{98}
 \indexentry{Vector Auto Regression|hyperpage}{98}
 \indexentry{Innovation Accounting|hyperpage}{99}
-\indexentry{recoding data|hyperpage}{105}
-\indexentry{ggplot|hyperpage}{111}
-\indexentry{ggplot|hyperpage}{121}
-\indexentry{DAG|hyperpage}{124}
-\indexentry{utility|hyperpage}{124}
-\indexentry{First Best|hyperpage}{124}
-\indexentry{Nash Equilibrium|hyperpage}{124}
-\indexentry{subgame perfect Nash Equilibrium|hyperpage}{125}
-\indexentry{comparative static|hyperpage}{125}
-\indexentry{p-values|hyperpage}{126}
+\indexentry{recoding data|hyperpage}{134}
+\indexentry{ggplot|hyperpage}{140}
+\indexentry{ggplot|hyperpage}{147}
+\indexentry{SIR|hyperpage}{173}
+\indexentry{DAG|hyperpage}{175}
+\indexentry{utility|hyperpage}{175}
+\indexentry{First Best|hyperpage}{175}
+\indexentry{Nash Equilibrium|hyperpage}{175}
+\indexentry{subgame perfect Nash Equilibrium|hyperpage}{176}
+\indexentry{comparative static|hyperpage}{176}
+\indexentry{p-values|hyperpage}{177}

@@ -3329,13 +3329,474 @@ While VAR allows for flexibility in helping determine the data generating proces
 \clearpage
 \section{Network Analysis}
 
-\subsection{Network Theory}
+Network analysis, broadly speaking, is just the analysis of the connection between nodes and the broader interconnections of a group of units. Nodes can be people, events, animals, anything really. Edges can be any measureable connection between nodes, be it frequency of community, survey responses, amount of eye contact - anything really.\\
 
-\subsection{Network Data, Nodes, and Edges}
+This chapter on network analysis will show the fundamentals of executing network techniques in R, but will dodge a lot of the underlying math making up these methods. \\
 
-\subsection{Summary Statistics of Networks}
+\subsection{Network Basics: Data}
 
-\subsection{Centrality}
+\begin{center}
+<<Network_Basics, warning=FALSE, message=FALSE, prompt=TRUE>>=
+# Packages used:
+library(igraph) # igraph is one of the more popular network analysis packages
+library(igraphdata)
+# use  View() (capital "V" to examine data when you get it.)
+
+# There will be some randomness, we'll set a seed to keep things consistent:
+set.seed(8675305)
+
+# Manually entering Network Data/ viewing networks -----------------------------
+
+# Entering Edge-List data manually (works fine for now).
+# ?graph()
+g1 <- graph(edges=c(1,2,
+                    1,3,
+                    2,4,
+                    3,1,
+                    3,5,
+                    5,1,
+                    4,3))
+# Let's view this:
+g1
+# So, Directional network, 5 nodes, 7 edges.
+# Or more briefly:
+summary(g1)
+# Or using the default plot() function:
+plot(g1)
+
+# Another Edge-List dataset with names instead of numbers:
+g2 <- graph(edges=c("Anand","Beth",
+                    "Anand","Chris",
+                    "Beth","Dieter",
+                    "Chris","Sun",
+                    "Chris","Ali",
+                    "Beth","Ali",
+                    "Ali","Sun",
+                    "Sun","Beth",
+                    "Fatima","Chris",
+                    "Fatima","Sun"),
+            directed=FALSE)
+# Now we have no directionality on nodes.
+
+plot(g2)
+summary(g2) # Undirected, now named, 7 nodes, 10 edges.
+
+# We can use functions to visualize our data another way (beyond edge-list)
+# Adjacency-Matrix:
+
+g1[]
+## 5 x 5 sparse Matrix of class "dgCMatrix"
+##
+## [1,] . 1 1 . .
+## [2,] . . . 1 .
+## [3,] 1 . . . 1
+## [4,] . . 1 . .
+## [5,] 1 . . . .
+
+get.adjacency(g2)
+## 7 x 7 sparse Matrix of class "dgCMatrix"
+##        Anand Beth Chris Dieter Sun Ali Fatima
+## Anand      .    1     1      .   .   .      .
+## Beth       1    .     .      1   1   1      .
+## Chris      1    .     .      .   1   1      1
+## Dieter     .    1     .      .   .   .      .
+## Sun        .    1     1      .   .   1      1
+## Ali        .    1     1      .   1   .      .
+## Fatima     .    .     1      .   1   .      .
+
+# Similarly, we can vizualise the Edges:
+E(g1)
+## + 7/7 edges from fd21364:
+## [1] 1->2 1->3 2->4 3->1 3->5 5->1 4->3
+V(g2)
+## + 7/7 vertices, named, from dd35840:
+## [1] Anand  Beth   Chris  Dieter Sun    Ali    Fatima
+
+# We can also pull up variables from this object: like $name
+V(g2)$name
+## [1] "Anand"  "Beth"   "Chris"  "Dieter" "Sun"    "Ali"    "Fatima"
+
+# So let's plug in more data on top of that:
+V(g2)$gender <- c("M","F","M","M","F","M","F") # Here, we're assigning the gender for each vertex.
+
+# Or we'll assign some arbitrary weights to the edges (notice the E(g2) now.)
+E(g2)$count <- rep(1:2,5)
+g2 <- set.vertex.attribute(g2, "age", value = c(20,26,19,34,22,30,21))
+# Because we want R to save this addition to the network, when using the
+#  set.vertex.attribute() function, we have to assign this again to the graph name.
+
+# With this new data added, let's summarize the graph:
+summary(g2) # We see the new variables added, and how they are relevantly connected.
+
+## Larger data -----------------------------------------------------------------
+
+# A classical long-standing training dataset for Network Analysis has been
+#  Zachary's Karate Club, some researchers even today test methods on this data.
+
+data("karate")
+summary(karate)
+
+# What does this summary output mean?
+#     - U means undirected (versus D for directed)
+# - N means that the graph is named
+# - W means weighted graph
+# - 34 is the number of nodes
+# - 78 is the number of edges
+# - name (g/c), Citation (g/c), Author (g/c) are all graph attributes,
+#      telling us about the source of the data.
+# - name (v/c) and label (v/c) mean that name and label are vertex attributes that are characters
+# - color (v/n) is a vertex attribute that’s numeric. (Here, the numbers call colors –
+#      that’s what’s being used in the plot)
+# - Faction (v/n) is a vertex attribute that’s numeric, and basically is the same content as color:
+#      both distinguish the two factions that emerged within the club.
+# - weight (e/n) means weight is an edge attribute and it’s numeric.
+
+plot(karate) # Remember this is an undirected network - interpretations change when directed!
+#  Here we have a bunch of students surrounding two faction leaders - the blue faction lead
+#    by John "A" - and the orange faction lead by Mr. Hi ("H")
+
+## With the data set up and discribed, let's run through the basic functions that can get you network stats.
+vcount(karate) # Verticie (node) count
+# [1] 34
+ecount(karate) # Edge count
+# [1] 78
+
+# ?degree() # a summation of all edges linked to nodes.
+# or, (undirected) - 2E/N;  (directed) E/N
+mean(degree(karate)) # Average network degree
+# [1] 4.588235      # "on average" we have 4.5 connections in the karate club
+
+# ?graph.density() # This is (usually) just: (Actual Connections/Potential Connections)
+graph.density(karate) # Density
+# [1] 0.1390374    # This network is about 14% dense/100%
+
+# Diameter gives you the longest distance and path:
+# ?diameter()
+diameter(karate) # It's diameter
+# [1] 13    # The farthest nodes are 13 people apart.
+get_diameter(karate) # Here we see the long-pathway
+farthest_vertices(karate) # Here we see the people that are the farthest apart.
+
+
+# Some graphical options:
+plot(karate,
+     edge.width = E(karate)$weight,
+     vertex.size = degree(karate)*1.5,
+     edge.arrow.size = 0.4,
+     vertex.label.cex = 0.7)
+# So in this graph we have weighted edges based on our data, the nodes are bigger
+#   depending on their degree "importance"
+
+
+## Bipartide Networks: ---------------------------------------------------------
+# This is where you have the relationship between nodes be that they are connected
+#   to another party. (I published with X, and so did you, so we're connected)
+
+# Seminar notes on this:
+mem <- matrix(data = c(1,1,1,1,0,
+                      0,1,1,0,0,
+                      0,0,0,1,1),
+              nrow = 3,
+              byrow = TRUE)
+# This is assigning the names first to the 3 rows, and then to the 5 columns
+dimnames(mem) <- list(c("Group1","Group2","Group3"),
+                      c("Y1","Y2","Y3","Y4","Y5"))
+mem
+##        Y1 Y2 Y3 Y4 Y5
+## Group1  1  1  1  1  0
+## Group2  0  1  1  0  0
+## Group3  0  0  0  1  1
+
+bg <- graph.incidence(mem)
+bg  # We see the "B" there now, for Bipartide
+## IGRAPH 6d6e710 UN-B 8 8 --
+## + attr: type (v/l), name (v/c)
+## + edges from 6d6e710 (vertex names):
+## [1] Group1--Y1 Group1--Y2 Group1--Y3 Group1--Y4 Group2--Y2 Group2--Y3
+## [7] Group3--Y4 Group3--Y5
+plot(bg)
+
+pr <- bipartite.projection(bg)
+pr
+## $proj1
+## IGRAPH 749b7be UNW- 3 2 --
+## + attr: name (v/c), weight (e/n)
+## + edges from 749b7be (vertex names):
+## [1] Group1--Group2 Group1--Group3
+##
+## $proj2
+## IGRAPH fbde6d7 UNW- 5 7 --
+## + attr: name (v/c), weight (e/n)
+## + edges from fbde6d7 (vertex names):
+## [1] Y1--Y2 Y1--Y3 Y1--Y4 Y2--Y3 Y2--Y4 Y3--Y4 Y4--Y5
+plot(pr$proj1, edge.width = E(pr$proj1)$weight)
+plot(pr$proj2, edge.width = E(pr$proj2)$weight)
+
+
+get.adjacency(pr$proj1, sparse = FALSE, attr = "weight")
+##        Group1 Group2 Group3
+## Group1      0      2      1
+## Group2      2      0      0
+## Group3      1      0      0
+get.adjacency(pr$proj2, sparse = FALSE, attr = "weight")
+##    Y1 Y2 Y3 Y4 Y5
+## Y1  0  1  1  1  0
+## Y2  1  0  2  1  0
+## Y3  1  2  0  1  0
+## Y4  1  1  1  0  1
+## Y5  0  0  0  1  0
+
+
+aff1 <- mem %*% t(mem)
+diag(aff1) <- 0
+# the diagonal doesn't really have important information for these,
+#   as it's about self-affiliation. So, with this command, we change those values to 0.
+aff1
+##        Group1 Group2 Group3
+## Group1      0      2      1
+## Group2      2      0      0
+## Group3      1      0      0
+aff2 <- t(mem) %*% mem
+diag(aff2) <- 0
+aff2
+##    Y1 Y2 Y3 Y4 Y5
+## Y1  0  1  1  1  0
+## Y2  1  0  2  1  0
+## Y3  1  2  0  1  0
+## Y4  1  1  1  0  1
+## Y5  0  0  0  1  0
+@
+\end{center}
+
+\subsection{Network Properties, Structural Equivalence, Roles, and Positions.}
+
+\begin{center}
+<<Network_Properties, warning=FALSE, message=FALSE, prompt=TRUE>>=
+set.seed(123)
+
+# Let's try something fancy:
+# List all packages:
+packages <- c("NetCluster", "blockmodeling", "gplots", "igraph")
+
+# Install all packages in one function:
+#   lapply(packages, install.packages, character.only = TRUE)
+
+# Load all packages in one function:
+lapply(packages, library, character.only = TRUE)
+#  lapply(object, function, ...)  # For "list" apply... nifty tool!
+
+# swi <- read.csv("swn.csv", header = TRUE, row.names = 1)
+# header = TRUE uses the first row as the column names;
+#  row.names = 1 uses the first column as the row names
+#    (if we put row.names = 2, it would use the second column, etc.)
+
+## I couldn't find the .csv... so I just took the data from the source
+# https://networkdata.ics.uci.edu/netdata/html/davis.html
+#  and hit "download" - open that r.data with Rstudio and it'll put it in your global env.
+
+plot(davis) # just checking
+swi <- as.matrix(davis) # Make incidence matrix - and put as igraph network
+swn <- graph.incidence(swi) # This specifically makes a bipartite igraph from a matrix.
+swn # UN-B ; 32 89
+plot(swn)
+
+swpr <- bipartite.projection(swn) # This makes the graph two one-mode networks
+# What is this? - instead of just 1:1 node relationships there are two overlapping networks
+#  and the realtionships we care about are between people of the other network.
+#   so now our edges are weighted, and igraph strangely calls this a nonbipartite graph? Why?
+#     Well now we don't really have one anymore! Instead we transfered the bipartide relationship
+#     To a weighted relationship using that projection function. - Weights are number of shared
+#     Event interactions. For more, check out this cool illistration:
+#   https://en.wikipedia.org/wiki/Bipartite_network_projection#/media/File:Bipartite_network_projection.png
+
+plot(swpr$proj2, # Note two proj's we get from that projection, via X or Y projection weights
+     edge.width = E(swpr$proj2)$weight)
+cor(swi) # Correlation of our matrix object to see structural position relationship. -1 : 1 (weights)
+# Note that Flora and Oliva are structurally similar here and elsewhere
+
+
+#  Going beyond Pearson correlation to see structural simularity:
+# dissimularity measure (-1 to cor).
+as.dist(1-cor(swi), upper=TRUE) # Upper = T just prints both sides of diag. Doesn't effect analysis
+# We want to move away from just comparing two individuals, but instead find entire clusters
+#  of attendants that exibit similar behavior. And then be able to analyize that more interesting
+#  result. But to do this, we have to find how nodes are disimilar, so this data is more
+#  valuable to find these clusters! Note we have a wider range now because with the -1
+#  we could have a 1 - a negative -1, or 1+1 (1- -1).
+
+swdend <- hclust(as.dist(1-cor(swi))) # Standard clustering tool
+plot(swdend) # So how do we read this Dendrogram?
+# Height is our value, and as we parse that value down, it's grouped into values.
+#  Similar values become grouped under other values.
+#  So, read from the top down, initial seperation was around the 1.0 mark, developing two
+#  clusters, which have unique values apart from one another. as more and more nodes find
+#  simularity. For more:
+#  https://www.displayr.com/what-is-dendrogram/#:~:text=How%20to%20read%20a%20dendrogram,objects%20are%20A%20and%20B.
+
+
+# Here is a heatmap with the same viz on each axis
+heatmap.2(as.matrix(as.dist(1-cor(swi))),
+          trace="none",
+          revC=TRUE)
+
+cutree(swdend, k=2) # here we are telling R where we should cut our clusters at.
+#  THEORY and your interpretation of the data drives this decision, a dendrogram will not
+#  tell you where to cut your clusters.
+
+# So we identified two groups. Let's graph each of these to show our new network:
+plot(swpr$proj2, edge.width=E(swpr$proj2)$weight, vertex.color=cutree(swdend, k=2))
+
+
+## Let's do the same analysis for a one-mode network.
+
+# Let's just ignore this package and data coding here for now... Copy and Pasted
+library(ergm)
+data("florentine")
+require(intergraph)
+require(igraph) # I'm adding igraph back in here to override other packages that might have similarly named functions
+
+# Igraph objects, thanks to intergraph package (as seen before)
+flo_m <- asIgraph(flomarriage)
+flo_b <- asIgraph(flobusiness)
+
+# This sets a default name, and fixes an issue with unnamed nodes:
+#   (Professor discovered this error by first not doing this code:)
+V(flo_m)$name <- V(flo_m)$vertex.names
+V(flo_b)$name <- V(flo_b)$vertex.names
+
+# Stacking our adjacency matricies on top of one another by row bind (rbind())
+#  Why? To consider multiple relationship types at the same time.
+flo_both <- rbind(as.matrix(get.adjacency(flo_m,names=TRUE)),
+                  as.matrix(get.adjacency(flo_b,names=TRUE)))
+
+flo_dist <- as.dist(1-cor(flo_both))
+## Warning in cor(flo_both): the standard deviation is zero
+flo_dist
+
+flo_dist[is.na(flo_dist)==TRUE]<-2 # Fixes NA error by reassigning to number 2
+
+## With NetCluster
+flo_dend <- hclust(flo_dist)
+plot(flo_dend)
+
+
+## With gplots
+heatmap.2(as.matrix(flo_dist),trace="none",revC=TRUE)
+plot(flo_m,vertex.color=cutree(flo_dend, k=4))
+
+# lots of explaination and data reading in the seminar notes from the course!
+#   Revisit it there if there are any questions it's very well documented.
+@
+\end{center}
+
+\subsection{Diads and Triads}
+
+\being{center}
+<<Diad_Triad, warning=FALSE, message=FALSE, prompt=TRUE>>=
+
+library(ergm)
+data("faux.dixon.high")
+detach(package:ergm)
+detach(package:network)
+require(intergraph)
+require(igraph)
+dixon <- asIgraph(faux.dixon.high)
+
+
+# Network Basics:
+summary(dixon)
+
+# Plotting with color by grade. [How might we clean this code?]
+plot(dixon,
+     vertex.label=NA,
+     edge.arrow.size=0.25,
+     vertex.size=3,
+     edge.width=0.5,
+     vertex.color=V(dixon)$grade)
+legend("topright",
+       legend=7:12,
+       pch=19,
+       col=categorical_pal(8)[c(7,8,1,2,3,4)])
+
+
+## Dyads:
+#    Reciprocity:  both nodes point to one another.
+#    Here we can get mutual, asymmetrical, and null counts:
+
+dyad.census(dixon) # Note the $ indicator for each object.
+
+reciprocity(dixon) # We can calculate this via dyad census (above) or through adjacency matrix.
+
+# Dyad Census:
+2*dyad_census(dixon)$mut/ecount(dixon)
+# two times the mutual count to control for the directionality of edges (which we use as denominator
+
+
+# Using the adjacency matrix
+dam <- as.matrix(get.adjacency(dixon))
+
+sum(dam %*% t(dam)) # [I've added matrix multiplier here for a teaching moment if needed]
+## Element-wise multiplation of the adjacency matrix, giving us the full number of mutual edges
+#    (equivalent to 2*dyad_census(dixon)$mut.)
+
+sum(dam) ## The count of the total number of edges in the network (equivlaent to ecount(dixon).)
+
+sum(dam*t(dam))/sum(dam)
+
+# Note all three are the same:
+reciprocity(dixon) # Simple function
+2*dyad_census(dixon)$mut/ecount(dixon) # Dyad Census utilization
+sum(dam*t(dam))/sum(dam) # Using adjacency matrix
+# 37% chance that if Student A names Student B as their friend; Student B will have also named A.
+#    More generally, we can say that 37% of edges are reciprocated.
+
+
+# Or we can use an alternative reciprocity calculation:
+reciprocity(dixon, mode="ratio")
+dyad.census(dixon)$mut/(dyad.census(dixon)$mut + dyad.census(dixon)$asym)
+# mutual connections / mutal + asym
+
+# Homophily  - relationships among people given a variable
+assortativity.nominal(dixon,V(dixon)$grade)
+assortativity.nominal(dixon,V(dixon)$sex)
+assortativity.nominal(dixon,factor(V(dixon)$race)) # Had to factorize race here
+# .nominal is giving us group-wise assortativity, without that it would treat as continuous.
+# postive number means more assortment (sorting) into like groups with the variable than non-variable.
+
+
+
+## Triads
+transitivity(dixon)
+# 18% chance of two neighbors of a vertex are themselves connected.
+#    put another way, 18% of all triads are closed triangles (triads)
+
+# Social networks often have a high level of transitivity, compare this to a completely random graph:
+#   of same size:
+rand <- sample_gnm(vcount(dixon),ecount(dixon),directed=TRUE)
+summary(rand)
+transitivity(rand)
+
+
+
+# Triad Census:
+# ?triad.census() # This help page defines most of the below information:
+
+census_labels <- c('003','012','102','021D','021U','021C','111D','111U',
+                  '030T','030C','201','120D','120U','120C','210','300')
+## this is the order in which the triads appear in the triad census output.
+triad.census(dixon)
+
+df <- data.frame(census_labels, triad.census(dixon))
+## binding the two labels with the output will let us actually interpret this!
+#
+# So most common are unconnected triads, then triads with only one asymmetric edge...
+
+triad.census(rand)
+
+@
+\end{center}
+
+\subsection{Network Centrality}
 
 Measuring the centrality of a network is indicating which node(s) are most central, or critical, to the network remaning the shape it is in. A central node, for example, can be the person inbetween groups, or just a well connected node in general. There are many ways to measure and detect network centrality, some of which I've studied are listed below. Later in this section we will compare each of these finding that they typically correlate with one another (good!). Cannon advice is to report all of the relevant measures of centrality rather than spending too much time choosing any particular one.
 
@@ -3722,6 +4183,262 @@ meow <- multicat(xs=x, Degree,
 @
 \end{center}
 
+\subsection{Assortativity and Community Structures}
+
+<<Assort, prompt=TRUE, warning=FALSE, message=FALSE, out.width='5in'>>=
+# Let's expand on the homopholy measurements from Session_5.R
+# We'll use Zachary's karate club data again:
+
+library(igraph)
+library(igraphdata)
+library(ape)
+## this package will help us easily plot the dendrograms for community detection
+#    algorithms that use hierarchical clustering
+library(Matrix)
+## this package gives us the image() function for quick visualizing adjacency matrices
+
+
+
+data("karate")
+summary(karate) #karate$Citation   is attached to this data remember
+
+
+frlay <- layout_with_fr(karate) # preset coordinates generated for us...
+## this will ensure that each time we plot the network, the location of the nodes stays constant
+plot(karate, edge.width = E(karate)$weight, layout = frlay)
+
+
+
+## Components
+#   Networks are made up of components, and isolated individuals.
+#  You can identify the components of a graph with the decompose.graph() function.
+#  This gives a potentially long list of each component.
+#  So, table(sapply(decompose.graph(yournetwork),vcount)) will give you a quick summary
+#       of the size and number of components.
+
+is_connected(karate)  # There is only one component within this network.
+
+## Cores (k)
+#   We could peel away layers of a network, by those who are weekly laching on (degree of 1)
+#      all the way inwards (k-cores).
+#   We could consider these layers individually, or all at once by seeing the greatest k-core for each node
+
+coreness(karate)
+
+colors <- rainbow(max(4))
+
+plot(karate,
+     vertex.color = colors[coreness(karate)],
+     edge.width = E(karate)$weight,
+     layout = frlay)
+legend("topright",
+       legend=c(1:4),
+       col = colors,
+       pch = 16,
+       title = "Coreness")
+
+## Cliques
+#   These are the maximal connected subgraphs.
+#   Note: we can relax the definition of this by including non-connected nodes (but at short distance "n")
+#         igraph does not have this functionality (n=1).
+# Visual definition of Clique: https://en.wikipedia.org/wiki/Clique_(graph_theory)#/media/File:VR_complex.svg
+
+head(cliques(karate, min=3)) # here we excluded cliques below a certain size.
+table(sapply(cliques(karate),length))
+# This summarizes the full enumeration of cliques, but showing us the number of cliques of each size
+largest_cliques(karate)
+
+
+#### Community detection
+#    There are so many ways to chop up a network into related nodes.
+#    Generally speaking, we want subsets of nodes that are well connected among them selves, but few
+#       connections from outsiders.
+#    There are mountains of ways to parse this out mathematically, but with R things can be easier.
+
+### Hierarchical clustering (see Session 4 for some of this).
+
+## Edge Betweenness
+#   Calculate betweenness (we did this in centrality session) of each edge, remove the edge
+#      (so divide the network along that edge) with the highest betweeness,
+#      recalculate betweenness, identify the new highest edge... repeat.
+#   Note:  edges with weights get interpreted as additional distance (this is not the case in our network!)
+#          have to adjust this calculation to get the weights on the right emphasis.
+
+eb <- cluster_edge_betweenness(karate, weights = 1/E(karate)$weight)
+membership(eb)
+sizes(eb)
+# library(stats) -- used for some alternative plotting options in our dendrograms.
+# ?dendPlot()
+dendPlot(eb, mode = "phylo")
+plot(eb, karate, edge.width = E(karate)$weight, layout = frlay)
+# by putting the community object (here, "eb") in front of the graph object,
+#    igraph knows to plot both. igraph then colors the nodes by their community membership,
+#    draws bubbles around each community, and colors edges within communities black and between
+#    communities red.
+
+
+## Fast Greedy (Modularity)
+#    Similar to "modularity" when we measured assorativity before, this can be used to partition communities.
+#      chopping groups up by their assortatitivy scores. Done within, then between all nodes. meaning
+#      there are more edges within groups and fewer between them -- then we find communities.
+fg <- cluster_fast_greedy(karate, weights = E(karate)$weight)
+sizes(fg)
+dendPlot(fg, mode="phylo")
+plot(fg, karate, edge.width = E(karate)$weight, layout = frlay)
+
+## Walktrap
+#   imagine doing many, many, short random walks across a network. You'll likely end up staying in a community
+#   on each random walk since between-communities ties should be rare to find.
+#   So we can use these random walks to find communities (on average) and use that measure
+#   as yet another hierarchical clustering process!
+#     [consider simulation, machine learning, and ways to take these random walks out of your hands]
+
+wt <- cluster_walktrap(karate, weights = E(karate)$weight) ## uses edge weight by default
+dendPlot(wt)
+plot(wt, karate, edge.width = E(karate)$weight, layout = frlay)
+
+
+### Other approaches:
+
+## Louvain (aka Multilevel)
+#    this one is also trying to quickly optimize modularity. Each node here is assigned to a different
+#    community, then a node is moved to join one of its neighbors with wich it increases the modularity score.
+#    This process of moving nodes around keeps going until modularity cannot be improved anymore.
+#    [see Yang et al 2016] - this performs really well.
+#  This doesn't classify as a heirarchical community deteticion because it is not strictly agglomerative.
+#    (bottom up) compared to "divisive" top-down methodologies.
+ml <- cluster_louvain(karate, weights = E(karate)$weight)
+plot(ml, karate, edge.width = E(karate)$weight, layout = frlay)
+
+## InfoMap
+#    Improvement on walktrap - draws on information theory
+im <- cluster_infomap(karate, e.weights=E(karate)$weight)
+plot(im, karate, edge.width = E(karate)$weight, layout = frlay)
+
+## Spinglass
+#     Drawing from physics, and magnetism - a spin glass type of magnet.
+#     Each node is similar to an atom, and we want to simulate the annealing process where we minimize energy
+#     and this happens when nodes are grouped in communities with the same spin - than different spin groups.
+sg <- cluster_spinglass(karate, weights=E(karate)$weight)
+plot(sg, karate, edge.width = E(karate)$weight, layout = frlay)
+
+
+
+
+### Which one do I use?!
+#     often the "big picture" is the same, but often we'll find small changes between methods.
+#     When publishing, it can be better to publish many different methods in a table or easily reportable
+#     Format. (See Seminar notes for some more information on each of these methods)
+
+
+### Graph Partitions and "Ground Truth"
+#     So we can mathematically parse out groups - but how does this align with our theory, and other
+#     data? How does this match with our homophily?
+
+# First step: let's calculate assortativity
+#      (normalized ---  -1 (disassortive) :  1(assortive) [0 = no evidence])
+
+modularity(karate, V(karate)$Faction)
+assortativity(karate, V(karate)$Faction)
+#  So this assortativity measure is very high... and matches the karate club theory and our knowledge of it.
+#    And we've already eye-balled all the graphs, and things seem to line up to these factions.
+
+# In igraph we can compare() different membership vectors using nmi "normalized mutual information"
+#    1 = perfect match!  0 = mutually uninformative of one another.
+
+# Compare "Truth" (faction)  with method:
+compare(V(karate)$Faction, eb, method = "nmi")
+## [1] 0.8371695
+compare(V(karate)$Faction, fg, method = "nmi")
+## [1] 0.8255182
+compare(V(karate)$Faction, wt, method = "nmi")
+## [1] 0.6956222
+compare(V(karate)$Faction, ml, method = "nmi")
+## [1] 0.6872629
+compare(V(karate)$Faction, im, method = "nmi")
+## [1] 0.8255182
+compare(V(karate)$Faction, sg, method = "nmi")
+## [1] 0.6543404
+table(V(karate)$Faction, membership(eb))
+##
+##      1  2
+##   1 16  0
+##   2  1 17
+table(V(karate)$Faction, membership(fg))
+##
+##      1  2  3
+##   1  0 11  5
+##   2 18  0  0
+table(V(karate)$Faction, membership(im))
+##
+##      1  2  3
+##   1  0 11  5
+##   2 18  0  0
+
+
+#  So if our theory is strong in that these factions matter:
+#     we see that edge betweenness does "best" with only one person assigned wrong faction.
+#     with fast_greedy and infomap coming close behind in faction membership detection.
+
+
+## we can also compare different partitionings based on different community detection algorithms.
+compare(eb, sg, method = "nmi")
+## [1] 0.5622443
+compare(wt, sg, method = "nmi")
+## [1] 0.8953659
+compare(fg, im, method = "nmi")
+## we can see that these two community detection algorithms produce exactly the same partitioning of the graph
+## [1] 1
+table(membership(fg),membership(im))
+##
+##      1  2  3
+##   1 18  0  0
+##   2  0 11  0
+##   3  0  0  5
+
+
+
+## Stochastic Block Models.
+#    Just create a model to calculate the probablity of ties within each group (controlling for variables).
+#    (Have to swap packages out of igraph and data out of igraph)
+
+
+require(intergraph)
+detach(package:igraph)
+require(sna)
+knet <- asNetwork(karate)
+## this is the function from intergraph that takes a igraph graph object and
+#      makes it into a statnet graph object
+blockmodel(knet,ec = knet %v% "Faction")
+##            Block 1    Block 2
+## Block 1 0.27500000 0.03472222
+## Block 2 0.03472222 0.22875817
+#   We can see that a much higher probability of a tie are within each faction than between them.\
+
+kbm <- blockmodel(knet,ec = knet %v% "Faction")$block.model ## saving these results
+
+
+# (swap packages back)
+detach(package:sna)
+detach(package:intergraph)
+require(igraph)
+
+
+#  BlockModels are mostly used for generative models of network formation.
+#    Now we'll use those block model results:
+
+g_kar <- sample_sbm(34, pref.matrix = kbm, block.sizes = c(16,18), directed = FALSE)
+assortativity(g_kar, c(rep(1,16), rep(2,18))) ## This compares pretty closely to the assortativity of the real karate network that we calculated above.
+## [1] 0.7456716
+par(mfrow=c(1,2))
+plot(g_kar,vertex.color = c(rep(1,16), rep(2,18)), main = "Fabricated")
+plot(karate, main = "Real")
+
+image(g_kar[]) ## quick way to visualize the adjacency matrix.
+#   Remember that graph[] calls the adjacency matrix
+
+image(karate[][order(as.vector(order(V(karate)$Faction))),])
+@
 
 
 %--------------------------------------

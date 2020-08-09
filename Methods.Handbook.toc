@@ -19,60 +19,65 @@
 \contentsline {subsection}{\numberline {2.2}Z Testing}{16}{subsection.2.2}
 \contentsline {subsection}{\numberline {2.3}Chi-Squared Testing}{17}{subsection.2.3}
 \contentsline {subsection}{\numberline {2.4}Rank-Ordering and Permutation Testing}{17}{subsection.2.4}
-\contentsline {section}{\numberline {3}Survey Design}{18}{section.3}
-\contentsline {subsection}{\numberline {3.1}The Survey Experiment}{18}{subsection.3.1}
-\contentsline {subsection}{\numberline {3.2}Types of Questions}{18}{subsection.3.2}
-\contentsline {subsection}{\numberline {3.3}Psychology of Design}{18}{subsection.3.3}
-\contentsline {subsubsection}{\numberline {3.3.1}The "Don't Know" Option:}{18}{subsubsection.3.3.1}
-\contentsline {subsection}{\numberline {3.4}Useful Rules of Thumb}{18}{subsection.3.4}
-\contentsline {subsection}{\numberline {3.5}Research on Survey Biases}{18}{subsection.3.5}
-\contentsline {section}{\numberline {4}Regression:}{19}{section.4}
-\contentsline {subsection}{\numberline {4.1}Modeling Assumptions, Diagnostics}{24}{subsection.4.1}
-\contentsline {subsubsection}{\numberline {4.1.1}Missing Data}{28}{subsubsection.4.1.1}
-\contentsline {subsubsection}{\numberline {4.1.2}Model Specificiation, Distributional Functions}{30}{subsubsection.4.1.2}
-\contentsline {subsection}{\numberline {4.2}Logit and Probit Modeling:}{31}{subsection.4.2}
-\contentsline {subsection}{\numberline {4.3}Poisson Modeling:}{41}{subsection.4.3}
+\contentsline {section}{\numberline {3}Regression:}{18}{section.3}
+\contentsline {subsection}{\numberline {3.1}Modeling Assumptions, Diagnostics}{24}{subsection.3.1}
+\contentsline {subsubsection}{\numberline {3.1.1}Missing Data}{28}{subsubsection.3.1.1}
+\contentsline {subsubsection}{\numberline {3.1.2}Model Specificiation, Distributional Functions}{30}{subsubsection.3.1.2}
+\contentsline {subsection}{\numberline {3.2}Logit and Probit Modeling:}{31}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.3}Poisson Modeling:}{41}{subsection.3.3}
 \contentsline {subsubsection}{Likelihood Ratio Test, Deviance, AIC, and BIC}{46}{table.caption.14}
-\contentsline {subsection}{\numberline {4.4}Ordered Logistic Modeling:}{49}{subsection.4.4}
+\contentsline {subsection}{\numberline {3.4}Ordered Logistic Modeling:}{49}{subsection.3.4}
 \contentsline {subsubsection}{Bootstrapping}{49}{table.caption.15}
-\contentsline {subsection}{\numberline {4.5}Multinomial Nominal Modeling:}{56}{subsection.4.5}
-\contentsline {subsection}{\numberline {4.6}Survival Modeling:}{59}{subsection.4.6}
-\contentsline {subsection}{\numberline {4.7}Conclusion, Quick Reference}{66}{subsection.4.7}
-\contentsline {section}{\numberline {5}Machine Learning}{69}{section.5}
-\contentsline {subsection}{\numberline {5.1}Simulation and Replication}{69}{subsection.5.1}
-\contentsline {subsection}{\numberline {5.2}Penalized Regression: LASSO, Ridge, Elastic Net}{75}{subsection.5.2}
-\contentsline {subsection}{\numberline {5.3}Support Vector Models, Regression Trees}{88}{subsection.5.3}
-\contentsline {subsection}{\numberline {5.4}K Nearest Neighbors, Nearest Means}{93}{subsection.5.4}
-\contentsline {section}{\numberline {6}Timeseries}{94}{section.6}
-\contentsline {subsection}{\numberline {6.1}Data Concerns}{94}{subsection.6.1}
-\contentsline {subsection}{\numberline {6.2}Differencing Equations and Operators}{94}{subsection.6.2}
-\contentsline {subsection}{\numberline {6.3}Identifying AR;MA - ACF, PACF}{95}{subsection.6.3}
-\contentsline {subsection}{\numberline {6.4}Unit Roots}{95}{subsection.6.4}
-\contentsline {subsection}{\numberline {6.5}ARIMA}{95}{subsection.6.5}
-\contentsline {subsection}{\numberline {6.6}VAR}{95}{subsection.6.6}
-\contentsline {subsubsection}{\numberline {6.6.1}Example VAR}{95}{subsubsection.6.6.1}
-\contentsline {section}{\numberline {7}Network Analysis}{105}{section.7}
-\contentsline {subsection}{\numberline {7.1}Network Theory}{105}{subsection.7.1}
-\contentsline {subsection}{\numberline {7.2}Network Data, Nodes, and Edges}{105}{subsection.7.2}
-\contentsline {subsection}{\numberline {7.3}Summary Statistics of Networks}{105}{subsection.7.3}
-\contentsline {subsection}{\numberline {7.4}Centrality}{105}{subsection.7.4}
-\contentsline {subsubsection}{\numberline {7.4.1}Data Viz}{116}{subsubsection.7.4.1}
-\contentsline {section}{\numberline {8}Field Research Design: The Qualitative Alternative}{122}{section.8}
-\contentsline {subsection}{\numberline {8.1}Qualitative Value}{122}{subsection.8.1}
-\contentsline {subsection}{\numberline {8.2}Advice, Tools, Resources}{122}{subsection.8.2}
-\contentsline {subsection}{\numberline {8.3}How to Use Qualitative Evidence}{122}{subsection.8.3}
-\contentsline {section}{\numberline {9}Content Analysis}{123}{section.9}
-\contentsline {subsection}{\numberline {9.1}The Protocol}{123}{subsection.9.1}
-\contentsline {subsection}{\numberline {9.2}The Coding Sheet}{123}{subsection.9.2}
-\contentsline {subsection}{\numberline {9.3}Reliability Measurements}{123}{subsection.9.3}
-\contentsline {subsection}{\numberline {9.4}Analysis}{123}{subsection.9.4}
-\contentsline {section}{\numberline {10}Formal Modeling}{124}{section.10}
-\contentsline {subsection}{\numberline {10.1}How can Formal Modeling Help?}{124}{subsection.10.1}
-\contentsline {subsection}{\numberline {10.2}Components of Game Theory}{124}{subsection.10.2}
-\contentsline {subsection}{\numberline {10.3}Popular Games as Examples}{125}{subsection.10.3}
-\contentsline {subsection}{\numberline {10.4}Structuring Your Own Formal Model}{125}{subsection.10.4}
-\contentsline {section}{\numberline {11}Meta-Analysis}{126}{section.11}
-\contentsline {subsection}{\numberline {11.1}The Art of Comparison}{126}{subsection.11.1}
-\contentsline {subsection}{\numberline {11.2}Examples}{126}{subsection.11.2}
-\contentsline {section}{Further Reading:}{127}{subsection.11.2}
-\contentsline {section}{Index}{127}{subsection.11.2}
+\contentsline {subsection}{\numberline {3.5}Multinomial Nominal Modeling:}{56}{subsection.3.5}
+\contentsline {subsection}{\numberline {3.6}Survival Modeling:}{59}{subsection.3.6}
+\contentsline {subsection}{\numberline {3.7}Conclusion, Quick Reference}{66}{subsection.3.7}
+\contentsline {section}{\numberline {4}Machine Learning}{69}{section.4}
+\contentsline {subsection}{\numberline {4.1}Simulation and Replication}{69}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.2}Penalized Regression: LASSO, Ridge, Elastic Net}{75}{subsection.4.2}
+\contentsline {subsection}{\numberline {4.3}Support Vector Models, Regression Trees}{88}{subsection.4.3}
+\contentsline {subsection}{\numberline {4.4}K Nearest Neighbors, Nearest Means}{93}{subsection.4.4}
+\contentsline {section}{\numberline {5}Timeseries}{94}{section.5}
+\contentsline {subsection}{\numberline {5.1}Data Concerns}{94}{subsection.5.1}
+\contentsline {subsection}{\numberline {5.2}Differencing Equations and Operators}{94}{subsection.5.2}
+\contentsline {subsection}{\numberline {5.3}Identifying AR;MA - ACF, PACF}{95}{subsection.5.3}
+\contentsline {subsection}{\numberline {5.4}Unit Roots}{95}{subsection.5.4}
+\contentsline {subsection}{\numberline {5.5}ARIMA}{95}{subsection.5.5}
+\contentsline {subsection}{\numberline {5.6}VAR}{95}{subsection.5.6}
+\contentsline {subsubsection}{\numberline {5.6.1}Example VAR}{95}{subsubsection.5.6.1}
+\contentsline {section}{\numberline {6}Network Analysis}{105}{section.6}
+\contentsline {subsection}{\numberline {6.1}Network Basics: Data}{105}{subsection.6.1}
+\contentsline {subsection}{\numberline {6.2}Network Properties, Structural Equivalence, Roles, and Positions.}{120}{subsection.6.2}
+\contentsline {subsection}{\numberline {6.3}Diads and Triads}{128}{subsection.6.3}
+\contentsline {subsection}{\numberline {6.4}Network Centrality}{133}{subsection.6.4}
+\contentsline {subsubsection}{\numberline {6.4.1}Data Viz}{143}{subsubsection.6.4.1}
+\contentsline {subsection}{\numberline {6.5}Assortativity and Community Structures}{148}{subsection.6.5}
+\contentsline {section}{\numberline {7}Field Research Design: The Qualitative Alternative}{170}{section.7}
+\contentsline {subsection}{\numberline {7.1}Qualitative Value}{170}{subsection.7.1}
+\contentsline {subsection}{\numberline {7.2}Advice, Tools, Resources}{170}{subsection.7.2}
+\contentsline {subsection}{\numberline {7.3}How to Use Qualitative Evidence}{170}{subsection.7.3}
+\contentsline {section}{\numberline {8}Survey Design}{171}{section.8}
+\contentsline {subsection}{\numberline {8.1}The Survey Experiment}{171}{subsection.8.1}
+\contentsline {subsection}{\numberline {8.2}Types of Questions}{171}{subsection.8.2}
+\contentsline {subsection}{\numberline {8.3}Psychology of Design}{171}{subsection.8.3}
+\contentsline {subsubsection}{\numberline {8.3.1}The "Don't Know" Option:}{171}{subsubsection.8.3.1}
+\contentsline {subsection}{\numberline {8.4}Useful Rules of Thumb}{171}{subsection.8.4}
+\contentsline {subsection}{\numberline {8.5}Research on Survey Biases}{171}{subsection.8.5}
+\contentsline {section}{\numberline {9}Content Analysis}{172}{section.9}
+\contentsline {subsection}{\numberline {9.1}The Protocol}{172}{subsection.9.1}
+\contentsline {subsection}{\numberline {9.2}The Coding Sheet}{172}{subsection.9.2}
+\contentsline {subsection}{\numberline {9.3}Reliability Measurements}{172}{subsection.9.3}
+\contentsline {subsection}{\numberline {9.4}Analysis}{172}{subsection.9.4}
+\contentsline {section}{\numberline {10}Stochastic Epidemic Modeling}{173}{section.10}
+\contentsline {subsection}{\numberline {10.1}Deterministic Epidemic Modeling}{173}{subsection.10.1}
+\contentsline {subsubsection}{\numberline {10.1.1}Reed-Frost Model}{173}{subsubsection.10.1.1}
+\contentsline {subsection}{\numberline {10.2}Stochastic SIR Models}{174}{subsection.10.2}
+\contentsline {section}{\numberline {11}Formal Modeling}{175}{section.11}
+\contentsline {subsection}{\numberline {11.1}How can Formal Modeling Help?}{175}{subsection.11.1}
+\contentsline {subsection}{\numberline {11.2}Components of Game Theory}{175}{subsection.11.2}
+\contentsline {subsection}{\numberline {11.3}Popular Games as Examples}{176}{subsection.11.3}
+\contentsline {subsection}{\numberline {11.4}Structuring Your Own Formal Model}{176}{subsection.11.4}
+\contentsline {section}{\numberline {12}Meta-Analysis}{177}{section.12}
+\contentsline {subsection}{\numberline {12.1}The Art of Comparison}{177}{subsection.12.1}
+\contentsline {subsection}{\numberline {12.2}Examples}{177}{subsection.12.2}
+\contentsline {section}{Further Reading:}{178}{subsection.12.2}
+\contentsline {section}{Index}{178}{subsection.12.2}

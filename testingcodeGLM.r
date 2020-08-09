@@ -236,3 +236,27 @@ text(ptree.bal, use.n=TRUE, all=TRUE, cex=.8)
 
 post(ptree.bal,
      title = "Pruned Classification Tree for Ballanced Data")
+
+
+
+
+
+
+
+
+#--------------------------
+
+x <- rnorm(2000, 5, 2)
+hist(x)
+hist(x, freq=FALSE)
+
+prop <- sum(x)/length(x)
+hist(prop)
+
+
+
+
+
+
+
+

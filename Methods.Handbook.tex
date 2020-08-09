@@ -28,8 +28,8 @@
 %----------------------- Preamble ------------------------------
 
 \documentclass[12pt]{article}\usepackage[]{graphicx}\usepackage[]{color}
-%% maxwidth is the original width if it is less than linewidth
-%% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+% maxwidth is the original width if it is less than linewidth
+% otherwise use linewidth (to make sure the graphics do not exceed the margin)
 \makeatletter
 \def\maxwidth{ %
   \ifdim\Gin@nat@width>\linewidth
@@ -176,9 +176,7 @@
 \hfill \\
 The purpose of this document is to provide an overview and tutorial for executing and critically interpreting various methods. A key contribution of this document is the ease to which you can swich between topics and search for conecpts, this was its inital purpose in helping me study for my minor exam.
 
-Many of the notes come from Sean Gailmard' ``Statistical Modeling and Inference for Social Science,'' Skyler Cranmer's course in quantitative methods, and various other books on these topics including ``Event History Modeling, A Guide for Social Scientists'' by Janet M. Box-Steffensmeier and Bradford S. Jones.
-
-Beyond the more cannonic methods courses, there are sections on causal inference, time series modeling, network analysis, and even brief sections devoted to courses on qualitative methods and survey design. This document includes hyperlinks for the table of contents and index for quick access to brief information. The brevity comes as both an advantage and disadvantage so always default to how you learn best - for me making this document is how I learned best.
+Beyond the more cannonic methods courses, there are sections on causal inference, time series modeling, network analysis, and even brief sections devoted to courses on qualitative methods and survey design. This document includes hyperlinks for the table of contents and index for quick access to brief information. The brevity comes as both an advantage and disadvantage so always default to how you learn best - for me making this document is how I processed this material best.
 
 The document initially follows a small dataset on beer rankings initially then covers data from the R Faraway package found here:
 
@@ -1023,6 +1021,10 @@ This means, given that our average (``Good'') beer rating is zero, that if we on
 \hlstd{> }\hlstd{beer_data} \hlkwb{<-} \hlkwd{read.dta}\hlstd{(}\hlstr{'C:/Users/Shing/Documents/Previous Course Info/Quant II/beer.dta'}\hlstd{)}
 \hlstd{> }
 \hlstd{> }\hlkwd{library}\hlstd{(car)} \hlcom{# for ease of recoding variables}
+\end{alltt}
+
+
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# Loading required package: carData}}\begin{alltt}
 \hlstd{> }\hlcom{# Our Beer ratings could be coded more intuitively:}
 \hlstd{> }\hlstd{beer_data}\hlopt{$}\hlstd{rating} \hlkwb{<-} \hlkwd{as.numeric}\hlstd{(beer_data}\hlopt{$}\hlstd{rating)}
 \hlstd{> }\hlkwd{head}\hlstd{(beer_data)} \hlcom{# Check out the variables we have available to us:}
@@ -1338,12 +1340,12 @@ Two R packages that make this very easy is both ``mice'' and ``Zelig.'' The func
 \end{alltt}
 \begin{verbatim}
 ##       1    2    3    4    5
-## 1  22.5 20.4 30.1 30.1 30.1
-## 3  27.2 27.2 35.3 28.7 27.2
-## 4  27.4 26.3 25.5 27.4 25.5
-## 6  25.5 21.7 24.9 22.5 22.5
-## 10 28.7 27.5 22.7 26.3 22.0
-## 11 29.6 27.5 33.2 28.7 26.3
+## 1  30.1 29.6 25.5 27.5 33.2
+## 3  27.2 22.0 27.2 35.3 35.3
+## 4  25.5 22.5 27.4 21.7 20.4
+## 6  24.9 20.4 20.4 25.5 25.5
+## 10 27.4 25.5 20.4 22.7 28.7
+## 11 27.2 22.0 35.3 22.0 22.0
 \end{verbatim}
 \begin{alltt}
 \hlstd{> }\hlcom{# first completed data matrix, can save this for analysis}
@@ -1351,12 +1353,12 @@ Two R packages that make this very easy is both ``mice'' and ``Zelig.'' The func
 \end{alltt}
 \begin{verbatim}
 ##   age  bmi hyp chl
-## 1   1 22.5   1 187
+## 1   1 30.1   1 187
 ## 2   2 22.7   1 187
 ## 3   1 27.2   1 187
-## 4   3 27.4   1 206
+## 4   3 25.5   1 184
 ## 5   1 20.4   1 113
-## 6   3 25.5   1 184
+## 6   3 24.9   1 184
 \end{verbatim}
 \begin{alltt}
 \hlstd{> }\hlcom{## imputation on mixed data with a different method per column:}
@@ -1718,7 +1720,7 @@ Let's build a regular Poisson model, adding one variable at a time, to predict t
 \end{alltt}
 
 
-{\ttfamily\noindent\color{warningcolor}{\#\# Warning: package 'faraway' was built under R version 3.3.3}}\begin{alltt}
+{\ttfamily\noindent\color{warningcolor}{\#\# Warning: package 'faraway' was built under R version 4.0.2}}\begin{alltt}
 \hlstd{> }\hlkwd{library}\hlstd{(MASS)}
 \hlstd{> }\hlkwd{data}\hlstd{(africa)}
 \hlstd{> }
@@ -2096,13 +2098,32 @@ This will typically yield more conservative estimations and evaluations of our s
 \hlstd{+ }                  \hlkwc{data} \hlstd{= sample.dta))}
 \hlstd{+ }\hlstd{\}}
 \hlstd{> }\hlstd{bs_est} \hlkwb{<-} \hlkwd{replicate}\hlstd{(}\hlnum{1000}\hlstd{,} \hlkwd{bs.routine}\hlstd{(}\hlkwc{dat} \hlstd{= beer_data))}
+\end{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in MASS::polr(as.factor(quality) \textasciitilde{} price + alcohol, data = sample.dta): attempt to find suitable starting values failed}}\begin{alltt}
 \hlstd{> }\hlcom{# replicate is actually doing the bootstrap^}
 \hlstd{> }
 \hlstd{> }\hlstd{bs_mean} \hlkwb{<-} \hlkwd{rowMeans}\hlstd{(bs_est)}
+\end{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'rowMeans': object 'bs\_est' not found}}\begin{alltt}
 \hlstd{> }\hlstd{bs_ci} \hlkwb{<-} \hlkwd{t}\hlstd{(}\hlkwd{apply}\hlstd{(bs_est,} \hlnum{1}\hlstd{, quantile,} \hlkwc{probs} \hlstd{=} \hlkwd{c}\hlstd{(}\hlnum{0.025}\hlstd{,} \hlnum{0.975}\hlstd{)))}
+\end{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 't': object 'bs\_est' not found}}\begin{alltt}
 \hlstd{> }\hlstd{bs_results} \hlkwb{<-} \hlkwd{cbind}\hlstd{(bs_mean, bs_ci)}
+\end{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in cbind(bs\_mean, bs\_ci): object 'bs\_mean' not found}}\begin{alltt}
 \hlstd{> }\hlkwd{colnames}\hlstd{(bs_results)} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlstr{"Est"}\hlstd{,} \hlstr{"Low"}\hlstd{,} \hlstr{"High"}\hlstd{)}
-\hlstd{> }
+\end{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in colnames(bs\_results) <- c("{}Est"{}, "{}Low"{}, "{}High"{}): object 'bs\_results' not found}}\begin{alltt}
 \hlstd{> }\hlcom{# Model build}
 \hlstd{> }\hlstd{mod11} \hlkwb{<-} \hlstd{MASS}\hlopt{::}\hlkwd{polr}\hlstd{(}\hlkwd{as.factor}\hlstd{(quality)} \hlopt{~} \hlstd{price} \hlopt{+} \hlstd{alcohol,} \hlkwc{data}\hlstd{=beer_data)}
 \hlstd{> }\hlcom{# Quick Results}
@@ -2110,24 +2131,9 @@ This will typically yield more conservative estimations and evaluations of our s
 \hlstd{+ }                  \hlkwc{override.ci.low} \hlstd{=} \hlkwd{c}\hlstd{(bs_results[,} \hlnum{2}\hlstd{]),}
 \hlstd{+ }                  \hlkwc{override.ci.up} \hlstd{=} \hlkwd{c}\hlstd{(bs_results[,} \hlnum{3}\hlstd{]))}
 \end{alltt}
-\begin{verbatim}
-## 
-## ==========================
-##              Model 1      
-## --------------------------
-## (Intercept)   -0.76       
-##              [-0.08; 1.95]
-## price          0.26 *     
-##              [ 0.62; 4.96]
-## --------------------------
-## R^2            0.14       
-## Adj. R^2       0.11       
-## Num. obs.     35          
-## RMSE           0.74       
-## ==========================
-## * 0 outside the confidence interval
-\end{verbatim}
-\begin{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in override(models = models, override.coef = override.coef, override.se = override.se, : object 'bs\_results' not found}}\begin{alltt}
 \hlstd{> }\hlcom{# Table, to show overriding the confidence intervals with the bootstrap}
 \hlstd{> }\hlcom{# library(texreg) # For this:}
 \hlstd{> }\hlcom{# texreg(l= list(mod11), stars = numeric(0),}
@@ -2844,20 +2850,22 @@ Let's use simulation to test out a few penalized regression models in R, startin
 \end{alltt}
 
 
-{\ttfamily\noindent\color{warningcolor}{\#\# Warning: package 'caret' was built under R version 3.3.3}}\begin{alltt}
+{\ttfamily\noindent\color{warningcolor}{\#\# Warning: package 'caret' was built under R version 4.0.2}}
+
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# Loading required package: lattice}}
+
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# \\\#\# Attaching package: 'lattice'}}
+
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# The following object is masked from 'package:faraway':\\\#\# \\\#\#\ \ \ \  melanoma}}\begin{alltt}
 \hlstd{> }\hlkwd{library}\hlstd{(MASS)} \hlcom{# mvrnorm()}
 \hlstd{> }\hlkwd{library}\hlstd{(Rlab)} \hlcom{# for rbern()}
 \hlstd{> }\hlkwd{library}\hlstd{(glmnet)}
 \end{alltt}
 
 
-{\ttfamily\noindent\color{warningcolor}{\#\# Warning: package 'glmnet' was built under R version 3.3.3}}
+{\ttfamily\noindent\color{warningcolor}{\#\# Warning: package 'glmnet' was built under R version 4.0.2}}
 
-{\ttfamily\noindent\itshape\color{messagecolor}{\#\# Loading required package: foreach}}
-
-{\ttfamily\noindent\color{warningcolor}{\#\# Warning: package 'foreach' was built under R version 3.3.3}}
-
-{\ttfamily\noindent\itshape\color{messagecolor}{\#\# Loaded glmnet 2.0-16}}\begin{alltt}
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# Loaded glmnet 4.0-2}}\begin{alltt}
 \hlstd{> }\hlstd{N} \hlkwb{<-} \hlnum{1000}
 \hlstd{> }\hlstd{P} \hlkwb{<-} \hlnum{100}
 \hlstd{> }\hlcom{# Wishart distribution for positive definite matricies}
@@ -2951,7 +2959,7 @@ These results make sense, most of our beta’s cluster with a mean around zero a
 \hlstd{> }\hlkwd{sqrt}\hlstd{(}\hlkwd{mean}\hlstd{(error}\hlopt{^}\hlnum{2}\hlstd{))}
 \end{alltt}
 \begin{verbatim}
-## [1] 3.039912
+## [1] 2.957983
 \end{verbatim}
 \begin{alltt}
 \hlstd{> }\hlcom{## [1] 3.039912}
@@ -2960,7 +2968,7 @@ These results make sense, most of our beta’s cluster with a mean around zero a
 \hlstd{> }\hlkwd{mean}\hlstd{(}\hlkwd{abs}\hlstd{(error))}
 \end{alltt}
 \begin{verbatim}
-## [1] 2.415841
+## [1] 2.353741
 \end{verbatim}
 \begin{alltt}
 \hlstd{> }\hlcom{## [1] 2.415841}
@@ -3254,7 +3262,10 @@ Support Vector Models (SVMs) can be used to analize data with the least error gi
 \hlstd{> }\hlcom{# Need a lot of packages for this:}
 \hlstd{> }\hlstd{packages} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlstr{"caret"}\hlstd{,} \hlstr{"MASS"}\hlstd{,} \hlstr{"Rlab"}\hlstd{,} \hlstr{"boot"}\hlstd{,} \hlstr{"ggplot2"}\hlstd{,} \hlstr{"ggridges"}\hlstd{,} \hlstr{"dplyr"}\hlstd{)}
 \hlstd{> }\hlkwd{invisible}\hlstd{(} \hlkwd{lapply}\hlstd{(packages, library,} \hlkwc{character.only} \hlstd{=} \hlnum{TRUE}\hlstd{))}
-\hlstd{> }
+\end{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in FUN(X[[i]], ...): there is no package called 'ggridges'}}\begin{alltt}
 \hlstd{> }\hlkwd{set.seed}\hlstd{(}\hlnum{12345}\hlstd{)}
 \hlstd{> }
 \hlstd{> }\hlstd{N} \hlkwb{<-} \hlnum{2000}
@@ -3291,13 +3302,15 @@ With the help of a few handy packages that help users run SVM's; consider the fo
 \hlstd{> }\hlstd{linear.svm.bal} \hlkwb{<-} \hlkwd{train}\hlstd{(Y}\hlopt{~}\hlstd{.,}
 \hlstd{+ }                       \hlkwc{data}\hlstd{=train.data.1.Bal,}
 \hlstd{+ }                       \hlkwc{method} \hlstd{=} \hlstr{"svmLinear"}\hlstd{)}
-\hlstd{> }
+\end{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: package e1071 is required}}\begin{alltt}
 \hlstd{> }\hlstd{linear.svm.bal}\hlopt{$}\hlstd{results}\hlopt{$}\hlstd{Accuracy}
 \end{alltt}
-\begin{verbatim}
-## [1] 0.9651691
-\end{verbatim}
-\begin{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in eval(expr, envir, enclos): object 'linear.svm.bal' not found}}\begin{alltt}
 \hlstd{> }\hlcom{# A polynomial kernal: (long computation!)}
 \hlstd{> }\hlcom{# poly.svm.bal <- train(Y~.,}
 \hlstd{> }\hlcom{#                      data=train.data.1.Bal,}
@@ -3640,13 +3653,949 @@ While VAR allows for flexibility in helping determine the data generating proces
 \clearpage
 \section{Network Analysis}
 
-\subsection{Network Theory}
+Network analysis, broadly speaking, is just the analysis of the connection between nodes and the broader interconnections of a group of units. Nodes can be people, events, animals, anything really. Edges can be any measureable connection between nodes, be it frequency of community, survey responses, amount of eye contact - anything really.\\
 
-\subsection{Network Data, Nodes, and Edges}
+This chapter on network analysis will show the fundamentals of executing network techniques in R, but will dodge a lot of the underlying math making up these methods. \\
 
-\subsection{Summary Statistics of Networks}
+\subsection{Network Basics: Data}
 
-\subsection{Centrality}
+\begin{center}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.165, 0.169, 0.184}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{> }\hlcom{# Packages used:}
+\hlstd{> }\hlkwd{library}\hlstd{(igraph)} \hlcom{# igraph is one of the more popular network analysis packages}
+\hlstd{> }\hlkwd{library}\hlstd{(igraphdata)}
+\hlstd{> }\hlcom{# use  View() (capital "V" to examine data when you get it.)}
+\hlstd{> }
+\hlstd{> }\hlcom{# There will be some randomness, we'll set a seed to keep things consistent:}
+\hlstd{> }\hlkwd{set.seed}\hlstd{(}\hlnum{8675305}\hlstd{)}
+\hlstd{> }
+\hlstd{> }\hlcom{# Manually entering Network Data/ viewing networks -----------------------------}
+\hlstd{> }
+\hlstd{> }\hlcom{# Entering Edge-List data manually (works fine for now).}
+\hlstd{> }\hlcom{# ?graph()}
+\hlstd{> }\hlstd{g1} \hlkwb{<-} \hlkwd{graph}\hlstd{(}\hlkwc{edges}\hlstd{=}\hlkwd{c}\hlstd{(}\hlnum{1}\hlstd{,}\hlnum{2}\hlstd{,}
+\hlstd{+ }                    \hlnum{1}\hlstd{,}\hlnum{3}\hlstd{,}
+\hlstd{+ }                    \hlnum{2}\hlstd{,}\hlnum{4}\hlstd{,}
+\hlstd{+ }                    \hlnum{3}\hlstd{,}\hlnum{1}\hlstd{,}
+\hlstd{+ }                    \hlnum{3}\hlstd{,}\hlnum{5}\hlstd{,}
+\hlstd{+ }                    \hlnum{5}\hlstd{,}\hlnum{1}\hlstd{,}
+\hlstd{+ }                    \hlnum{4}\hlstd{,}\hlnum{3}\hlstd{))}
+\hlstd{> }\hlcom{# Let's view this:}
+\hlstd{> }\hlstd{g1}
+\end{alltt}
+\begin{verbatim}
+## IGRAPH 8c94054 D--- 5 7 -- 
+## + edges from 8c94054:
+## [1] 1->2 1->3 2->4 3->1 3->5 5->1 4->3
+\end{verbatim}
+\begin{alltt}
+\hlstd{> }\hlcom{# So, Directional network, 5 nodes, 7 edges.}
+\hlstd{> }\hlcom{# Or more briefly:}
+\hlstd{> }\hlkwd{summary}\hlstd{(g1)}
+\end{alltt}
+\begin{verbatim}
+## IGRAPH 8c94054 D--- 5 7 --
+\end{verbatim}
+\begin{alltt}
+\hlstd{> }\hlcom{# Or using the default plot() function:}
+\hlstd{> }\hlkwd{plot}\hlstd{(g1)}
+\end{alltt}
+\end{kframe}
+\includegraphics[width=\maxwidth]{figure/Network_Basics-1} 
+\begin{kframe}\begin{alltt}
+\hlstd{> }\hlcom{# Another Edge-List dataset with names instead of numbers:}
+\hlstd{> }\hlstd{g2} \hlkwb{<-} \hlkwd{graph}\hlstd{(}\hlkwc{edges}\hlstd{=}\hlkwd{c}\hlstd{(}\hlstr{"Anand"}\hlstd{,}\hlstr{"Beth"}\hlstd{,}
+\hlstd{+ }                    \hlstr{"Anand"}\hlstd{,}\hlstr{"Chris"}\hlstd{,}
+\hlstd{+ }                    \hlstr{"Beth"}\hlstd{,}\hlstr{"Dieter"}\hlstd{,}
+\hlstd{+ }                    \hlstr{"Chris"}\hlstd{,}\hlstr{"Sun"}\hlstd{,}
+\hlstd{+ }                    \hlstr{"Chris"}\hlstd{,}\hlstr{"Ali"}\hlstd{,}
+\hlstd{+ }                    \hlstr{"Beth"}\hlstd{,}\hlstr{"Ali"}\hlstd{,}
+\hlstd{+ }                    \hlstr{"Ali"}\hlstd{,}\hlstr{"Sun"}\hlstd{,}
+\hlstd{+ }                    \hlstr{"Sun"}\hlstd{,}\hlstr{"Beth"}\hlstd{,}
+\hlstd{+ }                    \hlstr{"Fatima"}\hlstd{,}\hlstr{"Chris"}\hlstd{,}
+\hlstd{+ }                    \hlstr{"Fatima"}\hlstd{,}\hlstr{"Sun"}\hlstd{),}
+\hlstd{+ }            \hlkwc{directed}\hlstd{=}\hlnum{FALSE}\hlstd{)}
+\hlstd{> }\hlcom{# Now we have no directionality on nodes.}
+\hlstd{> }
+\hlstd{> }\hlkwd{plot}\hlstd{(g2)}
+\end{alltt}
+\end{kframe}
+\includegraphics[width=\maxwidth]{figure/Network_Basics-2} 
+\begin{kframe}\begin{alltt}
+\hlstd{> }\hlkwd{summary}\hlstd{(g2)} \hlcom{# Undirected, now named, 7 nodes, 10 edges.}
+\end{alltt}
+\begin{verbatim}
+## IGRAPH 8cac9e2 UN-- 7 10 -- 
+## + attr: name (v/c)
+\end{verbatim}
+\begin{alltt}
+\hlstd{> }\hlcom{# We can use functions to visualize our data another way (beyond edge-list)}
+\hlstd{> }\hlcom{# Adjacency-Matrix:}
+\hlstd{> }
+\hlstd{> }\hlstd{g1[]}
+\end{alltt}
+\begin{verbatim}
+## 5 x 5 sparse Matrix of class "dgCMatrix"
+##               
+## [1,] . 1 1 . .
+## [2,] . . . 1 .
+## [3,] 1 . . . 1
+## [4,] . . 1 . .
+## [5,] 1 . . . .
+\end{verbatim}
+\begin{alltt}
+\hlstd{> }\hlcom{## 5 x 5 sparse Matrix of class "dgCMatrix"}
+\hlstd{> }\hlcom{##}
+\hlstd{> }\hlcom{## [1,] . 1 1 . .}
+\hlstd{> }\hlcom{## [2,] . . . 1 .}
+\hlstd{> }\hlcom{## [3,] 1 . . . 1}
+\hlstd{> }\hlcom{## [4,] . . 1 . .}
+\hlstd{> }\hlcom{## [5,] 1 . . . .}
+\hlstd{> }
+\hlstd{> }\hlkwd{get.adjacency}\hlstd{(g2)}
+\end{alltt}
+\begin{verbatim}
+## 7 x 7 sparse Matrix of class "dgCMatrix"
+##        Anand Beth Chris Dieter Sun Ali Fatima
+## Anand      .    1     1      .   .   .      .
+## Beth       1    .     .      1   1   1      .
+## Chris      1    .     .      .   1   1      1
+## Dieter     .    1     .      .   .   .      .
+## Sun        .    1     1      .   .   1      1
+## Ali        .    1     1      .   1   .      .
+## Fatima     .    .     1      .   1   .      .
+\end{verbatim}
+\begin{alltt}
+\hlstd{> }\hlcom{## 7 x 7 sparse Matrix of class "dgCMatrix"}
+\hlstd{> }\hlcom{##        Anand Beth Chris Dieter Sun Ali Fatima}
+\hlstd{> }\hlcom{## Anand      .    1     1      .   .   .      .}
+\hlstd{> }\hlcom{## Beth       1    .     .      1   1   1      .}
+\hlstd{> }\hlcom{## Chris      1    .     .      .   1   1      1}
+\hlstd{> }\hlcom{## Dieter     .    1     .      .   .   .      .}
+\hlstd{> }\hlcom{## Sun        .    1     1      .   .   1      1}
+\hlstd{> }\hlcom{## Ali        .    1     1      .   1   .      .}
+\hlstd{> }\hlcom{## Fatima     .    .     1      .   1   .      .}
+\hlstd{> }
+\hlstd{> }\hlcom{# Similarly, we can vizualise the Edges:}
+\hlstd{> }\hlkwd{E}\hlstd{(g1)}
+\end{alltt}
+\begin{verbatim}
+## + 7/7 edges from 8c94054:
+## [1] 1->2 1->3 2->4 3->1 3->5 5->1 4->3
+\end{verbatim}
+\begin{alltt}
+\hlstd{> }\hlcom{## + 7/7 edges from fd21364:}
+\hlstd{> }\hlcom{## [1] 1->2 1->3 2->4 3->1 3->5 5->1 4->3}
+\hlstd{> }\hlkwd{V}\hlstd{(g2)}
+\end{alltt}
+\begin{verbatim}
+## + 7/7 vertices, named, from 8cac9e2:
+## [1] Anand  Beth   Chris  Dieter Sun    Ali    Fatima
+\end{verbatim}
+\begin{alltt}
+\hlstd{> }\hlcom{## + 7/7 vertices, named, from dd35840:}
+\hlstd{> }\hlcom{## [1] Anand  Beth   Chris  Dieter Sun    Ali    Fatima}
+\hlstd{> }
+\hlstd{> }\hlcom{# We can also pull up variables from this object: like $name}
+\hlstd{> }\hlkwd{V}\hlstd{(g2)}\hlopt{$}\hlstd{name}
+\end{alltt}
+\begin{verbatim}
+## [1] "Anand"  "Beth"   "Chris"  "Dieter" "Sun"    "Ali"    "Fatima"
+\end{verbatim}
+\begin{alltt}
+\hlstd{> }\hlcom{## [1] "Anand"  "Beth"   "Chris"  "Dieter" "Sun"    "Ali"    "Fatima"}
+\hlstd{> }
+\hlstd{> }\hlcom{# So let's plug in more data on top of that:}
+\hlstd{> }\hlkwd{V}\hlstd{(g2)}\hlopt{$}\hlstd{gender} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlstr{"M"}\hlstd{,}\hlstr{"F"}\hlstd{,}\hlstr{"M"}\hlstd{,}\hlstr{"M"}\hlstd{,}\hlstr{"F"}\hlstd{,}\hlstr{"M"}\hlstd{,}\hlstr{"F"}\hlstd{)} \hlcom{# Here, we're assigning the gender for each vertex.}
+\hlstd{> }
+\hlstd{> }\hlcom{# Or we'll assign some arbitrary weights to the edges (notice the E(g2) now.)}
+\hlstd{> }\hlkwd{E}\hlstd{(g2)}\hlopt{$}\hlstd{count} \hlkwb{<-} \hlkwd{rep}\hlstd{(}\hlnum{1}\hlopt{:}\hlnum{2}\hlstd{,}\hlnum{5}\hlstd{)}
+\hlstd{> }\hlstd{g2} \hlkwb{<-} \hlkwd{set.vertex.attribute}\hlstd{(g2,} \hlstr{"age"}\hlstd{,} \hlkwc{value} \hlstd{=} \hlkwd{c}\hlstd{(}\hlnum{20}\hlstd{,}\hlnum{26}\hlstd{,}\hlnum{19}\hlstd{,}\hlnum{34}\hlstd{,}\hlnum{22}\hlstd{,}\hlnum{30}\hlstd{,}\hlnum{21}\hlstd{))}
+\hlstd{> }\hlcom{# Because we want R to save this addition to the network, when using the}
+\hlstd{> }\hlcom{#  set.vertex.attribute() function, we have to assign this again to the graph name.}
+\hlstd{> }
+\hlstd{> }\hlcom{# With this new data added, let's summarize the graph:}
+\hlstd{> }\hlkwd{summary}\hlstd{(g2)} \hlcom{# We see the new variables added, and how they are relevantly connected.}
+\end{alltt}
+\begin{verbatim}
+## IGRAPH 8cac9e2 UN-- 7 10 -- 
+## + attr: name (v/c), gender (v/c), age (v/n), count (e/n)
+\end{verbatim}
+\begin{alltt}
+\hlstd{> }\hlcom{## Larger data -----------------------------------------------------------------}
+\hlstd{> }
+\hlstd{> }\hlcom{# A classical long-standing training dataset for Network Analysis has been}
+\hlstd{> }\hlcom{#  Zachary's Karate Club, some researchers even today test methods on this data.}
+\hlstd{> }
+\hlstd{> }\hlkwd{data}\hlstd{(}\hlstr{"karate"}\hlstd{)}
+\hlstd{> }\hlkwd{summary}\hlstd{(karate)}
+\end{alltt}
+\begin{verbatim}
+## IGRAPH 4b458a1 UNW- 34 78 -- Zachary's karate club network
+## + attr: name (g/c), Citation (g/c), Author (g/c), Faction (v/n), name
+## | (v/c), label (v/c), color (v/n), weight (e/n)
+\end{verbatim}
+\begin{alltt}
+\hlstd{> }\hlcom{# What does this summary output mean?}
+\hlstd{> }\hlcom{#     - U means undirected (versus D for directed)}
+\hlstd{> }\hlcom{# - N means that the graph is named}
+\hlstd{> }\hlcom{# - W means weighted graph}
+\hlstd{> }\hlcom{# - 34 is the number of nodes}
+\hlstd{> }\hlcom{# - 78 is the number of edges}
+\hlstd{> }\hlcom{# - name (g/c), Citation (g/c), Author (g/c) are all graph attributes,}
+\hlstd{> }\hlcom{#      telling us about the source of the data.}
+\hlstd{> }\hlcom{# - name (v/c) and label (v/c) mean that name and label are vertex attributes that are characters}
+\hlstd{> }\hlcom{# - color (v/n) is a vertex attribute that’s numeric. (Here, the numbers call colors –}
+\hlstd{> }\hlcom{#      that’s what’s being used in the plot)}
+\hlstd{> }\hlcom{# - Faction (v/n) is a vertex attribute that’s numeric, and basically is the same content as color:}
+\hlstd{> }\hlcom{#      both distinguish the two factions that emerged within the club.}
+\hlstd{> }\hlcom{# - weight (e/n) means weight is an edge attribute and it’s numeric.}
+\hlstd{> }
+\hlstd{> }\hlkwd{plot}\hlstd{(karate)} \hlcom{# Remember this is an undirected network - interpretations change when directed!}
+\end{alltt}
+\end{kframe}
+\includegraphics[width=\maxwidth]{figure/Network_Basics-3} 
+\begin{kframe}\begin{alltt}
+\hlstd{> }\hlcom{#  Here we have a bunch of students surrounding two faction leaders - the blue faction lead}
+\hlstd{> }\hlcom{#    by John "A" - and the orange faction lead by Mr. Hi ("H")}
+\hlstd{> }
+\hlstd{> }\hlcom{## With the data set up and discribed, let's run through the basic functions that can get you network stats.}
+\hlstd{> }\hlkwd{vcount}\hlstd{(karate)} \hlcom{# Verticie (node) count}
+\end{alltt}
+\begin{verbatim}
+## [1] 34
+\end{verbatim}
+\begin{alltt}
+\hlstd{> }\hlcom{# [1] 34}
+\hlstd{> }\hlkwd{ecount}\hlstd{(karate)} \hlcom{# Edge count}
+\end{alltt}
+\begin{verbatim}
+## [1] 78
+\end{verbatim}
+\begin{alltt}
+\hlstd{> }\hlcom{# [1] 78}
+\hlstd{> }
+\hlstd{> }\hlcom{# ?degree() # a summation of all edges linked to nodes.}
+\hlstd{> }\hlcom{# or, (undirected) - 2E/N;  (directed) E/N}
+\hlstd{> }\hlkwd{mean}\hlstd{(}\hlkwd{degree}\hlstd{(karate))} \hlcom{# Average network degree}
+\end{alltt}
+\begin{verbatim}
+## [1] 4.588235
+\end{verbatim}
+\begin{alltt}
+\hlstd{> }\hlcom{# [1] 4.588235      # "on average" we have 4.5 connections in the karate club}
+\hlstd{> }
+\hlstd{> }\hlcom{# ?graph.density() # This is (usually) just: (Actual Connections/Potential Connections)}
+\hlstd{> }\hlkwd{graph.density}\hlstd{(karate)} \hlcom{# Density}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.1390374
+\end{verbatim}
+\begin{alltt}
+\hlstd{> }\hlcom{# [1] 0.1390374    # This network is about 14% dense/100%}
+\hlstd{> }
+\hlstd{> }\hlcom{# Diameter gives you the longest distance and path:}
+\hlstd{> }\hlcom{# ?diameter()}
+\hlstd{> }\hlkwd{diameter}\hlstd{(karate)} \hlcom{# It's diameter}
+\end{alltt}
+\begin{verbatim}
+## [1] 13
+\end{verbatim}
+\begin{alltt}
+\hlstd{> }\hlcom{# [1] 13    # The farthest nodes are 13 people apart.}
+\hlstd{> }\hlkwd{get_diameter}\hlstd{(karate)} \hlcom{# Here we see the long-pathway}
+\end{alltt}
+\begin{verbatim}
+## + 6/34 vertices, named, from 4b458a1:
+## [1] Actor 16 John A   Actor 20 Mr Hi    Actor 6  Actor 17
+\end{verbatim}
+\begin{alltt}
+\hlstd{> }\hlkwd{farthest_vertices}\hlstd{(karate)} \hlcom{# Here we see the people that are the farthest apart.}
+\end{alltt}
+\begin{verbatim}
+## $vertices
+## + 2/34 vertices, named, from 4b458a1:
+## [1] Actor 16 Actor 17
+## 
+## $distance
+## [1] 13
+\end{verbatim}
+\begin{alltt}
+\hlstd{> }\hlcom{# Some graphical options:}
+\hlstd{> }\hlkwd{plot}\hlstd{(karate,}
+\hlstd{+ }     \hlkwc{edge.width} \hlstd{=} \hlkwd{E}\hlstd{(karate)}\hlopt{$}\hlstd{weight,}
+\hlstd{+ }     \hlkwc{vertex.size} \hlstd{=} \hlkwd{degree}\hlstd{(karate)}\hlopt{*}\hlnum{1.5}\hlstd{,}
+\hlstd{+ }     \hlkwc{edge.arrow.size} \hlstd{=} \hlnum{0.4}\hlstd{,}
+\hlstd{+ }     \hlkwc{vertex.label.cex} \hlstd{=} \hlnum{0.7}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\includegraphics[width=\maxwidth]{figure/Network_Basics-4} 
+\begin{kframe}\begin{alltt}
+\hlstd{> }\hlcom{# So in this graph we have weighted edges based on our data, the nodes are bigger}
+\hlstd{> }\hlcom{#   depending on their degree "importance"}
+\hlstd{> }
+\hlstd{> }
+\hlstd{> }\hlcom{## Bipartide Networks: ---------------------------------------------------------}
+\hlstd{> }\hlcom{# This is where you have the relationship between nodes be that they are connected}
+\hlstd{> }\hlcom{#   to another party. (I published with X, and so did you, so we're connected)}
+\hlstd{> }
+\hlstd{> }\hlcom{# Seminar notes on this:}
+\hlstd{> }\hlstd{mem} \hlkwb{<-} \hlkwd{matrix}\hlstd{(}\hlkwc{data} \hlstd{=} \hlkwd{c}\hlstd{(}\hlnum{1}\hlstd{,}\hlnum{1}\hlstd{,}\hlnum{1}\hlstd{,}\hlnum{1}\hlstd{,}\hlnum{0}\hlstd{,}
+\hlstd{+ }                      \hlnum{0}\hlstd{,}\hlnum{1}\hlstd{,}\hlnum{1}\hlstd{,}\hlnum{0}\hlstd{,}\hlnum{0}\hlstd{,}
+\hlstd{+ }                      \hlnum{0}\hlstd{,}\hlnum{0}\hlstd{,}\hlnum{0}\hlstd{,}\hlnum{1}\hlstd{,}\hlnum{1}\hlstd{),}
+\hlstd{+ }              \hlkwc{nrow} \hlstd{=} \hlnum{3}\hlstd{,}
+\hlstd{+ }              \hlkwc{byrow} \hlstd{=} \hlnum{TRUE}\hlstd{)}
+\hlstd{> }\hlcom{# This is assigning the names first to the 3 rows, and then to the 5 columns}
+\hlstd{> }\hlkwd{dimnames}\hlstd{(mem)} \hlkwb{<-} \hlkwd{list}\hlstd{(}\hlkwd{c}\hlstd{(}\hlstr{"Group1"}\hlstd{,}\hlstr{"Group2"}\hlstd{,}\hlstr{"Group3"}\hlstd{),}
+\hlstd{+ }                      \hlkwd{c}\hlstd{(}\hlstr{"Y1"}\hlstd{,}\hlstr{"Y2"}\hlstd{,}\hlstr{"Y3"}\hlstd{,}\hlstr{"Y4"}\hlstd{,}\hlstr{"Y5"}\hlstd{))}
+\hlstd{> }\hlstd{mem}
+\end{alltt}
+\begin{verbatim}
+##        Y1 Y2 Y3 Y4 Y5
+## Group1  1  1  1  1  0
+## Group2  0  1  1  0  0
+## Group3  0  0  0  1  1
+\end{verbatim}
+\begin{alltt}
+\hlstd{> }\hlcom{##        Y1 Y2 Y3 Y4 Y5}
+\hlstd{> }\hlcom{## Group1  1  1  1  1  0}
+\hlstd{> }\hlcom{## Group2  0  1  1  0  0}
+\hlstd{> }\hlcom{## Group3  0  0  0  1  1}
+\hlstd{> }
+\hlstd{> }\hlstd{bg} \hlkwb{<-} \hlkwd{graph.incidence}\hlstd{(mem)}
+\hlstd{> }\hlstd{bg}  \hlcom{# We see the "B" there now, for Bipartide}
+\end{alltt}
+\begin{verbatim}
+## IGRAPH 8cc6465 UN-B 8 8 -- 
+## + attr: type (v/l), name (v/c)
+## + edges from 8cc6465 (vertex names):
+## [1] Group1--Y1 Group1--Y2 Group1--Y3 Group1--Y4 Group2--Y2 Group2--Y3
+## [7] Group3--Y4 Group3--Y5
+\end{verbatim}
+\begin{alltt}
+\hlstd{> }\hlcom{## IGRAPH 6d6e710 UN-B 8 8 --}
+\hlstd{> }\hlcom{## + attr: type (v/l), name (v/c)}
+\hlstd{> }\hlcom{## + edges from 6d6e710 (vertex names):}
+\hlstd{> }\hlcom{## [1] Group1--Y1 Group1--Y2 Group1--Y3 Group1--Y4 Group2--Y2 Group2--Y3}
+\hlstd{> }\hlcom{## [7] Group3--Y4 Group3--Y5}
+\hlstd{> }\hlkwd{plot}\hlstd{(bg)}
+\end{alltt}
+\end{kframe}
+\includegraphics[width=\maxwidth]{figure/Network_Basics-5} 
+\begin{kframe}\begin{alltt}
+\hlstd{> }\hlstd{pr} \hlkwb{<-} \hlkwd{bipartite.projection}\hlstd{(bg)}
+\hlstd{> }\hlstd{pr}
+\end{alltt}
+\begin{verbatim}
+## $proj1
+## IGRAPH 8cc8173 UNW- 3 2 -- 
+## + attr: name (v/c), weight (e/n)
+## + edges from 8cc8173 (vertex names):
+## [1] Group1--Group2 Group1--Group3
+## 
+## $proj2
+## IGRAPH 8cc82aa UNW- 5 7 -- 
+## + attr: name (v/c), weight (e/n)
+## + edges from 8cc82aa (vertex names):
+## [1] Y1--Y2 Y1--Y3 Y1--Y4 Y2--Y3 Y2--Y4 Y3--Y4 Y4--Y5
+\end{verbatim}
+\begin{alltt}
+\hlstd{> }\hlcom{## $proj1}
+\hlstd{> }\hlcom{## IGRAPH 749b7be UNW- 3 2 --}
+\hlstd{> }\hlcom{## + attr: name (v/c), weight (e/n)}
+\hlstd{> }\hlcom{## + edges from 749b7be (vertex names):}
+\hlstd{> }\hlcom{## [1] Group1--Group2 Group1--Group3}
+\hlstd{> }\hlcom{##}
+\hlstd{> }\hlcom{## $proj2}
+\hlstd{> }\hlcom{## IGRAPH fbde6d7 UNW- 5 7 --}
+\hlstd{> }\hlcom{## + attr: name (v/c), weight (e/n)}
+\hlstd{> }\hlcom{## + edges from fbde6d7 (vertex names):}
+\hlstd{> }\hlcom{## [1] Y1--Y2 Y1--Y3 Y1--Y4 Y2--Y3 Y2--Y4 Y3--Y4 Y4--Y5}
+\hlstd{> }\hlkwd{plot}\hlstd{(pr}\hlopt{$}\hlstd{proj1,} \hlkwc{edge.width} \hlstd{=} \hlkwd{E}\hlstd{(pr}\hlopt{$}\hlstd{proj1)}\hlopt{$}\hlstd{weight)}
+\end{alltt}
+\end{kframe}
+\includegraphics[width=\maxwidth]{figure/Network_Basics-6} 
+\begin{kframe}\begin{alltt}
+\hlstd{> }\hlkwd{plot}\hlstd{(pr}\hlopt{$}\hlstd{proj2,} \hlkwc{edge.width} \hlstd{=} \hlkwd{E}\hlstd{(pr}\hlopt{$}\hlstd{proj2)}\hlopt{$}\hlstd{weight)}
+\end{alltt}
+\end{kframe}
+\includegraphics[width=\maxwidth]{figure/Network_Basics-7} 
+\begin{kframe}\begin{alltt}
+\hlstd{> }\hlkwd{get.adjacency}\hlstd{(pr}\hlopt{$}\hlstd{proj1,} \hlkwc{sparse} \hlstd{=} \hlnum{FALSE}\hlstd{,} \hlkwc{attr} \hlstd{=} \hlstr{"weight"}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+##        Group1 Group2 Group3
+## Group1      0      2      1
+## Group2      2      0      0
+## Group3      1      0      0
+\end{verbatim}
+\begin{alltt}
+\hlstd{> }\hlcom{##        Group1 Group2 Group3}
+\hlstd{> }\hlcom{## Group1      0      2      1}
+\hlstd{> }\hlcom{## Group2      2      0      0}
+\hlstd{> }\hlcom{## Group3      1      0      0}
+\hlstd{> }\hlkwd{get.adjacency}\hlstd{(pr}\hlopt{$}\hlstd{proj2,} \hlkwc{sparse} \hlstd{=} \hlnum{FALSE}\hlstd{,} \hlkwc{attr} \hlstd{=} \hlstr{"weight"}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+##    Y1 Y2 Y3 Y4 Y5
+## Y1  0  1  1  1  0
+## Y2  1  0  2  1  0
+## Y3  1  2  0  1  0
+## Y4  1  1  1  0  1
+## Y5  0  0  0  1  0
+\end{verbatim}
+\begin{alltt}
+\hlstd{> }\hlcom{##    Y1 Y2 Y3 Y4 Y5}
+\hlstd{> }\hlcom{## Y1  0  1  1  1  0}
+\hlstd{> }\hlcom{## Y2  1  0  2  1  0}
+\hlstd{> }\hlcom{## Y3  1  2  0  1  0}
+\hlstd{> }\hlcom{## Y4  1  1  1  0  1}
+\hlstd{> }\hlcom{## Y5  0  0  0  1  0}
+\hlstd{> }
+\hlstd{> }
+\hlstd{> }\hlstd{aff1} \hlkwb{<-} \hlstd{mem} \hlopt{%*%} \hlkwd{t}\hlstd{(mem)}
+\hlstd{> }\hlkwd{diag}\hlstd{(aff1)} \hlkwb{<-} \hlnum{0}
+\hlstd{> }\hlcom{# the diagonal doesn't really have important information for these,}
+\hlstd{> }\hlcom{#   as it's about self-affiliation. So, with this command, we change those values to 0.}
+\hlstd{> }\hlstd{aff1}
+\end{alltt}
+\begin{verbatim}
+##        Group1 Group2 Group3
+## Group1      0      2      1
+## Group2      2      0      0
+## Group3      1      0      0
+\end{verbatim}
+\begin{alltt}
+\hlstd{> }\hlcom{##        Group1 Group2 Group3}
+\hlstd{> }\hlcom{## Group1      0      2      1}
+\hlstd{> }\hlcom{## Group2      2      0      0}
+\hlstd{> }\hlcom{## Group3      1      0      0}
+\hlstd{> }\hlstd{aff2} \hlkwb{<-} \hlkwd{t}\hlstd{(mem)} \hlopt{%*%} \hlstd{mem}
+\hlstd{> }\hlkwd{diag}\hlstd{(aff2)} \hlkwb{<-} \hlnum{0}
+\hlstd{> }\hlstd{aff2}
+\end{alltt}
+\begin{verbatim}
+##    Y1 Y2 Y3 Y4 Y5
+## Y1  0  1  1  1  0
+## Y2  1  0  2  1  0
+## Y3  1  2  0  1  0
+## Y4  1  1  1  0  1
+## Y5  0  0  0  1  0
+\end{verbatim}
+\begin{alltt}
+\hlstd{> }\hlcom{##    Y1 Y2 Y3 Y4 Y5}
+\hlstd{> }\hlcom{## Y1  0  1  1  1  0}
+\hlstd{> }\hlcom{## Y2  1  0  2  1  0}
+\hlstd{> }\hlcom{## Y3  1  2  0  1  0}
+\hlstd{> }\hlcom{## Y4  1  1  1  0  1}
+\hlstd{> }\hlcom{## Y5  0  0  0  1  0}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+\end{center}
+
+\subsection{Network Properties, Structural Equivalence, Roles, and Positions.}
+
+\begin{center}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.165, 0.169, 0.184}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{> }\hlkwd{set.seed}\hlstd{(}\hlnum{123}\hlstd{)}
+\hlstd{> }
+\hlstd{> }\hlcom{# Let's try something fancy:}
+\hlstd{> }\hlcom{# List all packages:}
+\hlstd{> }\hlstd{packages} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlstr{"NetCluster"}\hlstd{,} \hlstr{"blockmodeling"}\hlstd{,} \hlstr{"gplots"}\hlstd{,} \hlstr{"igraph"}\hlstd{)}
+\hlstd{> }
+\hlstd{> }\hlcom{# Install all packages in one function:}
+\hlstd{> }\hlcom{#   lapply(packages, install.packages, character.only = TRUE)}
+\hlstd{> }
+\hlstd{> }\hlcom{# Load all packages in one function:}
+\hlstd{> }\hlkwd{lapply}\hlstd{(packages, library,} \hlkwc{character.only} \hlstd{=} \hlnum{TRUE}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+## [[1]]
+##  [1] "NetCluster"     "sna"            "network"        "statnet.common"
+##  [5] "igraphdata"     "igraph"         "vars"           "lmtest"        
+##  [9] "urca"           "strucchange"    "sandwich"       "zoo"           
+## [13] "tseries"        "ggthemes"       "haven"          "rpart"         
+## [17] "microbenchmark" "kernlab"        "boot"           "glmnet"        
+## [21] "caret"          "lattice"        "Rlab"           "grid"          
+## [25] "faraway"        "ggplot2"        "mice"           "arm"           
+## [29] "lme4"           "Matrix"         "MASS"           "car"           
+## [33] "carData"        "foreign"        "knitr"          "stats"         
+## [37] "graphics"       "grDevices"      "utils"          "datasets"      
+## [41] "methods"        "base"          
+## 
+## [[2]]
+##  [1] "blockmodeling"  "NetCluster"     "sna"            "network"       
+##  [5] "statnet.common" "igraphdata"     "igraph"         "vars"          
+##  [9] "lmtest"         "urca"           "strucchange"    "sandwich"      
+## [13] "zoo"            "tseries"        "ggthemes"       "haven"         
+## [17] "rpart"          "microbenchmark" "kernlab"        "boot"          
+## [21] "glmnet"         "caret"          "lattice"        "Rlab"          
+## [25] "grid"           "faraway"        "ggplot2"        "mice"          
+## [29] "arm"            "lme4"           "Matrix"         "MASS"          
+## [33] "car"            "carData"        "foreign"        "knitr"         
+## [37] "stats"          "graphics"       "grDevices"      "utils"         
+## [41] "datasets"       "methods"        "base"          
+## 
+## [[3]]
+##  [1] "gplots"         "blockmodeling"  "NetCluster"     "sna"           
+##  [5] "network"        "statnet.common" "igraphdata"     "igraph"        
+##  [9] "vars"           "lmtest"         "urca"           "strucchange"   
+## [13] "sandwich"       "zoo"            "tseries"        "ggthemes"      
+## [17] "haven"          "rpart"          "microbenchmark" "kernlab"       
+## [21] "boot"           "glmnet"         "caret"          "lattice"       
+## [25] "Rlab"           "grid"           "faraway"        "ggplot2"       
+## [29] "mice"           "arm"            "lme4"           "Matrix"        
+## [33] "MASS"           "car"            "carData"        "foreign"       
+## [37] "knitr"          "stats"          "graphics"       "grDevices"     
+## [41] "utils"          "datasets"       "methods"        "base"          
+## 
+## [[4]]
+##  [1] "gplots"         "blockmodeling"  "NetCluster"     "sna"           
+##  [5] "network"        "statnet.common" "igraphdata"     "igraph"        
+##  [9] "vars"           "lmtest"         "urca"           "strucchange"   
+## [13] "sandwich"       "zoo"            "tseries"        "ggthemes"      
+## [17] "haven"          "rpart"          "microbenchmark" "kernlab"       
+## [21] "boot"           "glmnet"         "caret"          "lattice"       
+## [25] "Rlab"           "grid"           "faraway"        "ggplot2"       
+## [29] "mice"           "arm"            "lme4"           "Matrix"        
+## [33] "MASS"           "car"            "carData"        "foreign"       
+## [37] "knitr"          "stats"          "graphics"       "grDevices"     
+## [41] "utils"          "datasets"       "methods"        "base"
+\end{verbatim}
+\begin{alltt}
+\hlstd{> }\hlcom{#  lapply(object, function, ...)  # For "list" apply... nifty tool!}
+\hlstd{> }
+\hlstd{> }\hlcom{# swi <- read.csv("swn.csv", header = TRUE, row.names = 1)}
+\hlstd{> }\hlcom{# header = TRUE uses the first row as the column names;}
+\hlstd{> }\hlcom{#  row.names = 1 uses the first column as the row names}
+\hlstd{> }\hlcom{#    (if we put row.names = 2, it would use the second column, etc.)}
+\hlstd{> }
+\hlstd{> }\hlcom{## I couldn't find the .csv... so I just took the data from the source}
+\hlstd{> }\hlcom{# https://networkdata.ics.uci.edu/netdata/html/davis.html}
+\hlstd{> }\hlcom{#  and hit "download" - open that r.data with Rstudio and it'll put it in your global env.}
+\hlstd{> }
+\hlstd{> }\hlkwd{plot}\hlstd{(davis)} \hlcom{# just checking}
+\end{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'plot': object 'davis' not found}}\begin{alltt}
+\hlstd{> }\hlstd{swi} \hlkwb{<-} \hlkwd{as.matrix}\hlstd{(davis)} \hlcom{# Make incidence matrix - and put as igraph network}
+\end{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'as.matrix': object 'davis' not found}}\begin{alltt}
+\hlstd{> }\hlstd{swn} \hlkwb{<-} \hlkwd{graph.incidence}\hlstd{(swi)} \hlcom{# This specifically makes a bipartite igraph from a matrix.}
+\end{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in graph.incidence(swi): object 'swi' not found}}\begin{alltt}
+\hlstd{> }\hlstd{swn} \hlcom{# UN-B ; 32 89}
+\end{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in eval(expr, envir, enclos): object 'swn' not found}}\begin{alltt}
+\hlstd{> }\hlkwd{plot}\hlstd{(swn)}
+\end{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'plot': object 'swn' not found}}\begin{alltt}
+\hlstd{> }\hlstd{swpr} \hlkwb{<-} \hlkwd{bipartite.projection}\hlstd{(swn)} \hlcom{# This makes the graph two one-mode networks}
+\end{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in "{}igraph"{} \%in\% class(graph): object 'swn' not found}}\begin{alltt}
+\hlstd{> }\hlcom{# What is this? - instead of just 1:1 node relationships there are two overlapping networks}
+\hlstd{> }\hlcom{#  and the realtionships we care about are between people of the other network.}
+\hlstd{> }\hlcom{#   so now our edges are weighted, and igraph strangely calls this a nonbipartite graph? Why?}
+\hlstd{> }\hlcom{#     Well now we don't really have one anymore! Instead we transfered the bipartide relationship}
+\hlstd{> }\hlcom{#     To a weighted relationship using that projection function. - Weights are number of shared}
+\hlstd{> }\hlcom{#     Event interactions. For more, check out this cool illistration:}
+\hlstd{> }\hlcom{#   https://en.wikipedia.org/wiki/Bipartite_network_projection#/media/File:Bipartite_network_projection.png}
+\hlstd{> }
+\hlstd{> }\hlkwd{plot}\hlstd{(swpr}\hlopt{$}\hlstd{proj2,} \hlcom{# Note two proj's we get from that projection, via X or Y projection weights}
+\hlstd{+ }     \hlkwc{edge.width} \hlstd{=} \hlkwd{E}\hlstd{(swpr}\hlopt{$}\hlstd{proj2)}\hlopt{$}\hlstd{weight)}
+\end{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'plot': object 'swpr' not found}}\begin{alltt}
+\hlstd{> }\hlkwd{cor}\hlstd{(swi)} \hlcom{# Correlation of our matrix object to see structural position relationship. -1 : 1 (weights)}
+\end{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in is.data.frame(x): object 'swi' not found}}\begin{alltt}
+\hlstd{> }\hlcom{# Note that Flora and Oliva are structurally similar here and elsewhere}
+\hlstd{> }
+\hlstd{> }
+\hlstd{> }\hlcom{#  Going beyond Pearson correlation to see structural simularity:}
+\hlstd{> }\hlcom{# dissimularity measure (-1 to cor).}
+\hlstd{> }\hlkwd{as.dist}\hlstd{(}\hlnum{1}\hlopt{-}\hlkwd{cor}\hlstd{(swi),} \hlkwc{upper}\hlstd{=}\hlnum{TRUE}\hlstd{)} \hlcom{# Upper = T just prints both sides of diag. Doesn't effect analysis}
+\end{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in is.data.frame(x): object 'swi' not found}}\begin{alltt}
+\hlstd{> }\hlcom{# We want to move away from just comparing two individuals, but instead find entire clusters}
+\hlstd{> }\hlcom{#  of attendants that exibit similar behavior. And then be able to analyize that more interesting}
+\hlstd{> }\hlcom{#  result. But to do this, we have to find how nodes are disimilar, so this data is more}
+\hlstd{> }\hlcom{#  valuable to find these clusters! Note we have a wider range now because with the -1}
+\hlstd{> }\hlcom{#  we could have a 1 - a negative -1, or 1+1 (1- -1).}
+\hlstd{> }
+\hlstd{> }\hlstd{swdend} \hlkwb{<-} \hlkwd{hclust}\hlstd{(}\hlkwd{as.dist}\hlstd{(}\hlnum{1}\hlopt{-}\hlkwd{cor}\hlstd{(swi)))} \hlcom{# Standard clustering tool}
+\end{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in is.data.frame(x): object 'swi' not found}}\begin{alltt}
+\hlstd{> }\hlkwd{plot}\hlstd{(swdend)} \hlcom{# So how do we read this Dendrogram?}
+\end{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'plot': object 'swdend' not found}}\begin{alltt}
+\hlstd{> }\hlcom{# Height is our value, and as we parse that value down, it's grouped into values.}
+\hlstd{> }\hlcom{#  Similar values become grouped under other values.}
+\hlstd{> }\hlcom{#  So, read from the top down, initial seperation was around the 1.0 mark, developing two}
+\hlstd{> }\hlcom{#  clusters, which have unique values apart from one another. as more and more nodes find}
+\hlstd{> }\hlcom{#  simularity. For more:}
+\hlstd{> }\hlcom{#  https://www.displayr.com/what-is-dendrogram/#:~:text=How%20to%20read%20a%20dendrogram,objects%20are%20A%20and%20B.}
+\hlstd{> }
+\hlstd{> }
+\hlstd{> }\hlcom{# Here is a heatmap with the same viz on each axis}
+\hlstd{> }\hlkwd{heatmap.2}\hlstd{(}\hlkwd{as.matrix}\hlstd{(}\hlkwd{as.dist}\hlstd{(}\hlnum{1}\hlopt{-}\hlkwd{cor}\hlstd{(swi))),}
+\hlstd{+ }          \hlkwc{trace}\hlstd{=}\hlstr{"none"}\hlstd{,}
+\hlstd{+ }          \hlkwc{revC}\hlstd{=}\hlnum{TRUE}\hlstd{)}
+\end{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'as.matrix': object 'swi' not found}}\begin{alltt}
+\hlstd{> }\hlkwd{cutree}\hlstd{(swdend,} \hlkwc{k}\hlstd{=}\hlnum{2}\hlstd{)} \hlcom{# here we are telling R where we should cut our clusters at.}
+\end{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in nrow(tree\$merge): object 'swdend' not found}}\begin{alltt}
+\hlstd{> }\hlcom{#  THEORY and your interpretation of the data drives this decision, a dendrogram will not}
+\hlstd{> }\hlcom{#  tell you where to cut your clusters.}
+\hlstd{> }
+\hlstd{> }\hlcom{# So we identified two groups. Let's graph each of these to show our new network:}
+\hlstd{> }\hlkwd{plot}\hlstd{(swpr}\hlopt{$}\hlstd{proj2,} \hlkwc{edge.width}\hlstd{=}\hlkwd{E}\hlstd{(swpr}\hlopt{$}\hlstd{proj2)}\hlopt{$}\hlstd{weight,} \hlkwc{vertex.color}\hlstd{=}\hlkwd{cutree}\hlstd{(swdend,} \hlkwc{k}\hlstd{=}\hlnum{2}\hlstd{))}
+\end{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'plot': object 'swpr' not found}}\begin{alltt}
+\hlstd{> }\hlcom{## Let's do the same analysis for a one-mode network.}
+\hlstd{> }
+\hlstd{> }\hlcom{# Let's just ignore this package and data coding here for now... Copy and Pasted}
+\hlstd{> }\hlkwd{library}\hlstd{(ergm)}
+\hlstd{> }\hlkwd{data}\hlstd{(}\hlstr{"florentine"}\hlstd{)}
+\hlstd{> }\hlkwd{require}\hlstd{(intergraph)}
+\hlstd{> }\hlkwd{require}\hlstd{(igraph)} \hlcom{# I'm adding igraph back in here to override other packages that might have similarly named functions}
+\hlstd{> }
+\hlstd{> }\hlcom{# Igraph objects, thanks to intergraph package (as seen before)}
+\hlstd{> }\hlstd{flo_m} \hlkwb{<-} \hlkwd{asIgraph}\hlstd{(flomarriage)}
+\hlstd{> }\hlstd{flo_b} \hlkwb{<-} \hlkwd{asIgraph}\hlstd{(flobusiness)}
+\hlstd{> }
+\hlstd{> }\hlcom{# This sets a default name, and fixes an issue with unnamed nodes:}
+\hlstd{> }\hlcom{#   (Professor discovered this error by first not doing this code:)}
+\hlstd{> }\hlkwd{V}\hlstd{(flo_m)}\hlopt{$}\hlstd{name} \hlkwb{<-} \hlkwd{V}\hlstd{(flo_m)}\hlopt{$}\hlstd{vertex.names}
+\hlstd{> }\hlkwd{V}\hlstd{(flo_b)}\hlopt{$}\hlstd{name} \hlkwb{<-} \hlkwd{V}\hlstd{(flo_b)}\hlopt{$}\hlstd{vertex.names}
+\hlstd{> }
+\hlstd{> }\hlcom{# Stacking our adjacency matricies on top of one another by row bind (rbind())}
+\hlstd{> }\hlcom{#  Why? To consider multiple relationship types at the same time.}
+\hlstd{> }\hlstd{flo_both} \hlkwb{<-} \hlkwd{rbind}\hlstd{(}\hlkwd{as.matrix}\hlstd{(}\hlkwd{get.adjacency}\hlstd{(flo_m,}\hlkwc{names}\hlstd{=}\hlnum{TRUE}\hlstd{)),}
+\hlstd{+ }                  \hlkwd{as.matrix}\hlstd{(}\hlkwd{get.adjacency}\hlstd{(flo_b,}\hlkwc{names}\hlstd{=}\hlnum{TRUE}\hlstd{)))}
+\hlstd{> }
+\hlstd{> }\hlstd{flo_dist} \hlkwb{<-} \hlkwd{as.dist}\hlstd{(}\hlnum{1}\hlopt{-}\hlkwd{cor}\hlstd{(flo_both))}
+\hlstd{> }\hlcom{## Warning in cor(flo_both): the standard deviation is zero}
+\hlstd{> }\hlstd{flo_dist}
+\end{alltt}
+\begin{verbatim}
+##              Acciaiuoli   Albizzi Barbadori  Bischeri Castellani    Ginori
+## Albizzi       0.4415844                                                   
+## Barbadori     0.6261217 0.8798272                                         
+## Bischeri      1.0862796 0.8798272 1.0256410                               
+## Castellani    1.0862796 1.1545079 1.0256410 0.4102564                     
+## Ginori        1.0577671 1.1034483 0.8798272 1.1545079  0.8798272          
+## Guadagni      1.0862796 1.1545079 1.2307692 1.0256410  1.0256410 0.8798272
+## Lamberteschi  1.0772898 0.8431363 0.7657122 0.5452060  0.9862184 1.1384091
+## Medici        1.1299888 1.2327814 1.1791062 1.3476767  1.0105357 0.7813265
+## Pazzi         1.0463739 1.0830455 0.7932754 1.1240347  1.1240347 0.6401363
+## Peruzzi       1.0950382 1.1701926 0.8668499 0.8668499  0.6731771 0.9108515
+## Pucci                NA        NA        NA        NA         NA        NA
+## Ridolfi       0.4415844 0.7356322 0.8798272 0.8798272  0.8798272 1.1034483
+## Salviati      0.4415844 0.7356322 0.6051466 1.1545079  1.1545079 0.7356322
+## Strozzi       1.0678844 1.1215661 0.9394772 0.9394772  0.9394772 1.1215661
+## Tornabuoni    0.5248090 0.4732134 0.6973862 0.9394772  1.1815683 0.7973898
+##               Guadagni Lamberteschi    Medici     Pazzi   Peruzzi     Pucci
+## Albizzi                                                                    
+## Barbadori                                                                  
+## Bischeri                                                                   
+## Castellani                                                                 
+## Ginori                                                                     
+## Guadagni                                                                   
+## Lamberteschi 0.9862184                                                     
+## Medici       1.0105357    1.3114511                                        
+## Pazzi        1.1240347    1.1111111 0.9150588                              
+## Peruzzi      0.6731771    0.8113260 1.2238141 1.1366260                    
+## Pucci               NA           NA        NA        NA        NA          
+## Ridolfi      0.8798272    1.1384091 1.0070540 1.0830455 0.9108515        NA
+## Salviati     1.1545079    1.1384091 1.2327814 0.6401363 1.1701926        NA
+## Strozzi      0.9394772    1.1626500 1.0746047 1.0975900 0.7428571        NA
+## Tornabuoni   1.1815683    0.9024100 1.0746047 0.7072300 1.2000000        NA
+##                Ridolfi  Salviati   Strozzi
+## Albizzi                                   
+## Barbadori                                 
+## Bischeri                                  
+## Castellani                                
+## Ginori                                    
+## Guadagni                                  
+## Lamberteschi                              
+## Medici                                    
+## Pazzi                                     
+## Peruzzi                                   
+## Pucci                                     
+## Ridolfi                                   
+## Salviati     0.7356322                    
+## Strozzi      1.1215661 1.1215661          
+## Tornabuoni   0.7973898 0.4732134 0.8571429
+\end{verbatim}
+\begin{alltt}
+\hlstd{> }\hlstd{flo_dist[}\hlkwd{is.na}\hlstd{(flo_dist)}\hlopt{==}\hlnum{TRUE}\hlstd{]}\hlkwb{<-}\hlnum{2} \hlcom{# Fixes NA error by reassigning to number 2}
+\hlstd{> }
+\hlstd{> }\hlcom{## With NetCluster}
+\hlstd{> }\hlstd{flo_dend} \hlkwb{<-} \hlkwd{hclust}\hlstd{(flo_dist)}
+\hlstd{> }\hlkwd{plot}\hlstd{(flo_dend)}
+\end{alltt}
+\end{kframe}
+\includegraphics[width=\maxwidth]{figure/Network_Properties-1} 
+\begin{kframe}\begin{alltt}
+\hlstd{> }\hlcom{## With gplots}
+\hlstd{> }\hlkwd{heatmap.2}\hlstd{(}\hlkwd{as.matrix}\hlstd{(flo_dist),}\hlkwc{trace}\hlstd{=}\hlstr{"none"}\hlstd{,}\hlkwc{revC}\hlstd{=}\hlnum{TRUE}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\includegraphics[width=\maxwidth]{figure/Network_Properties-2} 
+\begin{kframe}\begin{alltt}
+\hlstd{> }\hlkwd{plot}\hlstd{(flo_m,}\hlkwc{vertex.color}\hlstd{=}\hlkwd{cutree}\hlstd{(flo_dend,} \hlkwc{k}\hlstd{=}\hlnum{4}\hlstd{))}
+\end{alltt}
+\end{kframe}
+\includegraphics[width=\maxwidth]{figure/Network_Properties-3} 
+\begin{kframe}\begin{alltt}
+\hlstd{> }\hlcom{# lots of explaination and data reading in the seminar notes from the course!}
+\hlstd{> }\hlcom{#   Revisit it there if there are any questions it's very well documented.}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+\end{center}
+
+\subsection{Diads and Triads}
+
+\being{center}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.165, 0.169, 0.184}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{> }\hlkwd{library}\hlstd{(ergm)}
+\hlstd{> }\hlkwd{data}\hlstd{(}\hlstr{"faux.dixon.high"}\hlstd{)}
+\hlstd{> }\hlkwd{detach}\hlstd{(package}\hlopt{:}\hlstd{ergm)}
+\hlstd{> }\hlkwd{detach}\hlstd{(package}\hlopt{:}\hlstd{network)}
+\end{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: package 'network' is required by 'sna' so will not be detached}}\begin{alltt}
+\hlstd{> }\hlkwd{require}\hlstd{(intergraph)}
+\hlstd{> }\hlkwd{require}\hlstd{(igraph)}
+\hlstd{> }\hlstd{dixon} \hlkwb{<-} \hlkwd{asIgraph}\hlstd{(faux.dixon.high)}
+\hlstd{> }
+\hlstd{> }
+\hlstd{> }\hlcom{# Network Basics:}
+\hlstd{> }\hlkwd{summary}\hlstd{(dixon)}
+\end{alltt}
+\begin{verbatim}
+## IGRAPH 8e6affb D--- 248 1197 -- 
+## + attr: title (g/c), grade (v/n), na (v/l), race (v/c), scode (v/n),
+## | sex (v/n), vertex.names (v/c), na (e/l)
+\end{verbatim}
+\begin{alltt}
+\hlstd{> }\hlcom{# Plotting with color by grade. [How might we clean this code?]}
+\hlstd{> }\hlkwd{plot}\hlstd{(dixon,}
+\hlstd{+ }     \hlkwc{vertex.label}\hlstd{=}\hlnum{NA}\hlstd{,}
+\hlstd{+ }     \hlkwc{edge.arrow.size}\hlstd{=}\hlnum{0.25}\hlstd{,}
+\hlstd{+ }     \hlkwc{vertex.size}\hlstd{=}\hlnum{3}\hlstd{,}
+\hlstd{+ }     \hlkwc{edge.width}\hlstd{=}\hlnum{0.5}\hlstd{,}
+\hlstd{+ }     \hlkwc{vertex.color}\hlstd{=}\hlkwd{V}\hlstd{(dixon)}\hlopt{$}\hlstd{grade)}
+\hlstd{> }\hlkwd{legend}\hlstd{(}\hlstr{"topright"}\hlstd{,}
+\hlstd{+ }       \hlkwc{legend}\hlstd{=}\hlnum{7}\hlopt{:}\hlnum{12}\hlstd{,}
+\hlstd{+ }       \hlkwc{pch}\hlstd{=}\hlnum{19}\hlstd{,}
+\hlstd{+ }       \hlkwc{col}\hlstd{=}\hlkwd{categorical_pal}\hlstd{(}\hlnum{8}\hlstd{)[}\hlkwd{c}\hlstd{(}\hlnum{7}\hlstd{,}\hlnum{8}\hlstd{,}\hlnum{1}\hlstd{,}\hlnum{2}\hlstd{,}\hlnum{3}\hlstd{,}\hlnum{4}\hlstd{)])}
+\end{alltt}
+\end{kframe}
+\includegraphics[width=\maxwidth]{figure/Diad_Triad-1} 
+\begin{kframe}\begin{alltt}
+\hlstd{> }\hlcom{## Dyads:}
+\hlstd{> }\hlcom{#    Reciprocity:  both nodes point to one another.}
+\hlstd{> }\hlcom{#    Here we can get mutual, asymmetrical, and null counts:}
+\hlstd{> }
+\hlstd{> }\hlkwd{dyad.census}\hlstd{(dixon)} \hlcom{# Note the $ indicator for each object.}
+\end{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in FUN(X[[i]], ...): as.edgelist.sna input must be an adjacency matrix/array, edgelist matrix, network, or sparse matrix, or list thereof.}}\begin{alltt}
+\hlstd{> }\hlkwd{reciprocity}\hlstd{(dixon)} \hlcom{# We can calculate this via dyad census (above) or through adjacency matrix.}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.3659148
+\end{verbatim}
+\begin{alltt}
+\hlstd{> }\hlcom{# Dyad Census:}
+\hlstd{> }\hlnum{2}\hlopt{*}\hlkwd{dyad_census}\hlstd{(dixon)}\hlopt{$}\hlstd{mut}\hlopt{/}\hlkwd{ecount}\hlstd{(dixon)}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.3659148
+\end{verbatim}
+\begin{alltt}
+\hlstd{> }\hlcom{# two times the mutual count to control for the directionality of edges (which we use as denominator}
+\hlstd{> }
+\hlstd{> }
+\hlstd{> }\hlcom{# Using the adjacency matrix}
+\hlstd{> }\hlstd{dam} \hlkwb{<-} \hlkwd{as.matrix}\hlstd{(}\hlkwd{get.adjacency}\hlstd{(dixon))}
+\hlstd{> }
+\hlstd{> }\hlkwd{sum}\hlstd{(dam} \hlopt{%*%} \hlkwd{t}\hlstd{(dam))} \hlcom{# [I've added matrix multiplier here for a teaching moment if needed]}
+\end{alltt}
+\begin{verbatim}
+## [1] 8783
+\end{verbatim}
+\begin{alltt}
+\hlstd{> }\hlcom{## Element-wise multiplation of the adjacency matrix, giving us the full number of mutual edges}
+\hlstd{> }\hlcom{#    (equivalent to 2*dyad_census(dixon)$mut.)}
+\hlstd{> }
+\hlstd{> }\hlkwd{sum}\hlstd{(dam)} \hlcom{## The count of the total number of edges in the network (equivlaent to ecount(dixon).)}
+\end{alltt}
+\begin{verbatim}
+## [1] 1197
+\end{verbatim}
+\begin{alltt}
+\hlstd{> }\hlkwd{sum}\hlstd{(dam}\hlopt{*}\hlkwd{t}\hlstd{(dam))}\hlopt{/}\hlkwd{sum}\hlstd{(dam)}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.3659148
+\end{verbatim}
+\begin{alltt}
+\hlstd{> }\hlcom{# Note all three are the same:}
+\hlstd{> }\hlkwd{reciprocity}\hlstd{(dixon)} \hlcom{# Simple function}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.3659148
+\end{verbatim}
+\begin{alltt}
+\hlstd{> }\hlnum{2}\hlopt{*}\hlkwd{dyad_census}\hlstd{(dixon)}\hlopt{$}\hlstd{mut}\hlopt{/}\hlkwd{ecount}\hlstd{(dixon)} \hlcom{# Dyad Census utilization}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.3659148
+\end{verbatim}
+\begin{alltt}
+\hlstd{> }\hlkwd{sum}\hlstd{(dam}\hlopt{*}\hlkwd{t}\hlstd{(dam))}\hlopt{/}\hlkwd{sum}\hlstd{(dam)} \hlcom{# Using adjacency matrix}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.3659148
+\end{verbatim}
+\begin{alltt}
+\hlstd{> }\hlcom{# 37% chance that if Student A names Student B as their friend; Student B will have also named A.}
+\hlstd{> }\hlcom{#    More generally, we can say that 37% of edges are reciprocated.}
+\hlstd{> }
+\hlstd{> }
+\hlstd{> }\hlcom{# Or we can use an alternative reciprocity calculation:}
+\hlstd{> }\hlkwd{reciprocity}\hlstd{(dixon,} \hlkwc{mode}\hlstd{=}\hlstr{"ratio"}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.2239264
+\end{verbatim}
+\begin{alltt}
+\hlstd{> }\hlkwd{dyad.census}\hlstd{(dixon)}\hlopt{$}\hlstd{mut}\hlopt{/}\hlstd{(}\hlkwd{dyad.census}\hlstd{(dixon)}\hlopt{$}\hlstd{mut} \hlopt{+} \hlkwd{dyad.census}\hlstd{(dixon)}\hlopt{$}\hlstd{asym)}
+\end{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in FUN(X[[i]], ...): as.edgelist.sna input must be an adjacency matrix/array, edgelist matrix, network, or sparse matrix, or list thereof.}}\begin{alltt}
+\hlstd{> }\hlcom{# mutual connections / mutal + asym}
+\hlstd{> }
+\hlstd{> }\hlcom{# Homophily  - relationships among people given a variable}
+\hlstd{> }\hlkwd{assortativity.nominal}\hlstd{(dixon,}\hlkwd{V}\hlstd{(dixon)}\hlopt{$}\hlstd{grade)}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.5592401
+\end{verbatim}
+\begin{alltt}
+\hlstd{> }\hlkwd{assortativity.nominal}\hlstd{(dixon,}\hlkwd{V}\hlstd{(dixon)}\hlopt{$}\hlstd{sex)}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.1358054
+\end{verbatim}
+\begin{alltt}
+\hlstd{> }\hlkwd{assortativity.nominal}\hlstd{(dixon,}\hlkwd{factor}\hlstd{(}\hlkwd{V}\hlstd{(dixon)}\hlopt{$}\hlstd{race))} \hlcom{# Had to factorize race here}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.5761453
+\end{verbatim}
+\begin{alltt}
+\hlstd{> }\hlcom{# .nominal is giving us group-wise assortativity, without that it would treat as continuous.}
+\hlstd{> }\hlcom{# postive number means more assortment (sorting) into like groups with the variable than non-variable.}
+\hlstd{> }
+\hlstd{> }
+\hlstd{> }
+\hlstd{> }\hlcom{## Triads}
+\hlstd{> }\hlkwd{transitivity}\hlstd{(dixon)}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.1812741
+\end{verbatim}
+\begin{alltt}
+\hlstd{> }\hlcom{# 18% chance of two neighbors of a vertex are themselves connected.}
+\hlstd{> }\hlcom{#    put another way, 18% of all triads are closed triangles (triads)}
+\hlstd{> }
+\hlstd{> }\hlcom{# Social networks often have a high level of transitivity, compare this to a completely random graph:}
+\hlstd{> }\hlcom{#   of same size:}
+\hlstd{> }\hlstd{rand} \hlkwb{<-} \hlkwd{sample_gnm}\hlstd{(}\hlkwd{vcount}\hlstd{(dixon),}\hlkwd{ecount}\hlstd{(dixon),}\hlkwc{directed}\hlstd{=}\hlnum{TRUE}\hlstd{)}
+\hlstd{> }\hlkwd{summary}\hlstd{(rand)}
+\end{alltt}
+\begin{verbatim}
+## IGRAPH 8eaa459 D--- 248 1197 -- Erdos renyi (gnm) graph
+## + attr: name (g/c), type (g/c), loops (g/l), m (g/n)
+\end{verbatim}
+\begin{alltt}
+\hlstd{> }\hlkwd{transitivity}\hlstd{(rand)}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.03954752
+\end{verbatim}
+\begin{alltt}
+\hlstd{> }\hlcom{# Triad Census:}
+\hlstd{> }\hlcom{# ?triad.census() # This help page defines most of the below information:}
+\hlstd{> }
+\hlstd{> }\hlstd{census_labels} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlstr{'003'}\hlstd{,}\hlstr{'012'}\hlstd{,}\hlstr{'102'}\hlstd{,}\hlstr{'021D'}\hlstd{,}\hlstr{'021U'}\hlstd{,}\hlstr{'021C'}\hlstd{,}\hlstr{'111D'}\hlstd{,}\hlstr{'111U'}\hlstd{,}
+\hlstd{+ }                  \hlstr{'030T'}\hlstd{,}\hlstr{'030C'}\hlstd{,}\hlstr{'201'}\hlstd{,}\hlstr{'120D'}\hlstd{,}\hlstr{'120U'}\hlstd{,}\hlstr{'120C'}\hlstd{,}\hlstr{'210'}\hlstd{,}\hlstr{'300'}\hlstd{)}
+\hlstd{> }\hlcom{## this is the order in which the triads appear in the triad census output.}
+\hlstd{> }\hlkwd{triad.census}\hlstd{(dixon)}
+\end{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in FUN(X[[i]], ...): as.edgelist.sna input must be an adjacency matrix/array, edgelist matrix, network, or sparse matrix, or list thereof.}}\begin{alltt}
+\hlstd{> }\hlstd{df} \hlkwb{<-} \hlkwd{data.frame}\hlstd{(census_labels,} \hlkwd{triad.census}\hlstd{(dixon))}
+\end{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in FUN(X[[i]], ...): as.edgelist.sna input must be an adjacency matrix/array, edgelist matrix, network, or sparse matrix, or list thereof.}}\begin{alltt}
+\hlstd{> }\hlcom{## binding the two labels with the output will let us actually interpret this!}
+\hlstd{> }\hlcom{#}
+\hlstd{> }\hlcom{# So most common are unconnected triads, then triads with only one asymmetric edge...}
+\hlstd{> }
+\hlstd{> }\hlkwd{triad.census}\hlstd{(rand)}
+\end{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in FUN(X[[i]], ...): as.edgelist.sna input must be an adjacency matrix/array, edgelist matrix, network, or sparse matrix, or list thereof.}}\end{kframe}
+\end{knitrout}
+\end{center}
+
+\subsection{Network Centrality}
 
 Measuring the centrality of a network is indicating which node(s) are most central, or critical, to the network remaning the shape it is in. A central node, for example, can be the person inbetween groups, or just a well connected node in general. There are many ways to measure and detect network centrality, some of which I've studied are listed below. Later in this section we will compare each of these finding that they typically correlate with one another (good!). Cannon advice is to report all of the relevant measures of centrality rather than spending too much time choosing any particular one.
 
@@ -3734,7 +4683,7 @@ Now that we have the data read in and cleaned (mostly tracking the id numbers), 
 \hlstd{> }\hlkwd{summary}\hlstd{(graph.object)} \hlcom{# Basic statistics seem okay}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH f5412fc DN-- 610 1043 -- 
+## IGRAPH 8fb9244 DN-- 610 1043 -- 
 ## + attr: name (v/c)
 \end{verbatim}
 \begin{alltt}
@@ -3790,49 +4739,51 @@ We can examine some measures of centrality from this network (using the full net
 \hlstd{> }
 \hlstd{> }\hlcom{# --}
 \hlstd{> }\hlstd{degree} \hlkwb{<-} \hlkwd{degree}\hlstd{(graph.object)}
+\end{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in FUN(X[[i]], ...): as.edgelist.sna input must be an adjacency matrix/array, edgelist matrix, network, or sparse matrix, or list thereof.}}\begin{alltt}
 \hlstd{> }\hlstd{in.degree} \hlkwb{<-} \hlkwd{degree}\hlstd{(graph.object,} \hlkwc{mode}\hlstd{=}\hlstr{'in'}\hlstd{)}
+\end{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in degree(graph.object, mode = "{}in"{}): unused argument (mode = "{}in"{})}}\begin{alltt}
 \hlstd{> }\hlstd{out.degree} \hlkwb{<-} \hlkwd{degree}\hlstd{(graph.object,} \hlkwc{mode}\hlstd{=}\hlstr{'out'}\hlstd{)}
-\hlstd{> }
+\end{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in degree(graph.object, mode = "{}out"{}): unused argument (mode = "{}out"{})}}\begin{alltt}
 \hlstd{> }\hlcom{# Summary Statistics:}
 \hlstd{> }\hlkwd{summary}\hlstd{(out.degree)}
 \end{alltt}
-\begin{verbatim}
-##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##   0.000   1.000   1.000   1.859   2.000  58.000
-\end{verbatim}
-\begin{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in h(simpleError(msg, call)): error in evaluating the argument 'object' in selecting a method for function 'summary': object 'out.degree' not found}}\begin{alltt}
 \hlstd{> }\hlkwd{summary}\hlstd{(in.degree)}
 \end{alltt}
-\begin{verbatim}
-##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##   0.000   1.000   1.000   1.859   2.000  18.000
-\end{verbatim}
-\begin{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in h(simpleError(msg, call)): error in evaluating the argument 'object' in selecting a method for function 'summary': object 'in.degree' not found}}\begin{alltt}
 \hlstd{> }\hlkwd{summary}\hlstd{(degree)}
 \end{alltt}
-\begin{verbatim}
-##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##   1.000   1.000   2.000   3.718   4.000  65.000
-\end{verbatim}
-\begin{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in object[[i]]: object of type 'closure' is not subsettable}}\begin{alltt}
 \hlstd{> }\hlkwd{sd}\hlstd{(out.degree)}
 \end{alltt}
-\begin{verbatim}
-## [1] 3.303878
-\end{verbatim}
-\begin{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in is.data.frame(x): object 'out.degree' not found}}\begin{alltt}
 \hlstd{> }\hlkwd{sd}\hlstd{(in.degree)}
 \end{alltt}
-\begin{verbatim}
-## [1] 2.229811
-\end{verbatim}
-\begin{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in is.data.frame(x): object 'in.degree' not found}}\begin{alltt}
 \hlstd{> }\hlkwd{sd}\hlstd{(degree)}
 \end{alltt}
-\begin{verbatim}
-## [1] 4.761777
-\end{verbatim}
-\begin{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in as.double(x): cannot coerce type 'closure' to vector of type 'double'}}\begin{alltt}
 \hlstd{> }\hlcom{# Grammar of Graphics:}
 \hlstd{> }\hlkwd{library}\hlstd{(ggplot2)}
 \hlstd{> }\hlkwd{library}\hlstd{(gridExtra)}
@@ -3844,14 +4795,20 @@ We can examine some measures of centrality from this network (using the full net
 \hlstd{+ }     \hlkwd{ylab}\hlstd{(}\hlstr{"N"}\hlstd{)}\hlopt{+}
 \hlstd{+ }     \hlkwd{geom_vline}\hlstd{(}\hlkwc{xintercept}\hlstd{=}\hlnum{1.859}\hlstd{,} \hlkwc{linetype}\hlstd{=}\hlstr{"dashed"}\hlstd{)}\hlopt{+}
 \hlstd{+ }     \hlkwd{annotate}\hlstd{(}\hlstr{"text"}\hlstd{,} \hlkwc{x} \hlstd{=} \hlnum{50}\hlstd{,} \hlkwc{y} \hlstd{=} \hlnum{400}\hlstd{,} \hlkwc{label} \hlstd{=} \hlstr{"sd = 3.30"}\hlstd{)}
-\hlstd{> }
+\end{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in eval\_tidy(mapping\$x, data, caller\_env): object 'out.degree' not found}}\begin{alltt}
 \hlstd{> }\hlstd{p2} \hlkwb{<-} \hlkwd{qplot}\hlstd{(in.degree)}\hlopt{+}
 \hlstd{+ }     \hlkwd{theme_bw}\hlstd{()}\hlopt{+}
 \hlstd{+ }     \hlkwd{xlab}\hlstd{(}\hlstr{"Inward Degree"}\hlstd{)}\hlopt{+}
 \hlstd{+ }     \hlkwd{ylab}\hlstd{(}\hlstr{"N"}\hlstd{)}\hlopt{+}
 \hlstd{+ }     \hlkwd{geom_vline}\hlstd{(}\hlkwc{xintercept}\hlstd{=}\hlnum{1.859}\hlstd{,} \hlkwc{linetype}\hlstd{=}\hlstr{"dashed"}\hlstd{)}\hlopt{+}
 \hlstd{+ }     \hlkwd{annotate}\hlstd{(}\hlstr{"text"}\hlstd{,} \hlkwc{x} \hlstd{=} \hlnum{16}\hlstd{,} \hlkwc{y} \hlstd{=} \hlnum{213}\hlstd{,} \hlkwc{label} \hlstd{=} \hlstr{"sd = 2.23"}\hlstd{)}
-\hlstd{> }
+\end{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in eval\_tidy(mapping\$x, data, caller\_env): object 'in.degree' not found}}\begin{alltt}
 \hlstd{> }\hlstd{p3} \hlkwb{<-} \hlkwd{qplot}\hlstd{(degree)}\hlopt{+}
 \hlstd{+ }     \hlkwd{theme_bw}\hlstd{()}\hlopt{+}
 \hlstd{+ }     \hlkwd{xlab}\hlstd{(}\hlstr{"Degree"}\hlstd{)}\hlopt{+}
@@ -3877,9 +4834,9 @@ We can examine some measures of centrality from this network (using the full net
 \hlstd{+ }     \hlstd{)}
 \hlstd{+ }\hlstd{)}
 \end{alltt}
-\end{kframe}
-\includegraphics[width=6in]{figure/degree-1} 
 
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: Aesthetics must be valid data columns. Problematic aesthetic(s): x = degree. \\\#\# Did you mistype the name of a data column or forget to add after\_stat()?}}\end{kframe}
 \end{knitrout}
 \end{center}
 
@@ -3894,110 +4851,82 @@ The next part was difficult, and probably could be done better. I looked at a li
 \hlstd{> }
 \hlstd{> }\hlcom{## closeness centrality}
 \hlstd{> }\hlstd{c.graph.object} \hlkwb{<-} \hlkwd{closeness}\hlstd{(graph.object)}
+\end{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in FUN(X[[i]], ...): as.edgelist.sna input must be an adjacency matrix/array, edgelist matrix, network, or sparse matrix, or list thereof.}}\begin{alltt}
 \hlstd{> }\hlkwd{summary}\hlstd{(c.graph.object)}
 \end{alltt}
-\begin{verbatim}
-##      Min.   1st Qu.    Median      Mean   3rd Qu.      Max. 
-## 4.057e-06 4.065e-06 4.165e-06 5.800e-06 8.021e-06 8.439e-06
-\end{verbatim}
-\begin{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in h(simpleError(msg, call)): error in evaluating the argument 'object' in selecting a method for function 'summary': object 'c.graph.object' not found}}\begin{alltt}
 \hlstd{> }\hlkwd{E}\hlstd{(graph.object)[}\hlkwd{order}\hlstd{(c.graph.object,} \hlkwc{decreasing}\hlstd{=T)[}\hlnum{1}\hlopt{:}\hlnum{10}\hlstd{]]}
 \end{alltt}
-\begin{verbatim}
-## + 10/924 edges from f542dc5 (vertex names):
-##  [1] yodatsracist       ->dewarr   SpecificallyGeneral->gacorley
-##  [3] inh-uman           ->gacorley Shazbot_Nanu       ->Ramicus 
-##  [5] Mentalpopcorn      ->PeechMan Drict              ->USMCLee 
-##  [7] apaniyam           ->faguzzi  ExpectedSurprisal  ->sverdo  
-##  [9] UpsideVII          ->apaniyam VincentStaples     ->sverdo
-\end{verbatim}
-\begin{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in order(c.graph.object, decreasing = T): object 'c.graph.object' not found}}\begin{alltt}
 \hlstd{> }\hlstd{c.lg.graph.object} \hlkwb{<-} \hlkwd{closeness}\hlstd{(lg_graph.object)}
+\end{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in FUN(X[[i]], ...): as.edgelist.sna input must be an adjacency matrix/array, edgelist matrix, network, or sparse matrix, or list thereof.}}\begin{alltt}
 \hlstd{> }\hlkwd{E}\hlstd{(graph.object)[}\hlkwd{order}\hlstd{(c.lg.graph.object,} \hlkwc{decreasing}\hlstd{=T)[}\hlnum{1}\hlopt{:}\hlnum{10}\hlstd{]]}
 \end{alltt}
-\begin{verbatim}
-## + 10/924 edges from f542dc5 (vertex names):
-##  [1] Atriox998         ->wellmanicuredman  
-##  [2] Galileotierraplana->Atriox998         
-##  [3] wellmanicuredman  ->Atriox998         
-##  [4] Atriox998         ->Galileotierraplana
-##  [5] dmoni002          ->UpsideVII         
-##  [6] UpsideVII         ->apaniyam          
-##  [7] thatgerhard       ->apaniyam          
-##  [8] Cyllya            ->siali             
-##  [9] faguzzi           ->apaniyam          
-## [10] siali             ->apaniyam
-\end{verbatim}
-\begin{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in order(c.lg.graph.object, decreasing = T): object 'c.lg.graph.object' not found}}\begin{alltt}
 \hlstd{> }\hlcom{## betweenness centrality}
 \hlstd{> }\hlstd{b.graph.object} \hlkwb{<-} \hlkwd{betweenness}\hlstd{(graph.object)}
+\end{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in FUN(X[[i]], ...): as.edgelist.sna input must be an adjacency matrix/array, edgelist matrix, network, or sparse matrix, or list thereof.}}\begin{alltt}
 \hlstd{> }\hlkwd{summary}\hlstd{(b.graph.object)}
 \end{alltt}
-\begin{verbatim}
-##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##     0.0     0.0     0.0   868.9   227.0 29810.0
-\end{verbatim}
-\begin{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in h(simpleError(msg, call)): error in evaluating the argument 'object' in selecting a method for function 'summary': object 'b.graph.object' not found}}\begin{alltt}
 \hlstd{> }\hlkwd{E}\hlstd{(graph.object)[}\hlkwd{order}\hlstd{(b.graph.object,} \hlkwc{decreasing}\hlstd{=T)[}\hlnum{1}\hlopt{:}\hlnum{10}\hlstd{]]}
 \end{alltt}
-\begin{verbatim}
-## + 10/924 edges from f542dc5 (vertex names):
-##  [1] sambalchuck     ->orthag             
-##  [2] DarkGamer       ->Cullen_Ingus       
-##  [3] obamanisha      ->Aquifex            
-##  [4] PLEASE_USE_LOGIC->LD_in_MT           
-##  [5] TychoCelchuuu   ->Traz_Onmale        
-##  [6] sverdo          ->racornist          
-##  [7] owlpellet       ->sverdo             
-##  [8] obamanisha      ->North_London_Gunner
-##  [9] benjaminikuta   ->Klumber            
-## [10] TychoCelchuuu   ->Traz_Onmale
-\end{verbatim}
-\begin{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in order(b.graph.object, decreasing = T): object 'b.graph.object' not found}}\begin{alltt}
 \hlstd{> }\hlstd{b.lg.graph.object} \hlkwb{<-} \hlkwd{betweenness}\hlstd{(lg_graph.object)}
+\end{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in FUN(X[[i]], ...): as.edgelist.sna input must be an adjacency matrix/array, edgelist matrix, network, or sparse matrix, or list thereof.}}\begin{alltt}
 \hlstd{> }\hlkwd{E}\hlstd{(graph.object)[}\hlkwd{order}\hlstd{(b.lg.graph.object,} \hlkwc{decreasing}\hlstd{=T)[}\hlnum{1}\hlopt{:}\hlnum{10}\hlstd{]]}
 \end{alltt}
-\begin{verbatim}
-## + 10/924 edges from f542dc5 (vertex names):
-##  [1] yodatsracist  ->Randomname64   Fibonacci35813->deathlock13   
-##  [3] vulcan583     ->Fibonacci35813 Erinaceous    ->vulcan583     
-##  [5] dewarr        ->yodatsracist   Randomname64  ->Erinaceous    
-##  [7] Randomname64  ->Erinaceous     morpheusx66   ->dewarr        
-##  [9] Erinaceous    ->isntanywhere   isntanywhere  ->Snugglerific
-\end{verbatim}
-\begin{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in order(b.lg.graph.object, decreasing = T): object 'b.lg.graph.object' not found}}\begin{alltt}
 \hlstd{> }\hlcom{## eigenvector centrality}
 \hlstd{> }\hlstd{e.graph.object} \hlkwb{<-} \hlkwd{evcent}\hlstd{(graph.object)}
+\end{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in FUN(X[[i]], ...): as.edgelist.sna input must be an adjacency matrix/array, edgelist matrix, network, or sparse matrix, or list thereof.}}\begin{alltt}
 \hlstd{> }\hlkwd{summary}\hlstd{(e.graph.object}\hlopt{$}\hlstd{vector)}
 \end{alltt}
-\begin{verbatim}
-##     Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
-## 0.00e+00 5.50e-06 5.67e-05 9.94e-03 4.66e-04 1.00e+00
-\end{verbatim}
-\begin{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in h(simpleError(msg, call)): error in evaluating the argument 'object' in selecting a method for function 'summary': object 'e.graph.object' not found}}\begin{alltt}
 \hlstd{> }\hlkwd{E}\hlstd{(graph.object)[}\hlkwd{order}\hlstd{(e.graph.object}\hlopt{$}\hlstd{vector,} \hlkwc{decreasing}\hlstd{=T)[}\hlnum{1}\hlopt{:}\hlnum{10}\hlstd{]]}
 \end{alltt}
-\begin{verbatim}
-## + 10/924 edges from f542dc5 (vertex names):
-##  [1] MoralMidgetry  ->Dumble_dared        just_works_here->PM_ME_YOUR_SHEC0CK 
-##  [3] timeimmemorial ->dewarr              Kai_Daigoji    ->Klumber            
-##  [5] sambalchuck    ->orthag              HerrtomtomAZ   ->Newnews2           
-##  [7] inh-uman       ->chroboo             emptynothing   ->sambalchuck        
-##  [9] Klumber        ->NoFascistAgreements nllanki        ->Klumber
-\end{verbatim}
-\begin{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in order(e.graph.object\$vector, decreasing = T): object 'e.graph.object' not found}}\begin{alltt}
 \hlstd{> }\hlstd{evc_lg_graph.object} \hlkwb{<-} \hlkwd{evcent}\hlstd{(lg_graph.object)}
+\end{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in FUN(X[[i]], ...): as.edgelist.sna input must be an adjacency matrix/array, edgelist matrix, network, or sparse matrix, or list thereof.}}\begin{alltt}
 \hlstd{> }\hlkwd{E}\hlstd{(graph.object)[}\hlkwd{order}\hlstd{(evc_lg_graph.object}\hlopt{$}\hlstd{vector,} \hlkwc{decreasing}\hlstd{=T)[}\hlnum{1}\hlopt{:}\hlnum{10}\hlstd{]]}
 \end{alltt}
-\begin{verbatim}
-## + 10/924 edges from f542dc5 (vertex names):
-##  [1] Dennis_Langley  ->MoralMidgetry  Dennis_Langley  ->MoralMidgetry 
-##  [3] Dennis_Langley  ->MoralMidgetry  deathlock13     ->MoralMidgetry 
-##  [5] deathlock13     ->MoralMidgetry  BuildBetterWorld->MoralMidgetry 
-##  [7] lafayette0508   ->MoralMidgetry  MoralMidgetry   ->Dennis_Langley
-##  [9] MoralMidgetry   ->Dennis_Langley MoralMidgetry   ->Dennis_Langley
-\end{verbatim}
-\end{kframe}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in order(evc\_lg\_graph.object\$vector, decreasing = T): object 'evc\_lg\_graph.object' not found}}\end{kframe}
 \end{knitrout}
 
 
@@ -4009,40 +4938,65 @@ At least from above we know where to start looking for central nodes within our 
 \begin{alltt}
 \hlstd{> }\hlcom{# Let's whip-up a matrix of just our values, look at the correlation between them.}
 \hlstd{> }\hlstd{vec.degree} \hlkwb{<-} \hlkwd{as.vector}\hlstd{(degree)}
+\end{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in as.vector(x, mode): cannot coerce type 'closure' to vector of type 'any'}}\begin{alltt}
 \hlstd{> }\hlstd{vec.in.degree} \hlkwb{<-} \hlkwd{as.vector}\hlstd{(in.degree)}
+\end{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in as.vector(in.degree): object 'in.degree' not found}}\begin{alltt}
 \hlstd{> }\hlstd{vec.out.degree} \hlkwb{<-} \hlkwd{as.vector}\hlstd{(out.degree)}
+\end{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in as.vector(out.degree): object 'out.degree' not found}}\begin{alltt}
 \hlstd{> }\hlstd{vec.c.graph.object} \hlkwb{<-} \hlkwd{as.vector}\hlstd{(c.graph.object)}
+\end{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in as.vector(c.graph.object): object 'c.graph.object' not found}}\begin{alltt}
 \hlstd{> }\hlstd{vec.b.graph.object} \hlkwb{<-} \hlkwd{as.vector}\hlstd{(b.graph.object)}
+\end{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in as.vector(b.graph.object): object 'b.graph.object' not found}}\begin{alltt}
 \hlstd{> }\hlstd{vec.e.graph.object} \hlkwb{<-} \hlkwd{as.vector}\hlstd{(e.graph.object}\hlopt{$}\hlstd{vector)}
-\hlstd{> }
-\hlstd{> }
+\end{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in as.vector(e.graph.object\$vector): object 'e.graph.object' not found}}\begin{alltt}
 \hlstd{> }\hlstd{Cor.Object} \hlkwb{<-} \hlkwd{matrix}\hlstd{(}\hlkwd{c}\hlstd{(vec.degree, vec.in.degree, vec.out.degree,}
 \hlstd{+ }                       \hlstd{vec.c.graph.object, vec.b.graph.object, vec.e.graph.object),}
 \hlstd{+ }                      \hlkwc{ncol}\hlstd{=}\hlnum{6}\hlstd{)}
-\hlstd{> }
+\end{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in matrix(c(vec.degree, vec.in.degree, vec.out.degree, vec.c.graph.object, : object 'vec.degree' not found}}\begin{alltt}
 \hlstd{> }\hlkwd{colnames}\hlstd{(Cor.Object)} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlstr{"Degree"}\hlstd{,} \hlstr{"In Degree"}\hlstd{,} \hlstr{"Out Degree"}\hlstd{,}
 \hlstd{+ }                         \hlstr{"Closeness"}\hlstd{,} \hlstr{"Betweeness"}\hlstd{,} \hlstr{"Eigenvector"}\hlstd{)}
-\hlstd{> }
+\end{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in colnames(Cor.Object) <- c("{}Degree"{}, "{}In Degree"{}, "{}Out Degree"{}, : object 'Cor.Object' not found}}\begin{alltt}
 \hlstd{> }\hlkwd{cor}\hlstd{(Cor.Object)}
 \end{alltt}
-\begin{verbatim}
-##                Degree In Degree Out Degree  Closeness  Betweeness Eigenvector
-## Degree      1.0000000 0.7878691  0.9095307  0.2354144  0.60688044  0.22276886
-## In Degree   0.7878691 1.0000000  0.4606242  0.1250300  0.50376591  0.25588522
-## Out Degree  0.9095307 0.4606242  1.0000000  0.2549119  0.53468285  0.14837111
-## Closeness   0.2354144 0.1250300  0.2549119  1.0000000  0.28440051 -0.10317000
-## Betweeness  0.6068804 0.5037659  0.5346828  0.2844005  1.00000000 -0.02671278
-## Eigenvector 0.2227689 0.2558852  0.1483711 -0.1031700 -0.02671278  1.00000000
-\end{verbatim}
-\begin{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in is.data.frame(x): object 'Cor.Object' not found}}\begin{alltt}
 \hlstd{> }\hlcom{# Trying to think of cool ways to plot this:}
 \hlstd{> }\hlkwd{library}\hlstd{(corrplot)}
 \hlstd{> }\hlstd{x} \hlkwb{<-} \hlkwd{cor}\hlstd{(Cor.Object)}
+\end{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in is.data.frame(x): object 'Cor.Object' not found}}\begin{alltt}
 \hlstd{> }\hlkwd{corrplot}\hlstd{(x,} \hlkwc{type}\hlstd{=}\hlstr{"upper"}\hlstd{,} \hlkwc{order}\hlstd{=}\hlstr{"hclust"}\hlstd{)}
 \end{alltt}
-\end{kframe}
-\includegraphics[width=6in]{figure/comp-1} 
 
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in corrplot(x, type = "{}upper"{}, order = "{}hclust"{}): Need a matrix or data frame!}}\end{kframe}
 \end{knitrout}
 \end{center}
 
@@ -4066,7 +5020,7 @@ In this I will be using the Reddit data from "r/AskSocialScientists" from Octobe
 \hlstd{> }\hlkwd{summary}\hlstd{(g1)} \hlcom{#}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH f7f5411 DN-- 339 521 -- 
+## IGRAPH 9251439 DN-- 339 521 -- 
 ## + attr: name (v/c)
 \end{verbatim}
 \begin{alltt}
@@ -4076,7 +5030,7 @@ In this I will be using the Reddit data from "r/AskSocialScientists" from Octobe
 \hlstd{> }\hlkwd{summary}\hlstd{(g12)} \hlcom{#}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH f7f5dce DN-- 327 522 -- 
+## IGRAPH 925252e DN-- 327 522 -- 
 ## + attr: name (v/c)
 \end{verbatim}
 \end{kframe}
@@ -4173,12 +5127,15 @@ This is, of course, not the only information we can gain from a network. Below i
 \definecolor{shadecolor}{rgb}{0.165, 0.169, 0.184}\color{fgcolor}\begin{kframe}
 \begin{alltt}
 \hlstd{> }\hlstd{Degree} \hlkwb{<-} \hlkwd{degree}\hlstd{(g2)}
+\end{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in FUN(X[[i]], ...): as.edgelist.sna input must be an adjacency matrix/array, edgelist matrix, network, or sparse matrix, or list thereof.}}\begin{alltt}
 \hlstd{> }\hlkwd{mean}\hlstd{(Degree)}
 \end{alltt}
-\begin{verbatim}
-## [1] 3.497835
-\end{verbatim}
-\begin{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'mean': object 'Degree' not found}}\begin{alltt}
 \hlstd{> }\hlkwd{library}\hlstd{(ggplot2)}
 \hlstd{> }\hlkwd{qplot}\hlstd{(Degree)}\hlopt{+}
 \hlstd{+ }     \hlkwd{theme_bw}\hlstd{()}\hlopt{+}
@@ -4192,9 +5149,9 @@ This is, of course, not the only information we can gain from a network. Below i
 \hlstd{+ }     \hlkwd{geom_vline}\hlstd{(}\hlkwc{xintercept}\hlstd{=}\hlkwd{mean}\hlstd{(Degree),} \hlkwc{linetype}\hlstd{=}\hlstr{"dashed"}\hlstd{)}\hlopt{+}
 \hlstd{+ }     \hlkwd{annotate}\hlstd{(}\hlstr{"text"}\hlstd{,} \hlkwc{x} \hlstd{=} \hlnum{4.3}\hlstd{,} \hlkwc{y} \hlstd{=} \hlnum{71}\hlstd{,} \hlkwc{label} \hlstd{=} \hlkwd{round}\hlstd{(}\hlkwd{mean}\hlstd{(Degree),}\hlnum{3}\hlstd{),} \hlkwc{angle}\hlstd{=}\hlopt{-}\hlnum{90}\hlstd{)}
 \end{alltt}
-\end{kframe}
-\includegraphics[width=5in]{figure/plot3-1} 
 
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in eval\_tidy(mapping\$x, data, caller\_env): object 'Degree' not found}}\end{kframe}
 \end{knitrout}
 \end{center}
 
@@ -4205,13 +5162,20 @@ We might be interested in the same network statistic but reported with the help 
 \definecolor{shadecolor}{rgb}{0.165, 0.169, 0.184}\color{fgcolor}\begin{kframe}
 \begin{alltt}
 \hlstd{> }\hlstd{Degree} \hlkwb{<-} \hlkwd{degree}\hlstd{(g2)}
+\end{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in FUN(X[[i]], ...): as.edgelist.sna input must be an adjacency matrix/array, edgelist matrix, network, or sparse matrix, or list thereof.}}\begin{alltt}
 \hlstd{> }\hlstd{x} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlnum{1}\hlopt{:}\hlnum{231}\hlstd{)}
 \hlstd{> }
 \hlstd{> }\hlcom{## Creating a catterplot:}
 \hlstd{> }\hlcom{# library(devtools)}
 \hlstd{> }\hlcom{# install_github("Gibbsdavidl/CatterPlots")}
 \hlstd{> }\hlkwd{library}\hlstd{(CatterPlots)}
-\hlstd{> }
+\end{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in library(CatterPlots): there is no package called 'CatterPlots'}}\begin{alltt}
 \hlstd{> }\hlstd{meow} \hlkwb{<-} \hlkwd{multicat}\hlstd{(}\hlkwc{xs}\hlstd{=x, Degree,}
 \hlstd{+ }                 \hlkwc{cat}\hlstd{=}\hlkwd{c}\hlstd{(}\hlnum{1}\hlstd{,}\hlnum{2}\hlstd{,}\hlnum{3}\hlstd{,}\hlnum{4}\hlstd{,}\hlnum{5}\hlstd{,}\hlnum{6}\hlstd{,}\hlnum{7}\hlstd{,}\hlnum{8}\hlstd{,}\hlnum{9}\hlstd{,}\hlnum{10}\hlstd{),}
 \hlstd{+ }                 \hlkwc{catcolor}\hlstd{=}\hlkwd{list}\hlstd{(}\hlstr{'#0495EE'}\hlstd{,} \hlstr{'#FF0000'}\hlstd{),}
@@ -4219,12 +5183,522 @@ We might be interested in the same network statistic but reported with the help 
 \hlstd{+ }                 \hlkwc{xlab}\hlstd{=}\hlstr{"Index"}\hlstd{,} \hlkwc{ylab}\hlstd{=}\hlstr{"Degree Per Node (Cat) in Network"}\hlstd{,}
 \hlstd{+ }                 \hlkwc{main}\hlstd{=}\hlstr{"A Catterplot of Network Degrees"}\hlstd{)}
 \end{alltt}
-\end{kframe}
-\includegraphics[width=5in]{figure/what-1} 
 
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in multicat(xs = x, Degree, cat = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10), : could not find function "{}multicat"{}}}\end{kframe}
 \end{knitrout}
 \end{center}
 
+\subsection{Assortativity and Community Structures}
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.165, 0.169, 0.184}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{> }\hlcom{# Let's expand on the homopholy measurements from Session_5.R}
+\hlstd{> }\hlcom{# We'll use Zachary's karate club data again:}
+\hlstd{> }
+\hlstd{> }\hlkwd{library}\hlstd{(igraph)}
+\hlstd{> }\hlkwd{library}\hlstd{(igraphdata)}
+\hlstd{> }\hlkwd{library}\hlstd{(ape)}
+\hlstd{> }\hlcom{## this package will help us easily plot the dendrograms for community detection}
+\hlstd{> }\hlcom{#    algorithms that use hierarchical clustering}
+\hlstd{> }\hlkwd{library}\hlstd{(Matrix)}
+\hlstd{> }\hlcom{## this package gives us the image() function for quick visualizing adjacency matrices}
+\hlstd{> }
+\hlstd{> }
+\hlstd{> }
+\hlstd{> }\hlkwd{data}\hlstd{(}\hlstr{"karate"}\hlstd{)}
+\hlstd{> }\hlkwd{summary}\hlstd{(karate)} \hlcom{#karate$Citation   is attached to this data remember}
+\end{alltt}
+\begin{verbatim}
+## IGRAPH 4b458a1 UNW- 34 78 -- Zachary's karate club network
+## + attr: name (g/c), Citation (g/c), Author (g/c), Faction (v/n), name
+## | (v/c), label (v/c), color (v/n), weight (e/n)
+\end{verbatim}
+\begin{alltt}
+\hlstd{> }\hlstd{frlay} \hlkwb{<-} \hlkwd{layout_with_fr}\hlstd{(karate)} \hlcom{# preset coordinates generated for us...}
+\hlstd{> }\hlcom{## this will ensure that each time we plot the network, the location of the nodes stays constant}
+\hlstd{> }\hlkwd{plot}\hlstd{(karate,} \hlkwc{edge.width} \hlstd{=} \hlkwd{E}\hlstd{(karate)}\hlopt{$}\hlstd{weight,} \hlkwc{layout} \hlstd{= frlay)}
+\end{alltt}
+\end{kframe}
+\includegraphics[width=5in]{figure/Assort-1} 
+\begin{kframe}\begin{alltt}
+\hlstd{> }\hlcom{## Components}
+\hlstd{> }\hlcom{#   Networks are made up of components, and isolated individuals.}
+\hlstd{> }\hlcom{#  You can identify the components of a graph with the decompose.graph() function.}
+\hlstd{> }\hlcom{#  This gives a potentially long list of each component.}
+\hlstd{> }\hlcom{#  So, table(sapply(decompose.graph(yournetwork),vcount)) will give you a quick summary}
+\hlstd{> }\hlcom{#       of the size and number of components.}
+\hlstd{> }
+\hlstd{> }\hlkwd{is_connected}\hlstd{(karate)}  \hlcom{# There is only one component within this network.}
+\end{alltt}
+\begin{verbatim}
+## [1] TRUE
+\end{verbatim}
+\begin{alltt}
+\hlstd{> }\hlcom{## Cores (k)}
+\hlstd{> }\hlcom{#   We could peel away layers of a network, by those who are weekly laching on (degree of 1)}
+\hlstd{> }\hlcom{#      all the way inwards (k-cores).}
+\hlstd{> }\hlcom{#   We could consider these layers individually, or all at once by seeing the greatest k-core for each node}
+\hlstd{> }
+\hlstd{> }\hlkwd{coreness}\hlstd{(karate)}
+\end{alltt}
+\begin{verbatim}
+##    Mr Hi  Actor 2  Actor 3  Actor 4  Actor 5  Actor 6  Actor 7  Actor 8 
+##        4        4        4        4        3        3        3        4 
+##  Actor 9 Actor 10 Actor 11 Actor 12 Actor 13 Actor 14 Actor 15 Actor 16 
+##        4        2        3        1        2        4        2        2 
+## Actor 17 Actor 18 Actor 19 Actor 20 Actor 21 Actor 22 Actor 23 Actor 24 
+##        2        2        2        3        2        2        2        3 
+## Actor 25 Actor 26 Actor 27 Actor 28 Actor 29 Actor 30 Actor 31 Actor 32 
+##        3        3        2        3        3        3        4        3 
+## Actor 33   John A 
+##        4        4
+\end{verbatim}
+\begin{alltt}
+\hlstd{> }\hlstd{colors} \hlkwb{<-} \hlkwd{rainbow}\hlstd{(}\hlkwd{max}\hlstd{(}\hlnum{4}\hlstd{))}
+\hlstd{> }
+\hlstd{> }\hlkwd{plot}\hlstd{(karate,}
+\hlstd{+ }     \hlkwc{vertex.color} \hlstd{= colors[}\hlkwd{coreness}\hlstd{(karate)],}
+\hlstd{+ }     \hlkwc{edge.width} \hlstd{=} \hlkwd{E}\hlstd{(karate)}\hlopt{$}\hlstd{weight,}
+\hlstd{+ }     \hlkwc{layout} \hlstd{= frlay)}
+\hlstd{> }\hlkwd{legend}\hlstd{(}\hlstr{"topright"}\hlstd{,}
+\hlstd{+ }       \hlkwc{legend}\hlstd{=}\hlkwd{c}\hlstd{(}\hlnum{1}\hlopt{:}\hlnum{4}\hlstd{),}
+\hlstd{+ }       \hlkwc{col} \hlstd{= colors,}
+\hlstd{+ }       \hlkwc{pch} \hlstd{=} \hlnum{16}\hlstd{,}
+\hlstd{+ }       \hlkwc{title} \hlstd{=} \hlstr{"Coreness"}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\includegraphics[width=5in]{figure/Assort-2} 
+\begin{kframe}\begin{alltt}
+\hlstd{> }\hlcom{## Cliques}
+\hlstd{> }\hlcom{#   These are the maximal connected subgraphs.}
+\hlstd{> }\hlcom{#   Note: we can relax the definition of this by including non-connected nodes (but at short distance "n")}
+\hlstd{> }\hlcom{#         igraph does not have this functionality (n=1).}
+\hlstd{> }\hlcom{# Visual definition of Clique: https://en.wikipedia.org/wiki/Clique_(graph_theory)#/media/File:VR_complex.svg}
+\hlstd{> }
+\hlstd{> }\hlkwd{head}\hlstd{(}\hlkwd{cliques}\hlstd{(karate,} \hlkwc{min}\hlstd{=}\hlnum{3}\hlstd{))} \hlcom{# here we excluded cliques below a certain size.}
+\end{alltt}
+\begin{verbatim}
+## [[1]]
+## + 3/34 vertices, named, from 4b458a1:
+## [1] Mr Hi   Actor 2 Actor 3
+## 
+## [[2]]
+## + 3/34 vertices, named, from 4b458a1:
+## [1] Actor 29 Actor 32 John A  
+## 
+## [[3]]
+## + 3/34 vertices, named, from 4b458a1:
+## [1] Actor 32 Actor 33 John A  
+## 
+## [[4]]
+## + 3/34 vertices, named, from 4b458a1:
+## [1] Actor 31 Actor 33 John A  
+## 
+## [[5]]
+## + 3/34 vertices, named, from 4b458a1:
+## [1] Actor 27 Actor 30 John A  
+## 
+## [[6]]
+## + 3/34 vertices, named, from 4b458a1:
+## [1] Actor 30 Actor 33 John A
+\end{verbatim}
+\begin{alltt}
+\hlstd{> }\hlkwd{table}\hlstd{(}\hlkwd{sapply}\hlstd{(}\hlkwd{cliques}\hlstd{(karate),length))}
+\end{alltt}
+\begin{verbatim}
+## 
+##  1  2  3  4  5 
+## 34 78 45 11  2
+\end{verbatim}
+\begin{alltt}
+\hlstd{> }\hlcom{# This summarizes the full enumeration of cliques, but showing us the number of cliques of each size}
+\hlstd{> }\hlkwd{largest_cliques}\hlstd{(karate)}
+\end{alltt}
+\begin{verbatim}
+## [[1]]
+## + 5/34 vertices, named, from 4b458a1:
+## [1] Actor 8 Mr Hi   Actor 2 Actor 3 Actor 4
+## 
+## [[2]]
+## + 5/34 vertices, named, from 4b458a1:
+## [1] Actor 4  Mr Hi    Actor 2  Actor 3  Actor 14
+\end{verbatim}
+\begin{alltt}
+\hlstd{> }\hlcom{#### Community detection}
+\hlstd{> }\hlcom{#    There are so many ways to chop up a network into related nodes.}
+\hlstd{> }\hlcom{#    Generally speaking, we want subsets of nodes that are well connected among them selves, but few}
+\hlstd{> }\hlcom{#       connections from outsiders.}
+\hlstd{> }\hlcom{#    There are mountains of ways to parse this out mathematically, but with R things can be easier.}
+\hlstd{> }
+\hlstd{> }\hlcom{### Hierarchical clustering (see Session 4 for some of this).}
+\hlstd{> }
+\hlstd{> }\hlcom{## Edge Betweenness}
+\hlstd{> }\hlcom{#   Calculate betweenness (we did this in centrality session) of each edge, remove the edge}
+\hlstd{> }\hlcom{#      (so divide the network along that edge) with the highest betweeness,}
+\hlstd{> }\hlcom{#      recalculate betweenness, identify the new highest edge... repeat.}
+\hlstd{> }\hlcom{#   Note:  edges with weights get interpreted as additional distance (this is not the case in our network!)}
+\hlstd{> }\hlcom{#          have to adjust this calculation to get the weights on the right emphasis.}
+\hlstd{> }
+\hlstd{> }\hlstd{eb} \hlkwb{<-} \hlkwd{cluster_edge_betweenness}\hlstd{(karate,} \hlkwc{weights} \hlstd{=} \hlnum{1}\hlopt{/}\hlkwd{E}\hlstd{(karate)}\hlopt{$}\hlstd{weight)}
+\hlstd{> }\hlkwd{membership}\hlstd{(eb)}
+\end{alltt}
+\begin{verbatim}
+##    Mr Hi  Actor 2  Actor 3  Actor 4  Actor 5  Actor 6  Actor 7  Actor 8 
+##        1        1        1        1        1        1        1        1 
+##  Actor 9 Actor 10 Actor 11 Actor 12 Actor 13 Actor 14 Actor 15 Actor 16 
+##        1        2        1        1        1        1        2        2 
+## Actor 17 Actor 18 Actor 19 Actor 20 Actor 21 Actor 22 Actor 23 Actor 24 
+##        1        1        2        1        2        1        2        2 
+## Actor 25 Actor 26 Actor 27 Actor 28 Actor 29 Actor 30 Actor 31 Actor 32 
+##        2        2        2        2        2        2        2        2 
+## Actor 33   John A 
+##        2        2
+\end{verbatim}
+\begin{alltt}
+\hlstd{> }\hlkwd{sizes}\hlstd{(eb)}
+\end{alltt}
+\begin{verbatim}
+## Community sizes
+##  1  2 
+## 17 17
+\end{verbatim}
+\begin{alltt}
+\hlstd{> }\hlcom{# library(stats) -- used for some alternative plotting options in our dendrograms.}
+\hlstd{> }\hlcom{# ?dendPlot()}
+\hlstd{> }\hlkwd{dendPlot}\hlstd{(eb,} \hlkwc{mode} \hlstd{=} \hlstr{"phylo"}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\includegraphics[width=5in]{figure/Assort-3} 
+\begin{kframe}\begin{alltt}
+\hlstd{> }\hlkwd{plot}\hlstd{(eb, karate,} \hlkwc{edge.width} \hlstd{=} \hlkwd{E}\hlstd{(karate)}\hlopt{$}\hlstd{weight,} \hlkwc{layout} \hlstd{= frlay)}
+\end{alltt}
+\end{kframe}
+\includegraphics[width=5in]{figure/Assort-4} 
+\begin{kframe}\begin{alltt}
+\hlstd{> }\hlcom{# by putting the community object (here, "eb") in front of the graph object,}
+\hlstd{> }\hlcom{#    igraph knows to plot both. igraph then colors the nodes by their community membership,}
+\hlstd{> }\hlcom{#    draws bubbles around each community, and colors edges within communities black and between}
+\hlstd{> }\hlcom{#    communities red.}
+\hlstd{> }
+\hlstd{> }
+\hlstd{> }\hlcom{## Fast Greedy (Modularity)}
+\hlstd{> }\hlcom{#    Similar to "modularity" when we measured assorativity before, this can be used to partition communities.}
+\hlstd{> }\hlcom{#      chopping groups up by their assortatitivy scores. Done within, then between all nodes. meaning}
+\hlstd{> }\hlcom{#      there are more edges within groups and fewer between them -- then we find communities.}
+\hlstd{> }\hlstd{fg} \hlkwb{<-} \hlkwd{cluster_fast_greedy}\hlstd{(karate,} \hlkwc{weights} \hlstd{=} \hlkwd{E}\hlstd{(karate)}\hlopt{$}\hlstd{weight)}
+\hlstd{> }\hlkwd{sizes}\hlstd{(fg)}
+\end{alltt}
+\begin{verbatim}
+## Community sizes
+##  1  2  3 
+## 18 11  5
+\end{verbatim}
+\begin{alltt}
+\hlstd{> }\hlkwd{dendPlot}\hlstd{(fg,} \hlkwc{mode}\hlstd{=}\hlstr{"phylo"}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\includegraphics[width=5in]{figure/Assort-5} 
+\begin{kframe}\begin{alltt}
+\hlstd{> }\hlkwd{plot}\hlstd{(fg, karate,} \hlkwc{edge.width} \hlstd{=} \hlkwd{E}\hlstd{(karate)}\hlopt{$}\hlstd{weight,} \hlkwc{layout} \hlstd{= frlay)}
+\end{alltt}
+\end{kframe}
+\includegraphics[width=5in]{figure/Assort-6} 
+\begin{kframe}\begin{alltt}
+\hlstd{> }\hlcom{## Walktrap}
+\hlstd{> }\hlcom{#   imagine doing many, many, short random walks across a network. You'll likely end up staying in a community}
+\hlstd{> }\hlcom{#   on each random walk since between-communities ties should be rare to find.}
+\hlstd{> }\hlcom{#   So we can use these random walks to find communities (on average) and use that measure}
+\hlstd{> }\hlcom{#   as yet another hierarchical clustering process!}
+\hlstd{> }\hlcom{#     [consider simulation, machine learning, and ways to take these random walks out of your hands]}
+\hlstd{> }
+\hlstd{> }\hlstd{wt} \hlkwb{<-} \hlkwd{cluster_walktrap}\hlstd{(karate,} \hlkwc{weights} \hlstd{=} \hlkwd{E}\hlstd{(karate)}\hlopt{$}\hlstd{weight)} \hlcom{## uses edge weight by default}
+\hlstd{> }\hlkwd{dendPlot}\hlstd{(wt)}
+\end{alltt}
+\end{kframe}
+\includegraphics[width=5in]{figure/Assort-7} 
+\begin{kframe}\begin{alltt}
+\hlstd{> }\hlkwd{plot}\hlstd{(wt, karate,} \hlkwc{edge.width} \hlstd{=} \hlkwd{E}\hlstd{(karate)}\hlopt{$}\hlstd{weight,} \hlkwc{layout} \hlstd{= frlay)}
+\end{alltt}
+\end{kframe}
+\includegraphics[width=5in]{figure/Assort-8} 
+\begin{kframe}\begin{alltt}
+\hlstd{> }\hlcom{### Other approaches:}
+\hlstd{> }
+\hlstd{> }\hlcom{## Louvain (aka Multilevel)}
+\hlstd{> }\hlcom{#    this one is also trying to quickly optimize modularity. Each node here is assigned to a different}
+\hlstd{> }\hlcom{#    community, then a node is moved to join one of its neighbors with wich it increases the modularity score.}
+\hlstd{> }\hlcom{#    This process of moving nodes around keeps going until modularity cannot be improved anymore.}
+\hlstd{> }\hlcom{#    [see Yang et al 2016] - this performs really well.}
+\hlstd{> }\hlcom{#  This doesn't classify as a heirarchical community deteticion because it is not strictly agglomerative.}
+\hlstd{> }\hlcom{#    (bottom up) compared to "divisive" top-down methodologies.}
+\hlstd{> }\hlstd{ml} \hlkwb{<-} \hlkwd{cluster_louvain}\hlstd{(karate,} \hlkwc{weights} \hlstd{=} \hlkwd{E}\hlstd{(karate)}\hlopt{$}\hlstd{weight)}
+\hlstd{> }\hlkwd{plot}\hlstd{(ml, karate,} \hlkwc{edge.width} \hlstd{=} \hlkwd{E}\hlstd{(karate)}\hlopt{$}\hlstd{weight,} \hlkwc{layout} \hlstd{= frlay)}
+\end{alltt}
+\end{kframe}
+\includegraphics[width=5in]{figure/Assort-9} 
+\begin{kframe}\begin{alltt}
+\hlstd{> }\hlcom{## InfoMap}
+\hlstd{> }\hlcom{#    Improvement on walktrap - draws on information theory}
+\hlstd{> }\hlstd{im} \hlkwb{<-} \hlkwd{cluster_infomap}\hlstd{(karate,} \hlkwc{e.weights}\hlstd{=}\hlkwd{E}\hlstd{(karate)}\hlopt{$}\hlstd{weight)}
+\hlstd{> }\hlkwd{plot}\hlstd{(im, karate,} \hlkwc{edge.width} \hlstd{=} \hlkwd{E}\hlstd{(karate)}\hlopt{$}\hlstd{weight,} \hlkwc{layout} \hlstd{= frlay)}
+\end{alltt}
+\end{kframe}
+\includegraphics[width=5in]{figure/Assort-10} 
+\begin{kframe}\begin{alltt}
+\hlstd{> }\hlcom{## Spinglass}
+\hlstd{> }\hlcom{#     Drawing from physics, and magnetism - a spin glass type of magnet.}
+\hlstd{> }\hlcom{#     Each node is similar to an atom, and we want to simulate the annealing process where we minimize energy}
+\hlstd{> }\hlcom{#     and this happens when nodes are grouped in communities with the same spin - than different spin groups.}
+\hlstd{> }\hlstd{sg} \hlkwb{<-} \hlkwd{cluster_spinglass}\hlstd{(karate,} \hlkwc{weights}\hlstd{=}\hlkwd{E}\hlstd{(karate)}\hlopt{$}\hlstd{weight)}
+\hlstd{> }\hlkwd{plot}\hlstd{(sg, karate,} \hlkwc{edge.width} \hlstd{=} \hlkwd{E}\hlstd{(karate)}\hlopt{$}\hlstd{weight,} \hlkwc{layout} \hlstd{= frlay)}
+\end{alltt}
+\end{kframe}
+\includegraphics[width=5in]{figure/Assort-11} 
+\begin{kframe}\begin{alltt}
+\hlstd{> }\hlcom{### Which one do I use?!}
+\hlstd{> }\hlcom{#     often the "big picture" is the same, but often we'll find small changes between methods.}
+\hlstd{> }\hlcom{#     When publishing, it can be better to publish many different methods in a table or easily reportable}
+\hlstd{> }\hlcom{#     Format. (See Seminar notes for some more information on each of these methods)}
+\hlstd{> }
+\hlstd{> }
+\hlstd{> }\hlcom{### Graph Partitions and "Ground Truth"}
+\hlstd{> }\hlcom{#     So we can mathematically parse out groups - but how does this align with our theory, and other}
+\hlstd{> }\hlcom{#     data? How does this match with our homophily?}
+\hlstd{> }
+\hlstd{> }\hlcom{# First step: let's calculate assortativity}
+\hlstd{> }\hlcom{#      (normalized ---  -1 (disassortive) :  1(assortive) [0 = no evidence])}
+\hlstd{> }
+\hlstd{> }\hlkwd{modularity}\hlstd{(karate,} \hlkwd{V}\hlstd{(karate)}\hlopt{$}\hlstd{Faction)}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.3714661
+\end{verbatim}
+\begin{alltt}
+\hlstd{> }\hlkwd{assortativity}\hlstd{(karate,} \hlkwd{V}\hlstd{(karate)}\hlopt{$}\hlstd{Faction)}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.7434211
+\end{verbatim}
+\begin{alltt}
+\hlstd{> }\hlcom{#  So this assortativity measure is very high... and matches the karate club theory and our knowledge of it.}
+\hlstd{> }\hlcom{#    And we've already eye-balled all the graphs, and things seem to line up to these factions.}
+\hlstd{> }
+\hlstd{> }\hlcom{# In igraph we can compare() different membership vectors using nmi "normalized mutual information"}
+\hlstd{> }\hlcom{#    1 = perfect match!  0 = mutually uninformative of one another.}
+\hlstd{> }
+\hlstd{> }\hlcom{# Compare "Truth" (faction)  with method:}
+\hlstd{> }\hlkwd{compare}\hlstd{(}\hlkwd{V}\hlstd{(karate)}\hlopt{$}\hlstd{Faction, eb,} \hlkwc{method} \hlstd{=} \hlstr{"nmi"}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.8371695
+\end{verbatim}
+\begin{alltt}
+\hlstd{> }\hlcom{## [1] 0.8371695}
+\hlstd{> }\hlkwd{compare}\hlstd{(}\hlkwd{V}\hlstd{(karate)}\hlopt{$}\hlstd{Faction, fg,} \hlkwc{method} \hlstd{=} \hlstr{"nmi"}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.8255182
+\end{verbatim}
+\begin{alltt}
+\hlstd{> }\hlcom{## [1] 0.8255182}
+\hlstd{> }\hlkwd{compare}\hlstd{(}\hlkwd{V}\hlstd{(karate)}\hlopt{$}\hlstd{Faction, wt,} \hlkwc{method} \hlstd{=} \hlstr{"nmi"}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.6956222
+\end{verbatim}
+\begin{alltt}
+\hlstd{> }\hlcom{## [1] 0.6956222}
+\hlstd{> }\hlkwd{compare}\hlstd{(}\hlkwd{V}\hlstd{(karate)}\hlopt{$}\hlstd{Faction, ml,} \hlkwc{method} \hlstd{=} \hlstr{"nmi"}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.6872629
+\end{verbatim}
+\begin{alltt}
+\hlstd{> }\hlcom{## [1] 0.6872629}
+\hlstd{> }\hlkwd{compare}\hlstd{(}\hlkwd{V}\hlstd{(karate)}\hlopt{$}\hlstd{Faction, im,} \hlkwc{method} \hlstd{=} \hlstr{"nmi"}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.8255182
+\end{verbatim}
+\begin{alltt}
+\hlstd{> }\hlcom{## [1] 0.8255182}
+\hlstd{> }\hlkwd{compare}\hlstd{(}\hlkwd{V}\hlstd{(karate)}\hlopt{$}\hlstd{Faction, sg,} \hlkwc{method} \hlstd{=} \hlstr{"nmi"}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.6306144
+\end{verbatim}
+\begin{alltt}
+\hlstd{> }\hlcom{## [1] 0.6543404}
+\hlstd{> }\hlkwd{table}\hlstd{(}\hlkwd{V}\hlstd{(karate)}\hlopt{$}\hlstd{Faction,} \hlkwd{membership}\hlstd{(eb))}
+\end{alltt}
+\begin{verbatim}
+##    
+##      1  2
+##   1 16  0
+##   2  1 17
+\end{verbatim}
+\begin{alltt}
+\hlstd{> }\hlcom{##}
+\hlstd{> }\hlcom{##      1  2}
+\hlstd{> }\hlcom{##   1 16  0}
+\hlstd{> }\hlcom{##   2  1 17}
+\hlstd{> }\hlkwd{table}\hlstd{(}\hlkwd{V}\hlstd{(karate)}\hlopt{$}\hlstd{Faction,} \hlkwd{membership}\hlstd{(fg))}
+\end{alltt}
+\begin{verbatim}
+##    
+##      1  2  3
+##   1  0 11  5
+##   2 18  0  0
+\end{verbatim}
+\begin{alltt}
+\hlstd{> }\hlcom{##}
+\hlstd{> }\hlcom{##      1  2  3}
+\hlstd{> }\hlcom{##   1  0 11  5}
+\hlstd{> }\hlcom{##   2 18  0  0}
+\hlstd{> }\hlkwd{table}\hlstd{(}\hlkwd{V}\hlstd{(karate)}\hlopt{$}\hlstd{Faction,} \hlkwd{membership}\hlstd{(im))}
+\end{alltt}
+\begin{verbatim}
+##    
+##      1  2  3
+##   1  0 11  5
+##   2 18  0  0
+\end{verbatim}
+\begin{alltt}
+\hlstd{> }\hlcom{##}
+\hlstd{> }\hlcom{##      1  2  3}
+\hlstd{> }\hlcom{##   1  0 11  5}
+\hlstd{> }\hlcom{##   2 18  0  0}
+\hlstd{> }
+\hlstd{> }
+\hlstd{> }\hlcom{#  So if our theory is strong in that these factions matter:}
+\hlstd{> }\hlcom{#     we see that edge betweenness does "best" with only one person assigned wrong faction.}
+\hlstd{> }\hlcom{#     with fast_greedy and infomap coming close behind in faction membership detection.}
+\hlstd{> }
+\hlstd{> }
+\hlstd{> }\hlcom{## we can also compare different partitionings based on different community detection algorithms.}
+\hlstd{> }\hlkwd{compare}\hlstd{(eb, sg,} \hlkwc{method} \hlstd{=} \hlstr{"nmi"}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.5418738
+\end{verbatim}
+\begin{alltt}
+\hlstd{> }\hlcom{## [1] 0.5622443}
+\hlstd{> }\hlkwd{compare}\hlstd{(wt, sg,} \hlkwc{method} \hlstd{=} \hlstr{"nmi"}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.9267573
+\end{verbatim}
+\begin{alltt}
+\hlstd{> }\hlcom{## [1] 0.8953659}
+\hlstd{> }\hlkwd{compare}\hlstd{(fg, im,} \hlkwc{method} \hlstd{=} \hlstr{"nmi"}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+## [1] 1
+\end{verbatim}
+\begin{alltt}
+\hlstd{> }\hlcom{## we can see that these two community detection algorithms produce exactly the same partitioning of the graph}
+\hlstd{> }\hlcom{## [1] 1}
+\hlstd{> }\hlkwd{table}\hlstd{(}\hlkwd{membership}\hlstd{(fg),}\hlkwd{membership}\hlstd{(im))}
+\end{alltt}
+\begin{verbatim}
+##    
+##      1  2  3
+##   1 18  0  0
+##   2  0 11  0
+##   3  0  0  5
+\end{verbatim}
+\begin{alltt}
+\hlstd{> }\hlcom{##}
+\hlstd{> }\hlcom{##      1  2  3}
+\hlstd{> }\hlcom{##   1 18  0  0}
+\hlstd{> }\hlcom{##   2  0 11  0}
+\hlstd{> }\hlcom{##   3  0  0  5}
+\hlstd{> }
+\hlstd{> }
+\hlstd{> }
+\hlstd{> }\hlcom{## Stochastic Block Models.}
+\hlstd{> }\hlcom{#    Just create a model to calculate the probablity of ties within each group (controlling for variables).}
+\hlstd{> }\hlcom{#    (Have to swap packages out of igraph and data out of igraph)}
+\hlstd{> }
+\hlstd{> }
+\hlstd{> }\hlkwd{require}\hlstd{(intergraph)}
+\hlstd{> }\hlkwd{detach}\hlstd{(package}\hlopt{:}\hlstd{igraph)}
+\hlstd{> }\hlkwd{require}\hlstd{(sna)}
+\hlstd{> }\hlstd{knet} \hlkwb{<-} \hlkwd{asNetwork}\hlstd{(karate)}
+\hlstd{> }\hlcom{## this is the function from intergraph that takes a igraph graph object and}
+\hlstd{> }\hlcom{#      makes it into a statnet graph object}
+\hlstd{> }\hlkwd{blockmodel}\hlstd{(knet,}\hlkwc{ec} \hlstd{= knet} \hlopt{%v%} \hlstr{"Faction"}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+## 
+## Network Blockmodel:
+## 
+## Block membership:
+## 
+##  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 
+##  1  1  1  1  1  1  1  1  2  2  1  1  1  1  2  2  1  1  2  1  2  1  2  2  2  2 
+## 27 28 29 30 31 32 33 34 
+##  2  2  2  2  2  2  2  2 
+## 
+## Reduced form blockmodel:
+## 
+## 	 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 
+##            Block 1    Block 2
+## Block 1 0.27500000 0.03472222
+## Block 2 0.03472222 0.22875817
+\end{verbatim}
+\begin{alltt}
+\hlstd{> }\hlcom{##            Block 1    Block 2}
+\hlstd{> }\hlcom{## Block 1 0.27500000 0.03472222}
+\hlstd{> }\hlcom{## Block 2 0.03472222 0.22875817}
+\hlstd{> }\hlcom{#   We can see that a much higher probability of a tie are within each faction than between them.\textbackslash{}}
+\hlstd{> }
+\hlstd{> }\hlstd{kbm} \hlkwb{<-} \hlkwd{blockmodel}\hlstd{(knet,}\hlkwc{ec} \hlstd{= knet} \hlopt{%v%} \hlstr{"Faction"}\hlstd{)}\hlopt{$}\hlstd{block.model} \hlcom{## saving these results}
+\hlstd{> }
+\hlstd{> }
+\hlstd{> }\hlcom{# (swap packages back)}
+\hlstd{> }\hlkwd{detach}\hlstd{(package}\hlopt{:}\hlstd{sna)}
+\end{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: package 'sna' is required by 'statnet' so will not be detached}}\begin{alltt}
+\hlstd{> }\hlkwd{detach}\hlstd{(package}\hlopt{:}\hlstd{intergraph)}
+\hlstd{> }\hlkwd{require}\hlstd{(igraph)}
+\hlstd{> }
+\hlstd{> }
+\hlstd{> }\hlcom{#  BlockModels are mostly used for generative models of network formation.}
+\hlstd{> }\hlcom{#    Now we'll use those block model results:}
+\hlstd{> }
+\hlstd{> }\hlstd{g_kar} \hlkwb{<-} \hlkwd{sample_sbm}\hlstd{(}\hlnum{34}\hlstd{,} \hlkwc{pref.matrix} \hlstd{= kbm,} \hlkwc{block.sizes} \hlstd{=} \hlkwd{c}\hlstd{(}\hlnum{16}\hlstd{,}\hlnum{18}\hlstd{),} \hlkwc{directed} \hlstd{=} \hlnum{FALSE}\hlstd{)}
+\hlstd{> }\hlkwd{assortativity}\hlstd{(g_kar,} \hlkwd{c}\hlstd{(}\hlkwd{rep}\hlstd{(}\hlnum{1}\hlstd{,}\hlnum{16}\hlstd{),} \hlkwd{rep}\hlstd{(}\hlnum{2}\hlstd{,}\hlnum{18}\hlstd{)))} \hlcom{## This compares pretty closely to the assortativity of the real karate network that we calculated above.}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.7700846
+\end{verbatim}
+\begin{alltt}
+\hlstd{> }\hlcom{## [1] 0.7456716}
+\hlstd{> }\hlkwd{par}\hlstd{(}\hlkwc{mfrow}\hlstd{=}\hlkwd{c}\hlstd{(}\hlnum{1}\hlstd{,}\hlnum{2}\hlstd{))}
+\hlstd{> }\hlkwd{plot}\hlstd{(g_kar,}\hlkwc{vertex.color} \hlstd{=} \hlkwd{c}\hlstd{(}\hlkwd{rep}\hlstd{(}\hlnum{1}\hlstd{,}\hlnum{16}\hlstd{),} \hlkwd{rep}\hlstd{(}\hlnum{2}\hlstd{,}\hlnum{18}\hlstd{)),} \hlkwc{main} \hlstd{=} \hlstr{"Fabricated"}\hlstd{)}
+\hlstd{> }\hlkwd{plot}\hlstd{(karate,} \hlkwc{main} \hlstd{=} \hlstr{"Real"}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\includegraphics[width=5in]{figure/Assort-12} 
+\begin{kframe}\begin{alltt}
+\hlstd{> }\hlkwd{image}\hlstd{(g_kar[])} \hlcom{## quick way to visualize the adjacency matrix.}
+\end{alltt}
+\end{kframe}
+\includegraphics[width=5in]{figure/Assort-13} 
+\begin{kframe}\begin{alltt}
+\hlstd{> }\hlcom{#   Remember that graph[] calls the adjacency matrix}
+\hlstd{> }
+\hlstd{> }\hlkwd{image}\hlstd{(karate[][}\hlkwd{order}\hlstd{(}\hlkwd{as.vector}\hlstd{(}\hlkwd{order}\hlstd{(}\hlkwd{V}\hlstd{(karate)}\hlopt{$}\hlstd{Faction))),])}
+\end{alltt}
+\end{kframe}
+\includegraphics[width=5in]{figure/Assort-14} 
+
+\end{knitrout}
 
 
 %--------------------------------------
@@ -4280,6 +5754,70 @@ We might be interested in the same network statistic but reported with the help 
 \subsection{Reliability Measurements}
 
 \subsection{Analysis}
+
+
+
+%--------------------------------------
+
+\clearpage
+\section{Stochastic Epidemic Modeling}
+
+Stochastic Epidemic Modeling, at it's core, is the ability to track, predict, and ultimiately intervene upon epidemics during their lifespan. This has obvious applications in public health, but could also be applied to the social sciences. Consider an example where voters who identify as ``independent'' are not ``infected'' with the Republican or Democrat ``virus.'' Does framing public opinion this way yield interesting results? Perhaps! In the same way the H1N1 virus can only travel from person to person, geography too is important for political projections. Similarly for political communication online, the fact that we reference ``viral'' sensations and memes is forshadowing epidemic modeling's utility on the social sciences.
+
+Certainly most epidemics are stochastic in nature, that is, acting with a degree of randomness and variation. Deterministic models have additional assumptions and too can be useful as a first-pass analysis. Epidemics usually start as a stochastic event in the first place, but at a larger volume they reach deterministic levels. However, if we wish to comment on the degree of uncertainty we have about an epidemic we requie stochastic models. For these purposes we will primarily focus on stochastic models, however the first subsection will include a deterministic model to outline some useful definitions and practices.
+
+\subsection{Deterministic Epidemic Modeling}
+
+Consider the following simplified epidemic model: the SIR model. This model assumes a simplified epidemic where susceptibles (S) become infected (I) and then either become recovered or otherwised removed (R). This model can be complicated, adding conditional variables along the way (which would certainly be the case for the social sciences) but for now we will work with the following SIR model: a compartmented type model in theory. \index{SIR}
+
+\begin{center}
+
+\begin{tikzpicture}[%
+    ->,
+    shorten >=2pt,
+    >=stealth,
+    node distance=3cm,
+    noname/.style={%
+      rectangle,
+      minimum width=2em,
+      minimum height=2em,
+      draw
+    }
+  ]
+  % Nodes:
+    \node[noname] (S)                                   {S};
+    \node[noname] (I) [right=of S]        				{I};
+    \node[noname] (R) [right=of I]                      {R};
+
+  % Paths:
+    \path (S) edge     node {} (I);
+    \path (I) edge     node {} (R);
+\end{tikzpicture}
+\end{center}
+
+The other thing to mention is that for these models we do not consider ``time'' in the same sense as timeseries or as we usually think of it. Instead, ``time'' passes as each generational infection occurs, someone could remain dormant with a virus for a long time, but all that matters is the conversion periods not the waiting periods inbetween. Similarly, these are Markov models which only care about the probability of infection between generations, so one's history doesn't matter.
+
+
+\subsubsection{Reed-Frost Model}
+
+The Reed-Frost Model is the simplest example of a deterministic epidemic model, and is typically appicable for small-n scenarios (like a small household infection for example).
+
+Consider $q$ to be the probability of escaping infection from a single infected individual by a given suseptible. $X_i$ and $Y_i$ are the number of susceptibles and infectives at a given generational time.
+
+The logic behind this model is to map out all possiblities that could occur for a particular n-size and then calculate the probability of any one possibiliy occuring. Or mathematically:
+
+\begin{align*}
+& P(Y_{j+1} = y_{j+1} | X_0 = x_0, Y_0 = y_0 , ... , X_j = x_j, Y_j =y_j) \\
+&= P(Y_{j+1} = y_{j+1} | X_j = x_j, Y_j = y_j)\\
+&= \binom{x_i}{y_{j+1}} (1-q^{y_j})^{y_{j+1}} (q^{y_j})^{x_j - y_{j+1}}
+\end{align*}
+
+The final result includes (in the first module) a binomial of individual infected, those who didn't escape infection ($1-q$) and then the compliment of this ($q$).
+
+
+\subsection{Stochastic SIR Models}
+
+
 
 
 
