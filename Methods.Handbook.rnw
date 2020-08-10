@@ -3331,12 +3331,14 @@ While VAR allows for flexibility in helping determine the data generating proces
 
 Network analysis, broadly speaking, is just the analysis of the connection between nodes and the broader interconnections of a group of units. Nodes can be people, events, animals, anything really. Edges can be any measureable connection between nodes, be it frequency of community, survey responses, amount of eye contact - anything really.\\
 
-This chapter on network analysis will show the fundamentals of executing network techniques in R, but will dodge a lot of the underlying math making up these methods. \\
+This chapter on network analysis will show the fundamentals of executing network techniques in R, but will dodge a lot of the underlying math making up these methods. A lot of this code and practice has been from previous courses and tutoring I've participated in, so there may be references to this in the comments of the code in this chapter. \\
 
 \subsection{Network Basics: Data}
 
+In this section we'll cover just the basics of setting up network data and reading some of the general network statistics.
+
 \begin{center}
-<<Network_Basics, warning=FALSE, message=FALSE, prompt=TRUE>>=
+<<Network_Basics, warning=FALSE, message=FALSE, prompt=TRUE, out.width='6in'>>=
 # Packages used:
 library(igraph) # igraph is one of the more popular network analysis packages
 library(igraphdata)
@@ -3417,16 +3419,17 @@ V(g2)$name
 ## [1] "Anand"  "Beth"   "Chris"  "Dieter" "Sun"    "Ali"    "Fatima"
 
 # So let's plug in more data on top of that:
-V(g2)$gender <- c("M","F","M","M","F","M","F") # Here, we're assigning the gender for each vertex.
+V(g2)$gender <- c("M","F","M","M","F","M","F")
+# Here, we're assigning the gender for each vertex.
 
 # Or we'll assign some arbitrary weights to the edges (notice the E(g2) now.)
 E(g2)$count <- rep(1:2,5)
 g2 <- set.vertex.attribute(g2, "age", value = c(20,26,19,34,22,30,21))
 # Because we want R to save this addition to the network, when using the
-#  set.vertex.attribute() function, we have to assign this again to the graph name.
+# set.vertex.attribute() function, we have to assign this again to the graph name.
 
 # With this new data added, let's summarize the graph:
-summary(g2) # We see the new variables added, and how they are relevantly connected.
+summary(g2) # We see the new variables added, and how they are connected.
 
 ## Larger data -----------------------------------------------------------------
 
@@ -3442,21 +3445,11 @@ summary(karate)
 # - W means weighted graph
 # - 34 is the number of nodes
 # - 78 is the number of edges
-# - name (g/c), Citation (g/c), Author (g/c) are all graph attributes,
-#      telling us about the source of the data.
-# - name (v/c) and label (v/c) mean that name and label are vertex attributes that are characters
-# - color (v/n) is a vertex attribute that’s numeric. (Here, the numbers call colors –
-#      that’s what’s being used in the plot)
-# - Faction (v/n) is a vertex attribute that’s numeric, and basically is the same content as color:
-#      both distinguish the two factions that emerged within the club.
-# - weight (e/n) means weight is an edge attribute and it’s numeric.
+# - Other information is various variable data and data types.
 
-plot(karate) # Remember this is an undirected network - interpretations change when directed!
-#  Here we have a bunch of students surrounding two faction leaders - the blue faction lead
-#    by John "A" - and the orange faction lead by Mr. Hi ("H")
+plot(karate)
 
-## With the data set up and discribed, let's run through the basic functions that can get you network stats.
-vcount(karate) # Verticie (node) count
+vcount(karate) # Vertical (node) count
 # [1] 34
 ecount(karate) # Edge count
 # [1] 78
@@ -3466,7 +3459,7 @@ ecount(karate) # Edge count
 mean(degree(karate)) # Average network degree
 # [1] 4.588235      # "on average" we have 4.5 connections in the karate club
 
-# ?graph.density() # This is (usually) just: (Actual Connections/Potential Connections)
+# This is (usually) just: (Actual Connections/Potential Connections)
 graph.density(karate) # Density
 # [1] 0.1390374    # This network is about 14% dense/100%
 
@@ -3484,7 +3477,7 @@ plot(karate,
      vertex.size = degree(karate)*1.5,
      edge.arrow.size = 0.4,
      vertex.label.cex = 0.7)
-# So in this graph we have weighted edges based on our data, the nodes are bigger
+# In this graph we have weighted edges based on our data, the nodes are bigger
 #   depending on their degree "importance"
 
 
@@ -3550,7 +3543,7 @@ get.adjacency(pr$proj2, sparse = FALSE, attr = "weight")
 aff1 <- mem %*% t(mem)
 diag(aff1) <- 0
 # the diagonal doesn't really have important information for these,
-#   as it's about self-affiliation. So, with this command, we change those values to 0.
+#   as it's about self-affiliation. With this command, we change those values to 0.
 aff1
 ##        Group1 Group2 Group3
 ## Group1      0      2      1
@@ -3571,7 +3564,7 @@ aff2
 \subsection{Network Properties, Structural Equivalence, Roles, and Positions.}
 
 \begin{center}
-<<Network_Properties, warning=FALSE, message=FALSE, prompt=TRUE>>=
+<<Network_Properties, warning=FALSE, message=FALSE, prompt=TRUE, out.width='6in'>>=
 set.seed(123)
 
 # Let's try something fancy:
@@ -3653,7 +3646,8 @@ plot(swpr$proj2, edge.width=E(swpr$proj2)$weight, vertex.color=cutree(swdend, k=
 library(ergm)
 data("florentine")
 require(intergraph)
-require(igraph) # I'm adding igraph back in here to override other packages that might have similarly named functions
+require(igraph)
+# igraph back in here to override other packages-might have similarly named functions
 
 # Igraph objects, thanks to intergraph package (as seen before)
 flo_m <- asIgraph(flomarriage)
@@ -3692,7 +3686,7 @@ plot(flo_m,vertex.color=cutree(flo_dend, k=4))
 \subsection{Diads and Triads}
 
 \being{center}
-<<Diad_Triad, warning=FALSE, message=FALSE, prompt=TRUE>>=
+<<Diad_Triad, warning=FALSE, message=FALSE, prompt=TRUE, out.width='6in'>>=
 
 library(ergm)
 data("faux.dixon.high")
@@ -3701,7 +3695,6 @@ detach(package:network)
 require(intergraph)
 require(igraph)
 dixon <- asIgraph(faux.dixon.high)
-
 
 # Network Basics:
 summary(dixon)
@@ -3717,7 +3710,6 @@ legend("topright",
        legend=7:12,
        pch=19,
        col=categorical_pal(8)[c(7,8,1,2,3,4)])
-
 
 ## Dyads:
 #    Reciprocity:  both nodes point to one another.
@@ -3764,7 +3756,6 @@ assortativity.nominal(dixon,factor(V(dixon)$race)) # Had to factorize race here
 # postive number means more assortment (sorting) into like groups with the variable than non-variable.
 
 
-
 ## Triads
 transitivity(dixon)
 # 18% chance of two neighbors of a vertex are themselves connected.
@@ -3775,7 +3766,6 @@ transitivity(dixon)
 rand <- sample_gnm(vcount(dixon),ecount(dixon),directed=TRUE)
 summary(rand)
 transitivity(rand)
-
 
 
 # Triad Census:
@@ -4185,6 +4175,7 @@ meow <- multicat(xs=x, Degree,
 
 \subsection{Assortativity and Community Structures}
 
+\begin{center}
 <<Assort, prompt=TRUE, warning=FALSE, message=FALSE, out.width='5in'>>=
 # Let's expand on the homopholy measurements from Session_5.R
 # We'll use Zachary's karate club data again:
@@ -4399,9 +4390,9 @@ table(membership(fg),membership(im))
 
 
 ## Stochastic Block Models.
-#    Just create a model to calculate the probablity of ties within each group (controlling for variables).
+#    Just create a model to calculate the probability of ties within each group
+#       (controlling for variables).
 #    (Have to swap packages out of igraph and data out of igraph)
-
 
 require(intergraph)
 detach(package:igraph)
@@ -4409,14 +4400,13 @@ require(sna)
 knet <- asNetwork(karate)
 ## this is the function from intergraph that takes a igraph graph object and
 #      makes it into a statnet graph object
-blockmodel(knet,ec = knet %v% "Faction")
+blockmodel(knet, ec = knet %v% "Faction")
 ##            Block 1    Block 2
 ## Block 1 0.27500000 0.03472222
 ## Block 2 0.03472222 0.22875817
-#   We can see that a much higher probability of a tie are within each faction than between them.\
+#   We can see that a much higher probability of a tie are within each faction than between them.
 
-kbm <- blockmodel(knet,ec = knet %v% "Faction")$block.model ## saving these results
-
+kbm <- blockmodel(knet, ec = knet %v% "Faction")$block.model ## saving these results
 
 # (swap packages back)
 detach(package:sna)
@@ -4428,10 +4418,13 @@ require(igraph)
 #    Now we'll use those block model results:
 
 g_kar <- sample_sbm(34, pref.matrix = kbm, block.sizes = c(16,18), directed = FALSE)
-assortativity(g_kar, c(rep(1,16), rep(2,18))) ## This compares pretty closely to the assortativity of the real karate network that we calculated above.
+assortativity(g_kar, c(rep(1,16), rep(2,18)))
+## This compares pretty closely to the assortativity of the real karate network
+#      that we calculated above.
 ## [1] 0.7456716
+
 par(mfrow=c(1,2))
-plot(g_kar,vertex.color = c(rep(1,16), rep(2,18)), main = "Fabricated")
+plot(g_kar, vertex.color = c(rep(1,16), rep(2,18)), main = "Fabricated")
 plot(karate, main = "Real")
 
 image(g_kar[]) ## quick way to visualize the adjacency matrix.
@@ -4439,7 +4432,9 @@ image(g_kar[]) ## quick way to visualize the adjacency matrix.
 
 image(karate[][order(as.vector(order(V(karate)$Faction))),])
 @
+\end{center}
 
+\subsection{Network Modeling}
 
 %--------------------------------------
 \clearpage
@@ -4478,8 +4473,6 @@ image(karate[][order(as.vector(order(V(karate)$Faction))),])
 
 \clearpage
 %-----------------------------------------------------------------------------------
-
-
 
 
 %--------------------------------------
@@ -4556,7 +4549,6 @@ The final result includes (in the first module) a binomial of individual infecte
 
 
 \subsection{Stochastic SIR Models}
-
 
 
 
