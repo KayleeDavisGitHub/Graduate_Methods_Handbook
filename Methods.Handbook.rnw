@@ -1,6 +1,5 @@
 %%! Created by: Kyle E. Davis
-%   The Ohio State University
-%   MailKyleDavis@gmail.com
+%   https://www.linkedin.com/in/kyledavisln/
 
 %%! Document created using R's .rnw document editing, not LaTeX
 %   platform (although both should work). UTF-8
@@ -123,9 +122,9 @@
 \thispagestyle{empty}
 \noindent \textbf{Introduction: Purpose and Goal}\\
 \hfill \\
-The purpose of this document is to provide an overview and tutorial for executing and critically interpreting various methods. A key contribution of this document is the ease to which you can swich between topics and search for conecpts, this was its inital purpose in helping me study for my minor exam.
+The purpose of this document is to provide an overview and tutorial for executing and critically interpreting various methods. A key contribution of this document is the ease to which you can switch between topics and search for concepts, this was its initial purpose in helping me study for exams.
 
-Beyond the more cannonic methods courses, there are sections on causal inference, time series modeling, network analysis, and even brief sections devoted to courses on qualitative methods and survey design. This document includes hyperlinks for the table of contents and index for quick access to brief information. The brevity comes as both an advantage and disadvantage so always default to how you learn best - for me making this document is how I processed this material best.
+Beyond the more stream-lined methods courses, there are sections on causal inference, time series modeling, network analysis, and even brief sections devoted to courses on qualitative methods and survey design. This document includes hyperlinks for the table of contents and index for quick access to brief information. The scope of this guide will be only in R, with rare mentions to other tools like Tableau, Power BI, Python, and SQL.
 
 The document initially follows a small dataset on beer rankings initially then covers data from the R Faraway package found here:
 
@@ -133,7 +132,7 @@ The document initially follows a small dataset on beer rankings initially then c
 \url{https://www.rdocumentation.org/packages/faraway/versions/1.0.7}
 \end{center}
 
-Code for visualizations is included often but not always feel free to email me for any code or data, including for \LaTeX. But ultimately this tutorial is less about replicating my results but to provide easily accessible tools for social scientists to use in their own research. That is, this document is only a first pass at a lot of these methods, to learn them better I would sugguest using them and failing over and over until something is learned. This is also not an exaustive list, I may reference something but never cover it later on. This only covers courses I've taken in my PhD program at Ohio State.
+Code for visualizations is included often but not always feel free to contact me for any code or data, including for \LaTeX. But ultimately this tutorial is less about replicating my results but to provide easily accessible tools for social scientists to use in their own research. That is, this document is only a first pass at a lot of these methods, to learn them better I would suggest using them and failing over and over until something is learned. This is also not an exhaustive list, I may reference something but never cover it later on. This only covers courses I've taken in my PhD program at Ohio State.
 
 Code in this document will appear as follows:
 
@@ -165,7 +164,8 @@ inverse_logit <- function(x){
 
 
 \begin{center}
-Created by Kyle Davis; davis.5211@osu.edu.\\ Summer 2017 --- \thedate ~(last updated)
+Created by Kyle Davis; https://www.linkedin.com/in/kyledavisln \\
+Summer 2017 --- \thedate ~(last updated)
 
 \
 
@@ -175,7 +175,7 @@ For the most recent version:
 \url{https://github.com/KyleDavisGithub/Graduate_Methods_Handbook}
 \end{center}
 
-Any questions or concerns can be sent to me directly: davis.5211@osu.edu
+Any questions or concerns can be sent to me via LinkedIN or Github.
 \end{center}
 
 
@@ -202,7 +202,7 @@ Any questions or concerns can be sent to me directly: davis.5211@osu.edu
 
 What is a \textit{cause}? More specifically, what in social science can really ``cause'' anything, is it ever really measurable? These are the questions that have been plaguing scientists for years, and with increases in methodology and theory we have tried to answer causal questions --- or at the very least, accurately report our assumptions and errors. A lot of the first few pages of this guide will be explicit in describing the assumptions we make with various methods, because these should be explicit for the audience when we find ``causal effects.''
 
-Here we are using one language to define ``cause,'' specifically that used by social scientists, which is the first theoretical assumption. A cause here, in the simpilest terms that maximizes the utility of the word -- \textbf{is a treatment}. Anytime you see the word ``cause'' you could also say treatment, and the reverse. Therefore, race, gender, any attirbute is \textbf{not} a cause because we can not give people a new race or gender on a fundemental and societal level. But obviously these things matter! Here we would divide up our study, \textit{stratifying} on gender, race, etc for all of those groups which we cannot assign a new race or gender. Being creative in design up front can save a lot of our analysis on the back-end too; for example, creating an online program that generates a name or image for you on some online messenger program may give you a new \textit{perceieved race} or {perceieved gender} which we can randomize and identify. The key point here is that our definition of ``causal'' already introduces some problems, and a lot of what follows is attempting to advert them, understand them, and explain them accurately to the audience through \textit{causal inference}. Causal inference, then, is the way we infer causality through many design and analytical choices. One take-away here is that by broadening our language we strengthen the assumptions we can make, it's a give-and-take that has become convention. \index{cause}
+Here we are using one language to define ``cause,'' specifically that used by social scientists, which is the first theoretical assumption. A cause here, in the simplest terms that maximizes the utility of the word -- \textbf{is a treatment}. Anytime you see the word ``cause'' you could also say treatment, and the reverse. Therefore, race, gender, any attribute is \textbf{not} a cause because we can not give people a new race or gender on a fundamental and societal level. But obviously these things matter! Here we would divide up our study, \textit{stratifying} on gender, race, etc for all of those groups which we cannot assign a new race or gender. Being creative in design up front can save a lot of our analysis on the back-end too; for example, creating an online program that generates a name or image for you on some online messenger program may give you a new \textit{perceieved race} or {perceieved gender} which we can randomize and identify. The key point here is that our definition of ``causal'' already introduces some problems, and a lot of what follows is attempting to advert them, understand them, and explain them accurately to the audience through \textit{causal inference}. Causal inference, then, is the way we infer causality through many design and analytic choices. One take-away here is that by broadening our language we strengthen the assumptions we can make, it's a give-and-take that has become convention. \index{cause}
 
 \begin{longtable}{ll}
 \hline\noalign{\smallskip}
@@ -233,7 +233,7 @@ $X_{it}$ & All Rows Within X (i) and At Each Time (t)\\
 \subsection{Pearl vs. Rubin Models of Causal Inference}
 \hfill \\
 
-Working with similar definitions of ``cause'' Rubin and Pearl are two scholars that have had different approaches to tackling causal inference. Both focus on weighted averages (means) to make the jump between data to the ``real world.'' Note that we could care about the distribution or variance instead of weighted means, but this won't be covered here. Rubin's approach is more algebraic, focusing on how attributes cannot be causal, and specifically stating when errors originate and cross between variables. Pearl leans on graphing theories, creating ``DAG'' plots (this will be covered later) to draw out for readers which variables influence others. Pearl's approach is intuitive and straightforward and seems to encapusalte theory just as well as Rubin's approach but has been criticized for not being explicit enough in error tracking between nodes of the theory plots. However, in some ways Pearl is more explicit algebraically, consider a fundemental mean difference in means between treatment and controlls:
+Working with similar definitions of ``cause'' Rubin and Pearl are two scholars that have had different approaches to tackling causal inference. Both focus on weighted averages (means) to make the jump between data to the ``real world.'' Note that we could care about the distribution or variance instead of weighted means, but this won't be covered here. Rubin's approach is more algebraic, focusing on how attributes cannot be causal, and specifically stating when errors originate and cross between variables. Pearl leans on graphing theories, creating ``DAG'' plots (this will be covered later) to draw out for readers which variables influence others. Pearl's approach is intuitive and straightforward and seems to encapsulate theory just as well as Rubin's approach but has been criticized for not being explicit enough in error tracking between nodes of the theory plots. However, in some ways Pearl is more explicit algebraically, consider a fundamental mean difference in means between treatment and controls:
 
 \begin{equation}
 \text{Rubin approach:} ~~~~ E[Y_1] - E[Y_0]
@@ -243,7 +243,7 @@ Working with similar definitions of ``cause'' Rubin and Pearl are two scholars t
 \text{Pearl approach:} ~~~~ E[Y_1 | \text{do}(D=1)] - E[Y_0 | \text{do}(D=0)]
 \end{equation}
 
-Pearl's approach, using the \textit{do()} operator explicity states what the researcher \textit{did} and does not assume the reader has knowledge of what the researcher did in notation.
+Pearl's approach, using the \textit{do()} operator explicitly states what the researcher \textit{did} and does not assume the reader has knowledge of what the researcher did in notation.
 
 
 \hfill \\
@@ -286,9 +286,9 @@ Pearl's approach, using the \textit{do()} operator explicity states what the res
 \end{center}
 \hfill
 
-Consider our first plot (above), and imagine that it is some causal ``story'' we wish to convey to the reader. Here C influences both O and D which both influence Y. If we care about the effect of D on Y then we ought be careful that we are not measuring any effect of O on Y as well. This is the backbone to more complex DAG plots, or dynamic acyclic graphs. As a few definitions with these going forward, a \textbf{back door path} is any possible influence that goes into our cuasal variable rather than coming \textit{from} our causal variable to the dependent variable. Here C is a backdoor path, because Y could influence O (thus C) against the arrow, which in turn gives us false results if we merely measure D on Y. A \textbf{collider} is a node which has multiple variables running into it (in social science most variables will be colliders). Colliders hand-off information into these ``hubs'' which can greatly complicate our findings if not accounted for. Sometimes we may see broken lines or different shapes and subscripts to denote errors in these graphs (take THAT Rubin!) and how these are thought to exist between nodes. Note that DAG plots are made entirely from theory, and that qualitative and quantitative data alike can sculpt how we might model our causal phenomena of interest. Ultimately we care about a few things, (1) identifying exogenous variiation, (2) blocking backdoor paths, (3) sum up the front door paths. But how do we ``block'' these dangerous paths? Well there are many ways, the most common in experiments is to stratify the experiment by the node, but the \textbf{curse of dimensionality} tells us that as we do this more and more we will run out of responents (countries, etc) to be able to afford all of the strata we may want. Thus, many methods such as matching, and design choices help us account for blocking difficulties. \index{Curse of Dimensionality} \index{DAG} \index{Back-Door-Paths} \index{colliders}
+Consider our first plot (above), and imagine that it is some causal ``story'' we wish to convey to the reader. Here C influences both O and D which both influence Y. If we care about the effect of D on Y then we ought be careful that we are not measuring any effect of O on Y as well. This is the backbone to more complex DAG plots, or dynamic acyclic graphs. As a few definitions with these going forward, a \textbf{back door path} is any possible influence that goes into our causal variable rather than coming \textit{from} our causal variable to the dependent variable. Here C is a backdoor path, because Y could influence O (thus C) against the arrow, which in turn gives us false results if we merely measure D on Y. A \textbf{collider} is a node which has multiple variables running into it (in social science most variables will be colliders). Colliders hand-off information into these ``hubs'' which can greatly complicate our findings if not accounted for. Sometimes we may see broken lines or different shapes and subscripts to denote errors in these graphs (take THAT Rubin!) and how these are thought to exist between nodes. Note that DAG plots are made entirely from theory, and that qualitative and quantitative data alike can sculpt how we might model our causal phenomena of interest. Ultimately we care about a few things, (1) identifying exogenous variation, (2) blocking backdoor paths, (3) sum up the front door paths. But how do we ``block'' these dangerous paths? Well there are many ways, the most common in experiments is to stratify the experiment by the node, but the \textbf{curse of dimensionality} tells us that as we do this more and more we will run out of respondents (countries, etc) to be able to afford all of the strata we may want. Thus, many methods such as matching, and design choices help us account for blocking difficulties. \index{Curse of Dimensionality} \index{DAG} \index{Back-Door-Paths} \index{colliders}
 
-Another great way to account for back-door-paths is to simply randomize, randomize everything in many different ways. By randomizing we shuffle who might get treated or not, with no interaction between them (SUTVA), and no selection into treatment. Although this will be mentioned in detail later. A final note is that sometimes researchers will put coefficents and effect sizes on the edges between nodes to show effects between and within variables of a study. Also when we see circles and dotted lines these are unobservable variables that are not measurable, or observable.
+Another great way to account for back-door-paths is to simply randomize, randomize everything in many different ways. By randomizing we shuffle who might get treated or not, with no interaction between them (SUTVA), and no selection into treatment. Although this will be mentioned in detail later. A final note is that sometimes researchers will put coefficients and effect sizes on the edges between nodes to show effects between and within variables of a study. Also when we see circles and dotted lines these are not easily observable variables that are not measurable, or observable.
 
 
 %----------------------------------------------------------------------
@@ -331,25 +331,25 @@ Another great way to account for back-door-paths is to simply randomize, randomi
 
 \subsection{Treatment (Causal) Effects, SUTVA, Confounding}
 
-In its simplist form, we care about the difference between the average treated effect and the average control effect. The difference between the two is the \textbf{Naive Differences in Means}, or the naively simple calculation of treatment effects. Why is it naive? Well, we haven't considered any assumptions surrounding the groups, and the fundemental problem of causal inference --- the counterfactual. A counterfactual is the ``what if'' of being in the other group than the one assigned. \index{Naive Differences in Means}
+In its simplest form, we care about the difference between the average treated effect and the average control effect. The difference between the two is the \textbf{Naive Differences in Means}, or the naively simple calculation of treatment effects. Why is it naive? Well, we haven't considered any assumptions surrounding the groups, and the fundamental problem of causal inference --- the counterfactual. A counterfactual is the ``what if'' of being in the other group than the one assigned. \index{Naive Differences in Means}
 
 \begin{equation}
 \hat{\mu}_\text{Naive} = E[Y|D=1] - E[Y|D=0]
 \end{equation}
 
 
-Think for a second, given all of this, when might the $\hat{\mu}_\text{Naive} = \hat{\mu}_\text{ate}$? Or, when might the naive estimator be the same as our average treatment effect (ATE)? Remember that the reason why $\mu_{naive}$ is naive is because it never oberserves the counterfactual world.
+Think for a second, given all of this, when might the $\hat{\mu}_\text{Naive} = \hat{\mu}_\text{ate}$? Or, when might the naive estimator be the same as our average treatment effect (ATE)? Remember that the reason why $\mu_{naive}$ is naive is because it never observes the counterfactual world.
 \prac[inline]{Think: Causation, When will the ATE be the same as the Naive Estimator?}
 
 \hfill \\
 
 \noindent \textit{Answer:}\\
 
-Note that the above equation has no decorations on $Y$, we are assuming that all respondents are not interacting with each other, even over time, (SUTVA) and that our design is absolutely complete (think of a complete DAG plot) such that we really are just getting $ E[Y_1] - E[Y_0]$. So no error, and no SUTVA violation we get the $ate$ to equal $\mu_{Naive}$. \index{SUTVA} Here SUTVA is doing a lot of work, we are assuming with SUTVA that there is no interference and treatment variation ($ Y = Y_1)$. This is a pretty monsterous assumption, countries, people, politicians, the media, \textit{everyone} often communicates and shares what they have been ``treated'' with all the time! Beyond this, treatments often effect people very differently depending on affiliaiton, openness to feedback, or if you ate breakfast that morning. Some methods like network analysis will embrace this fact instead of avoiding, although this method will not be covered here.
+Note that the above equation has no decorations on $Y$, we are assuming that all respondents are not interacting with each other, even over time, (SUTVA) and that our design is absolutely complete (think of a complete DAG plot) such that we really are just getting $ E[Y_1] - E[Y_0]$. So no error, and no SUTVA violation we get the $ate$ to equal $\mu_{Naive}$. \index{SUTVA} Here SUTVA is doing a lot of work, we are assuming with SUTVA that there is no interference and treatment variation ($ Y = Y_1)$. This is a pretty monstrous assumption, countries, people, politicians, the media, \textit{everyone} often communicates and shares what they have been ``treated'' with all the time! Beyond this, treatments often effect people very differently depending on affiliation, openness to feedback, or if you ate breakfast that morning. Some methods like network analysis will embrace this fact instead of avoiding, although this method will not be covered here.
 
 \hfill \\
 
-\noindent SUTVA, or the Stable Unit Treatment Value Assumption, follows two primary tennants:
+\noindent SUTVA, or the Stable Unit Treatment Value Assumption, follows two primary tenants:
 
 \hfill \\
 
@@ -366,7 +366,7 @@ Note that the above equation has no decorations on $Y$, we are assuming that all
 D \Vbar Y_1, Y_0 = P(D=1 ~ | ~ Y_1, Y_0)
 \end{equation}
 
-This language, by the way, is really annoying because: selection on observables $=$ conditional independence $=$ conditional ignorability $=$ no confounding, conditional on covariates $=$ blocking all back door paths. \index{blocking} \index{selection on observables} \index{back door paths} Open backdoor paths, is Pearlsian DAG-speak for having confounding. If we have more treated folk for each $Y_0$'s than $Y_1$'s then we have imballance. If X is correlated with $Y_1$ and $Y_0$ for \textit{any reason}, then even though we randomized, then $Y_1$ and $Y_0$ would be informative about $X$ - And therefore $Y_1$ and $Y_0$ would be informative about our treatment D! Therefore we have a broken experiment.
+This language, by the way, is really annoying because: selection on observables $=$ conditional independence $=$ conditional ignorability $=$ no confounding, conditional on covariates $=$ blocking all back door paths. \index{blocking} \index{selection on observables} \index{back door paths} Open backdoor paths, is Pearlsian DAG-speak for having confounding. If we have more treated folk for each $Y_0$'s than $Y_1$'s then we have imbalance. If X is correlated with $Y_1$ and $Y_0$ for \textit{any reason}, then even though we randomized, then $Y_1$ and $Y_0$ would be informative about $X$ - And therefore $Y_1$ and $Y_0$ would be informative about our treatment D! Therefore we have a broken experiment.
 
 Some other things to look out for is the plug-in estimator and conditional expectation functions, each of these are just examining average treatment effects around conditions (control variables). The \textit{plug-in estimator} is when we condition on and control for the average treatment effect (ATE) summing up over our controlled $X$'s.
 
@@ -388,9 +388,9 @@ We could think about taking into account all variables and possible conditions, 
 
 \subsection{Identification Through Randomization, Hypothesis Testing}
 
-Identification strategies are the attempt to find the missing data that we don't know due to the fundemental problem of causal inference. Two popular paths to do this are using controls and randomization.
+Identification strategies are the attempt to find the missing data that we don't know due to the fundamental problem of causal inference. Two popular paths to do this are using controls and randomization.
 
-There are different types of randomization to help us gain inference. Simple randomization is a probability of treatment per individual ($D$ ``treatment'' being applied) in all possible cases; complete randomization is deciding what fraction of observations we need to fulfil for our total group and then curate our probability of treatment to this. Using randomization, we can hope to ``block'' on these observations (like gender, or X) which we cannot randomally assign.
+There are different types of randomization to help us gain inference. Simple randomization is a probability of treatment per individual ($D$ ``treatment'' being applied) in all possible cases; complete randomization is deciding what fraction of observations we need to fulfill for our total group and then curate our probability of treatment to this. Using randomization, we can hope to ``block'' on these observations (like gender, or X) which we cannot randomly assign.
 
 \begin{equation}
 D \Vbar Y_1, Y_0 | X ~ \text{or,} ~ P(D=1 ~ | ~ Y_1, Y_0; X) = p
@@ -423,7 +423,7 @@ Cool, what's the p-values that we get from this? It is saying that conditional o
 % Slide 45 of causal 4 has regression components.
 
 %------------------------------------------------------------------------------------------
-%    Law of itterated expecations? it is when we take the E[E(Y|D)] we can boil it down to E[Y]
+%    Law of iterated expectations? it is when we take the E[E(Y|D)] we can boil it down to E[Y]
 %
 Note that our experiments can lose observations rather quickly not only through design but in human execution (for various reasons). Consider the hypothetical flow chart on the following page for a good way to report these losses to readers (often included in supplemental appendix online). This has the added visual benefit of informing readers (reviewers) of your paper's design,
 
@@ -548,7 +548,7 @@ Note that our experiments can lose observations rather quickly not only through 
 
 \newpage
 
-\noindent On hypothesis testing, in most cases we start off with testing against a \textit{sharp null hypothesis of zero average effects}. That is, $\mu_{ate} = 0$. Note that this is probably the most boring, unrealistic, and uninteresting null hypothesis that we could ever test against. Does anything, in social science, really ever have a sharp zero effect? Probably not, but we use our handy friends, the z-test and t-test, to find the statistical significance of our finding compared to the zero effect. For small samples we often assume that, because of the large sample size used, the unkown population variance may be replaced by the sample variance. That is, instead of a z score we use a t score:
+\noindent On hypothesis testing, in most cases we start off with testing against a \textit{sharp null hypothesis of zero average effects}. That is, $\mu_{ate} = 0$. Note that this is probably the most boring, unrealistic, and uninteresting null hypothesis that we could ever test against. Does anything, in social science, really ever have a sharp zero effect? Probably not, but we use our handy friends, the z-test and t-test, to find the statistical significance of our finding compared to the zero effect. For small samples we often assume that, because of the large sample size used, the unknown population variance may be replaced by the sample variance. That is, instead of a z score we use a t score:
 
 \begin{equation}
 z= \frac{\bar{x} - \mu}{\sigma / \sqrt{n}}
@@ -566,7 +566,7 @@ t = \frac{\bar{x} - \mu}{s_x / \sqrt{n}}
 
 \subsection{Frequentism and Bayesianism: What are we really doing here?}
 
-``Statistics'' has its roots, interestingly, in social sciences as the origins of the word derives from ``state-istics'' or the study of the state. This methodology, uniquely bred for States to understand it's citizenry, statistics have become fascinatingly turned for the \textit{people} to now understand their State. Following World War II this was more important than ever, a social science with deep philosophical, theoretical, and qualitative research began to explode with quantiative methodology in through the 1950's. These methodologies, deeply aided by fields like biology, computer science, and econometrics, have both drawn us closer to understanding public and governmental behavior \textit{and} has driven us farther from these concepts as methodology has been misused (e.g. p-hacking), misunderstood, and miscommunicated.
+``Statistics'' has its roots, interestingly, in social sciences as the origins of the word derives from ``state-istics'' or the study of the state. This methodology, uniquely bred for States to understand it's citizenry, statistics have become fascinatingly turned for the \textit{people} to now understand their State. Following World War II this was more important than ever, a social science with deep philosophical, theoretical, and qualitative research began to explode with quantitative methodology in through the 1950's. These methodologies, deeply aided by fields like biology, computer science, and econometrics, have both drawn us closer to understanding public and governmental behavior \textit{and} has driven us farther from these concepts as methodology has been misused (e.g. p-hacking), misunderstood, and miscommunicated.
 
 To begin to understand why we use statistics, general linear models, or machine learning, one must first understand a few basic underpinnings of frequentist theory versus Bayesian theory. Frequentism comes in social science largely from R.A. Fisher's idea of likelihood theory of inference. It argues that one true parameter ($\theta$) exists in nature and all scientists are doing are getting multiple samples to guess the one-true-fixed $\theta$. Our results are likelihoods that are close to measuring the one-true DGP but \textbf{always} with some uncertainty. In theory, we can map our estimated DGP $\hat{\theta}$ in two-dimensions pretty easily (think of a basic x--y coordinate grid). Yet, the social world is very complex, as we add more and more variables we begin to get to a point where we find ourselves in hyperspace, unable to map and visualize our surroundings (thus, machine learning helps here, but this will come up later). To help find interesting points when we do these regressions, we (in frequentist theory) seek the MLE or the Maximum Likelihood Estimation. Note this is purposefully not the Maximum \textit{Probabilistic} Estimation, in likelihoodist theory these words mean very different things. The take-away here should be to be careful when speaking in likelihoods (a relative measure of uncertainty) versus probabilities (results only from randomized experiments) as these words have strict definitions in causal inference.
 
@@ -721,7 +721,7 @@ Fixed effects are dummy varriables (are stratification) and are turning ``on or 
 
 \subsubsection{Differences in Differences}
 \index{Differences in Differences}
-Differences in Differences is a way to estimate our causal estimand (ATT, ATE, etc) and map it when treatment rolls out. Say we have three time points 1, 2, and 3, where all are untreated at 1, some are treated at 2, and all are treated at 3. To get the estimand from differences in differences we first subtract (getting the difference) of the mean outcomes between times and 2 and time 1 for the treated and controlled then calculate the differences in those two groups between the two time groups. We could do the same thing for 3 and 2. An assumption for difference in differences designs is that things were to be on the same parallel paths, or that we need to prove to the reader (often through theory) that the treated and controlled group -- in a world where no treatment occured, actually would've been the same (parrallel to one another). Further, that it is only our treatment group that caused a change between the control and treated group, not anything that would've happened anyways.
+Differences in Differences is a way to estimate our causal estimand (ATT, ATE, etc) and map it when treatment rolls out. Say we have three time points 1, 2, and 3, where all are untreated at 1, some are treated at 2, and all are treated at 3. To get the estimand from differences in differences we first subtract (getting the difference) of the mean outcomes between times and 2 and time 1 for the treated and controlled then calculate the differences in those two groups between the two time groups. We could do the same thing for 3 and 2. An assumption for difference in differences designs is that things were to be on the same parallel paths, or that we need to prove to the reader (often through theory) that the treated and controlled group -- in a world where no treatment occurred, actually would've been the same (parallel to one another). Further, that it is only our treatment group that caused a change between the control and treated group, not anything that would've happened anyways.
 
 \hfill \\
 
@@ -763,13 +763,13 @@ Here imagine we are interested in the causal effect of D --> Y but our errors, o
 \section{Introductory Statistics}
 \hfill \\
 
-While causal effects are certainly the cream-of-the-crop in terms of statistical findings; it's not necessary to examine our social world. In fact, in many cases it's not possible to get causal effects for human behavior. I cannot, for example, randomly assign a population to become black, female, or hispanic to study the effects of discrimination. However, there is an intersection of causality and correlation: the likelihood. That is, how likely is X to happen, given a list of set assumptions?
+While causal effects are certainly the cream-of-the-crop in terms of statistical findings; it's not necessary to examine our social world. In fact, in many cases it's not possible to get causal effects for human behavior. I cannot, for example, randomly assign a population to become black, female, or Hispanic to study the effects of discrimination. However, there is an intersection of causality and correlation: the likelihood. That is, how likely is X to happen, given a list of set assumptions?
 
 There's a famous example involving famous statistician Ronald Fisher, someone we've heard of. Story has it, someone in his office one day claimed that she was a passionate tea lover, so passionate that she could tell from taste alone whether tea was added to milk or milk to tea. Fisher, ever-fun at parties, questioned the lady's passion with statistical analysis. How would we set up a \textit{causal} analysis of this however? Well, we don't have multiple universes of passionate tea-loving ladies to examine; yet, we can test the lady's abilities against random chance. Assuming random guessing would lend us a 50/50 chance of success if the lady were to defy those odds to such a great detail we could claim her successful. As the story goes, the lady could not correctly guess the difference against random chance.
 
 But how do we statistically examine the degree to which someone ``defies odds'' or what can we call ``statistically significant'' success at something? Fisher, not leaving the world hanging, had other projects besides breaking old ladies hopes and dreams. In a study on manure on farming yields Fisher noted that ``statistical significance'' could be found at three seperate thresholds which could be best communicated using associated p-values. These p-values are simply representations of the ``probability of unusualness'' found via transformation of our standard errors giving a set distribution. The thresholds are usually on the 10\% tail (.10), 5\% tail (.05), and the most unusual 1\% tail observations (.01). If a set observation, or population distribution were to exist in these tail regions, passing these thresholds we could claim statistical significance. These thresholds were noted by Fisher to be ``usual, and convenient'' enough in the scientific enterprise to use them universally.
 
-In this section of the methods handbook I'll go over the fundementals of t-tests, population distributions, z-scores, chi-squared testing, and other tests that all come back to the same notion of testing ``unusualness'' in the world. This may not be causal observations but can be powerful, these tests are deployed by cancer researchers to aerospace engineers - it has saved lives and it's preversion has conversely caused great harm. These examples and many more will be included along the way. Last note, there very well could be a section on our assumptions and tests for them, however I will just integrate these issues alongside the tests and dirrect specific attention to this in the introduction section on OLS regression.
+In this section of the methods handbook I'll go over the fundamentals of t-tests, population distributions, z-scores, chi-squared testing, and other tests that all come back to the same notion of testing ``unusualness'' in the world. This may not be causal observations but can be powerful, these tests are deployed by cancer researchers to aerospace engineers - it has saved lives and it's perversion has conversely caused great harm. These examples and many more will be included along the way. Last note, there very well could be a section on our assumptions and tests for them, however I will just integrate these issues alongside the tests and direct specific attention to this in the introduction section on OLS regression.
 
 \subsection{T Testing}
 
@@ -3103,7 +3103,8 @@ Difference equations, then, are the intregate combination of these operators to 
 <<dataload, warning=FALSE, message=FALSE, echo=TRUE, include=TRUE, prompt=TRUE >>=
 # devtools::install_github("hadley/haven")
 require(haven)
-df <- read_dta('C:/Users/Shing/Documents/GodGap/TS Final/anes_timeseries_cdf.dta')
+''
+df <- read_dta('C:/Users/Shing/Documents/^ Data + Projects/GodGap/TS Final/anes_timeseries_cdf.dta')
 library(ggplot2)
 library(ggthemes)
 @
