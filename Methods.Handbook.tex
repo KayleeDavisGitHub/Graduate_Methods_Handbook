@@ -112,10 +112,6 @@
 %% using Todo Notes:
 \usepackage{xargs}                      % Use more than one optional parameter in a new commands
 \usepackage[pdftex,dvipsnames]{xcolor}  % Coloured text etc.
-\usepackage[colorinlistoftodos,prependcaption,textsize=small]{todonotes}
-% Custom Todo Options:
-\newcommandx{\prac}[2][1=]{\todo[linecolor=blue, backgroundcolor=blue!25, bordercolor=blue, #1]{#2}}
-\newcommandx{\work}[2][1=]{\todo[linecolor=red,  backgroundcolor=red!25,  bordercolor=red,  #1]{#2}}
 
 %% Making an Index:
 \usepackage{makeidx}
@@ -217,15 +213,6 @@ For the most recent version:
 
 Any questions or concerns can be sent to me via LinkedIN or Github.
 \end{center}
-
-
-
-
-\clearpage
-%%! Page for TO Do Notes:
-\listoftodos[For Review:]
-\thispagestyle{empty}
-
 
 \clearpage
 %%! Page for Table of Contents:
@@ -379,7 +366,6 @@ In its simplest form, we care about the difference between the average treated e
 
 
 Think for a second, given all of this, when might the $\hat{\mu}_\text{Naive} = \hat{\mu}_\text{ate}$? Or, when might the naive estimator be the same as our average treatment effect (ATE)? Remember that the reason why $\mu_{naive}$ is naive is because it never observes the counterfactual world.
-\prac[inline]{Think: Causation, When will the ATE be the same as the Naive Estimator?}
 
 \hfill \\
 
@@ -452,7 +438,6 @@ In hypothesis testing we could just take with and without treatment and see how 
 \index{p-values}
 Cool, what's the p-values that we get from this? It is saying that conditional on the null hypothesis (i.e., conditional on $\mu_{ate} = 0$ ), what is the (frequentist) probability of observing this extreme an estimate of $\hat{\mu}$? This is typically in regards to a sharp null hypothesis of zero average effects, $Y_1 = Y_0$ always. \index{sharp null hypothesis}
 
-\prac[inline]{Think: What really is a p-value telling us?}
 
 
 %------------------------------------------------------------------------------------------
@@ -634,7 +619,6 @@ To find, mathematically, our MLE (which occurs under-the-hood in R) we compute t
 
 \subsection{Running Assumptions}
 
-\prac[inline]{Think: What assumptions are in causal analysis?}
 
 Typically we trade-off assumptions but can never completely eliminate them, only show or \textit{prove} that we have fulfilled them -- all to get closer to causation (causal inference). Some running assumptions are:
 
@@ -988,7 +972,6 @@ No matter what the model we're specifying throughout this document, be it logit,
 \mathlarger{ \eta = X\beta \text{ \text{  }  or,  }}
 \mathlarger{ \eta_i = \beta_0 + \beta_1 x_{i1} \textbf{...} \beta_q x_{iq}  }
 \end{equation}
-\prac{Set up a problem here}
 One example of when we might use regression is when trying to determine the best quality of beer based upon mean judged ratings, these are the questions that matter the most. Beer ratings range from $-1$: ``Fair'', to $0$: ``Good'', and $1$: ``Great.'' Consider our first model where we consider how expensive the beer is:
 
 \begin{equation}
@@ -1303,7 +1286,6 @@ This shows our amount of variance explained by our model, over what's unexplaine
 \hfill \\
 \subsubsection{Missing Data}
 
-\prac[inline]{Practice: How might we code and fill in missing data?}
 
 Often is the case that we have missing data and still models are ran as usual. Yet, missing data very often occurs for a reason, be it a question offends a respondent, a respondent doesn't know how to answer, or a unit of observation intentionally does not respond because the response may not be acceptable to the researcher. That is, the missing data is very often not missing completely at random (MCAR). Rather, data can be missing with surrounding answered variables that we can use to predict the missing response (imputation). If we have no variables to attempt to predict the missing data (NI) then there is nothing we can do. With MCAR data we would go on as normal, or impute because it wouldn't really hurt anything.
 
@@ -3694,8 +3676,8 @@ In this section we'll cover just the basics of setting up network data and readi
 \hlstd{> }\hlstd{g1}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH 18867c1 D--- 5 7 -- 
-## + edges from 18867c1:
+## IGRAPH be57c01 D--- 5 7 -- 
+## + edges from be57c01:
 ## [1] 1->2 1->3 2->4 3->1 3->5 5->1 4->3
 \end{verbatim}
 \begin{alltt}
@@ -3704,7 +3686,7 @@ In this section we'll cover just the basics of setting up network data and readi
 \hlstd{> }\hlkwd{summary}\hlstd{(g1)}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH 18867c1 D--- 5 7 --
+## IGRAPH be57c01 D--- 5 7 --
 \end{verbatim}
 \begin{alltt}
 \hlstd{> }\hlcom{# Or using the default plot() function:}
@@ -3735,7 +3717,7 @@ In this section we'll cover just the basics of setting up network data and readi
 \hlstd{> }\hlkwd{summary}\hlstd{(g2)} \hlcom{# Undirected, now named, 7 nodes, 10 edges.}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH 18986c0 UN-- 7 10 -- 
+## IGRAPH be6b68f UN-- 7 10 -- 
 ## + attr: name (v/c)
 \end{verbatim}
 \begin{alltt}
@@ -3790,7 +3772,7 @@ In this section we'll cover just the basics of setting up network data and readi
 \hlstd{> }\hlkwd{E}\hlstd{(g1)}
 \end{alltt}
 \begin{verbatim}
-## + 7/7 edges from 18867c1:
+## + 7/7 edges from be57c01:
 ## [1] 1->2 1->3 2->4 3->1 3->5 5->1 4->3
 \end{verbatim}
 \begin{alltt}
@@ -3799,7 +3781,7 @@ In this section we'll cover just the basics of setting up network data and readi
 \hlstd{> }\hlkwd{V}\hlstd{(g2)}
 \end{alltt}
 \begin{verbatim}
-## + 7/7 vertices, named, from 18986c0:
+## + 7/7 vertices, named, from be6b68f:
 ## [1] Anand  Beth   Chris  Dieter Sun    Ali    Fatima
 \end{verbatim}
 \begin{alltt}
@@ -3829,7 +3811,7 @@ In this section we'll cover just the basics of setting up network data and readi
 \hlstd{> }\hlkwd{summary}\hlstd{(g2)} \hlcom{# We see the new variables added, and how they are connected.}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH 18986c0 UN-- 7 10 -- 
+## IGRAPH be6b68f UN-- 7 10 -- 
 ## + attr: name (v/c), gender (v/c), age (v/n), count (e/n)
 \end{verbatim}
 \begin{alltt}
@@ -3966,9 +3948,9 @@ In this section we'll cover just the basics of setting up network data and readi
 \hlstd{> }\hlstd{bg}  \hlcom{# We see the "B" there now, for Bipartide}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH 18b992d UN-B 8 8 -- 
+## IGRAPH be7e3cb UN-B 8 8 -- 
 ## + attr: type (v/l), name (v/c)
-## + edges from 18b992d (vertex names):
+## + edges from be7e3cb (vertex names):
 ## [1] Group1--Y1 Group1--Y2 Group1--Y3 Group1--Y4 Group2--Y2 Group2--Y3
 ## [7] Group3--Y4 Group3--Y5
 \end{verbatim}
@@ -3988,15 +3970,15 @@ In this section we'll cover just the basics of setting up network data and readi
 \end{alltt}
 \begin{verbatim}
 ## $proj1
-## IGRAPH 18bd0d7 UNW- 3 2 -- 
+## IGRAPH be8047c UNW- 3 2 -- 
 ## + attr: name (v/c), weight (e/n)
-## + edges from 18bd0d7 (vertex names):
+## + edges from be8047c (vertex names):
 ## [1] Group1--Group2 Group1--Group3
 ## 
 ## $proj2
-## IGRAPH 18bd0d7 UNW- 5 7 -- 
+## IGRAPH be8047c UNW- 5 7 -- 
 ## + attr: name (v/c), weight (e/n)
-## + edges from 18bd0d7 (vertex names):
+## + edges from be8047c (vertex names):
 ## [1] Y1--Y2 Y1--Y3 Y1--Y4 Y2--Y3 Y2--Y4 Y3--Y4 Y4--Y5
 \end{verbatim}
 \begin{alltt}
@@ -4409,7 +4391,7 @@ In this section we'll cover just the basics of setting up network data and readi
 \hlstd{> }\hlkwd{summary}\hlstd{(dixon)}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH 1a34ab7 D--- 248 1197 -- 
+## IGRAPH c01f678 D--- 248 1197 -- 
 ## + attr: title (g/c), grade (v/n), na (v/l), race (v/c), scode (v/n),
 ## | sex (v/n), vertex.names (v/c), na (e/l)
 \end{verbatim}
@@ -4554,7 +4536,7 @@ In this section we'll cover just the basics of setting up network data and readi
 \hlstd{> }\hlkwd{summary}\hlstd{(rand)}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH 1a7ad41 D--- 248 1197 -- Erdos renyi (gnm) graph
+## IGRAPH c0643c4 D--- 248 1197 -- Erdos renyi (gnm) graph
 ## + attr: name (g/c), type (g/c), loops (g/l), m (g/n)
 \end{verbatim}
 \begin{alltt}
@@ -4680,7 +4662,7 @@ Now that we have the data read in and cleaned (mostly tracking the id numbers), 
 \hlstd{> }\hlkwd{summary}\hlstd{(graph.object)} \hlcom{# Basic statistics seem okay}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH 1b348f4 DN-- 610 1043 -- 
+## IGRAPH c16f49e DN-- 610 1043 -- 
 ## + attr: name (v/c)
 \end{verbatim}
 \begin{alltt}
@@ -5017,7 +4999,7 @@ In this I will be using the Reddit data from "r/AskSocialScientists" from Octobe
 \hlstd{> }\hlkwd{summary}\hlstd{(g1)} \hlcom{#}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH 1d60603 DN-- 339 521 -- 
+## IGRAPH c3802a6 DN-- 339 521 -- 
 ## + attr: name (v/c)
 \end{verbatim}
 \begin{alltt}
@@ -5027,7 +5009,7 @@ In this I will be using the Reddit data from "r/AskSocialScientists" from Octobe
 \hlstd{> }\hlkwd{summary}\hlstd{(g12)} \hlcom{#}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH 1d60d47 DN-- 327 522 -- 
+## IGRAPH c380c56 DN-- 327 522 -- 
 ## + attr: name (v/c)
 \end{verbatim}
 \end{kframe}

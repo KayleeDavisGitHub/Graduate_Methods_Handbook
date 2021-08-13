@@ -62,10 +62,6 @@
 %% using Todo Notes:
 \usepackage{xargs}                      % Use more than one optional parameter in a new commands
 \usepackage[pdftex,dvipsnames]{xcolor}  % Coloured text etc.
-\usepackage[colorinlistoftodos,prependcaption,textsize=small]{todonotes}
-% Custom Todo Options:
-\newcommandx{\prac}[2][1=]{\todo[linecolor=blue, backgroundcolor=blue!25, bordercolor=blue, #1]{#2}}
-\newcommandx{\work}[2][1=]{\todo[linecolor=red,  backgroundcolor=red!25,  bordercolor=red,  #1]{#2}}
 
 %% Making an Index:
 \usepackage{makeidx}
@@ -177,15 +173,6 @@ For the most recent version:
 
 Any questions or concerns can be sent to me via LinkedIN or Github.
 \end{center}
-
-
-
-
-\clearpage
-%%! Page for TO Do Notes:
-\listoftodos[For Review:]
-\thispagestyle{empty}
-
 
 \clearpage
 %%! Page for Table of Contents:
@@ -339,7 +326,6 @@ In its simplest form, we care about the difference between the average treated e
 
 
 Think for a second, given all of this, when might the $\hat{\mu}_\text{Naive} = \hat{\mu}_\text{ate}$? Or, when might the naive estimator be the same as our average treatment effect (ATE)? Remember that the reason why $\mu_{naive}$ is naive is because it never observes the counterfactual world.
-\prac[inline]{Think: Causation, When will the ATE be the same as the Naive Estimator?}
 
 \hfill \\
 
@@ -412,7 +398,6 @@ In hypothesis testing we could just take with and without treatment and see how 
 \index{p-values}
 Cool, what's the p-values that we get from this? It is saying that conditional on the null hypothesis (i.e., conditional on $\mu_{ate} = 0$ ), what is the (frequentist) probability of observing this extreme an estimate of $\hat{\mu}$? This is typically in regards to a sharp null hypothesis of zero average effects, $Y_1 = Y_0$ always. \index{sharp null hypothesis}
 
-\prac[inline]{Think: What really is a p-value telling us?}
 
 
 %------------------------------------------------------------------------------------------
@@ -594,7 +579,6 @@ To find, mathematically, our MLE (which occurs under-the-hood in R) we compute t
 
 \subsection{Running Assumptions}
 
-\prac[inline]{Think: What assumptions are in causal analysis?}
 
 Typically we trade-off assumptions but can never completely eliminate them, only show or \textit{prove} that we have fulfilled them -- all to get closer to causation (causal inference). Some running assumptions are:
 
@@ -907,7 +891,6 @@ No matter what the model we're specifying throughout this document, be it logit,
 \mathlarger{ \eta = X\beta \text{ \text{  }  or,  }}
 \mathlarger{ \eta_i = \beta_0 + \beta_1 x_{i1} \textbf{...} \beta_q x_{iq}  }
 \end{equation}
-\prac{Set up a problem here}
 One example of when we might use regression is when trying to determine the best quality of beer based upon mean judged ratings, these are the questions that matter the most. Beer ratings range from $-1$: ``Fair'', to $0$: ``Good'', and $1$: ``Great.'' Consider our first model where we consider how expensive the beer is:
 
 \begin{equation}
@@ -1154,7 +1137,6 @@ This shows our amount of variance explained by our model, over what's unexplaine
 \hfill \\
 \subsubsection{Missing Data}
 
-\prac[inline]{Practice: How might we code and fill in missing data?}
 
 Often is the case that we have missing data and still models are ran as usual. Yet, missing data very often occurs for a reason, be it a question offends a respondent, a respondent doesn't know how to answer, or a unit of observation intentionally does not respond because the response may not be acceptable to the researcher. That is, the missing data is very often not missing completely at random (MCAR). Rather, data can be missing with surrounding answered variables that we can use to predict the missing response (imputation). If we have no variables to attempt to predict the missing data (NI) then there is nothing we can do. With MCAR data we would go on as normal, or impute because it wouldn't really hurt anything.
 
