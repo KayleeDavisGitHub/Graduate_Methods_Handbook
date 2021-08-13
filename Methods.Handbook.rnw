@@ -604,9 +604,9 @@ A few non-parametric models help us lean away from certain assumptions. This cou
 
 If we are working with relational datasets, and do have downstream effects at $t_1$, $t_2$, $t_n$ we cannot solve this problem by using fixed effects. Because we are assuming with fixed effects that our estimands do not change over time, this is actually a core assumption that is violated all the time. However, fear not, for marginal structural models can help us when fixed effects cannot.
 
-Assuming time doesn't influence previous times (which may be an issue if we're studying some forecasting or strategic process that appears in our data). we can look at the outcome in th elast time period and stack each time period on top of one another. This is very different from adding a bunch of dummy variables, it is stacking the time periods together; we can treat for the histories in this way and potential influence amongst them.\footnote{It may be a good idea to check out time series analysis here, just in case you problems can be solved with your data.}
+Assuming time doesn't influence previous times (which may be an issue if we're studying some forecasting or strategic process that appears in our data). we can look at the outcome in the last time period and stack each time period on top of one another. This is very different from adding a bunch of dummy variables, it is stacking the time periods together; we can treat for the histories in this way and potential influence among them.\footnote{It may be a good idea to check out time series analysis here, just in case you problems can be solved with your data.}
 
-So marginal structural models can work with different treatment histories (arms) than fixed effects. Let's fit a model for every ``D,'' and just weight each of these down the road. We conditionon the history of past events, and if the model pukes at us then we drop the bad cases and redefine the subsample we are talking about, and how it's still interesting.
+So marginal structural models can work with different treatment histories (arms) than fixed effects. Let's fit a model for every ``D,'' and just weight each of these down the road. We condition the history of past events, and if the model pukes at us then we drop the bad cases and redefine the subsample we are talking about, and how it's still interesting.
 
 Note, we do not get out of the unobservables problem, we still need to set up this model with the same theory and careful design. \textit{You cannot analyize your way out of a bad design. }
 
@@ -622,7 +622,7 @@ library(survey) # this is better for a variety of reasons.
 
 @
 
-These weighted coefficents can help us, but we can try to stabilize teh weights we get, especially in cases of low probability events. For this we need non-dynamic probabilities. Assign these values with R's ``mgcv'' package, and function ``bam'' and some smoothing with \texttt{s()}. Get the t-specific weights, and there are ways to plot the improvements  from doing this. Then, put the weights together (stabilized) so mean aroudnd 1, and multiply these easily with \texttt{prod(weights)}. Change out these weights in above, instead of \texttt{1} we can use \texttt{ weights}:
+These weighted coefficients can help us, but we can try to stabilize the weights we get, especially in cases of low probability events. For this we need non-dynamic probabilities. Assign these values with R's ``mgcv'' package, and function ``bam'' and some smoothing with \texttt{s()}. Get the t-specific weights, and there are ways to plot the improvements  from doing this. Then, put the weights together (stabilized) so mean around 1, and multiply these easily with \texttt{prod(weights)}. Change out these weights in above, instead of \texttt{1} we can use \texttt{ weights}:
 
 <<msm2, prompt=TRUE, eval=FALSE>>=
 
@@ -645,7 +645,7 @@ We can then get predicted probabilities from our marginal structural models. So 
 \begin{itemize}
 \item[1.] Set up data so each outcome has multiple individuals and prior time periods.
 \item[2.] Model treatment in each period without tie-varying covariates with them.
-\item[3.] Asses ballance (repeat 2 if necessary).
+\item[3.] Assess balance (repeat 2 if necessary).
 \item[4.] stabilize weights.
 \item[5.] calculate weighted estimates of QOI's.
 \item[6.] What is N anymore? Let's just always bootstrap the heck out of this: doing (2), (4), (5), over 1,000 times over.
@@ -668,9 +668,9 @@ We can then get predicted probabilities from our marginal structural models. So 
 e(X) = Pr(D = 1|X)
 \end{equation}
 
-The idea is then to coarsen/subclassify or nearest-neighbor match on the \textbf{propensity score}. \index{coarse matching} \index{nearest-neighbor} \textbf{Subclassification} is making the probabilities of treatment and controll equivilant in observational studies. Doing this, we help create ballance in our treated and controlled groups. This is similar to complete randomization in experimental trials. (What machine learning techniques can help us here?) \index{subclassification}
+The idea is then to coarsen/subclassify or nearest-neighbor match on the \textbf{propensity score}. \index{coarse matching} \index{nearest-neighbor} \textbf{Subclassification} is making the probabilities of treatment and control equivilant in observational studies. Doing this, we help create balance in our treated and controlled groups. This is similar to complete randomization in experimental trials. (What machine learning techniques can help us here?) \index{subclassification}
 
-Some machine learning approaches that can help us here (see machine learning chapter for more) include regression trees and other classification approaches. These can help us identify groups to match on create more ballance in our data.
+Some machine learning approaches that can help us here (see machine learning chapter for more) include regression trees and other classification approaches. These can help us identify groups to match on create more balance in our data.
 
 
 
@@ -679,12 +679,12 @@ Some machine learning approaches that can help us here (see machine learning cha
 
 \subsubsection{Fixed Effects:}
 
-Fixed effects are dummy varriables (are stratification) and are turning ``on or off'' a year, country, or some other theoretically interesting variable to ``account'' for the things that pour into a time or place. Using this we assume no carry over between years to previous or future years. Here are the assumptions with fixed effects: \index{Fixed Effects} \index{Marginal Structural Models}
+Fixed effects are dummy variables (are stratification) and are turning ``on or off'' a year, country, or some other theoretically interesting variable to ``account'' for the things that pour into a time or place. Using this we assume no carry over between years to previous or future years. Here are the assumptions with fixed effects: \index{Fixed Effects} \index{Marginal Structural Models}
 
 \hfill \\
 
 \begin{itemize}
-\item[1.] no unobserved time-varying confounder exists
+\item[1.] no unobserved time-varying confounds exist
 \item[2.] past outcomes do not directly affect current outcome
 \item[3.] past outcomes do not directly affect current treatment
 \item[4.] past treatments do not directly affect current outcome
