@@ -4,15 +4,15 @@
 \indexentry{Back-Door-Paths|hyperpage}{3}
 \indexentry{colliders|hyperpage}{3}
 \indexentry{Naive Differences in Means|hyperpage}{3}
-\indexentry{SUTVA|hyperpage}{4}
+\indexentry{SUTVA|hyperpage}{3}
 \indexentry{confounding|hyperpage}{4}
 \indexentry{selection on observables|hyperpage}{4}
 \indexentry{ignorability|hyperpage}{4}
 \indexentry{blocking|hyperpage}{4}
 \indexentry{selection on observables|hyperpage}{4}
 \indexentry{back door paths|hyperpage}{4}
-\indexentry{saturated modeling|hyperpage}{5}
-\indexentry{imputation|hyperpage}{5}
+\indexentry{saturated modeling|hyperpage}{4}
+\indexentry{imputation|hyperpage}{4}
 \indexentry{p-values|hyperpage}{5}
 \indexentry{sharp null hypothesis|hyperpage}{5}
 \indexentry{MLE|hyperpage}{9}
@@ -41,33 +41,33 @@
 \indexentry{Binned Residuals|hyperpage}{36}
 \indexentry{Rope Ladder Ploting|hyperpage}{38}
 \indexentry{link function|hyperpage}{49}
-\indexentry{Kaplan-Meier|hyperpage}{68}
-\indexentry{Simulation|hyperpage}{72}
-\indexentry{Test Set Training Set|hyperpage}{76}
-\indexentry{LASSO|hyperpage}{79}
-\indexentry{Ridge|hyperpage}{79}
-\indexentry{Elastic Net|hyperpage}{79}
-\indexentry{GGplot|hyperpage}{81}
-\indexentry{Test Set Training Set|hyperpage}{87}
-\indexentry{DGP|hyperpage}{88}
-\indexentry{Test Set Training Set|hyperpage}{88}
-\indexentry{library() |hyperpage}{88}
-\indexentry{Data Vintaging|hyperpage}{94}
-\indexentry{VAR|hyperpage}{94}
-\indexentry{systematic sampling|hyperpage}{94}
-\indexentry{Augmented Dicky Fuller|hyperpage}{98}
-\indexentry{KPSS Test|hyperpage}{98}
-\indexentry{Granger Causality|hyperpage}{98}
-\indexentry{Vector Auto Regression|hyperpage}{98}
-\indexentry{Innovation Accounting|hyperpage}{99}
-\indexentry{recoding data|hyperpage}{134}
-\indexentry{ggplot|hyperpage}{140}
-\indexentry{ggplot|hyperpage}{147}
-\indexentry{SIR|hyperpage}{173}
-\indexentry{DAG|hyperpage}{175}
-\indexentry{utility|hyperpage}{175}
-\indexentry{First Best|hyperpage}{175}
-\indexentry{Nash Equilibrium|hyperpage}{175}
-\indexentry{subgame perfect Nash Equilibrium|hyperpage}{176}
-\indexentry{comparative static|hyperpage}{176}
-\indexentry{p-values|hyperpage}{177}
+\indexentry{Kaplan-Meier|hyperpage}{64}
+\indexentry{Simulation|hyperpage}{68}
+\indexentry{Test Set Training Set|hyperpage}{72}
+\indexentry{LASSO|hyperpage}{75}
+\indexentry{Ridge|hyperpage}{75}
+\indexentry{Elastic Net|hyperpage}{75}
+\indexentry{GGplot|hyperpage}{77}
+\indexentry{Test Set Training Set|hyperpage}{83}
+\indexentry{DGP|hyperpage}{84}
+\indexentry{Test Set Training Set|hyperpage}{84}
+\indexentry{library() |hyperpage}{84}
+\indexentry{Data Vintaging|hyperpage}{90}
+\indexentry{VAR|hyperpage}{90}
+\indexentry{systematic sampling|hyperpage}{90}
+\indexentry{Augmented Dicky Fuller|hyperpage}{94}
+\indexentry{KPSS Test|hyperpage}{94}
+\indexentry{Granger Causality|hyperpage}{94}
+\indexentry{Vector Auto Regression|hyperpage}{94}
+\indexentry{Innovation Accounting|hyperpage}{95}
+\indexentry{recoding data|hyperpage}{130}
+\indexentry{ggplot|hyperpage}{136}
+\indexentry{ggplot|hyperpage}{143}
+\indexentry{SIR|hyperpage}{169}
+\indexentry{DAG|hyperpage}{171}
+\indexentry{utility|hyperpage}{171}
+\indexentry{First Best|hyperpage}{171}
+\indexentry{Nash Equilibrium|hyperpage}{171}
+\indexentry{subgame perfect Nash Equilibrium|hyperpage}{172}
+\indexentry{comparative static|hyperpage}{172}
+\indexentry{p-values|hyperpage}{173}
