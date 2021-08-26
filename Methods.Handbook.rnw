@@ -204,7 +204,7 @@ E[~~]  & Expectation of Something, Typically the Mean\\
 $E[Y |D]$ & Expectation of Y \textit{Given Some} D\\
 $\mu_{ATE}$ & The Average Treatment Effect\\
 $\mu_{ATT}$ & The Average Treatment of the Treated Group\\
-$\mu_{ATC}$ & The Average Treatment of the Controll Group\\
+$\mu_{ATC}$ & The Average Treatment of the Control Group\\
 $\xrightarrow[]{d}$ & The Distribution Becomes\\
 $n$ or $N$ & The Number of Observations\\
 $\mathcal{N}$ & Normally Distributed\\
