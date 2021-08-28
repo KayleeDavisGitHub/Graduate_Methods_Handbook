@@ -3312,7 +3312,7 @@ While VAR allows for flexibility in helping determine the data generating proces
 \clearpage
 \section{Network Analysis}
 
-Network analysis, broadly speaking, is just the analysis of the connection between nodes and the broader interconnections of a group of units. Nodes can be people, events, animals, anything really. Edges can be any measureable connection between nodes, be it frequency of community, survey responses, amount of eye contact - anything really.\\
+Network analysis, broadly speaking, is just the analysis of the connection between nodes and the broader interconnections of a group of units. Nodes can be people, events, animals, anything really. Edges can be any measurable connection between nodes, be it frequency of community, survey responses, amount of eye contact - anything really.\\
 
 This chapter on network analysis will show the fundamentals of executing network techniques in R, but will dodge a lot of the underlying math making up these methods. A lot of this code and practice has been from previous courses and tutoring I've participated in, so there may be references to this in the comments of the code in this chapter. \\
 
