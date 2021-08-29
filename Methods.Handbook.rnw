@@ -128,7 +128,7 @@ The document initially follows a small dataset on beer rankings initially then c
 \url{https://www.rdocumentation.org/packages/faraway/versions/1.0.7}
 \end{center}
 
-Code for visualizations is included often but not always feel free to contact me for any code or data, including for \LaTeX. But ultimately this tutorial is less about replicating my results but to provide easily accessible tools for social scientists to use in their own research. That is, this document is only a first pass at a lot of these methods, to learn them better I would suggest using them and failing over and over until something is learned. This is also not an exhaustive list, I may reference something but never cover it later on. This only covers courses I've taken in my PhD program at Ohio State.
+Code for visualizations is included but sometimes hidden for readability, you can find the full \LaTeX version on Github. Ultimately this tutorial is less about replicating my results but to provide easily accessible tools for social scientists to use in their own research. That is, this document is only a first pass at a lot of these methods, to learn them better I would suggest using them and failing over and over until something is learned. This is also not an exhaustive list, I may reference something but never cover it later on. This only covers courses I've taken in my PhD program at Ohio State, but some of my insights from my work later on may be folded in to provide relevance for those in the business or government industry.
 
 Code in this document will appear as follows:
 
@@ -158,6 +158,7 @@ inverse_logit <- function(x){
 }
 @
 
+Overall, I hope this document helps someone. It doesn't read too professionally, image reading it as two friends hanging out at Starbucks. I used this to largely practice my skills on the topics here, but I'm happy you're here to join in.
 
 \begin{center}
 Created by Kyle Davis; https://www.linkedin.com/in/kyledavisln \\
@@ -171,7 +172,7 @@ For the most recent version:
 \url{https://github.com/KyleDavisGithub/Graduate_Methods_Handbook}
 \end{center}
 
-Any questions or concerns can be sent to me via LinkedIN or Github.
+Any questions or concerns can be sent to me via LinkedIn or GitHub.
 \end{center}
 
 \clearpage
@@ -551,7 +552,7 @@ t = \frac{\bar{x} - \mu}{s_x / \sqrt{n}}
 
 \subsection{Frequentism and Bayesianism: What are we really doing here?}
 
-``Statistics'' has its roots, interestingly, in social sciences as the origins of the word derives from ``state-istics'' or the study of the state. This methodology, uniquely bred for States to understand it's citizenry, statistics have become fascinatingly turned for the \textit{people} to now understand their State. Following World War II this was more important than ever, a social science with deep philosophical, theoretical, and qualitative research began to explode with quantitative methodology in through the 1950's. These methodologies, deeply aided by fields like biology, computer science, and econometrics, have both drawn us closer to understanding public and governmental behavior \textit{and} has driven us farther from these concepts as methodology has been misused (e.g. p-hacking), misunderstood, and miscommunicated.
+``Statistics'' has its roots, interestingly, in social sciences as the origins of the word derives from ``state-istics'' or the study of the state. This methodology, uniquely bred for States to understand it's citizenry, statistics have become fascinatingly turned for the \textit{people} to now understand their State. Following World War II this was more important than ever, a social science with deep philosophical, theoretical, and qualitative research began to explode with quantitative methodology in through the 1950's. These methodologies, deeply aided by fields like biology, computer science, and econometric, have both drawn us closer to understanding public and governmental behavior \textit{and} has driven us farther from these concepts as methodology has been misused (e.g. p-hacking), misunderstood, and miscommunicated.
 
 To begin to understand why we use statistics, general linear models, or machine learning, one must first understand a few basic underpinnings of frequentist theory versus Bayesian theory. Frequentism comes in social science largely from R.A. Fisher's idea of likelihood theory of inference. It argues that one true parameter ($\theta$) exists in nature and all scientists are doing are getting multiple samples to guess the one-true-fixed $\theta$. Our results are likelihoods that are close to measuring the one-true DGP but \textbf{always} with some uncertainty. In theory, we can map our estimated DGP $\hat{\theta}$ in two-dimensions pretty easily (think of a basic x--y coordinate grid). Yet, the social world is very complex, as we add more and more variables we begin to get to a point where we find ourselves in hyperspace, unable to map and visualize our surroundings (thus, machine learning helps here, but this will come up later). To help find interesting points when we do these regressions, we (in frequentist theory) seek the MLE or the Maximum Likelihood Estimation. Note this is purposefully not the Maximum \textit{Probabilistic} Estimation, in likelihoodist theory these words mean very different things. The take-away here should be to be careful when speaking in likelihoods (a relative measure of uncertainty) versus probabilities (results only from randomized experiments) as these words have strict definitions in causal inference.
 
@@ -560,8 +561,6 @@ An MLE is interesting because it is the impasse between our estimated parameter 
 \begin{center}
 \includegraphics[scale=2]{MLEex}
 \end{center}
-
-\clearpage
 
 To find, mathematically, our MLE (which occurs under-the-hood in R) we compute the following: \index{MLE}
 
@@ -3705,7 +3704,6 @@ reciprocity(dixon) # We can calculate this via dyad census (above) or through ad
 # Dyad Census:
 2*dyad_census(dixon)$mut/ecount(dixon)
 # two times the mutual count to control for the directionality of edges (which we use as denominator
-
 
 # Using the adjacency matrix
 dam <- as.matrix(get.adjacency(dixon))
