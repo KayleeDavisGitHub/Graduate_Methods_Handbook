@@ -587,7 +587,7 @@ Typically we trade-off assumptions but can never completely eliminate them, only
 \item[3.] Probability exists only between 0 and 1, but never zero nor 1.
 \end{itemize}
 
-\noindent If we attempt to "lean-into" one of these assumptions to be able to measure it, we may come across additional assumptions like "parrallel paths" or various representation and error assumptions. Some of these will be discussed in the Regression section of this book.
+\noindent If we attempt to "lean-into" one of these assumptions to be able to measure it, we may come across additional assumptions like "parallel paths" or various representation and error assumptions. Some of these will be discussed in the Regression section of this book.
 
 
 \subsection{Non-parametric Modeling}
@@ -739,7 +739,9 @@ Here imagine we are interested in the causal effect of D --> Y but our errors, o
 \end{center}
 \hfill
 
+\subsection{Conclusion: Causal Inference}
 
+In the end, whether you agree or disagree that causality can truly ever be found in our social world, the efforts we take to ensure that theory is at the forefront of our models is never time wasted. Thinking through - seriously - the exact relationships between our variables and carefully crafting our models make them more convincing be it scientifically, in a business scenario, or in government work. It shows our hand, hides nothing, and clarifies our thinking. It encourages teamwork and collaboration around a shared thought and research agenda, and it helps in presentation by painting a clear picture of the work accomplished. Further chapters are not meant to be shortcuts to this chapter, but additions to it.
 
 %----------------------------------------------------------------------------------
 \clearpage
