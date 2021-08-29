@@ -805,7 +805,7 @@ In this section of the methods handbook I'll go over the fundamentals of t-tests
 \subsection{T Testing}
 
 \index{t-test}
-Directly, t score is a ratio between the difference between two groups and the difference within the groups. The larger the t score, the more difference there is between groups. The smaller the t score, the more similarity there is between groups. A t score of 3 means that the groups are three times as different from each other as they are within each other. When you run a t test, the bigger the t-value, the more likely it is that the results are repeatable. When we work with t tests we are typically working with sample populations rather than whole population data (with a known $\sigma$ error like we saw with z testing). There are three ways we usually find a t test:
+Directly, t-score is a ratio between the difference between two groups and the difference within the groups. The larger the t-score, the more difference there is between groups. The smaller the t-score, the more similarity there is between groups. A t-score of 3 means that the groups are three times as different from each other as they are within each other. When you run a t-test, the bigger the t-value, the more likely it is that the results are repeatable. When we work with t-tests we are typically working with sample populations rather than whole population data (with a known $\sigma$ error like we saw with z-testing). There are three ways we usually find a t-test:
 
 \begin{itemize}
 \item[1.] An Independent Samples t-test compares the means for two groups.
@@ -815,7 +815,7 @@ Directly, t score is a ratio between the difference between two groups and the d
 
 Each of these follow the same theory with slight variations to account for differences in known variance or not. Each of these test against a standardized null hypothesis of zero average effects ($ H_0 : \mu_1 - \mu_2 = 0$) and, conversely, our alternative hypothesis can be that our sample is anything but zero ($H_A : \mu_1 - \mu_2 \neq 0$) or existing only in one tail ($H_A : \mu_1 - \mu_2 > 0$). However, our alternative hypothesis specification doesn't really change our test much - just our interpretation of the critical values and our multiplicative testing parameter, similar to the z test.
 
-Formally, our t test takes the following form when we are comparing our data to a known population mean:
+Formally, our t-test takes the following form when we are comparing our data to a known population mean:
 
 $$ t = \frac{\bar{x} - \mu_0}{\sqrt{s^2 / n}} \sim t_{df=n-1} $$
 
@@ -823,7 +823,7 @@ Here $\mu_0$ is our postulated value of the population where as $\bar{x}$ is the
 
 $$s = \sqrt{\frac{(X-\bar{x})^2 \text{...} (X_n - \bar{x})^2 }{n-1} } $$
 
-Recall our degrees of freedom being calculated in $s$ not in the actual t test. Without speeding ahead too fast let's stop and consider an example before opening it up to two sample differences. Suppose we gave a small class an exam from a well-published textbook. The textbook company claims that, on average, students get an 85\% on the exam. Is our class \textit{significantly} better or worse than the national average?
+Recall our degrees of freedom being calculated in $s$ not in the actual t-test. Without speeding ahead too fast let's stop and consider an example before opening it up to two sample differences. Suppose we gave a small class an exam from a well-published textbook. The textbook company claims that, on average, students get an 85\% on the exam. Is our class \textit{significantly} better or worse than the national average?
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.165, 0.169, 0.184}\color{fgcolor}\begin{kframe}
@@ -842,7 +842,7 @@ Recall our degrees of freedom being calculated in $s$ not in the actual t test. 
 \end{verbatim}
 \begin{alltt}
 \hlstd{> }\hlcom{# p-value:}
-\hlstd{> }\hlkwd{pt}\hlstd{(t,} \hlkwc{df} \hlstd{=} \hlkwd{length}\hlstd{(class1)}\hlopt{-}\hlnum{1}\hlstd{)} \hlcom{# using t distribution! (pt)}
+\hlstd{> }\hlkwd{pt}\hlstd{(t,} \hlkwc{df} \hlstd{=} \hlkwd{length}\hlstd{(class1)}\hlopt{-}\hlnum{1}\hlstd{)} \hlcom{# using t-distribution! (pt)}
 \end{alltt}
 \begin{verbatim}
 ## [1] 0.09159503
@@ -859,9 +859,9 @@ Recall our degrees of freedom being calculated in $s$ not in the actual t test. 
 \end{kframe}
 \end{knitrout}
 
-We see that according to Fisher's definition of statistical significance we pass the 10\% threshold of ``unusualness'' but not the signifiance level of .05 or .01.
+We see that according to Fisher's definition of statistical significance we pass the 10\% threshold of ``unusualness'' but not the significance level of .05 or .01.
 
-Suppose we were to compare exam scores for our class to a comparative school across a local river. Here we would need to use to two-sample t test. Luckily, the formula doesn't change much except that we need a pooled sample standard deviation in the denominator:
+Suppose we were to compare exam scores for our class to a comparative school across a local river. Here we would need to use to two-sample t-test. Luckily, the formula doesn't change much except that we need a pooled sample standard deviation in the denominator:
 
 $$ t = \frac{\bar{x}-\bar{y}}{Sp \sqrt{1/m + 1/n}} $$
 
@@ -869,7 +869,7 @@ Where our $Sp$ standardized deviation is:
 
 $$ Sp = \sqrt{ \frac{ (x_1 - \bar{x})^2 + \text{...} + (x_m - \bar{x})^2 + (y_1 - \bar{y})^2 + \text{...} + (y_n - \bar{y})^2  }{m+n -2}} $$
 
-Note the pooled observation $-2$ because of the two sample mean estimations already used. This follows the same t distribution ($t_{m+n-2}$). Is our class significantly better than the other schools?
+Note the pooled observation $-2$ because of the two sample mean estimations already used. This follows the same t-distribution ($t_{m+n-2}$). Is our class significantly better than the other schools?
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.165, 0.169, 0.184}\color{fgcolor}\begin{kframe}
@@ -915,17 +915,17 @@ Note the pooled observation $-2$ because of the two sample mean estimations alre
 
 Note that here we could not prove that our standard deviations are equal so we had to do a different standard deviation test where the denominator uses the standard deviations independently instead of pooling them. Our results are exactly what R's t.test function would have given us however it should be noted that there is some nuance here in selecting exactly how we account for standard deviations. For more information consider Welch's t-test versus choosing the smaller df as a conservative estimate against our Type 1 error.
 
-Above I used a very sharp test to see if our standard deviations were equal or not, however we can add some nuance to this assumption and see if our standard deviations are significantly different from one another. Testing this assumption can be done with an F-test. \index{F-test} Unsurprisingly, the ``F'' in F-test is in regards to Fisher who thought the F-test could be used to help researchers make better decisions in the varition of t-test they use.
+Above I used a very sharp test to see if our standard deviations were equal or not, however we can add some nuance to this assumption and see if our standard deviations are significantly different from one another. Testing this assumption can be done with an F-test. \index{F-test} Unsurprisingly, the ``F'' in F-test is in regards to Fisher who thought the F-test could be used to help researchers make better decisions in the variation of t-test they use.
 
 $$ F = \frac{s_x^2}{s_y^2} \sim F_{m-1,n-1,\alpha} $$
 
-Using an F-test table we can find our critical value and test the null hypothesis that $s_x - s_y = 0$. That is, if we reject the null hypothesis using the F-test we would not use a pooled test and if we could not reject the null we would have to keep the standard deviations seperated.
+Using an F-test table we can find our critical value and test the null hypothesis that $s_x - s_y = 0$. That is, if we reject the null hypothesis using the F-test we would not use a pooled test and if we could not reject the null we would have to keep the standard deviations separated.
 
 
 
 \subsection{Z Testing}
 
-$$ z = \frac{\bar{x} - \mu_0}{\sigma / \sqrt{n}} $$ This is distributed normal mean 0 stdev of 1.
+$$ z = \frac{\bar{x} - \mu_0}{\sigma / \sqrt{n}} $$ This is distributed normal mean 0 standard deviation of 1.
 
 
 $$ z = \frac{ \bar{x} - \bar{y} - E[\bar{x}-\bar{y}]}{SD(\bar{x}-\bar{y})} $$
@@ -934,13 +934,15 @@ Where $E[\bar{x}-\bar{y}]$ is just our null hypothesis statement, note our null 
 
 $$ z = \frac{\bar{x}-\bar{y} }{\sqrt{\sigma_x^2/m  + \sigma_y^2/n}} $$
 
-We would take this result, compare it with a z-table depending on our $\alpha$ and either use our observed value to either reject or accept the null.
+We would take this result, compare it with a z-table depending on our $\alpha$ and either use our observed value to either reject or accept the null. These z-tables can be found online and basically act as the pass/fail for much of these scores.
 
 If our standard deviations are equal then we can:
 
 $$ z = \frac{\bar{x}-\bar{y} }{\sigma \sqrt{1/m  + 1/n}} $$
 
-Finding confidence intervals for all of this ...
+Finding confidence intervals for all of this are as simple as taking the upper and lower threshold desired (say 95 percent or 90 percent) and then reporting the upper/lower in a table. Some models in the regression segment will do this for variety.
+
+I found a really good article online about confidence intervals if you are looking for more notes on this:
 http://sphweb.bumc.bu.edu/otlt/MPH-Modules/BS/BS704_Confidence_Intervals/BS704_Confidence_Intervals_print.html
 
 \subsection{Chi-Squared Testing}
@@ -3677,8 +3679,8 @@ In this section we'll cover just the basics of setting up network data and readi
 \hlstd{> }\hlstd{g1}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH e0ab6c4 D--- 5 7 -- 
-## + edges from e0ab6c4:
+## IGRAPH 0659ae3 D--- 5 7 -- 
+## + edges from 0659ae3:
 ## [1] 1->2 1->3 2->4 3->1 3->5 5->1 4->3
 \end{verbatim}
 \begin{alltt}
@@ -3687,7 +3689,7 @@ In this section we'll cover just the basics of setting up network data and readi
 \hlstd{> }\hlkwd{summary}\hlstd{(g1)}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH e0ab6c4 D--- 5 7 --
+## IGRAPH 0659ae3 D--- 5 7 --
 \end{verbatim}
 \begin{alltt}
 \hlstd{> }\hlcom{# Or using the default plot() function:}
@@ -3718,7 +3720,7 @@ In this section we'll cover just the basics of setting up network data and readi
 \hlstd{> }\hlkwd{summary}\hlstd{(g2)} \hlcom{# Undirected, now named, 7 nodes, 10 edges.}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH e0bf19b UN-- 7 10 -- 
+## IGRAPH 066b4f9 UN-- 7 10 -- 
 ## + attr: name (v/c)
 \end{verbatim}
 \begin{alltt}
@@ -3773,7 +3775,7 @@ In this section we'll cover just the basics of setting up network data and readi
 \hlstd{> }\hlkwd{E}\hlstd{(g1)}
 \end{alltt}
 \begin{verbatim}
-## + 7/7 edges from e0ab6c4:
+## + 7/7 edges from 0659ae3:
 ## [1] 1->2 1->3 2->4 3->1 3->5 5->1 4->3
 \end{verbatim}
 \begin{alltt}
@@ -3782,7 +3784,7 @@ In this section we'll cover just the basics of setting up network data and readi
 \hlstd{> }\hlkwd{V}\hlstd{(g2)}
 \end{alltt}
 \begin{verbatim}
-## + 7/7 vertices, named, from e0bf19b:
+## + 7/7 vertices, named, from 066b4f9:
 ## [1] Anand  Beth   Chris  Dieter Sun    Ali    Fatima
 \end{verbatim}
 \begin{alltt}
@@ -3812,7 +3814,7 @@ In this section we'll cover just the basics of setting up network data and readi
 \hlstd{> }\hlkwd{summary}\hlstd{(g2)} \hlcom{# We see the new variables added, and how they are connected.}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH e0bf19b UN-- 7 10 -- 
+## IGRAPH 066b4f9 UN-- 7 10 -- 
 ## + attr: name (v/c), gender (v/c), age (v/n), count (e/n)
 \end{verbatim}
 \begin{alltt}
@@ -3949,9 +3951,9 @@ In this section we'll cover just the basics of setting up network data and readi
 \hlstd{> }\hlstd{bg}  \hlcom{# We see the "B" there now, for Bipartide}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH e0cfe6f UN-B 8 8 -- 
+## IGRAPH 067d055 UN-B 8 8 -- 
 ## + attr: type (v/l), name (v/c)
-## + edges from e0cfe6f (vertex names):
+## + edges from 067d055 (vertex names):
 ## [1] Group1--Y1 Group1--Y2 Group1--Y3 Group1--Y4 Group2--Y2 Group2--Y3
 ## [7] Group3--Y4 Group3--Y5
 \end{verbatim}
@@ -3971,15 +3973,15 @@ In this section we'll cover just the basics of setting up network data and readi
 \end{alltt}
 \begin{verbatim}
 ## $proj1
-## IGRAPH e0d1914 UNW- 3 2 -- 
+## IGRAPH 067ec30 UNW- 3 2 -- 
 ## + attr: name (v/c), weight (e/n)
-## + edges from e0d1914 (vertex names):
+## + edges from 067ec30 (vertex names):
 ## [1] Group1--Group2 Group1--Group3
 ## 
 ## $proj2
-## IGRAPH e0d1914 UNW- 5 7 -- 
+## IGRAPH 067ec30 UNW- 5 7 -- 
 ## + attr: name (v/c), weight (e/n)
-## + edges from e0d1914 (vertex names):
+## + edges from 067ec30 (vertex names):
 ## [1] Y1--Y2 Y1--Y3 Y1--Y4 Y2--Y3 Y2--Y4 Y3--Y4 Y4--Y5
 \end{verbatim}
 \begin{alltt}
@@ -4392,7 +4394,7 @@ In this section we'll cover just the basics of setting up network data and readi
 \hlstd{> }\hlkwd{summary}\hlstd{(dixon)}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH e2e3756 D--- 248 1197 -- 
+## IGRAPH 07acbd2 D--- 248 1197 -- 
 ## + attr: title (g/c), grade (v/n), na (v/l), race (v/c), scode (v/n),
 ## | sex (v/n), vertex.names (v/c), na (e/l)
 \end{verbatim}
@@ -4536,7 +4538,7 @@ In this section we'll cover just the basics of setting up network data and readi
 \hlstd{> }\hlkwd{summary}\hlstd{(rand)}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH e31dbc0 D--- 248 1197 -- Erdos renyi (gnm) graph
+## IGRAPH 07e4d30 D--- 248 1197 -- Erdos renyi (gnm) graph
 ## + attr: name (g/c), type (g/c), loops (g/l), m (g/n)
 \end{verbatim}
 \begin{alltt}
@@ -4662,7 +4664,7 @@ Now that we have the data read in and cleaned (mostly tracking the id numbers), 
 \hlstd{> }\hlkwd{summary}\hlstd{(graph.object)} \hlcom{# Basic statistics seem okay}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH e462ffa DN-- 610 1043 -- 
+## IGRAPH 089afdb DN-- 610 1043 -- 
 ## + attr: name (v/c)
 \end{verbatim}
 \begin{alltt}
@@ -4999,7 +5001,7 @@ In this I will be using the Reddit data from "r/AskSocialScientists" from Octobe
 \hlstd{> }\hlkwd{summary}\hlstd{(g1)} \hlcom{#}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH e693c39 DN-- 339 521 -- 
+## IGRAPH 0ab3e59 DN-- 339 521 -- 
 ## + attr: name (v/c)
 \end{verbatim}
 \begin{alltt}
@@ -5009,7 +5011,7 @@ In this I will be using the Reddit data from "r/AskSocialScientists" from Octobe
 \hlstd{> }\hlkwd{summary}\hlstd{(g12)} \hlcom{#}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH e69498c DN-- 327 522 -- 
+## IGRAPH 0ab4a5a DN-- 327 522 -- 
 ## + attr: name (v/c)
 \end{verbatim}
 \end{kframe}

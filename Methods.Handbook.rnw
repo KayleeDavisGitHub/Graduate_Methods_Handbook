@@ -759,7 +759,7 @@ In this section of the methods handbook I'll go over the fundamentals of t-tests
 \subsection{T Testing}
 
 \index{t-test}
-Directly, t score is a ratio between the difference between two groups and the difference within the groups. The larger the t score, the more difference there is between groups. The smaller the t score, the more similarity there is between groups. A t score of 3 means that the groups are three times as different from each other as they are within each other. When you run a t test, the bigger the t-value, the more likely it is that the results are repeatable. When we work with t tests we are typically working with sample populations rather than whole population data (with a known $\sigma$ error like we saw with z testing). There are three ways we usually find a t test:
+Directly, t-score is a ratio between the difference between two groups and the difference within the groups. The larger the t-score, the more difference there is between groups. The smaller the t-score, the more similarity there is between groups. A t-score of 3 means that the groups are three times as different from each other as they are within each other. When you run a t-test, the bigger the t-value, the more likely it is that the results are repeatable. When we work with t-tests we are typically working with sample populations rather than whole population data (with a known $\sigma$ error like we saw with z-testing). There are three ways we usually find a t-test:
 
 \begin{itemize}
 \item[1.] An Independent Samples t-test compares the means for two groups.
@@ -769,7 +769,7 @@ Directly, t score is a ratio between the difference between two groups and the d
 
 Each of these follow the same theory with slight variations to account for differences in known variance or not. Each of these test against a standardized null hypothesis of zero average effects ($ H_0 : \mu_1 - \mu_2 = 0$) and, conversely, our alternative hypothesis can be that our sample is anything but zero ($H_A : \mu_1 - \mu_2 \neq 0$) or existing only in one tail ($H_A : \mu_1 - \mu_2 > 0$). However, our alternative hypothesis specification doesn't really change our test much - just our interpretation of the critical values and our multiplicative testing parameter, similar to the z test.
 
-Formally, our t test takes the following form when we are comparing our data to a known population mean:
+Formally, our t-test takes the following form when we are comparing our data to a known population mean:
 
 $$ t = \frac{\bar{x} - \mu_0}{\sqrt{s^2 / n}} \sim t_{df=n-1} $$
 
@@ -777,7 +777,7 @@ Here $\mu_0$ is our postulated value of the population where as $\bar{x}$ is the
 
 $$s = \sqrt{\frac{(X-\bar{x})^2 \text{...} (X_n - \bar{x})^2 }{n-1} } $$
 
-Recall our degrees of freedom being calculated in $s$ not in the actual t test. Without speeding ahead too fast let's stop and consider an example before opening it up to two sample differences. Suppose we gave a small class an exam from a well-published textbook. The textbook company claims that, on average, students get an 85\% on the exam. Is our class \textit{significantly} better or worse than the national average?
+Recall our degrees of freedom being calculated in $s$ not in the actual t-test. Without speeding ahead too fast let's stop and consider an example before opening it up to two sample differences. Suppose we gave a small class an exam from a well-published textbook. The textbook company claims that, on average, students get an 85\% on the exam. Is our class \textit{significantly} better or worse than the national average?
 
 <<ttestex1, prompt=TRUE>>=
 # Class scores:
@@ -789,7 +789,7 @@ s <- sqrt( sum(((class1 - mean(class1))^2)) / length(class1)-1)
 t <- (mean(class1) - 85) / (sqrt(s^2/length(class1)))
 t
 # p-value:
-pt(t, df = length(class1)-1) # using t distribution! (pt)
+pt(t, df = length(class1)-1) # using t-distribution! (pt)
 
 # Testing this against R's function
 r_results <- t.test(class1, mu=85)
@@ -797,9 +797,9 @@ r_results$statistic
 
 @
 
-We see that according to Fisher's definition of statistical significance we pass the 10\% threshold of ``unusualness'' but not the signifiance level of .05 or .01.
+We see that according to Fisher's definition of statistical significance we pass the 10\% threshold of ``unusualness'' but not the significance level of .05 or .01.
 
-Suppose we were to compare exam scores for our class to a comparative school across a local river. Here we would need to use to two-sample t test. Luckily, the formula doesn't change much except that we need a pooled sample standard deviation in the denominator:
+Suppose we were to compare exam scores for our class to a comparative school across a local river. Here we would need to use to two-sample t-test. Luckily, the formula doesn't change much except that we need a pooled sample standard deviation in the denominator:
 
 $$ t = \frac{\bar{x}-\bar{y}}{Sp \sqrt{1/m + 1/n}} $$
 
@@ -807,7 +807,7 @@ Where our $Sp$ standardized deviation is:
 
 $$ Sp = \sqrt{ \frac{ (x_1 - \bar{x})^2 + \text{...} + (x_m - \bar{x})^2 + (y_1 - \bar{y})^2 + \text{...} + (y_n - \bar{y})^2  }{m+n -2}} $$
 
-Note the pooled observation $-2$ because of the two sample mean estimations already used. This follows the same t distribution ($t_{m+n-2}$). Is our class significantly better than the other schools?
+Note the pooled observation $-2$ because of the two sample mean estimations already used. This follows the same t-distribution ($t_{m+n-2}$). Is our class significantly better than the other schools?
 
 <<ttest2, prompt=TRUE>>=
 # Two samples:
@@ -834,17 +834,17 @@ r_results$p.value
 
 Note that here we could not prove that our standard deviations are equal so we had to do a different standard deviation test where the denominator uses the standard deviations independently instead of pooling them. Our results are exactly what R's t.test function would have given us however it should be noted that there is some nuance here in selecting exactly how we account for standard deviations. For more information consider Welch's t-test versus choosing the smaller df as a conservative estimate against our Type 1 error.
 
-Above I used a very sharp test to see if our standard deviations were equal or not, however we can add some nuance to this assumption and see if our standard deviations are significantly different from one another. Testing this assumption can be done with an F-test. \index{F-test} Unsurprisingly, the ``F'' in F-test is in regards to Fisher who thought the F-test could be used to help researchers make better decisions in the varition of t-test they use.
+Above I used a very sharp test to see if our standard deviations were equal or not, however we can add some nuance to this assumption and see if our standard deviations are significantly different from one another. Testing this assumption can be done with an F-test. \index{F-test} Unsurprisingly, the ``F'' in F-test is in regards to Fisher who thought the F-test could be used to help researchers make better decisions in the variation of t-test they use.
 
 $$ F = \frac{s_x^2}{s_y^2} \sim F_{m-1,n-1,\alpha} $$
 
-Using an F-test table we can find our critical value and test the null hypothesis that $s_x - s_y = 0$. That is, if we reject the null hypothesis using the F-test we would not use a pooled test and if we could not reject the null we would have to keep the standard deviations seperated.
+Using an F-test table we can find our critical value and test the null hypothesis that $s_x - s_y = 0$. That is, if we reject the null hypothesis using the F-test we would not use a pooled test and if we could not reject the null we would have to keep the standard deviations separated.
 
 
 
 \subsection{Z Testing}
 
-$$ z = \frac{\bar{x} - \mu_0}{\sigma / \sqrt{n}} $$ This is distributed normal mean 0 stdev of 1.
+$$ z = \frac{\bar{x} - \mu_0}{\sigma / \sqrt{n}} $$ This is distributed normal mean 0 standard deviation of 1.
 
 
 $$ z = \frac{ \bar{x} - \bar{y} - E[\bar{x}-\bar{y}]}{SD(\bar{x}-\bar{y})} $$
@@ -853,13 +853,15 @@ Where $E[\bar{x}-\bar{y}]$ is just our null hypothesis statement, note our null 
 
 $$ z = \frac{\bar{x}-\bar{y} }{\sqrt{\sigma_x^2/m  + \sigma_y^2/n}} $$
 
-We would take this result, compare it with a z-table depending on our $\alpha$ and either use our observed value to either reject or accept the null.
+We would take this result, compare it with a z-table depending on our $\alpha$ and either use our observed value to either reject or accept the null. These z-tables can be found online and basically act as the pass/fail for much of these scores.
 
 If our standard deviations are equal then we can:
 
 $$ z = \frac{\bar{x}-\bar{y} }{\sigma \sqrt{1/m  + 1/n}} $$
 
-Finding confidence intervals for all of this ...
+Finding confidence intervals for all of this are as simple as taking the upper and lower threshold desired (say 95 percent or 90 percent) and then reporting the upper/lower in a table. Some models in the regression segment will do this for variety.
+
+I found a really good article online about confidence intervals if you are looking for more notes on this:
 http://sphweb.bumc.bu.edu/otlt/MPH-Modules/BS/BS704_Confidence_Intervals/BS704_Confidence_Intervals_print.html
 
 \subsection{Chi-Squared Testing}
