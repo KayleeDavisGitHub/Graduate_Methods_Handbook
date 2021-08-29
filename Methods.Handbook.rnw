@@ -866,6 +866,56 @@ http://sphweb.bumc.bu.edu/otlt/MPH-Modules/BS/BS704_Confidence_Intervals/BS704_C
 
 \subsection{Chi-Squared Testing}
 
+The chi-square test of independence is used to analyze the frequency table (i.e. contingency table) formed by two categorical variables. The chi-square test evaluates whether there is a significant association between the categories of the two variables.
+
+Let's review an example of this in R. We'll pull R's native iris data and separate the sepal lengths into two categorical variables - big and small depending on if it's above or below the median.
+
+<<chisquared1, prompt=TRUE>>=
+dat <- iris
+
+dat$size <- ifelse(dat$Sepal.Length < median(dat$Sepal.Length),
+  "small", "big"
+)
+
+# here's our contingency table:
+table(dat$Species, dat$size)
+
+@
+
+
+This is great, and below we will use R functions to calculate that chi-squared statistic:
+
+<<chisquared2, prompt=TRUE>>=
+# calculate chi-squared (full results)
+test <- chisq.test(table(dat$Species, dat$size))
+test # full results
+
+test$statistic # chi-squared result
+
+test$p.value # p-value
+
+
+@
+
+From the output and from test p.value argument we see that the p-value is less than the significance level of 5\%. Like any other statistical test, if the p-value is less than the significance level, we can reject the null hypothesis.
+
+Finally, we can combine the contingency table with the statistical results together in a concise visual:
+
+<<chisquared3, prompt=TRUE>>=
+
+# This gives us the ability to make mosaic plots pretty easily.
+library(vcd)
+
+mosaic(~ Species + size,
+  direction = c("v", "h"),
+  data = dat,
+  shade = TRUE
+)
+
+@
+
+This mosaic plot with colored cases shows where the observed frequencies deviates from the expected frequencies if the variables were independent. The red cases means that the observed frequencies are smaller than the expected frequencies, whereas the blue cases means that the observed frequencies are larger than the expected frequencies.
+
 
 \subsection{Rank-Ordering and Permutation Testing}
 
