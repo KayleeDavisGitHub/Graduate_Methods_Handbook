@@ -1035,14 +1035,118 @@ Finally, we can combine the contingency table with the statistical results toget
 This mosaic plot with colored cases shows where the observed frequencies deviates from the expected frequencies if the variables were independent. The red cases means that the observed frequencies are smaller than the expected frequencies, whereas the blue cases means that the observed frequencies are larger than the expected frequencies.
 
 
-\subsection{Rank-Ordering and Permutation Testing}
+\subsection{Permutation Testing}
+
+\index{permutation}
+
+Much of this section on permutation testing comes straight from Thomas Leeper upon me meeting him at Ohio State in 2016. I highly recommend following him on Github, or checking out the relevant article for this section linked at the end of this section.
+
+Thomas writes that an increasingly common statistical tool for constructing sampling distributions is the permutation test (or sometimes called a randomization test). Like bootstrapping, a permutation test builds - rather than assumes - sampling distribution (called the ``permutation distribution'') by resampling the observed data. Specifically, we can ``shuffle'' or permute the observed data (e.g., by assigning different outcome values to each observation from among the set of actually observed outcomes). Unlike bootstrapping, we do this without replacement.
+
+Permutation tests are particularly relevant in experimental studies, where we are often interested in the sharp null hypothesis of no difference between treatment groups. In these situations, the permutation test perfectly represents our process of inference because our null hypothesis is that the two treatment groups do not differ on the outcome (i.e., that the outcome is observed independently of treatment assignment). When we permute the outcome values during the test, we therefore see all of the possible alternative treatment assignments we could have had and where the mean-difference in our observed data falls relative to all of the differences we could have seen if the outcome was independent of treatment assignment. While a permutation test requires that we see all possible permutations of the data (which can become quite large), we can easily conduct ``approximate permutation tests'' by simply conducting a vary large number of resamples. That process should, in expectation, approximate the permutation distribution.
+
+For example, if we have only n=20 units in our study, the number of permutations is:
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.165, 0.169, 0.184}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{> }\hlkwd{factorial}\hlstd{(}\hlnum{20}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+## [1] 2.432902e+18
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+That number exceeds what we can reasonably compute. But we can randomly sample from that permutation distribution to obtain the approximate permutation distribution, simply by running a large number of resamples. Let's look at this as an example using some made up data:
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.165, 0.169, 0.184}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{> }\hlkwd{set.seed}\hlstd{(}\hlnum{1}\hlstd{)}
+\hlstd{> }\hlstd{n} \hlkwb{<-} \hlnum{100}
+\hlstd{> }\hlstd{tr} \hlkwb{<-} \hlkwd{rbinom}\hlstd{(}\hlnum{100}\hlstd{,} \hlnum{1}\hlstd{,} \hlnum{0.5}\hlstd{)}
+\hlstd{> }\hlstd{y} \hlkwb{<-} \hlnum{1} \hlopt{+} \hlstd{tr} \hlopt{+} \hlkwd{rnorm}\hlstd{(n,} \hlnum{0}\hlstd{,} \hlnum{3}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+The difference in means is, as we would expect (given we made it up), about 1:
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.165, 0.169, 0.184}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{> }\hlkwd{diff}\hlstd{(}\hlkwd{by}\hlstd{(y, tr, mean))}
+\end{alltt}
+\begin{verbatim}
+## [1] 1.341389
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+To obtain a single permutation of the data, we simply resample without replacement and calculate the difference again:
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.165, 0.169, 0.184}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{> }\hlstd{s} \hlkwb{<-} \hlkwd{sample}\hlstd{(tr,} \hlkwd{length}\hlstd{(tr),} \hlnum{FALSE}\hlstd{)}
+\hlstd{> }\hlkwd{diff}\hlstd{(}\hlkwd{by}\hlstd{(y, s, mean))}
+\end{alltt}
+\begin{verbatim}
+## [1] 1.283456
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+Here we use the permuted treatment vector s instead of tr to calculate the difference and find a very small difference. If we repeat this process a large number of times, we can build our approximate permutation distribution (i.e., the sampling distribution for the mean-difference). We'll use replicate do repeat our permutation process. The result will be a vector of the differences from each permutation (i.e., our distribution):
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.165, 0.169, 0.184}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{> }\hlstd{dist} \hlkwb{<-} \hlkwd{replicate}\hlstd{(}\hlnum{2000}\hlstd{,} \hlkwd{diff}\hlstd{(}\hlkwd{by}\hlstd{(y,} \hlkwd{sample}\hlstd{(tr,} \hlkwd{length}\hlstd{(tr),} \hlnum{FALSE}\hlstd{), mean)))}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+We can look at our distribution using hist and draw a vertical line for our observed difference:
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.165, 0.169, 0.184}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{> }\hlkwd{hist}\hlstd{(dist,} \hlkwc{xlim} \hlstd{=} \hlkwd{c}\hlstd{(}\hlopt{-}\hlnum{3}\hlstd{,} \hlnum{3}\hlstd{),} \hlkwc{col} \hlstd{=} \hlstr{"black"}\hlstd{,} \hlkwc{breaks} \hlstd{=} \hlnum{100}\hlstd{)}
+\hlstd{> }\hlkwd{abline}\hlstd{(}\hlkwc{v} \hlstd{=} \hlkwd{diff}\hlstd{(}\hlkwd{by}\hlstd{(y, tr, mean)),} \hlkwc{col} \hlstd{=} \hlstr{"blue"}\hlstd{,} \hlkwc{lwd} \hlstd{=} \hlnum{2}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\includegraphics[width=4in]{figure/perm6-1} 
+
+\end{knitrout}
+
+At face value, it seems that our null hypothesis can probably be rejected. Our observed mean-difference appears to be quite extreme in terms of the distribution of possible mean-differences observable were the outcome independent of treatment assignment. But we can use the distribution to obtain a p-value for our mean-difference by counting how many permuted mean-differences are larger than the one we observed in our actual data. We can then divide this by the number of items in our permutation distribution (i.e., 2000 from our call to replicate, above):
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.165, 0.169, 0.184}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{> }\hlkwd{sum}\hlstd{(dist} \hlopt{>} \hlkwd{diff}\hlstd{(}\hlkwd{by}\hlstd{(y, tr, mean)))}\hlopt{/}\hlnum{2000}  \hlcom{# one-tailed test}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.012
+\end{verbatim}
+\begin{alltt}
+\hlstd{> }\hlkwd{sum}\hlstd{(}\hlkwd{abs}\hlstd{(dist)} \hlopt{>} \hlkwd{abs}\hlstd{(}\hlkwd{diff}\hlstd{(}\hlkwd{by}\hlstd{(y, tr, mean))))}\hlopt{/}\hlnum{2000}  \hlcom{# two-tailed test}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.021
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+Using either the one-tailed test or the two-tailed test, our difference is unlikely to be due to chance variation observable in a world where the outcome is independent of treatment assignment.
+
+There are many packages that assist in permutation testing and sampling, a few are used in future chapters. One Thomas Leeper uses in his article (quoted nearly verbatim in this chapter) is the library ``coin''. Visit his article linked below to review this package to see if it may help.
 
 
-
-
-
-
-
+\noindent \url{https://github.com/leeper}
+\noindent \url{https://thomasleeper.com/Rcourse/Tutorials/permutationtests.html}
 
 
 \clearpage
@@ -3766,8 +3870,8 @@ In this section we'll cover just the basics of setting up network data and readi
 \hlstd{> }\hlstd{g1}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH 8fa8471 D--- 5 7 -- 
-## + edges from 8fa8471:
+## IGRAPH b003f7e D--- 5 7 -- 
+## + edges from b003f7e:
 ## [1] 1->2 1->3 2->4 3->1 3->5 5->1 4->3
 \end{verbatim}
 \begin{alltt}
@@ -3776,7 +3880,7 @@ In this section we'll cover just the basics of setting up network data and readi
 \hlstd{> }\hlkwd{summary}\hlstd{(g1)}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH 8fa8471 D--- 5 7 --
+## IGRAPH b003f7e D--- 5 7 --
 \end{verbatim}
 \begin{alltt}
 \hlstd{> }\hlcom{# Or using the default plot() function:}
@@ -3807,7 +3911,7 @@ In this section we'll cover just the basics of setting up network data and readi
 \hlstd{> }\hlkwd{summary}\hlstd{(g2)} \hlcom{# Undirected, now named, 7 nodes, 10 edges.}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH 8fb4c25 UN-- 7 10 -- 
+## IGRAPH b018064 UN-- 7 10 -- 
 ## + attr: name (v/c)
 \end{verbatim}
 \begin{alltt}
@@ -3862,7 +3966,7 @@ In this section we'll cover just the basics of setting up network data and readi
 \hlstd{> }\hlkwd{E}\hlstd{(g1)}
 \end{alltt}
 \begin{verbatim}
-## + 7/7 edges from 8fa8471:
+## + 7/7 edges from b003f7e:
 ## [1] 1->2 1->3 2->4 3->1 3->5 5->1 4->3
 \end{verbatim}
 \begin{alltt}
@@ -3871,7 +3975,7 @@ In this section we'll cover just the basics of setting up network data and readi
 \hlstd{> }\hlkwd{V}\hlstd{(g2)}
 \end{alltt}
 \begin{verbatim}
-## + 7/7 vertices, named, from 8fb4c25:
+## + 7/7 vertices, named, from b018064:
 ## [1] Anand  Beth   Chris  Dieter Sun    Ali    Fatima
 \end{verbatim}
 \begin{alltt}
@@ -3901,7 +4005,7 @@ In this section we'll cover just the basics of setting up network data and readi
 \hlstd{> }\hlkwd{summary}\hlstd{(g2)} \hlcom{# We see the new variables added, and how they are connected.}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH 8fb4c25 UN-- 7 10 -- 
+## IGRAPH b018064 UN-- 7 10 -- 
 ## + attr: name (v/c), gender (v/c), age (v/n), count (e/n)
 \end{verbatim}
 \begin{alltt}
@@ -4038,9 +4142,9 @@ In this section we'll cover just the basics of setting up network data and readi
 \hlstd{> }\hlstd{bg}  \hlcom{# We see the "B" there now, for Bipartide}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH 8fd4651 UN-B 8 8 -- 
+## IGRAPH b02ea76 UN-B 8 8 -- 
 ## + attr: type (v/l), name (v/c)
-## + edges from 8fd4651 (vertex names):
+## + edges from b02ea76 (vertex names):
 ## [1] Group1--Y1 Group1--Y2 Group1--Y3 Group1--Y4 Group2--Y2 Group2--Y3
 ## [7] Group3--Y4 Group3--Y5
 \end{verbatim}
@@ -4060,15 +4164,15 @@ In this section we'll cover just the basics of setting up network data and readi
 \end{alltt}
 \begin{verbatim}
 ## $proj1
-## IGRAPH 8fd6497 UNW- 3 2 -- 
+## IGRAPH b030c60 UNW- 3 2 -- 
 ## + attr: name (v/c), weight (e/n)
-## + edges from 8fd6497 (vertex names):
+## + edges from b030c60 (vertex names):
 ## [1] Group1--Group2 Group1--Group3
 ## 
 ## $proj2
-## IGRAPH 8fd6497 UNW- 5 7 -- 
+## IGRAPH b030c60 UNW- 5 7 -- 
 ## + attr: name (v/c), weight (e/n)
-## + edges from 8fd6497 (vertex names):
+## + edges from b030c60 (vertex names):
 ## [1] Y1--Y2 Y1--Y3 Y1--Y4 Y2--Y3 Y2--Y4 Y3--Y4 Y4--Y5
 \end{verbatim}
 \begin{alltt}
@@ -4483,7 +4587,7 @@ In this section we'll cover just the basics of setting up network data and readi
 \hlstd{> }\hlkwd{summary}\hlstd{(dixon)}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH 90fd618 D--- 248 1197 -- 
+## IGRAPH b14d0a5 D--- 248 1197 -- 
 ## + attr: title (g/c), grade (v/n), na (v/l), race (v/c), scode (v/n),
 ## | sex (v/n), vertex.names (v/c), na (e/l)
 \end{verbatim}
@@ -4627,7 +4731,7 @@ In this section we'll cover just the basics of setting up network data and readi
 \hlstd{> }\hlkwd{summary}\hlstd{(rand)}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH 9135c2f D--- 248 1197 -- Erdos renyi (gnm) graph
+## IGRAPH b18827d D--- 248 1197 -- Erdos renyi (gnm) graph
 ## + attr: name (g/c), type (g/c), loops (g/l), m (g/n)
 \end{verbatim}
 \begin{alltt}
@@ -4753,7 +4857,7 @@ Now that we have the data read in and cleaned (mostly tracking the id numbers), 
 \hlstd{> }\hlkwd{summary}\hlstd{(graph.object)} \hlcom{# Basic statistics seem okay}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH 91ee48b DN-- 610 1043 -- 
+## IGRAPH b23cce6 DN-- 610 1043 -- 
 ## + attr: name (v/c)
 \end{verbatim}
 \begin{alltt}
@@ -5090,7 +5194,7 @@ In this I will be using the Reddit data from "r/AskSocialScientists" from Octobe
 \hlstd{> }\hlkwd{summary}\hlstd{(g1)} \hlcom{#}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH 94062f6 DN-- 339 521 -- 
+## IGRAPH b476318 DN-- 339 521 -- 
 ## + attr: name (v/c)
 \end{verbatim}
 \begin{alltt}
@@ -5100,7 +5204,7 @@ In this I will be using the Reddit data from "r/AskSocialScientists" from Octobe
 \hlstd{> }\hlkwd{summary}\hlstd{(g12)} \hlcom{#}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH 9406f12 DN-- 327 522 -- 
+## IGRAPH b47706b DN-- 327 522 -- 
 ## + attr: name (v/c)
 \end{verbatim}
 \end{kframe}
