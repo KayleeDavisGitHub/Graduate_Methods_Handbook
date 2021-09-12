@@ -1273,7 +1273,7 @@ head(nhanes$bmi)
 head(imp$imp$bmi)
 
 # first completed data matrix, can save this for analysis
-head( complete(imp) )
+head(complete(imp))
 
 ## imputation on mixed data with a different method per column:
 # mice(nhanes2, meth=c('sample','pmm','logreg','norm'))
@@ -1796,7 +1796,6 @@ Given that this doesn't really work, and our results would be helpful but we wou
 \mathlarger{  \lambda = -2 \ln \left( \frac{ \hat{L_R}}{ \hat{L_U}}  \right) = -2 \left[(-469.174) - (-406.0718) \right] = 126.2044  }
 \end{equation}
 
-\clearpage
 
 We could run this number in R: \\
 
@@ -1927,9 +1926,9 @@ Num. obs.       & 35               \\
 \end{table}
 
 
-This will typically yield more conservative estimations and evaluations of our standard errors, commonly in cases with low N. Code for this process:
+This will typically yield more conservative estimations and evaluations of our standard errors, commonly in cases with low N. Code for this process is here but not ran, an example follows:
 
-<<orderd1, prompt=TRUE, warning=FALSE, message=FALSE, eval=TRUE>>=
+<<orderd1, prompt=TRUE, warning=FALSE, message=FALSE, eval=FALSE>>=
 set.seed(10)
 # This seed is used, it assures replication and convergence for this model
 
@@ -1955,7 +1954,7 @@ bs_results <- cbind(bs_mean, bs_ci)
 colnames(bs_results) <- c("Est", "Low", "High")
 
 # Model build
-mod11 <- MASS::polr(as.factor(quality) ~ price + alcohol, data=beer_data)
+mod1 <- MASS::polr(as.factor(quality) ~ price + alcohol, data=beer_data)
 # Quick Results
 texreg::screenreg(mod1,
                   override.ci.low = c(bs_results[, 2]),
@@ -1976,7 +1975,7 @@ texreg::screenreg(mod1,
 
 
 \noindent \textbf{Model Interpretation} \\
-Assume R gives us the following raw output involving giving aid to Katrina relief:
+Using a different dataset, assume R gives us the following raw output involving giving aid to Katrina relief:
 \begin{verbatim}
 Model:
                Coefficient    Std. Error    0.95 CI Lower     0.95 CI Upper
@@ -2004,7 +2003,6 @@ The rate of change between our .5 cut point (considering donating) and our cut p
 
 However, predicting a category like altruism (which ranges from 1-10) can be far different. Given the range of categories the variable could just be treated just as a variable would in a standard linear model, but the interpretation again is the \textbf{relative change from the removed category 0} (not considering a donation). In this instance we see a 1.2 percentage increase in the logged likelihood of donating for every unit increase in altruism. \\
 
-\clearpage
 \noindent \textbf{Latent Spaces}\\
 This question has come up in the previous model's interpretation. What we obtain from a categorical variable is various ``cut points'' or snapshots of some longer distribution drawn out between these cuts in our distribution. These thresholds only tell us the associative values at each of these points, it is on the researcher to either integrate or use the difference in inverse logs to find the rate of change between points - or the latent spaces between the thresholds. \\
 The more categories we add in initial data collection the easier it becomes to measure these latent spaces, for example age (a continuous variable) could be categorized as Teen, Young Adult, Adult, Elderly. Or, we could collect more data and have it by year - or by day! Measuring the difference between groups, say form Adult to Elderly, would take the probability at the stage of being an adult and everything greater than it ($k+1$) minus being Elderly and everything less than it ($k$) and then we find the effect from one threshold to the next. As this crude sketch shows, this is important because our distribution \textit{between} cut points could be interesting to understand.\\
@@ -3880,7 +3878,7 @@ triad.census(rand)
 
 \subsection{Network Centrality}
 
-Measuring the centrality of a network is indicating which node(s) are most central, or critical, to the network remaning the shape it is in. A central node, for example, can be the person inbetween groups, or just a well connected node in general. There are many ways to measure and detect network centrality, some of which I've studied are listed below. Later in this section we will compare each of these finding that they typically correlate with one another (good!). Cannon advice is to report all of the relevant measures of centrality rather than spending too much time choosing any particular one.
+Measuring the centrality of a network is indicating which node(s) are most central, or critical, to the network remaining the shape it is in. A central node, for example, can be the person inbetween groups, or just a well connected node in general. There are many ways to measure and detect network centrality, some of which I've studied are listed below. Later in this section we will compare each of these finding that they typically correlate with one another (good!). Cannon advice is to report all of the relevant measures of centrality rather than spending too much time choosing any particular one.
 
 \textit{Borgatti (2005):}
 \begin{longtable}{m{2.8cm}  m{4cm} m{5.7cm} m{4.7cm}  }

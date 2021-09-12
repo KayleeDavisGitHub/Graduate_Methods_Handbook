@@ -1142,7 +1142,7 @@ At face value, it seems that our null hypothesis can probably be rejected. Our o
 
 Using either the one-tailed test or the two-tailed test, our difference is unlikely to be due to chance variation observable in a world where the outcome is independent of treatment assignment.
 
-There are many packages that assist in permutation testing and sampling, a few are used in future chapters. One Thomas Leeper uses in his article (quoted nearly verbatim in this chapter) is the library ``coin''. Visit his article linked below to review this package to see if it may help.
+There are many packages that assist in permutation testing and sampling, a few are used in future chapters. One Thomas Leeper uses in his article (quoted nearly verbatim in this chapter) is the library ``coin''. Visit his article linked below to review this package to see if it may help. \\
 
 
 \noindent \url{https://github.com/leeper}
@@ -1525,7 +1525,7 @@ Two R packages that make this very easy is both ``mice'' and ``Zelig.'' The func
 \end{verbatim}
 \begin{alltt}
 \hlstd{> }\hlcom{# first completed data matrix, can save this for analysis}
-\hlstd{> }\hlkwd{head}\hlstd{(} \hlkwd{complete}\hlstd{(imp) )}
+\hlstd{> }\hlkwd{head}\hlstd{(}\hlkwd{complete}\hlstd{(imp))}
 \end{alltt}
 \begin{verbatim}
 ##   age  bmi hyp chl
@@ -2114,7 +2114,6 @@ Given that this doesn't really work, and our results would be helpful but we wou
 \mathlarger{  \lambda = -2 \ln \left( \frac{ \hat{L_R}}{ \hat{L_U}}  \right) = -2 \left[(-469.174) - (-406.0718) \right] = 126.2044  }
 \end{equation}
 
-\clearpage
 
 We could run this number in R: \\
 
@@ -2252,7 +2251,7 @@ Num. obs.       & 35               \\
 \end{table}
 
 
-This will typically yield more conservative estimations and evaluations of our standard errors, commonly in cases with low N. Code for this process:
+This will typically yield more conservative estimations and evaluations of our standard errors, commonly in cases with low N. Code for this process is here but not ran, an example follows:
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.165, 0.169, 0.184}\color{fgcolor}\begin{kframe}
@@ -2274,42 +2273,20 @@ This will typically yield more conservative estimations and evaluations of our s
 \hlstd{+ }                  \hlkwc{data} \hlstd{= sample.dta))}
 \hlstd{+ }\hlstd{\}}
 \hlstd{> }\hlstd{bs_est} \hlkwb{<-} \hlkwd{replicate}\hlstd{(}\hlnum{1000}\hlstd{,} \hlkwd{bs.routine}\hlstd{(}\hlkwc{dat} \hlstd{= beer_data))}
-\end{alltt}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in MASS::polr(as.factor(quality) \textasciitilde{} price + alcohol, data = sample.dta): attempt to find suitable starting values failed}}\begin{alltt}
 \hlstd{> }\hlcom{# replicate is actually doing the bootstrap^}
 \hlstd{> }
 \hlstd{> }\hlstd{bs_mean} \hlkwb{<-} \hlkwd{rowMeans}\hlstd{(bs_est)}
-\end{alltt}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'rowMeans': object 'bs\_est' not found}}\begin{alltt}
 \hlstd{> }\hlstd{bs_ci} \hlkwb{<-} \hlkwd{t}\hlstd{(}\hlkwd{apply}\hlstd{(bs_est,} \hlnum{1}\hlstd{, quantile,} \hlkwc{probs} \hlstd{=} \hlkwd{c}\hlstd{(}\hlnum{0.025}\hlstd{,} \hlnum{0.975}\hlstd{)))}
-\end{alltt}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 't': object 'bs\_est' not found}}\begin{alltt}
 \hlstd{> }\hlstd{bs_results} \hlkwb{<-} \hlkwd{cbind}\hlstd{(bs_mean, bs_ci)}
-\end{alltt}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in cbind(bs\_mean, bs\_ci): object 'bs\_mean' not found}}\begin{alltt}
 \hlstd{> }\hlkwd{colnames}\hlstd{(bs_results)} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlstr{"Est"}\hlstd{,} \hlstr{"Low"}\hlstd{,} \hlstr{"High"}\hlstd{)}
-\end{alltt}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in colnames(bs\_results) <- c("{}Est"{}, "{}Low"{}, "{}High"{}): object 'bs\_results' not found}}\begin{alltt}
+\hlstd{> }
 \hlstd{> }\hlcom{# Model build}
-\hlstd{> }\hlstd{mod11} \hlkwb{<-} \hlstd{MASS}\hlopt{::}\hlkwd{polr}\hlstd{(}\hlkwd{as.factor}\hlstd{(quality)} \hlopt{~} \hlstd{price} \hlopt{+} \hlstd{alcohol,} \hlkwc{data}\hlstd{=beer_data)}
+\hlstd{> }\hlstd{mod1} \hlkwb{<-} \hlstd{MASS}\hlopt{::}\hlkwd{polr}\hlstd{(}\hlkwd{as.factor}\hlstd{(quality)} \hlopt{~} \hlstd{price} \hlopt{+} \hlstd{alcohol,} \hlkwc{data}\hlstd{=beer_data)}
 \hlstd{> }\hlcom{# Quick Results}
 \hlstd{> }\hlstd{texreg}\hlopt{::}\hlkwd{screenreg}\hlstd{(mod1,}
 \hlstd{+ }                  \hlkwc{override.ci.low} \hlstd{=} \hlkwd{c}\hlstd{(bs_results[,} \hlnum{2}\hlstd{]),}
 \hlstd{+ }                  \hlkwc{override.ci.up} \hlstd{=} \hlkwd{c}\hlstd{(bs_results[,} \hlnum{3}\hlstd{]))}
-\end{alltt}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in override(models = models, override.coef = override.coef, override.se = override.se, : object 'bs\_results' not found}}\begin{alltt}
+\hlstd{> }
 \hlstd{> }\hlcom{# Table, to show overriding the confidence intervals with the bootstrap}
 \hlstd{> }\hlcom{# library(texreg) # For this:}
 \hlstd{> }\hlcom{# texreg(l= list(mod11), stars = numeric(0),}
@@ -2326,7 +2303,7 @@ This will typically yield more conservative estimations and evaluations of our s
 
 
 \noindent \textbf{Model Interpretation} \\
-Assume R gives us the following raw output involving giving aid to Katrina relief:
+Using a different dataset, assume R gives us the following raw output involving giving aid to Katrina relief:
 \begin{verbatim}
 Model:
                Coefficient    Std. Error    0.95 CI Lower     0.95 CI Upper
@@ -2354,7 +2331,6 @@ The rate of change between our .5 cut point (considering donating) and our cut p
 
 However, predicting a category like altruism (which ranges from 1-10) can be far different. Given the range of categories the variable could just be treated just as a variable would in a standard linear model, but the interpretation again is the \textbf{relative change from the removed category 0} (not considering a donation). In this instance we see a 1.2 percentage increase in the logged likelihood of donating for every unit increase in altruism. \\
 
-\clearpage
 \noindent \textbf{Latent Spaces}\\
 This question has come up in the previous model's interpretation. What we obtain from a categorical variable is various ``cut points'' or snapshots of some longer distribution drawn out between these cuts in our distribution. These thresholds only tell us the associative values at each of these points, it is on the researcher to either integrate or use the difference in inverse logs to find the rate of change between points - or the latent spaces between the thresholds. \\
 The more categories we add in initial data collection the easier it becomes to measure these latent spaces, for example age (a continuous variable) could be categorized as Teen, Young Adult, Adult, Elderly. Or, we could collect more data and have it by year - or by day! Measuring the difference between groups, say form Adult to Elderly, would take the probability at the stage of being an adult and everything greater than it ($k+1$) minus being Elderly and everything less than it ($k$) and then we find the effect from one threshold to the next. As this crude sketch shows, this is important because our distribution \textit{between} cut points could be interesting to understand.\\
@@ -3870,8 +3846,8 @@ In this section we'll cover just the basics of setting up network data and readi
 \hlstd{> }\hlstd{g1}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH b003f7e D--- 5 7 -- 
-## + edges from b003f7e:
+## IGRAPH a5af50d D--- 5 7 -- 
+## + edges from a5af50d:
 ## [1] 1->2 1->3 2->4 3->1 3->5 5->1 4->3
 \end{verbatim}
 \begin{alltt}
@@ -3880,7 +3856,7 @@ In this section we'll cover just the basics of setting up network data and readi
 \hlstd{> }\hlkwd{summary}\hlstd{(g1)}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH b003f7e D--- 5 7 --
+## IGRAPH a5af50d D--- 5 7 --
 \end{verbatim}
 \begin{alltt}
 \hlstd{> }\hlcom{# Or using the default plot() function:}
@@ -3911,7 +3887,7 @@ In this section we'll cover just the basics of setting up network data and readi
 \hlstd{> }\hlkwd{summary}\hlstd{(g2)} \hlcom{# Undirected, now named, 7 nodes, 10 edges.}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH b018064 UN-- 7 10 -- 
+## IGRAPH a5bb802 UN-- 7 10 -- 
 ## + attr: name (v/c)
 \end{verbatim}
 \begin{alltt}
@@ -3966,7 +3942,7 @@ In this section we'll cover just the basics of setting up network data and readi
 \hlstd{> }\hlkwd{E}\hlstd{(g1)}
 \end{alltt}
 \begin{verbatim}
-## + 7/7 edges from b003f7e:
+## + 7/7 edges from a5af50d:
 ## [1] 1->2 1->3 2->4 3->1 3->5 5->1 4->3
 \end{verbatim}
 \begin{alltt}
@@ -3975,7 +3951,7 @@ In this section we'll cover just the basics of setting up network data and readi
 \hlstd{> }\hlkwd{V}\hlstd{(g2)}
 \end{alltt}
 \begin{verbatim}
-## + 7/7 vertices, named, from b018064:
+## + 7/7 vertices, named, from a5bb802:
 ## [1] Anand  Beth   Chris  Dieter Sun    Ali    Fatima
 \end{verbatim}
 \begin{alltt}
@@ -4005,7 +3981,7 @@ In this section we'll cover just the basics of setting up network data and readi
 \hlstd{> }\hlkwd{summary}\hlstd{(g2)} \hlcom{# We see the new variables added, and how they are connected.}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH b018064 UN-- 7 10 -- 
+## IGRAPH a5bb802 UN-- 7 10 -- 
 ## + attr: name (v/c), gender (v/c), age (v/n), count (e/n)
 \end{verbatim}
 \begin{alltt}
@@ -4142,9 +4118,9 @@ In this section we'll cover just the basics of setting up network data and readi
 \hlstd{> }\hlstd{bg}  \hlcom{# We see the "B" there now, for Bipartide}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH b02ea76 UN-B 8 8 -- 
+## IGRAPH a5d1ad2 UN-B 8 8 -- 
 ## + attr: type (v/l), name (v/c)
-## + edges from b02ea76 (vertex names):
+## + edges from a5d1ad2 (vertex names):
 ## [1] Group1--Y1 Group1--Y2 Group1--Y3 Group1--Y4 Group2--Y2 Group2--Y3
 ## [7] Group3--Y4 Group3--Y5
 \end{verbatim}
@@ -4164,15 +4140,15 @@ In this section we'll cover just the basics of setting up network data and readi
 \end{alltt}
 \begin{verbatim}
 ## $proj1
-## IGRAPH b030c60 UNW- 3 2 -- 
+## IGRAPH a5d4192 UNW- 3 2 -- 
 ## + attr: name (v/c), weight (e/n)
-## + edges from b030c60 (vertex names):
+## + edges from a5d4192 (vertex names):
 ## [1] Group1--Group2 Group1--Group3
 ## 
 ## $proj2
-## IGRAPH b030c60 UNW- 5 7 -- 
+## IGRAPH a5d4192 UNW- 5 7 -- 
 ## + attr: name (v/c), weight (e/n)
-## + edges from b030c60 (vertex names):
+## + edges from a5d4192 (vertex names):
 ## [1] Y1--Y2 Y1--Y3 Y1--Y4 Y2--Y3 Y2--Y4 Y3--Y4 Y4--Y5
 \end{verbatim}
 \begin{alltt}
@@ -4587,7 +4563,7 @@ In this section we'll cover just the basics of setting up network data and readi
 \hlstd{> }\hlkwd{summary}\hlstd{(dixon)}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH b14d0a5 D--- 248 1197 -- 
+## IGRAPH a6febec D--- 248 1197 -- 
 ## + attr: title (g/c), grade (v/n), na (v/l), race (v/c), scode (v/n),
 ## | sex (v/n), vertex.names (v/c), na (e/l)
 \end{verbatim}
@@ -4731,7 +4707,7 @@ In this section we'll cover just the basics of setting up network data and readi
 \hlstd{> }\hlkwd{summary}\hlstd{(rand)}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH b18827d D--- 248 1197 -- Erdos renyi (gnm) graph
+## IGRAPH a737839 D--- 248 1197 -- Erdos renyi (gnm) graph
 ## + attr: name (g/c), type (g/c), loops (g/l), m (g/n)
 \end{verbatim}
 \begin{alltt}
@@ -4771,7 +4747,7 @@ In this section we'll cover just the basics of setting up network data and readi
 
 \subsection{Network Centrality}
 
-Measuring the centrality of a network is indicating which node(s) are most central, or critical, to the network remaning the shape it is in. A central node, for example, can be the person inbetween groups, or just a well connected node in general. There are many ways to measure and detect network centrality, some of which I've studied are listed below. Later in this section we will compare each of these finding that they typically correlate with one another (good!). Cannon advice is to report all of the relevant measures of centrality rather than spending too much time choosing any particular one.
+Measuring the centrality of a network is indicating which node(s) are most central, or critical, to the network remaining the shape it is in. A central node, for example, can be the person inbetween groups, or just a well connected node in general. There are many ways to measure and detect network centrality, some of which I've studied are listed below. Later in this section we will compare each of these finding that they typically correlate with one another (good!). Cannon advice is to report all of the relevant measures of centrality rather than spending too much time choosing any particular one.
 
 \textit{Borgatti (2005):}
 \begin{longtable}{m{2.8cm}  m{4cm} m{5.7cm} m{4.7cm}  }
@@ -4857,7 +4833,7 @@ Now that we have the data read in and cleaned (mostly tracking the id numbers), 
 \hlstd{> }\hlkwd{summary}\hlstd{(graph.object)} \hlcom{# Basic statistics seem okay}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH b23cce6 DN-- 610 1043 -- 
+## IGRAPH a815a3a DN-- 610 1043 -- 
 ## + attr: name (v/c)
 \end{verbatim}
 \begin{alltt}
@@ -5194,7 +5170,7 @@ In this I will be using the Reddit data from "r/AskSocialScientists" from Octobe
 \hlstd{> }\hlkwd{summary}\hlstd{(g1)} \hlcom{#}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH b476318 DN-- 339 521 -- 
+## IGRAPH aa21f94 DN-- 339 521 -- 
 ## + attr: name (v/c)
 \end{verbatim}
 \begin{alltt}
@@ -5204,7 +5180,7 @@ In this I will be using the Reddit data from "r/AskSocialScientists" from Octobe
 \hlstd{> }\hlkwd{summary}\hlstd{(g12)} \hlcom{#}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH b47706b DN-- 327 522 -- 
+## IGRAPH aa2280e DN-- 327 522 -- 
 ## + attr: name (v/c)
 \end{verbatim}
 \end{kframe}
