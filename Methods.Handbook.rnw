@@ -3678,7 +3678,11 @@ lapply(packages, library, character.only = TRUE)
 # https://networkdata.ics.uci.edu/netdata/html/davis.html
 #  and hit "download" - open that r.data with Rstudio and it'll put it in your global env.
 
-plot(davis) # just checking
+library(readr)
+data <- read_csv("https://raw.githubusercontent.com/KyleDavisGithub/Graduate_Methods_Handbook/master/swi.csv")
+
+davis <- as.data.frame(data)
+
 swi <- as.matrix(davis) # Make incidence matrix - and put as igraph network
 swn <- graph.incidence(swi) # This specifically makes a bipartite igraph from a matrix.
 swn # UN-B ; 32 89

@@ -3414,10 +3414,7 @@ Support Vector Models (SVMs) can be used to analize data with the least error gi
 \hlstd{> }\hlcom{# Need a lot of packages for this:}
 \hlstd{> }\hlstd{packages} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlstr{"caret"}\hlstd{,} \hlstr{"MASS"}\hlstd{,} \hlstr{"Rlab"}\hlstd{,} \hlstr{"boot"}\hlstd{,} \hlstr{"ggplot2"}\hlstd{,} \hlstr{"ggridges"}\hlstd{,} \hlstr{"dplyr"}\hlstd{)}
 \hlstd{> }\hlkwd{invisible}\hlstd{(} \hlkwd{lapply}\hlstd{(packages, library,} \hlkwc{character.only} \hlstd{=} \hlnum{TRUE}\hlstd{))}
-\end{alltt}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in FUN(X[[i]], ...): there is no package called 'ggridges'}}\begin{alltt}
+\hlstd{> }
 \hlstd{> }\hlkwd{set.seed}\hlstd{(}\hlnum{12345}\hlstd{)}
 \hlstd{> }
 \hlstd{> }\hlstd{N} \hlkwb{<-} \hlnum{2000}
@@ -3846,8 +3843,8 @@ In this section we'll cover just the basics of setting up network data and readi
 \hlstd{> }\hlstd{g1}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH a5af50d D--- 5 7 -- 
-## + edges from a5af50d:
+## IGRAPH 4c924f6 D--- 5 7 -- 
+## + edges from 4c924f6:
 ## [1] 1->2 1->3 2->4 3->1 3->5 5->1 4->3
 \end{verbatim}
 \begin{alltt}
@@ -3856,7 +3853,7 @@ In this section we'll cover just the basics of setting up network data and readi
 \hlstd{> }\hlkwd{summary}\hlstd{(g1)}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH a5af50d D--- 5 7 --
+## IGRAPH 4c924f6 D--- 5 7 --
 \end{verbatim}
 \begin{alltt}
 \hlstd{> }\hlcom{# Or using the default plot() function:}
@@ -3887,7 +3884,7 @@ In this section we'll cover just the basics of setting up network data and readi
 \hlstd{> }\hlkwd{summary}\hlstd{(g2)} \hlcom{# Undirected, now named, 7 nodes, 10 edges.}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH a5bb802 UN-- 7 10 -- 
+## IGRAPH 4ca952f UN-- 7 10 -- 
 ## + attr: name (v/c)
 \end{verbatim}
 \begin{alltt}
@@ -3942,7 +3939,7 @@ In this section we'll cover just the basics of setting up network data and readi
 \hlstd{> }\hlkwd{E}\hlstd{(g1)}
 \end{alltt}
 \begin{verbatim}
-## + 7/7 edges from a5af50d:
+## + 7/7 edges from 4c924f6:
 ## [1] 1->2 1->3 2->4 3->1 3->5 5->1 4->3
 \end{verbatim}
 \begin{alltt}
@@ -3951,7 +3948,7 @@ In this section we'll cover just the basics of setting up network data and readi
 \hlstd{> }\hlkwd{V}\hlstd{(g2)}
 \end{alltt}
 \begin{verbatim}
-## + 7/7 vertices, named, from a5bb802:
+## + 7/7 vertices, named, from 4ca952f:
 ## [1] Anand  Beth   Chris  Dieter Sun    Ali    Fatima
 \end{verbatim}
 \begin{alltt}
@@ -3981,7 +3978,7 @@ In this section we'll cover just the basics of setting up network data and readi
 \hlstd{> }\hlkwd{summary}\hlstd{(g2)} \hlcom{# We see the new variables added, and how they are connected.}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH a5bb802 UN-- 7 10 -- 
+## IGRAPH 4ca952f UN-- 7 10 -- 
 ## + attr: name (v/c), gender (v/c), age (v/n), count (e/n)
 \end{verbatim}
 \begin{alltt}
@@ -4118,9 +4115,9 @@ In this section we'll cover just the basics of setting up network data and readi
 \hlstd{> }\hlstd{bg}  \hlcom{# We see the "B" there now, for Bipartide}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH a5d1ad2 UN-B 8 8 -- 
+## IGRAPH 4cbcc75 UN-B 8 8 -- 
 ## + attr: type (v/l), name (v/c)
-## + edges from a5d1ad2 (vertex names):
+## + edges from 4cbcc75 (vertex names):
 ## [1] Group1--Y1 Group1--Y2 Group1--Y3 Group1--Y4 Group2--Y2 Group2--Y3
 ## [7] Group3--Y4 Group3--Y5
 \end{verbatim}
@@ -4140,15 +4137,15 @@ In this section we'll cover just the basics of setting up network data and readi
 \end{alltt}
 \begin{verbatim}
 ## $proj1
-## IGRAPH a5d4192 UNW- 3 2 -- 
+## IGRAPH 4cbe987 UNW- 3 2 -- 
 ## + attr: name (v/c), weight (e/n)
-## + edges from a5d4192 (vertex names):
+## + edges from 4cbe987 (vertex names):
 ## [1] Group1--Group2 Group1--Group3
 ## 
 ## $proj2
-## IGRAPH a5d4192 UNW- 5 7 -- 
+## IGRAPH 4cbe987 UNW- 5 7 -- 
 ## + attr: name (v/c), weight (e/n)
-## + edges from a5d4192 (vertex names):
+## + edges from 4cbe987 (vertex names):
 ## [1] Y1--Y2 Y1--Y3 Y1--Y4 Y2--Y3 Y2--Y4 Y3--Y4 Y4--Y5
 \end{verbatim}
 \begin{alltt}
@@ -4270,33 +4267,7 @@ In this section we'll cover just the basics of setting up network data and readi
 ##  [5] "igraphdata"     "igraph"         "vars"           "lmtest"        
 ##  [9] "urca"           "strucchange"    "sandwich"       "zoo"           
 ## [13] "tseries"        "ggthemes"       "haven"          "rpart"         
-## [17] "microbenchmark" "kernlab"        "boot"           "glmnet"        
-## [21] "caret"          "lattice"        "Rlab"           "faraway"       
-## [25] "ggplot2"        "mice"           "arm"            "lme4"          
-## [29] "Matrix"         "MASS"           "car"            "carData"       
-## [33] "foreign"        "vcd"            "grid"           "knitr"         
-## [37] "stats"          "graphics"       "grDevices"      "utils"         
-## [41] "datasets"       "methods"        "base"          
-## 
-## [[2]]
-##  [1] "blockmodeling"  "NetCluster"     "sna"            "network"       
-##  [5] "statnet.common" "igraphdata"     "igraph"         "vars"          
-##  [9] "lmtest"         "urca"           "strucchange"    "sandwich"      
-## [13] "zoo"            "tseries"        "ggthemes"       "haven"         
-## [17] "rpart"          "microbenchmark" "kernlab"        "boot"          
-## [21] "glmnet"         "caret"          "lattice"        "Rlab"          
-## [25] "faraway"        "ggplot2"        "mice"           "arm"           
-## [29] "lme4"           "Matrix"         "MASS"           "car"           
-## [33] "carData"        "foreign"        "vcd"            "grid"          
-## [37] "knitr"          "stats"          "graphics"       "grDevices"     
-## [41] "utils"          "datasets"       "methods"        "base"          
-## 
-## [[3]]
-##  [1] "gplots"         "blockmodeling"  "NetCluster"     "sna"           
-##  [5] "network"        "statnet.common" "igraphdata"     "igraph"        
-##  [9] "vars"           "lmtest"         "urca"           "strucchange"   
-## [13] "sandwich"       "zoo"            "tseries"        "ggthemes"      
-## [17] "haven"          "rpart"          "microbenchmark" "kernlab"       
+## [17] "microbenchmark" "kernlab"        "dplyr"          "ggridges"      
 ## [21] "boot"           "glmnet"         "caret"          "lattice"       
 ## [25] "Rlab"           "faraway"        "ggplot2"        "mice"          
 ## [29] "arm"            "lme4"           "Matrix"         "MASS"          
@@ -4305,19 +4276,47 @@ In this section we'll cover just the basics of setting up network data and readi
 ## [41] "grDevices"      "utils"          "datasets"       "methods"       
 ## [45] "base"          
 ## 
+## [[2]]
+##  [1] "blockmodeling"  "NetCluster"     "sna"            "network"       
+##  [5] "statnet.common" "igraphdata"     "igraph"         "vars"          
+##  [9] "lmtest"         "urca"           "strucchange"    "sandwich"      
+## [13] "zoo"            "tseries"        "ggthemes"       "haven"         
+## [17] "rpart"          "microbenchmark" "kernlab"        "dplyr"         
+## [21] "ggridges"       "boot"           "glmnet"         "caret"         
+## [25] "lattice"        "Rlab"           "faraway"        "ggplot2"       
+## [29] "mice"           "arm"            "lme4"           "Matrix"        
+## [33] "MASS"           "car"            "carData"        "foreign"       
+## [37] "vcd"            "grid"           "knitr"          "stats"         
+## [41] "graphics"       "grDevices"      "utils"          "datasets"      
+## [45] "methods"        "base"          
+## 
+## [[3]]
+##  [1] "gplots"         "blockmodeling"  "NetCluster"     "sna"           
+##  [5] "network"        "statnet.common" "igraphdata"     "igraph"        
+##  [9] "vars"           "lmtest"         "urca"           "strucchange"   
+## [13] "sandwich"       "zoo"            "tseries"        "ggthemes"      
+## [17] "haven"          "rpart"          "microbenchmark" "kernlab"       
+## [21] "dplyr"          "ggridges"       "boot"           "glmnet"        
+## [25] "caret"          "lattice"        "Rlab"           "faraway"       
+## [29] "ggplot2"        "mice"           "arm"            "lme4"          
+## [33] "Matrix"         "MASS"           "car"            "carData"       
+## [37] "foreign"        "vcd"            "grid"           "knitr"         
+## [41] "stats"          "graphics"       "grDevices"      "utils"         
+## [45] "datasets"       "methods"        "base"          
+## 
 ## [[4]]
 ##  [1] "gplots"         "blockmodeling"  "NetCluster"     "sna"           
 ##  [5] "network"        "statnet.common" "igraphdata"     "igraph"        
 ##  [9] "vars"           "lmtest"         "urca"           "strucchange"   
 ## [13] "sandwich"       "zoo"            "tseries"        "ggthemes"      
 ## [17] "haven"          "rpart"          "microbenchmark" "kernlab"       
-## [21] "boot"           "glmnet"         "caret"          "lattice"       
-## [25] "Rlab"           "faraway"        "ggplot2"        "mice"          
-## [29] "arm"            "lme4"           "Matrix"         "MASS"          
-## [33] "car"            "carData"        "foreign"        "vcd"           
-## [37] "grid"           "knitr"          "stats"          "graphics"      
-## [41] "grDevices"      "utils"          "datasets"       "methods"       
-## [45] "base"
+## [21] "dplyr"          "ggridges"       "boot"           "glmnet"        
+## [25] "caret"          "lattice"        "Rlab"           "faraway"       
+## [29] "ggplot2"        "mice"           "arm"            "lme4"          
+## [33] "Matrix"         "MASS"           "car"            "carData"       
+## [37] "foreign"        "vcd"            "grid"           "knitr"         
+## [41] "stats"          "graphics"       "grDevices"      "utils"         
+## [45] "datasets"       "methods"        "base"
 \end{verbatim}
 \begin{alltt}
 \hlstd{> }\hlcom{#  lapply(object, function, ...)  # For "list" apply... nifty tool!}
@@ -4331,36 +4330,36 @@ In this section we'll cover just the basics of setting up network data and readi
 \hlstd{> }\hlcom{# https://networkdata.ics.uci.edu/netdata/html/davis.html}
 \hlstd{> }\hlcom{#  and hit "download" - open that r.data with Rstudio and it'll put it in your global env.}
 \hlstd{> }
-\hlstd{> }\hlkwd{plot}\hlstd{(davis)} \hlcom{# just checking}
-\end{alltt}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'plot': object 'davis' not found}}\begin{alltt}
+\hlstd{> }\hlkwd{library}\hlstd{(readr)}
+\hlstd{> }\hlstd{data} \hlkwb{<-} \hlkwd{read_csv}\hlstd{(}\hlstr{"https://raw.githubusercontent.com/KyleDavisGithub/Graduate_Methods_Handbook/master/swi.csv"}\hlstd{)}
+\hlstd{> }
+\hlstd{> }\hlstd{davis} \hlkwb{<-} \hlkwd{as.data.frame}\hlstd{(data)}
+\hlstd{> }
 \hlstd{> }\hlstd{swi} \hlkwb{<-} \hlkwd{as.matrix}\hlstd{(davis)} \hlcom{# Make incidence matrix - and put as igraph network}
-\end{alltt}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'as.matrix': object 'davis' not found}}\begin{alltt}
 \hlstd{> }\hlstd{swn} \hlkwb{<-} \hlkwd{graph.incidence}\hlstd{(swi)} \hlcom{# This specifically makes a bipartite igraph from a matrix.}
-\end{alltt}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in graph.incidence(swi): object 'swi' not found}}\begin{alltt}
 \hlstd{> }\hlstd{swn} \hlcom{# UN-B ; 32 89}
 \end{alltt}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in eval(expr, envir, enclos): object 'swn' not found}}\begin{alltt}
+\begin{verbatim}
+## IGRAPH 4e4dbfb U--B 31 81 -- 
+## + attr: type (v/l)
+## + edges from 4e4dbfb:
+##  [1]  1--18  1--19  1--20  1--22  1--23  1--24  1--25  2--19  2--20  2--21
+## [11]  2--22  2--23  2--24  2--25  2--26  3--18  3--20  3--21  3--22  3--23
+## [21]  3--24  3--25  4--20  4--21  4--22  4--24  5--20  5--22  5--23  5--25
+## [31]  6--22  6--23  6--24  6--25  7--23  7--25  7--26  8--22  8--24  8--25
+## [41]  8--26  9--24  9--25  9--26  9--29 10--25 10--26 10--27 10--29 11--25
+## [51] 11--26 11--27 11--29 11--30 11--31 12--24 12--25 12--26 12--27 12--29
+## [61] 12--30 12--31 13--23 13--24 13--26 13--27 13--28 13--29 13--30 13--31
+## [71] 14--24 14--25 14--27 14--28 14--29 15--25 15--26 16--26 16--28 17--26
+## + ... omitted several edges
+\end{verbatim}
+\begin{alltt}
 \hlstd{> }\hlkwd{plot}\hlstd{(swn)}
 \end{alltt}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'plot': object 'swn' not found}}\begin{alltt}
+\end{kframe}
+\includegraphics[width=6in]{figure/Network_Properties-1} 
+\begin{kframe}\begin{alltt}
 \hlstd{> }\hlstd{swpr} \hlkwb{<-} \hlkwd{bipartite.projection}\hlstd{(swn)} \hlcom{# This makes the graph two one-mode networks}
-\end{alltt}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in "{}igraph"{} \%in\% class(graph): object 'swn' not found}}\begin{alltt}
 \hlstd{> }\hlcom{# What is this? - instead of just 1:1 node relationships there are two overlapping networks}
 \hlstd{> }\hlcom{#  and the realtionships we care about are between people of the other network.}
 \hlstd{> }\hlcom{#   so now our edges are weighted, and igraph strangely calls this a nonbipartite graph? Why?}
@@ -4372,14 +4371,59 @@ In this section we'll cover just the basics of setting up network data and readi
 \hlstd{> }\hlkwd{plot}\hlstd{(swpr}\hlopt{$}\hlstd{proj2,} \hlcom{# Note two proj's we get from that projection, via X or Y projection weights}
 \hlstd{+ }     \hlkwc{edge.width} \hlstd{=} \hlkwd{E}\hlstd{(swpr}\hlopt{$}\hlstd{proj2)}\hlopt{$}\hlstd{weight)}
 \end{alltt}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'plot': object 'swpr' not found}}\begin{alltt}
+\end{kframe}
+\includegraphics[width=6in]{figure/Network_Properties-2} 
+\begin{kframe}\begin{alltt}
 \hlstd{> }\hlkwd{cor}\hlstd{(swi)} \hlcom{# Correlation of our matrix object to see structural position relationship. -1 : 1 (weights)}
 \end{alltt}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in is.data.frame(x): object 'swi' not found}}\begin{alltt}
+\begin{verbatim}
+##              1        1_1         1_2        1_3        1_4         1_5
+## 1    1.0000000  0.4333333  0.56568542  0.3098899  0.4364358  0.43643578
+## 1_1  0.4333333  1.0000000  0.56568542  0.3098899  0.4364358  0.43643578
+## 1_2  0.5656854  0.5656854  1.00000000  0.7171372  0.7715167  0.50920105
+## 1_3  0.3098899  0.3098899  0.71713717  1.0000000  0.5532833  0.23975611
+## 1_4  0.4364358  0.4364358  0.77151675  0.5532833  1.0000000  0.51428571
+## 1_5  0.4364358  0.4364358  0.50920105  0.2397561  0.5142857  1.00000000
+## 0    0.3055050  0.3055050  0.27774603  0.3872983  0.4571429  0.21428571
+## 1_6  0.2025479  0.2025479  0.05370862 -0.1069901  0.1823232  0.18232322
+## 1_7 -0.4944132 -0.1123666 -0.60385964 -0.3038949 -0.6326266 -0.38251843
+## 0_1 -0.2357023 -0.2357023 -0.41666667 -0.2988072 -0.5400617 -0.27774603
+## 0_2 -0.2025479 -0.2025479 -0.35805744 -0.2567763 -0.4640955 -0.18232322
+## 0_3 -0.2696799 -0.2696799 -0.47673129 -0.3418817 -0.6179144 -0.36780618
+## 0_4 -0.1690309 -0.1690309 -0.29880715 -0.2142857 -0.3872983 -0.07377111
+## 0_5 -0.1690309 -0.1690309 -0.29880715 -0.2142857 -0.3872983 -0.07377111
+##               0         1_6        1_7         0_1         0_2        0_3
+## 1    0.30550505  0.20254787 -0.4944132 -0.23570226 -0.20254787 -0.2696799
+## 1_1  0.30550505  0.20254787 -0.1123666 -0.23570226 -0.20254787 -0.2696799
+## 1_2  0.27774603  0.05370862 -0.6038596 -0.41666667 -0.35805744 -0.4767313
+## 1_3  0.38729833 -0.10699012 -0.3038949 -0.29880715 -0.25677630 -0.3418817
+## 1_4  0.45714286  0.18232322 -0.6326266 -0.54006172 -0.46409548 -0.6179144
+## 1_5  0.21428571  0.18232322 -0.3825184 -0.27774603 -0.18232322 -0.3678062
+## 0    1.00000000  0.09944903 -0.3678062  0.01543033 -0.09944903  0.1176980
+## 1_6  0.09944903  1.00000000 -0.1194880  0.05370862 -0.67307692  0.1194880
+## 1_7 -0.36780618 -0.11948803  1.0000000  0.20658356  0.11948803  0.2878788
+## 0_1  0.01543033  0.05370862  0.2065836  1.00000000  0.25064021  0.8740074
+## 0_2 -0.09944903 -0.67307692  0.1194880  0.25064021  1.00000000  0.1706972
+## 0_3  0.11769798  0.11948803  0.2878788  0.87400737  0.17069719  1.0000000
+## 0_4  0.07377111 -0.10699012  0.3418817  0.71713717  0.10699012  0.6267832
+## 0_5  0.07377111 -0.10699012  0.3418817  0.71713717  0.10699012  0.6267832
+##             0_4         0_5
+## 1   -0.16903085 -0.16903085
+## 1_1 -0.16903085 -0.16903085
+## 1_2 -0.29880715 -0.29880715
+## 1_3 -0.21428571 -0.21428571
+## 1_4 -0.38729833 -0.38729833
+## 1_5 -0.07377111 -0.07377111
+## 0    0.07377111  0.07377111
+## 1_6 -0.10699012 -0.10699012
+## 1_7  0.34188173  0.34188173
+## 0_1  0.71713717  0.71713717
+## 0_2  0.10699012  0.10699012
+## 0_3  0.62678317  0.62678317
+## 0_4  1.00000000  1.00000000
+## 0_5  1.00000000  1.00000000
+\end{verbatim}
+\begin{alltt}
 \hlstd{> }\hlcom{# Note that Flora and Oliva are structurally similar here and elsewhere}
 \hlstd{> }
 \hlstd{> }
@@ -4387,9 +4431,54 @@ In this section we'll cover just the basics of setting up network data and readi
 \hlstd{> }\hlcom{# dissimularity measure (-1 to cor).}
 \hlstd{> }\hlkwd{as.dist}\hlstd{(}\hlnum{1}\hlopt{-}\hlkwd{cor}\hlstd{(swi),} \hlkwc{upper}\hlstd{=}\hlnum{TRUE}\hlstd{)} \hlcom{# Upper = T just prints both sides of diag. Doesn't effect analysis}
 \end{alltt}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in is.data.frame(x): object 'swi' not found}}\begin{alltt}
+\begin{verbatim}
+##                1          1_1          1_2          1_3          1_4
+## 1                5.666667e-01 4.343146e-01 6.901101e-01 5.635642e-01
+## 1_1 5.666667e-01              4.343146e-01 6.901101e-01 5.635642e-01
+## 1_2 4.343146e-01 4.343146e-01              2.828628e-01 2.284833e-01
+## 1_3 6.901101e-01 6.901101e-01 2.828628e-01              4.467167e-01
+## 1_4 5.635642e-01 5.635642e-01 2.284833e-01 4.467167e-01             
+## 1_5 5.635642e-01 5.635642e-01 4.907989e-01 7.602439e-01 4.857143e-01
+## 0   6.944950e-01 6.944950e-01 7.222540e-01 6.127017e-01 5.428571e-01
+## 1_6 7.974521e-01 7.974521e-01 9.462914e-01 1.106990e+00 8.176768e-01
+## 1_7 1.494413e+00 1.112367e+00 1.603860e+00 1.303895e+00 1.632627e+00
+## 0_1 1.235702e+00 1.235702e+00 1.416667e+00 1.298807e+00 1.540062e+00
+## 0_2 1.202548e+00 1.202548e+00 1.358057e+00 1.256776e+00 1.464095e+00
+## 0_3 1.269680e+00 1.269680e+00 1.476731e+00 1.341882e+00 1.617914e+00
+## 0_4 1.169031e+00 1.169031e+00 1.298807e+00 1.214286e+00 1.387298e+00
+## 0_5 1.169031e+00 1.169031e+00 1.298807e+00 1.214286e+00 1.387298e+00
+##              1_5            0          1_6          1_7          0_1
+## 1   5.635642e-01 6.944950e-01 7.974521e-01 1.494413e+00 1.235702e+00
+## 1_1 5.635642e-01 6.944950e-01 7.974521e-01 1.112367e+00 1.235702e+00
+## 1_2 4.907989e-01 7.222540e-01 9.462914e-01 1.603860e+00 1.416667e+00
+## 1_3 7.602439e-01 6.127017e-01 1.106990e+00 1.303895e+00 1.298807e+00
+## 1_4 4.857143e-01 5.428571e-01 8.176768e-01 1.632627e+00 1.540062e+00
+## 1_5              7.857143e-01 8.176768e-01 1.382518e+00 1.277746e+00
+## 0   7.857143e-01              9.005510e-01 1.367806e+00 9.845697e-01
+## 1_6 8.176768e-01 9.005510e-01              1.119488e+00 9.462914e-01
+## 1_7 1.382518e+00 1.367806e+00 1.119488e+00              7.934164e-01
+## 0_1 1.277746e+00 9.845697e-01 9.462914e-01 7.934164e-01             
+## 0_2 1.182323e+00 1.099449e+00 1.673077e+00 8.805120e-01 7.493598e-01
+## 0_3 1.367806e+00 8.823020e-01 8.805120e-01 7.121212e-01 1.259926e-01
+## 0_4 1.073771e+00 9.262289e-01 1.106990e+00 6.581183e-01 2.828628e-01
+## 0_5 1.073771e+00 9.262289e-01 1.106990e+00 6.581183e-01 2.828628e-01
+##              0_2          0_3          0_4          0_5
+## 1   1.202548e+00 1.269680e+00 1.169031e+00 1.169031e+00
+## 1_1 1.202548e+00 1.269680e+00 1.169031e+00 1.169031e+00
+## 1_2 1.358057e+00 1.476731e+00 1.298807e+00 1.298807e+00
+## 1_3 1.256776e+00 1.341882e+00 1.214286e+00 1.214286e+00
+## 1_4 1.464095e+00 1.617914e+00 1.387298e+00 1.387298e+00
+## 1_5 1.182323e+00 1.367806e+00 1.073771e+00 1.073771e+00
+## 0   1.099449e+00 8.823020e-01 9.262289e-01 9.262289e-01
+## 1_6 1.673077e+00 8.805120e-01 1.106990e+00 1.106990e+00
+## 1_7 8.805120e-01 7.121212e-01 6.581183e-01 6.581183e-01
+## 0_1 7.493598e-01 1.259926e-01 2.828628e-01 2.828628e-01
+## 0_2              8.293028e-01 8.930099e-01 8.930099e-01
+## 0_3 8.293028e-01              3.732168e-01 3.732168e-01
+## 0_4 8.930099e-01 3.732168e-01              2.220446e-16
+## 0_5 8.930099e-01 3.732168e-01 2.220446e-16
+\end{verbatim}
+\begin{alltt}
 \hlstd{> }\hlcom{# We want to move away from just comparing two individuals, but instead find entire clusters}
 \hlstd{> }\hlcom{#  of attendants that exibit similar behavior. And then be able to analyize that more interesting}
 \hlstd{> }\hlcom{#  result. But to do this, we have to find how nodes are disimilar, so this data is more}
@@ -4397,15 +4486,11 @@ In this section we'll cover just the basics of setting up network data and readi
 \hlstd{> }\hlcom{#  we could have a 1 - a negative -1, or 1+1 (1- -1).}
 \hlstd{> }
 \hlstd{> }\hlstd{swdend} \hlkwb{<-} \hlkwd{hclust}\hlstd{(}\hlkwd{as.dist}\hlstd{(}\hlnum{1}\hlopt{-}\hlkwd{cor}\hlstd{(swi)))} \hlcom{# Standard clustering tool}
-\end{alltt}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in is.data.frame(x): object 'swi' not found}}\begin{alltt}
 \hlstd{> }\hlkwd{plot}\hlstd{(swdend)} \hlcom{# So how do we read this Dendrogram?}
 \end{alltt}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'plot': object 'swdend' not found}}\begin{alltt}
+\end{kframe}
+\includegraphics[width=6in]{figure/Network_Properties-3} 
+\begin{kframe}\begin{alltt}
 \hlstd{> }\hlcom{# Height is our value, and as we parse that value down, it's grouped into values.}
 \hlstd{> }\hlcom{#  Similar values become grouped under other values.}
 \hlstd{> }\hlcom{#  So, read from the top down, initial seperation was around the 1.0 mark, developing two}
@@ -4419,23 +4504,25 @@ In this section we'll cover just the basics of setting up network data and readi
 \hlstd{+ }          \hlkwc{trace}\hlstd{=}\hlstr{"none"}\hlstd{,}
 \hlstd{+ }          \hlkwc{revC}\hlstd{=}\hlnum{TRUE}\hlstd{)}
 \end{alltt}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'as.matrix': object 'swi' not found}}\begin{alltt}
+\end{kframe}
+\includegraphics[width=6in]{figure/Network_Properties-4} 
+\begin{kframe}\begin{alltt}
 \hlstd{> }\hlkwd{cutree}\hlstd{(swdend,} \hlkwc{k}\hlstd{=}\hlnum{2}\hlstd{)} \hlcom{# here we are telling R where we should cut our clusters at.}
 \end{alltt}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in nrow(tree\$merge): object 'swdend' not found}}\begin{alltt}
+\begin{verbatim}
+##   1 1_1 1_2 1_3 1_4 1_5   0 1_6 1_7 0_1 0_2 0_3 0_4 0_5 
+##   1   1   1   1   1   1   1   1   2   2   2   2   2   2
+\end{verbatim}
+\begin{alltt}
 \hlstd{> }\hlcom{#  THEORY and your interpretation of the data drives this decision, a dendrogram will not}
 \hlstd{> }\hlcom{#  tell you where to cut your clusters.}
 \hlstd{> }
 \hlstd{> }\hlcom{# So we identified two groups. Let's graph each of these to show our new network:}
 \hlstd{> }\hlkwd{plot}\hlstd{(swpr}\hlopt{$}\hlstd{proj2,} \hlkwc{edge.width}\hlstd{=}\hlkwd{E}\hlstd{(swpr}\hlopt{$}\hlstd{proj2)}\hlopt{$}\hlstd{weight,} \hlkwc{vertex.color}\hlstd{=}\hlkwd{cutree}\hlstd{(swdend,} \hlkwc{k}\hlstd{=}\hlnum{2}\hlstd{))}
 \end{alltt}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'plot': object 'swpr' not found}}\begin{alltt}
+\end{kframe}
+\includegraphics[width=6in]{figure/Network_Properties-5} 
+\begin{kframe}\begin{alltt}
 \hlstd{> }\hlcom{## Let's do the same analysis for a one-mode network.}
 \hlstd{> }
 \hlstd{> }\hlcom{# Let's just ignore this package and data coding here for now... Copy and Pasted}
@@ -4521,18 +4608,18 @@ In this section we'll cover just the basics of setting up network data and readi
 \hlstd{> }\hlkwd{plot}\hlstd{(flo_dend)}
 \end{alltt}
 \end{kframe}
-\includegraphics[width=6in]{figure/Network_Properties-1} 
+\includegraphics[width=6in]{figure/Network_Properties-6} 
 \begin{kframe}\begin{alltt}
 \hlstd{> }\hlcom{## With gplots}
 \hlstd{> }\hlkwd{heatmap.2}\hlstd{(}\hlkwd{as.matrix}\hlstd{(flo_dist),}\hlkwc{trace}\hlstd{=}\hlstr{"none"}\hlstd{,}\hlkwc{revC}\hlstd{=}\hlnum{TRUE}\hlstd{)}
 \end{alltt}
 \end{kframe}
-\includegraphics[width=6in]{figure/Network_Properties-2} 
+\includegraphics[width=6in]{figure/Network_Properties-7} 
 \begin{kframe}\begin{alltt}
 \hlstd{> }\hlkwd{plot}\hlstd{(flo_m,}\hlkwc{vertex.color}\hlstd{=}\hlkwd{cutree}\hlstd{(flo_dend,} \hlkwc{k}\hlstd{=}\hlnum{4}\hlstd{))}
 \end{alltt}
 \end{kframe}
-\includegraphics[width=6in]{figure/Network_Properties-3} 
+\includegraphics[width=6in]{figure/Network_Properties-8} 
 \begin{kframe}\begin{alltt}
 \hlstd{> }\hlcom{# lots of explaination and data reading in the seminar notes from the course!}
 \hlstd{> }\hlcom{#   Revisit it there if there are any questions it's very well documented.}
@@ -4563,7 +4650,7 @@ In this section we'll cover just the basics of setting up network data and readi
 \hlstd{> }\hlkwd{summary}\hlstd{(dixon)}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH a6febec D--- 248 1197 -- 
+## IGRAPH 4f0eeba D--- 248 1197 -- 
 ## + attr: title (g/c), grade (v/n), na (v/l), race (v/c), scode (v/n),
 ## | sex (v/n), vertex.names (v/c), na (e/l)
 \end{verbatim}
@@ -4707,14 +4794,14 @@ In this section we'll cover just the basics of setting up network data and readi
 \hlstd{> }\hlkwd{summary}\hlstd{(rand)}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH a737839 D--- 248 1197 -- Erdos renyi (gnm) graph
+## IGRAPH 4f4a89e D--- 248 1197 -- Erdos renyi (gnm) graph
 ## + attr: name (g/c), type (g/c), loops (g/l), m (g/n)
 \end{verbatim}
 \begin{alltt}
 \hlstd{> }\hlkwd{transitivity}\hlstd{(rand)}
 \end{alltt}
 \begin{verbatim}
-## [1] 0.03954752
+## [1] 0.0427358
 \end{verbatim}
 \begin{alltt}
 \hlstd{> }\hlcom{# Triad Census:}
@@ -4833,7 +4920,7 @@ Now that we have the data read in and cleaned (mostly tracking the id numbers), 
 \hlstd{> }\hlkwd{summary}\hlstd{(graph.object)} \hlcom{# Basic statistics seem okay}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH a815a3a DN-- 610 1043 -- 
+## IGRAPH 505a737 DN-- 610 1043 -- 
 ## + attr: name (v/c)
 \end{verbatim}
 \begin{alltt}
@@ -5170,7 +5257,7 @@ In this I will be using the Reddit data from "r/AskSocialScientists" from Octobe
 \hlstd{> }\hlkwd{summary}\hlstd{(g1)} \hlcom{#}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH aa21f94 DN-- 339 521 -- 
+## IGRAPH 5277b5b DN-- 339 521 -- 
 ## + attr: name (v/c)
 \end{verbatim}
 \begin{alltt}
@@ -5180,7 +5267,7 @@ In this I will be using the Reddit data from "r/AskSocialScientists" from Octobe
 \hlstd{> }\hlkwd{summary}\hlstd{(g12)} \hlcom{#}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH aa2280e DN-- 327 522 -- 
+## IGRAPH 5278651 DN-- 327 522 -- 
 ## + attr: name (v/c)
 \end{verbatim}
 \end{kframe}
