@@ -3666,7 +3666,9 @@ packages <- c("NetCluster", "blockmodeling", "gplots", "igraph")
 #   lapply(packages, install.packages, character.only = TRUE)
 
 # Load all packages in one function:
+invisible( # supressing out output which shows all packages.
 lapply(packages, library, character.only = TRUE)
+)
 #  lapply(object, function, ...)  # For "list" apply... nifty tool!
 
 # swi <- read.csv("swn.csv", header = TRUE, row.names = 1)
@@ -3906,9 +3908,13 @@ library(igraph)
 # Let's read in, add on top of one/ another the Reddit EdgeList data:
 ##   October:
 # read in the posts data
-posts <- read.csv('file:///C:/Users/Shing/Documents/Previous Course Info/Networks/Data/2017_10_AskSocialScience_posts.csv')
+library(readr)
+# data <- read_csv("https://raw.githubusercontent.com/KyleDavisGithub/Graduate_Methods_Handbook/master/swi.csv")
+
+
+posts <- read_csv('https://raw.githubusercontent.com/KyleDavisGithub/Graduate_Methods_Handbook/master/2017_10_AskSocialScience_posts.csv')
 # read in the comments data
-comments <- read.csv('file:///C:/Users/Shing/Documents/Previous Course Info/Networks/Data/2017_10_AskSocialScience_comments.csv')
+comments <- read_csv('https://raw.githubusercontent.com/KyleDavisGithub/Graduate_Methods_Handbook/master/2017_10_AskSocialScience_comments.csv')
 comments$id2 <- paste("t1_", comments$id, sep="")
 posts$id2 <- paste("t3_", posts$id, sep="")
 for_el <- data.frame(
@@ -3924,8 +3930,8 @@ el <- as.matrix(el)
 
 #---------------------------------------------------------------------------
 ##   Nov:
-posts2 <- read.csv('file:///C:/Users/Shing/Documents/Previous Course Info/Networks/Data/2017_11_AskSocialScience_posts.csv')
-comments2 <- read.csv('file:///C:/Users/Shing/Documents/Previous Course Info/Networks/Data/2017_11_AskSocialScience_comments.csv')
+posts2 <- read_csv('https://raw.githubusercontent.com/KyleDavisGithub/Graduate_Methods_Handbook/master/2017_11_AskSocialScience_posts.csv')
+comments2 <- read_csv('https://raw.githubusercontent.com/KyleDavisGithub/Graduate_Methods_Handbook/master/2017_11_AskSocialScience_comments.csv')
 comments2$id2 <- paste("t1_", comments2$id, sep="")
 posts2$id2 <- paste("t3_", posts2$id, sep="")
 

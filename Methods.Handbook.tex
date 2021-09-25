@@ -3843,8 +3843,8 @@ In this section we'll cover just the basics of setting up network data and readi
 \hlstd{> }\hlstd{g1}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH 4c924f6 D--- 5 7 -- 
-## + edges from 4c924f6:
+## IGRAPH 62f20c5 D--- 5 7 -- 
+## + edges from 62f20c5:
 ## [1] 1->2 1->3 2->4 3->1 3->5 5->1 4->3
 \end{verbatim}
 \begin{alltt}
@@ -3853,7 +3853,7 @@ In this section we'll cover just the basics of setting up network data and readi
 \hlstd{> }\hlkwd{summary}\hlstd{(g1)}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH 4c924f6 D--- 5 7 --
+## IGRAPH 62f20c5 D--- 5 7 --
 \end{verbatim}
 \begin{alltt}
 \hlstd{> }\hlcom{# Or using the default plot() function:}
@@ -3884,7 +3884,7 @@ In this section we'll cover just the basics of setting up network data and readi
 \hlstd{> }\hlkwd{summary}\hlstd{(g2)} \hlcom{# Undirected, now named, 7 nodes, 10 edges.}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH 4ca952f UN-- 7 10 -- 
+## IGRAPH 63023e9 UN-- 7 10 -- 
 ## + attr: name (v/c)
 \end{verbatim}
 \begin{alltt}
@@ -3939,7 +3939,7 @@ In this section we'll cover just the basics of setting up network data and readi
 \hlstd{> }\hlkwd{E}\hlstd{(g1)}
 \end{alltt}
 \begin{verbatim}
-## + 7/7 edges from 4c924f6:
+## + 7/7 edges from 62f20c5:
 ## [1] 1->2 1->3 2->4 3->1 3->5 5->1 4->3
 \end{verbatim}
 \begin{alltt}
@@ -3948,7 +3948,7 @@ In this section we'll cover just the basics of setting up network data and readi
 \hlstd{> }\hlkwd{V}\hlstd{(g2)}
 \end{alltt}
 \begin{verbatim}
-## + 7/7 vertices, named, from 4ca952f:
+## + 7/7 vertices, named, from 63023e9:
 ## [1] Anand  Beth   Chris  Dieter Sun    Ali    Fatima
 \end{verbatim}
 \begin{alltt}
@@ -3978,7 +3978,7 @@ In this section we'll cover just the basics of setting up network data and readi
 \hlstd{> }\hlkwd{summary}\hlstd{(g2)} \hlcom{# We see the new variables added, and how they are connected.}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH 4ca952f UN-- 7 10 -- 
+## IGRAPH 63023e9 UN-- 7 10 -- 
 ## + attr: name (v/c), gender (v/c), age (v/n), count (e/n)
 \end{verbatim}
 \begin{alltt}
@@ -4115,9 +4115,9 @@ In this section we'll cover just the basics of setting up network data and readi
 \hlstd{> }\hlstd{bg}  \hlcom{# We see the "B" there now, for Bipartide}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH 4cbcc75 UN-B 8 8 -- 
+## IGRAPH 6317e3d UN-B 8 8 -- 
 ## + attr: type (v/l), name (v/c)
-## + edges from 4cbcc75 (vertex names):
+## + edges from 6317e3d (vertex names):
 ## [1] Group1--Y1 Group1--Y2 Group1--Y3 Group1--Y4 Group2--Y2 Group2--Y3
 ## [7] Group3--Y4 Group3--Y5
 \end{verbatim}
@@ -4137,15 +4137,15 @@ In this section we'll cover just the basics of setting up network data and readi
 \end{alltt}
 \begin{verbatim}
 ## $proj1
-## IGRAPH 4cbe987 UNW- 3 2 -- 
+## IGRAPH 6319c83 UNW- 3 2 -- 
 ## + attr: name (v/c), weight (e/n)
-## + edges from 4cbe987 (vertex names):
+## + edges from 6319c83 (vertex names):
 ## [1] Group1--Group2 Group1--Group3
 ## 
 ## $proj2
-## IGRAPH 4cbe987 UNW- 5 7 -- 
+## IGRAPH 6319c83 UNW- 5 7 -- 
 ## + attr: name (v/c), weight (e/n)
-## + edges from 4cbe987 (vertex names):
+## + edges from 6319c83 (vertex names):
 ## [1] Y1--Y2 Y1--Y3 Y1--Y4 Y2--Y3 Y2--Y4 Y3--Y4 Y4--Y5
 \end{verbatim}
 \begin{alltt}
@@ -4259,66 +4259,9 @@ In this section we'll cover just the basics of setting up network data and readi
 \hlstd{> }\hlcom{#   lapply(packages, install.packages, character.only = TRUE)}
 \hlstd{> }
 \hlstd{> }\hlcom{# Load all packages in one function:}
-\hlstd{> }\hlkwd{lapply}\hlstd{(packages, library,} \hlkwc{character.only} \hlstd{=} \hlnum{TRUE}\hlstd{)}
-\end{alltt}
-\begin{verbatim}
-## [[1]]
-##  [1] "NetCluster"     "sna"            "network"        "statnet.common"
-##  [5] "igraphdata"     "igraph"         "vars"           "lmtest"        
-##  [9] "urca"           "strucchange"    "sandwich"       "zoo"           
-## [13] "tseries"        "ggthemes"       "haven"          "rpart"         
-## [17] "microbenchmark" "kernlab"        "dplyr"          "ggridges"      
-## [21] "boot"           "glmnet"         "caret"          "lattice"       
-## [25] "Rlab"           "faraway"        "ggplot2"        "mice"          
-## [29] "arm"            "lme4"           "Matrix"         "MASS"          
-## [33] "car"            "carData"        "foreign"        "vcd"           
-## [37] "grid"           "knitr"          "stats"          "graphics"      
-## [41] "grDevices"      "utils"          "datasets"       "methods"       
-## [45] "base"          
-## 
-## [[2]]
-##  [1] "blockmodeling"  "NetCluster"     "sna"            "network"       
-##  [5] "statnet.common" "igraphdata"     "igraph"         "vars"          
-##  [9] "lmtest"         "urca"           "strucchange"    "sandwich"      
-## [13] "zoo"            "tseries"        "ggthemes"       "haven"         
-## [17] "rpart"          "microbenchmark" "kernlab"        "dplyr"         
-## [21] "ggridges"       "boot"           "glmnet"         "caret"         
-## [25] "lattice"        "Rlab"           "faraway"        "ggplot2"       
-## [29] "mice"           "arm"            "lme4"           "Matrix"        
-## [33] "MASS"           "car"            "carData"        "foreign"       
-## [37] "vcd"            "grid"           "knitr"          "stats"         
-## [41] "graphics"       "grDevices"      "utils"          "datasets"      
-## [45] "methods"        "base"          
-## 
-## [[3]]
-##  [1] "gplots"         "blockmodeling"  "NetCluster"     "sna"           
-##  [5] "network"        "statnet.common" "igraphdata"     "igraph"        
-##  [9] "vars"           "lmtest"         "urca"           "strucchange"   
-## [13] "sandwich"       "zoo"            "tseries"        "ggthemes"      
-## [17] "haven"          "rpart"          "microbenchmark" "kernlab"       
-## [21] "dplyr"          "ggridges"       "boot"           "glmnet"        
-## [25] "caret"          "lattice"        "Rlab"           "faraway"       
-## [29] "ggplot2"        "mice"           "arm"            "lme4"          
-## [33] "Matrix"         "MASS"           "car"            "carData"       
-## [37] "foreign"        "vcd"            "grid"           "knitr"         
-## [41] "stats"          "graphics"       "grDevices"      "utils"         
-## [45] "datasets"       "methods"        "base"          
-## 
-## [[4]]
-##  [1] "gplots"         "blockmodeling"  "NetCluster"     "sna"           
-##  [5] "network"        "statnet.common" "igraphdata"     "igraph"        
-##  [9] "vars"           "lmtest"         "urca"           "strucchange"   
-## [13] "sandwich"       "zoo"            "tseries"        "ggthemes"      
-## [17] "haven"          "rpart"          "microbenchmark" "kernlab"       
-## [21] "dplyr"          "ggridges"       "boot"           "glmnet"        
-## [25] "caret"          "lattice"        "Rlab"           "faraway"       
-## [29] "ggplot2"        "mice"           "arm"            "lme4"          
-## [33] "Matrix"         "MASS"           "car"            "carData"       
-## [37] "foreign"        "vcd"            "grid"           "knitr"         
-## [41] "stats"          "graphics"       "grDevices"      "utils"         
-## [45] "datasets"       "methods"        "base"
-\end{verbatim}
-\begin{alltt}
+\hlstd{> }\hlkwd{invisible}\hlstd{(} \hlcom{# supressing out output which shows all packages.}
+\hlstd{+ }\hlkwd{lapply}\hlstd{(packages, library,} \hlkwc{character.only} \hlstd{=} \hlnum{TRUE}\hlstd{)}
+\hlstd{+ }\hlstd{)}
 \hlstd{> }\hlcom{#  lapply(object, function, ...)  # For "list" apply... nifty tool!}
 \hlstd{> }
 \hlstd{> }\hlcom{# swi <- read.csv("swn.csv", header = TRUE, row.names = 1)}
@@ -4340,9 +4283,9 @@ In this section we'll cover just the basics of setting up network data and readi
 \hlstd{> }\hlstd{swn} \hlcom{# UN-B ; 32 89}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH 4e4dbfb U--B 31 81 -- 
+## IGRAPH 640eb16 U--B 31 81 -- 
 ## + attr: type (v/l)
-## + edges from 4e4dbfb:
+## + edges from 640eb16:
 ##  [1]  1--18  1--19  1--20  1--22  1--23  1--24  1--25  2--19  2--20  2--21
 ## [11]  2--22  2--23  2--24  2--25  2--26  3--18  3--20  3--21  3--22  3--23
 ## [21]  3--24  3--25  4--20  4--21  4--22  4--24  5--20  5--22  5--23  5--25
@@ -4650,7 +4593,7 @@ In this section we'll cover just the basics of setting up network data and readi
 \hlstd{> }\hlkwd{summary}\hlstd{(dixon)}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH 4f0eeba D--- 248 1197 -- 
+## IGRAPH 64a013f D--- 248 1197 -- 
 ## + attr: title (g/c), grade (v/n), na (v/l), race (v/c), scode (v/n),
 ## | sex (v/n), vertex.names (v/c), na (e/l)
 \end{verbatim}
@@ -4794,7 +4737,7 @@ In this section we'll cover just the basics of setting up network data and readi
 \hlstd{> }\hlkwd{summary}\hlstd{(rand)}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH 4f4a89e D--- 248 1197 -- Erdos renyi (gnm) graph
+## IGRAPH 64d7c8e D--- 248 1197 -- Erdos renyi (gnm) graph
 ## + attr: name (g/c), type (g/c), loops (g/l), m (g/n)
 \end{verbatim}
 \begin{alltt}
@@ -4860,9 +4803,13 @@ But how do we actually do this? Let's start with reading in the data, and settin
 \hlstd{> }\hlcom{# Let's read in, add on top of one/ another the Reddit EdgeList data:}
 \hlstd{> }\hlcom{##   October:}
 \hlstd{> }\hlcom{# read in the posts data}
-\hlstd{> }\hlstd{posts} \hlkwb{<-} \hlkwd{read.csv}\hlstd{(}\hlstr{'file:///C:/Users/Shing/Documents/Previous Course Info/Networks/Data/2017_10_AskSocialScience_posts.csv'}\hlstd{)}
+\hlstd{> }\hlkwd{library}\hlstd{(readr)}
+\hlstd{> }\hlcom{# data <- read_csv("https://raw.githubusercontent.com/KyleDavisGithub/Graduate_Methods_Handbook/master/swi.csv")}
+\hlstd{> }
+\hlstd{> }
+\hlstd{> }\hlstd{posts} \hlkwb{<-} \hlkwd{read_csv}\hlstd{(}\hlstr{'https://raw.githubusercontent.com/KyleDavisGithub/Graduate_Methods_Handbook/master/2017_10_AskSocialScience_posts.csv'}\hlstd{)}
 \hlstd{> }\hlcom{# read in the comments data}
-\hlstd{> }\hlstd{comments} \hlkwb{<-} \hlkwd{read.csv}\hlstd{(}\hlstr{'file:///C:/Users/Shing/Documents/Previous Course Info/Networks/Data/2017_10_AskSocialScience_comments.csv'}\hlstd{)}
+\hlstd{> }\hlstd{comments} \hlkwb{<-} \hlkwd{read_csv}\hlstd{(}\hlstr{'https://raw.githubusercontent.com/KyleDavisGithub/Graduate_Methods_Handbook/master/2017_10_AskSocialScience_comments.csv'}\hlstd{)}
 \hlstd{> }\hlstd{comments}\hlopt{$}\hlstd{id2} \hlkwb{<-} \hlkwd{paste}\hlstd{(}\hlstr{"t1_"}\hlstd{, comments}\hlopt{$}\hlstd{id,} \hlkwc{sep}\hlstd{=}\hlstr{""}\hlstd{)}
 \hlstd{> }\hlstd{posts}\hlopt{$}\hlstd{id2} \hlkwb{<-} \hlkwd{paste}\hlstd{(}\hlstr{"t3_"}\hlstd{, posts}\hlopt{$}\hlstd{id,} \hlkwc{sep}\hlstd{=}\hlstr{""}\hlstd{)}
 \hlstd{> }\hlstd{for_el} \hlkwb{<-} \hlkwd{data.frame}\hlstd{(}
@@ -4878,8 +4825,8 @@ But how do we actually do this? Let's start with reading in the data, and settin
 \hlstd{> }
 \hlstd{> }\hlcom{#---------------------------------------------------------------------------}
 \hlstd{> }\hlcom{##   Nov:}
-\hlstd{> }\hlstd{posts2} \hlkwb{<-} \hlkwd{read.csv}\hlstd{(}\hlstr{'file:///C:/Users/Shing/Documents/Previous Course Info/Networks/Data/2017_11_AskSocialScience_posts.csv'}\hlstd{)}
-\hlstd{> }\hlstd{comments2} \hlkwb{<-} \hlkwd{read.csv}\hlstd{(}\hlstr{'file:///C:/Users/Shing/Documents/Previous Course Info/Networks/Data/2017_11_AskSocialScience_comments.csv'}\hlstd{)}
+\hlstd{> }\hlstd{posts2} \hlkwb{<-} \hlkwd{read_csv}\hlstd{(}\hlstr{'https://raw.githubusercontent.com/KyleDavisGithub/Graduate_Methods_Handbook/master/2017_11_AskSocialScience_posts.csv'}\hlstd{)}
+\hlstd{> }\hlstd{comments2} \hlkwb{<-} \hlkwd{read_csv}\hlstd{(}\hlstr{'https://raw.githubusercontent.com/KyleDavisGithub/Graduate_Methods_Handbook/master/2017_11_AskSocialScience_comments.csv'}\hlstd{)}
 \hlstd{> }\hlstd{comments2}\hlopt{$}\hlstd{id2} \hlkwb{<-} \hlkwd{paste}\hlstd{(}\hlstr{"t1_"}\hlstd{, comments2}\hlopt{$}\hlstd{id,} \hlkwc{sep}\hlstd{=}\hlstr{""}\hlstd{)}
 \hlstd{> }\hlstd{posts2}\hlopt{$}\hlstd{id2} \hlkwb{<-} \hlkwd{paste}\hlstd{(}\hlstr{"t3_"}\hlstd{, posts2}\hlopt{$}\hlstd{id,} \hlkwc{sep}\hlstd{=}\hlstr{""}\hlstd{)}
 \hlstd{> }
@@ -4920,7 +4867,7 @@ Now that we have the data read in and cleaned (mostly tracking the id numbers), 
 \hlstd{> }\hlkwd{summary}\hlstd{(graph.object)} \hlcom{# Basic statistics seem okay}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH 505a737 DN-- 610 1043 -- 
+## IGRAPH 6640d85 DN-- 610 1043 -- 
 ## + attr: name (v/c)
 \end{verbatim}
 \begin{alltt}
@@ -5257,7 +5204,7 @@ In this I will be using the Reddit data from "r/AskSocialScientists" from Octobe
 \hlstd{> }\hlkwd{summary}\hlstd{(g1)} \hlcom{#}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH 5277b5b DN-- 339 521 -- 
+## IGRAPH 684b103 DN-- 339 521 -- 
 ## + attr: name (v/c)
 \end{verbatim}
 \begin{alltt}
@@ -5267,7 +5214,7 @@ In this I will be using the Reddit data from "r/AskSocialScientists" from Octobe
 \hlstd{> }\hlkwd{summary}\hlstd{(g12)} \hlcom{#}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH 5278651 DN-- 327 522 -- 
+## IGRAPH 684bbe8 DN-- 327 522 -- 
 ## + attr: name (v/c)
 \end{verbatim}
 \end{kframe}
