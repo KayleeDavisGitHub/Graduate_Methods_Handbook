@@ -3843,8 +3843,8 @@ In this section we'll cover just the basics of setting up network data and readi
 \hlstd{> }\hlstd{g1}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH 62f20c5 D--- 5 7 -- 
-## + edges from 62f20c5:
+## IGRAPH 097256c D--- 5 7 -- 
+## + edges from 097256c:
 ## [1] 1->2 1->3 2->4 3->1 3->5 5->1 4->3
 \end{verbatim}
 \begin{alltt}
@@ -3853,7 +3853,7 @@ In this section we'll cover just the basics of setting up network data and readi
 \hlstd{> }\hlkwd{summary}\hlstd{(g1)}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH 62f20c5 D--- 5 7 --
+## IGRAPH 097256c D--- 5 7 --
 \end{verbatim}
 \begin{alltt}
 \hlstd{> }\hlcom{# Or using the default plot() function:}
@@ -3884,7 +3884,7 @@ In this section we'll cover just the basics of setting up network data and readi
 \hlstd{> }\hlkwd{summary}\hlstd{(g2)} \hlcom{# Undirected, now named, 7 nodes, 10 edges.}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH 63023e9 UN-- 7 10 -- 
+## IGRAPH 0983d15 UN-- 7 10 -- 
 ## + attr: name (v/c)
 \end{verbatim}
 \begin{alltt}
@@ -3939,7 +3939,7 @@ In this section we'll cover just the basics of setting up network data and readi
 \hlstd{> }\hlkwd{E}\hlstd{(g1)}
 \end{alltt}
 \begin{verbatim}
-## + 7/7 edges from 62f20c5:
+## + 7/7 edges from 097256c:
 ## [1] 1->2 1->3 2->4 3->1 3->5 5->1 4->3
 \end{verbatim}
 \begin{alltt}
@@ -3948,7 +3948,7 @@ In this section we'll cover just the basics of setting up network data and readi
 \hlstd{> }\hlkwd{V}\hlstd{(g2)}
 \end{alltt}
 \begin{verbatim}
-## + 7/7 vertices, named, from 63023e9:
+## + 7/7 vertices, named, from 0983d15:
 ## [1] Anand  Beth   Chris  Dieter Sun    Ali    Fatima
 \end{verbatim}
 \begin{alltt}
@@ -3978,7 +3978,7 @@ In this section we'll cover just the basics of setting up network data and readi
 \hlstd{> }\hlkwd{summary}\hlstd{(g2)} \hlcom{# We see the new variables added, and how they are connected.}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH 63023e9 UN-- 7 10 -- 
+## IGRAPH 0983d15 UN-- 7 10 -- 
 ## + attr: name (v/c), gender (v/c), age (v/n), count (e/n)
 \end{verbatim}
 \begin{alltt}
@@ -4115,9 +4115,9 @@ In this section we'll cover just the basics of setting up network data and readi
 \hlstd{> }\hlstd{bg}  \hlcom{# We see the "B" there now, for Bipartide}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH 6317e3d UN-B 8 8 -- 
+## IGRAPH 099d662 UN-B 8 8 -- 
 ## + attr: type (v/l), name (v/c)
-## + edges from 6317e3d (vertex names):
+## + edges from 099d662 (vertex names):
 ## [1] Group1--Y1 Group1--Y2 Group1--Y3 Group1--Y4 Group2--Y2 Group2--Y3
 ## [7] Group3--Y4 Group3--Y5
 \end{verbatim}
@@ -4137,15 +4137,15 @@ In this section we'll cover just the basics of setting up network data and readi
 \end{alltt}
 \begin{verbatim}
 ## $proj1
-## IGRAPH 6319c83 UNW- 3 2 -- 
+## IGRAPH 09a01fb UNW- 3 2 -- 
 ## + attr: name (v/c), weight (e/n)
-## + edges from 6319c83 (vertex names):
+## + edges from 09a01fb (vertex names):
 ## [1] Group1--Group2 Group1--Group3
 ## 
 ## $proj2
-## IGRAPH 6319c83 UNW- 5 7 -- 
+## IGRAPH 09a01fb UNW- 5 7 -- 
 ## + attr: name (v/c), weight (e/n)
-## + edges from 6319c83 (vertex names):
+## + edges from 09a01fb (vertex names):
 ## [1] Y1--Y2 Y1--Y3 Y1--Y4 Y2--Y3 Y2--Y4 Y3--Y4 Y4--Y5
 \end{verbatim}
 \begin{alltt}
@@ -4283,9 +4283,9 @@ In this section we'll cover just the basics of setting up network data and readi
 \hlstd{> }\hlstd{swn} \hlcom{# UN-B ; 32 89}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH 640eb16 U--B 31 81 -- 
+## IGRAPH 0a7ece8 U--B 31 81 -- 
 ## + attr: type (v/l)
-## + edges from 640eb16:
+## + edges from 0a7ece8:
 ##  [1]  1--18  1--19  1--20  1--22  1--23  1--24  1--25  2--19  2--20  2--21
 ## [11]  2--22  2--23  2--24  2--25  2--26  3--18  3--20  3--21  3--22  3--23
 ## [21]  3--24  3--25  4--20  4--21  4--22  4--24  5--20  5--22  5--23  5--25
@@ -4593,7 +4593,7 @@ In this section we'll cover just the basics of setting up network data and readi
 \hlstd{> }\hlkwd{summary}\hlstd{(dixon)}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH 64a013f D--- 248 1197 -- 
+## IGRAPH 0b191f4 D--- 248 1197 -- 
 ## + attr: title (g/c), grade (v/n), na (v/l), race (v/c), scode (v/n),
 ## | sex (v/n), vertex.names (v/c), na (e/l)
 \end{verbatim}
@@ -4737,7 +4737,7 @@ In this section we'll cover just the basics of setting up network data and readi
 \hlstd{> }\hlkwd{summary}\hlstd{(rand)}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH 64d7c8e D--- 248 1197 -- Erdos renyi (gnm) graph
+## IGRAPH 0b5523a D--- 248 1197 -- Erdos renyi (gnm) graph
 ## + attr: name (g/c), type (g/c), loops (g/l), m (g/n)
 \end{verbatim}
 \begin{alltt}
@@ -4851,26 +4851,10 @@ Now that we have the data read in and cleaned (mostly tracking the id numbers), 
 \begin{alltt}
 \hlstd{> }\hlcom{# Stack one edge list on top of the other:}
 \hlstd{> }\hlstd{edge.list} \hlkwb{<-} \hlkwd{rbind}\hlstd{(el, el2)}
-\hlstd{> }\hlkwd{head}\hlstd{(edge.list)}
-\end{alltt}
-\begin{verbatim}
-##      auth1                 auth2          
-## [1,] "ProbablyaNerd"       "AutoModerator"
-## [2,] "panick21"            "dandelusional"
-## [3,] "wellmanicuredman"    "abbamouse"    
-## [4,] "timeimmemorial"      "dewarr"       
-## [5,] "yodatsracist"        "dewarr"       
-## [6,] "North_London_Gunner" "obamanisha"
-\end{verbatim}
-\begin{alltt}
+\hlstd{> }
 \hlstd{> }\hlstd{graph.object} \hlkwb{<-} \hlkwd{graph_from_edgelist}\hlstd{(edge.list)}
 \hlstd{> }\hlkwd{summary}\hlstd{(graph.object)} \hlcom{# Basic statistics seem okay}
-\end{alltt}
-\begin{verbatim}
-## IGRAPH 6640d85 DN-- 610 1043 -- 
-## + attr: name (v/c)
-\end{verbatim}
-\begin{alltt}
+\hlstd{> }
 \hlstd{> }\hlcom{# Grabbing the largest component:}
 \hlstd{> }\hlstd{giant.component} \hlkwb{<-} \hlkwa{function}\hlstd{(}\hlkwc{graph}\hlstd{) \{}
 \hlstd{+ }     \hlstd{cl} \hlkwb{<-} \hlkwd{clusters}\hlstd{(graph)}
@@ -4902,10 +4886,6 @@ Now that we have the data read in and cleaned (mostly tracking the id numbers), 
 \hlstd{+ }            \hlkwc{edge.width}\hlstd{=}\hlnum{1.5}\hlstd{)}
 \hlstd{> }\hlkwd{title}\hlstd{(}\hlstr{"\textbackslash{}n Largest Component"}\hlstd{,}
 \hlstd{+ }      \hlkwc{cex.main}\hlstd{=}\hlnum{1}\hlstd{,} \hlkwc{col.main}\hlstd{=}\hlstr{"gray10"}\hlstd{)}
-\end{alltt}
-\end{kframe}
-\includegraphics[width=6in]{figure/starting-1} 
-\begin{kframe}\begin{alltt}
 \hlstd{> }\hlkwd{par}\hlstd{(}\hlkwc{mfrow}\hlstd{=}\hlkwd{c}\hlstd{(}\hlnum{1}\hlstd{,}\hlnum{1}\hlstd{))}
 \end{alltt}
 \end{kframe}
@@ -4919,55 +4899,21 @@ We can examine some measures of centrality from this network (using the full net
 \definecolor{shadecolor}{rgb}{0.165, 0.169, 0.184}\color{fgcolor}\begin{kframe}
 \begin{alltt}
 \hlstd{> }\hlcom{# For this assignment, we are only interested in large component:}
-\hlstd{> }\hlstd{graph.object} \hlkwb{<-} \hlstd{l.graph.object}
-\hlstd{> }
+\hlstd{> }\hlstd{l_graph.object} \hlkwb{<-} \hlkwd{as_edgelist}\hlstd{(l.graph.object)}
 \hlstd{> }\hlcom{# --}
-\hlstd{> }\hlstd{degree} \hlkwb{<-} \hlkwd{degree}\hlstd{(graph.object)}
-\end{alltt}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in FUN(X[[i]], ...): as.edgelist.sna input must be an adjacency matrix/array, edgelist matrix, network, or sparse matrix, or list thereof.}}\begin{alltt}
-\hlstd{> }\hlstd{in.degree} \hlkwb{<-} \hlkwd{degree}\hlstd{(graph.object,} \hlkwc{mode}\hlstd{=}\hlstr{'in'}\hlstd{)}
-\end{alltt}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in degree(graph.object, mode = "{}in"{}): unused argument (mode = "{}in"{})}}\begin{alltt}
-\hlstd{> }\hlstd{out.degree} \hlkwb{<-} \hlkwd{degree}\hlstd{(graph.object,} \hlkwc{mode}\hlstd{=}\hlstr{'out'}\hlstd{)}
-\end{alltt}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in degree(graph.object, mode = "{}out"{}): unused argument (mode = "{}out"{})}}\begin{alltt}
+\hlstd{> }\hlstd{degree} \hlkwb{<-} \hlkwd{degree}\hlstd{(l.graph.object)}
+\hlstd{> }\hlstd{in.degree} \hlkwb{<-} \hlkwd{degree}\hlstd{(l.graph.object,} \hlkwc{mode} \hlstd{=} \hlstr{'in'}\hlstd{)}
+\hlstd{> }\hlstd{out.degree} \hlkwb{<-} \hlkwd{degree}\hlstd{(l.graph.object,} \hlkwc{mode} \hlstd{=} \hlstr{'out'}\hlstd{)}
+\hlstd{> }
 \hlstd{> }\hlcom{# Summary Statistics:}
 \hlstd{> }\hlkwd{summary}\hlstd{(out.degree)}
-\end{alltt}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in h(simpleError(msg, call)): error in evaluating the argument 'object' in selecting a method for function 'summary': object 'out.degree' not found}}\begin{alltt}
 \hlstd{> }\hlkwd{summary}\hlstd{(in.degree)}
-\end{alltt}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in h(simpleError(msg, call)): error in evaluating the argument 'object' in selecting a method for function 'summary': object 'in.degree' not found}}\begin{alltt}
 \hlstd{> }\hlkwd{summary}\hlstd{(degree)}
-\end{alltt}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in object[[i]]: object of type 'closure' is not subsettable}}\begin{alltt}
+\hlstd{> }
 \hlstd{> }\hlkwd{sd}\hlstd{(out.degree)}
-\end{alltt}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in is.data.frame(x): object 'out.degree' not found}}\begin{alltt}
 \hlstd{> }\hlkwd{sd}\hlstd{(in.degree)}
-\end{alltt}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in is.data.frame(x): object 'in.degree' not found}}\begin{alltt}
 \hlstd{> }\hlkwd{sd}\hlstd{(degree)}
-\end{alltt}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in as.double(x): cannot coerce type 'closure' to vector of type 'double'}}\begin{alltt}
+\hlstd{> }
 \hlstd{> }\hlcom{# Grammar of Graphics:}
 \hlstd{> }\hlkwd{library}\hlstd{(ggplot2)}
 \hlstd{> }\hlkwd{library}\hlstd{(gridExtra)}
@@ -4979,20 +4925,14 @@ We can examine some measures of centrality from this network (using the full net
 \hlstd{+ }     \hlkwd{ylab}\hlstd{(}\hlstr{"N"}\hlstd{)}\hlopt{+}
 \hlstd{+ }     \hlkwd{geom_vline}\hlstd{(}\hlkwc{xintercept}\hlstd{=}\hlnum{1.859}\hlstd{,} \hlkwc{linetype}\hlstd{=}\hlstr{"dashed"}\hlstd{)}\hlopt{+}
 \hlstd{+ }     \hlkwd{annotate}\hlstd{(}\hlstr{"text"}\hlstd{,} \hlkwc{x} \hlstd{=} \hlnum{50}\hlstd{,} \hlkwc{y} \hlstd{=} \hlnum{400}\hlstd{,} \hlkwc{label} \hlstd{=} \hlstr{"sd = 3.30"}\hlstd{)}
-\end{alltt}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in eval\_tidy(mapping\$x, data, caller\_env): object 'out.degree' not found}}\begin{alltt}
+\hlstd{> }
 \hlstd{> }\hlstd{p2} \hlkwb{<-} \hlkwd{qplot}\hlstd{(in.degree)}\hlopt{+}
 \hlstd{+ }     \hlkwd{theme_bw}\hlstd{()}\hlopt{+}
 \hlstd{+ }     \hlkwd{xlab}\hlstd{(}\hlstr{"Inward Degree"}\hlstd{)}\hlopt{+}
 \hlstd{+ }     \hlkwd{ylab}\hlstd{(}\hlstr{"N"}\hlstd{)}\hlopt{+}
 \hlstd{+ }     \hlkwd{geom_vline}\hlstd{(}\hlkwc{xintercept}\hlstd{=}\hlnum{1.859}\hlstd{,} \hlkwc{linetype}\hlstd{=}\hlstr{"dashed"}\hlstd{)}\hlopt{+}
 \hlstd{+ }     \hlkwd{annotate}\hlstd{(}\hlstr{"text"}\hlstd{,} \hlkwc{x} \hlstd{=} \hlnum{16}\hlstd{,} \hlkwc{y} \hlstd{=} \hlnum{213}\hlstd{,} \hlkwc{label} \hlstd{=} \hlstr{"sd = 2.23"}\hlstd{)}
-\end{alltt}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in eval\_tidy(mapping\$x, data, caller\_env): object 'in.degree' not found}}\begin{alltt}
+\hlstd{> }
 \hlstd{> }\hlstd{p3} \hlkwb{<-} \hlkwd{qplot}\hlstd{(degree)}\hlopt{+}
 \hlstd{+ }     \hlkwd{theme_bw}\hlstd{()}\hlopt{+}
 \hlstd{+ }     \hlkwd{xlab}\hlstd{(}\hlstr{"Degree"}\hlstd{)}\hlopt{+}
@@ -5018,9 +4958,7 @@ We can examine some measures of centrality from this network (using the full net
 \hlstd{+ }     \hlstd{)}
 \hlstd{+ }\hlstd{)}
 \end{alltt}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: Aesthetics must be valid data columns. Problematic aesthetic(s): x = degree. \\\#\# Did you mistype the name of a data column or forget to add after\_stat()?}}\end{kframe}
+\end{kframe}
 \end{knitrout}
 \end{center}
 
@@ -5035,82 +4973,31 @@ The next part was difficult, and probably could be done better. I looked at a li
 \hlstd{> }
 \hlstd{> }\hlcom{## closeness centrality}
 \hlstd{> }\hlstd{c.graph.object} \hlkwb{<-} \hlkwd{closeness}\hlstd{(graph.object)}
-\end{alltt}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in FUN(X[[i]], ...): as.edgelist.sna input must be an adjacency matrix/array, edgelist matrix, network, or sparse matrix, or list thereof.}}\begin{alltt}
 \hlstd{> }\hlkwd{summary}\hlstd{(c.graph.object)}
-\end{alltt}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in h(simpleError(msg, call)): error in evaluating the argument 'object' in selecting a method for function 'summary': object 'c.graph.object' not found}}\begin{alltt}
 \hlstd{> }\hlkwd{E}\hlstd{(graph.object)[}\hlkwd{order}\hlstd{(c.graph.object,} \hlkwc{decreasing}\hlstd{=T)[}\hlnum{1}\hlopt{:}\hlnum{10}\hlstd{]]}
-\end{alltt}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in order(c.graph.object, decreasing = T): object 'c.graph.object' not found}}\begin{alltt}
+\hlstd{> }
 \hlstd{> }\hlstd{c.lg.graph.object} \hlkwb{<-} \hlkwd{closeness}\hlstd{(lg_graph.object)}
-\end{alltt}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in FUN(X[[i]], ...): as.edgelist.sna input must be an adjacency matrix/array, edgelist matrix, network, or sparse matrix, or list thereof.}}\begin{alltt}
 \hlstd{> }\hlkwd{E}\hlstd{(graph.object)[}\hlkwd{order}\hlstd{(c.lg.graph.object,} \hlkwc{decreasing}\hlstd{=T)[}\hlnum{1}\hlopt{:}\hlnum{10}\hlstd{]]}
-\end{alltt}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in order(c.lg.graph.object, decreasing = T): object 'c.lg.graph.object' not found}}\begin{alltt}
+\hlstd{> }
+\hlstd{> }
 \hlstd{> }\hlcom{## betweenness centrality}
 \hlstd{> }\hlstd{b.graph.object} \hlkwb{<-} \hlkwd{betweenness}\hlstd{(graph.object)}
-\end{alltt}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in FUN(X[[i]], ...): as.edgelist.sna input must be an adjacency matrix/array, edgelist matrix, network, or sparse matrix, or list thereof.}}\begin{alltt}
 \hlstd{> }\hlkwd{summary}\hlstd{(b.graph.object)}
-\end{alltt}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in h(simpleError(msg, call)): error in evaluating the argument 'object' in selecting a method for function 'summary': object 'b.graph.object' not found}}\begin{alltt}
 \hlstd{> }\hlkwd{E}\hlstd{(graph.object)[}\hlkwd{order}\hlstd{(b.graph.object,} \hlkwc{decreasing}\hlstd{=T)[}\hlnum{1}\hlopt{:}\hlnum{10}\hlstd{]]}
-\end{alltt}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in order(b.graph.object, decreasing = T): object 'b.graph.object' not found}}\begin{alltt}
+\hlstd{> }
 \hlstd{> }\hlstd{b.lg.graph.object} \hlkwb{<-} \hlkwd{betweenness}\hlstd{(lg_graph.object)}
-\end{alltt}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in FUN(X[[i]], ...): as.edgelist.sna input must be an adjacency matrix/array, edgelist matrix, network, or sparse matrix, or list thereof.}}\begin{alltt}
 \hlstd{> }\hlkwd{E}\hlstd{(graph.object)[}\hlkwd{order}\hlstd{(b.lg.graph.object,} \hlkwc{decreasing}\hlstd{=T)[}\hlnum{1}\hlopt{:}\hlnum{10}\hlstd{]]}
-\end{alltt}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in order(b.lg.graph.object, decreasing = T): object 'b.lg.graph.object' not found}}\begin{alltt}
+\hlstd{> }
+\hlstd{> }
 \hlstd{> }\hlcom{## eigenvector centrality}
 \hlstd{> }\hlstd{e.graph.object} \hlkwb{<-} \hlkwd{evcent}\hlstd{(graph.object)}
-\end{alltt}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in FUN(X[[i]], ...): as.edgelist.sna input must be an adjacency matrix/array, edgelist matrix, network, or sparse matrix, or list thereof.}}\begin{alltt}
 \hlstd{> }\hlkwd{summary}\hlstd{(e.graph.object}\hlopt{$}\hlstd{vector)}
-\end{alltt}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in h(simpleError(msg, call)): error in evaluating the argument 'object' in selecting a method for function 'summary': object 'e.graph.object' not found}}\begin{alltt}
 \hlstd{> }\hlkwd{E}\hlstd{(graph.object)[}\hlkwd{order}\hlstd{(e.graph.object}\hlopt{$}\hlstd{vector,} \hlkwc{decreasing}\hlstd{=T)[}\hlnum{1}\hlopt{:}\hlnum{10}\hlstd{]]}
-\end{alltt}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in order(e.graph.object\$vector, decreasing = T): object 'e.graph.object' not found}}\begin{alltt}
+\hlstd{> }
 \hlstd{> }\hlstd{evc_lg_graph.object} \hlkwb{<-} \hlkwd{evcent}\hlstd{(lg_graph.object)}
-\end{alltt}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in FUN(X[[i]], ...): as.edgelist.sna input must be an adjacency matrix/array, edgelist matrix, network, or sparse matrix, or list thereof.}}\begin{alltt}
 \hlstd{> }\hlkwd{E}\hlstd{(graph.object)[}\hlkwd{order}\hlstd{(evc_lg_graph.object}\hlopt{$}\hlstd{vector,} \hlkwc{decreasing}\hlstd{=T)[}\hlnum{1}\hlopt{:}\hlnum{10}\hlstd{]]}
 \end{alltt}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in order(evc\_lg\_graph.object\$vector, decreasing = T): object 'evc\_lg\_graph.object' not found}}\end{kframe}
+\end{kframe}
 \end{knitrout}
 
 
@@ -5122,65 +5009,28 @@ At least from above we know where to start looking for central nodes within our 
 \begin{alltt}
 \hlstd{> }\hlcom{# Let's whip-up a matrix of just our values, look at the correlation between them.}
 \hlstd{> }\hlstd{vec.degree} \hlkwb{<-} \hlkwd{as.vector}\hlstd{(degree)}
-\end{alltt}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in as.vector(x, mode): cannot coerce type 'closure' to vector of type 'any'}}\begin{alltt}
 \hlstd{> }\hlstd{vec.in.degree} \hlkwb{<-} \hlkwd{as.vector}\hlstd{(in.degree)}
-\end{alltt}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in as.vector(in.degree): object 'in.degree' not found}}\begin{alltt}
 \hlstd{> }\hlstd{vec.out.degree} \hlkwb{<-} \hlkwd{as.vector}\hlstd{(out.degree)}
-\end{alltt}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in as.vector(out.degree): object 'out.degree' not found}}\begin{alltt}
 \hlstd{> }\hlstd{vec.c.graph.object} \hlkwb{<-} \hlkwd{as.vector}\hlstd{(c.graph.object)}
-\end{alltt}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in as.vector(c.graph.object): object 'c.graph.object' not found}}\begin{alltt}
 \hlstd{> }\hlstd{vec.b.graph.object} \hlkwb{<-} \hlkwd{as.vector}\hlstd{(b.graph.object)}
-\end{alltt}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in as.vector(b.graph.object): object 'b.graph.object' not found}}\begin{alltt}
 \hlstd{> }\hlstd{vec.e.graph.object} \hlkwb{<-} \hlkwd{as.vector}\hlstd{(e.graph.object}\hlopt{$}\hlstd{vector)}
-\end{alltt}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in as.vector(e.graph.object\$vector): object 'e.graph.object' not found}}\begin{alltt}
+\hlstd{> }
+\hlstd{> }
 \hlstd{> }\hlstd{Cor.Object} \hlkwb{<-} \hlkwd{matrix}\hlstd{(}\hlkwd{c}\hlstd{(vec.degree, vec.in.degree, vec.out.degree,}
 \hlstd{+ }                       \hlstd{vec.c.graph.object, vec.b.graph.object, vec.e.graph.object),}
 \hlstd{+ }                      \hlkwc{ncol}\hlstd{=}\hlnum{6}\hlstd{)}
-\end{alltt}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in matrix(c(vec.degree, vec.in.degree, vec.out.degree, vec.c.graph.object, : object 'vec.degree' not found}}\begin{alltt}
+\hlstd{> }
 \hlstd{> }\hlkwd{colnames}\hlstd{(Cor.Object)} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlstr{"Degree"}\hlstd{,} \hlstr{"In Degree"}\hlstd{,} \hlstr{"Out Degree"}\hlstd{,}
 \hlstd{+ }                         \hlstr{"Closeness"}\hlstd{,} \hlstr{"Betweeness"}\hlstd{,} \hlstr{"Eigenvector"}\hlstd{)}
-\end{alltt}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in colnames(Cor.Object) <- c("{}Degree"{}, "{}In Degree"{}, "{}Out Degree"{}, : object 'Cor.Object' not found}}\begin{alltt}
+\hlstd{> }
 \hlstd{> }\hlkwd{cor}\hlstd{(Cor.Object)}
-\end{alltt}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in is.data.frame(x): object 'Cor.Object' not found}}\begin{alltt}
+\hlstd{> }
 \hlstd{> }\hlcom{# Trying to think of cool ways to plot this:}
 \hlstd{> }\hlkwd{library}\hlstd{(corrplot)}
 \hlstd{> }\hlstd{x} \hlkwb{<-} \hlkwd{cor}\hlstd{(Cor.Object)}
-\end{alltt}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in is.data.frame(x): object 'Cor.Object' not found}}\begin{alltt}
 \hlstd{> }\hlkwd{corrplot}\hlstd{(x,} \hlkwc{type}\hlstd{=}\hlstr{"upper"}\hlstd{,} \hlkwc{order}\hlstd{=}\hlstr{"hclust"}\hlstd{)}
 \end{alltt}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in corrplot(x, type = "{}upper"{}, order = "{}hclust"{}): Need a matrix or data frame!}}\end{kframe}
+\end{kframe}
 \end{knitrout}
 \end{center}
 
@@ -5204,7 +5054,7 @@ In this I will be using the Reddit data from "r/AskSocialScientists" from Octobe
 \hlstd{> }\hlkwd{summary}\hlstd{(g1)} \hlcom{#}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH 684b103 DN-- 339 521 -- 
+## IGRAPH 0cf9304 DN-- 339 521 -- 
 ## + attr: name (v/c)
 \end{verbatim}
 \begin{alltt}
@@ -5214,7 +5064,7 @@ In this I will be using the Reddit data from "r/AskSocialScientists" from Octobe
 \hlstd{> }\hlkwd{summary}\hlstd{(g12)} \hlcom{#}
 \end{alltt}
 \begin{verbatim}
-## IGRAPH 684bbe8 DN-- 327 522 -- 
+## IGRAPH 0cf9dfa DN-- 327 522 -- 
 ## + attr: name (v/c)
 \end{verbatim}
 \end{kframe}
@@ -5336,40 +5186,6 @@ This is, of course, not the only information we can gain from a network. Below i
 
 
 {\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in eval\_tidy(mapping\$x, data, caller\_env): object 'Degree' not found}}\end{kframe}
-\end{knitrout}
-\end{center}
-
-We might be interested in the same network statistic but reported with the help of feline friends. Certainly journals today would not accept this, but perhaps they will someday when the job market slows down. Below is a ``CatterPlot'' of the degrees in our network, cats are in two colors to better show distinction. Note the clowder of cats in the lower-degree levels and the one cat in the top left being the most ``social'' in our Reddit data. One advantage to a plot like this could be how it attracts the reader and adds a element of humor; however, the plot could be easily distracting and obnoxious to use almost anywhere. \index{ggplot}
-
-\begin{center}
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.165, 0.169, 0.184}\color{fgcolor}\begin{kframe}
-\begin{alltt}
-\hlstd{> }\hlstd{Degree} \hlkwb{<-} \hlkwd{degree}\hlstd{(g2)}
-\end{alltt}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in FUN(X[[i]], ...): as.edgelist.sna input must be an adjacency matrix/array, edgelist matrix, network, or sparse matrix, or list thereof.}}\begin{alltt}
-\hlstd{> }\hlstd{x} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlnum{1}\hlopt{:}\hlnum{231}\hlstd{)}
-\hlstd{> }
-\hlstd{> }\hlcom{## Creating a catterplot:}
-\hlstd{> }\hlcom{# library(devtools)}
-\hlstd{> }\hlcom{# install_github("Gibbsdavidl/CatterPlots")}
-\hlstd{> }\hlkwd{library}\hlstd{(CatterPlots)}
-\end{alltt}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in library(CatterPlots): there is no package called 'CatterPlots'}}\begin{alltt}
-\hlstd{> }\hlstd{meow} \hlkwb{<-} \hlkwd{multicat}\hlstd{(}\hlkwc{xs}\hlstd{=x, Degree,}
-\hlstd{+ }                 \hlkwc{cat}\hlstd{=}\hlkwd{c}\hlstd{(}\hlnum{1}\hlstd{,}\hlnum{2}\hlstd{,}\hlnum{3}\hlstd{,}\hlnum{4}\hlstd{,}\hlnum{5}\hlstd{,}\hlnum{6}\hlstd{,}\hlnum{7}\hlstd{,}\hlnum{8}\hlstd{,}\hlnum{9}\hlstd{,}\hlnum{10}\hlstd{),}
-\hlstd{+ }                 \hlkwc{catcolor}\hlstd{=}\hlkwd{list}\hlstd{(}\hlstr{'#0495EE'}\hlstd{,} \hlstr{'#FF0000'}\hlstd{),}
-\hlstd{+ }                 \hlkwc{canvas}\hlstd{=}\hlkwd{c}\hlstd{(}\hlopt{-}\hlnum{0.1}\hlstd{,}\hlnum{1.1}\hlstd{,} \hlopt{-}\hlnum{0.1}\hlstd{,} \hlnum{1.1}\hlstd{),}
-\hlstd{+ }                 \hlkwc{xlab}\hlstd{=}\hlstr{"Index"}\hlstd{,} \hlkwc{ylab}\hlstd{=}\hlstr{"Degree Per Node (Cat) in Network"}\hlstd{,}
-\hlstd{+ }                 \hlkwc{main}\hlstd{=}\hlstr{"A Catterplot of Network Degrees"}\hlstd{)}
-\end{alltt}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in multicat(xs = x, Degree, cat = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10), : could not find function "{}multicat"{}}}\end{kframe}
 \end{knitrout}
 \end{center}
 

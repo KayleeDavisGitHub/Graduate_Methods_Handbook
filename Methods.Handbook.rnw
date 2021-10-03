@@ -3950,10 +3950,9 @@ el2 <- as.matrix(el2)
 Now that we have the data read in and cleaned (mostly tracking the id numbers), I'll combine the two months and plot the network object that we'll be using for the rest of this section.
 
 \begin{center}
-<<starting, warning=FALSE, message=FALSE, prompt=TRUE, out.width='6in'>>=
+<<starting, warning=FALSE, message=FALSE, prompt=TRUE, out.width='6in', eval=FALSE>>=
 # Stack one edge list on top of the other:
 edge.list <- rbind(el, el2)
-head(edge.list)
 
 graph.object <- graph_from_edgelist(edge.list)
 summary(graph.object) # Basic statistics seem okay
@@ -3997,14 +3996,13 @@ par(mfrow=c(1,1))
 We can examine some measures of centrality from this network (using the full network instead of largest component). I'll calculate the degree, the inward degree, and outward degree. Then, I find the summary statistics and plot all of these in one concise plot.
 
 \begin{center}
-<<degree, warning=FALSE, message=FALSE, prompt=TRUE, out.width='6in'>>=
+<<degree, warning=FALSE, message=FALSE, prompt=TRUE, out.width='6in', eval=FALSE>>=
 # For this assignment, we are only interested in large component:
-graph.object <- l.graph.object
-
+l_graph.object <- as_edgelist(l.graph.object)
 # --
-degree <- degree(graph.object)
-in.degree <- degree(graph.object, mode='in')
-out.degree <- degree(graph.object, mode='out')
+degree <- degree(l.graph.object)
+in.degree <- degree(l.graph.object, mode = 'in')
+out.degree <- degree(l.graph.object, mode = 'out')
 
 # Summary Statistics:
 summary(out.degree)
@@ -4065,7 +4063,7 @@ grid.arrange(
 
 The next part was difficult, and probably could be done better. I looked at a list of the ordered centrality measures, then created an edge-graph and looked at those lists similarly. We can see from the lists that some names pop up more often then others (MoralMidgetry, apaniyam, Atriox998), but there has to be some code to get the ``max'' or to highlight those with the largest degree more clearly. How might we code that? \index{ggplot}
 
-<<listsgalor, warning=FALSE, message=FALSE, prompt=TRUE>>=
+<<listsgalor, warning=FALSE, message=FALSE, prompt=TRUE, eval=FALSE>>=
 
 ### Centrality measures:
 lg_graph.object <- line.graph(graph.object)
@@ -4103,7 +4101,7 @@ E(graph.object)[order(evc_lg_graph.object$vector, decreasing=T)[1:10]]
 At least from above we know where to start looking for central nodes within our data. Following this, I compare each measure of centrality by generating a matrix of correlation values, then plot it.
 
 \begin{center}
-<<comp, message=FALSE, warning=FALSE, out.width='6in', prompt=TRUE>>=
+<<comp, message=FALSE, warning=FALSE, out.width='6in', prompt=TRUE, eval=FALSE>>=
 
 # Let's whip-up a matrix of just our values, look at the correlation between them.
 vec.degree <- as.vector(degree)
@@ -4249,27 +4247,6 @@ qplot(Degree)+
      geom_vline(xintercept=mean(Degree), linetype="dashed")+
      annotate("text", x = 4.3, y = 71, label = round(mean(Degree),3), angle=-90)
 
-@
-\end{center}
-
-We might be interested in the same network statistic but reported with the help of feline friends. Certainly journals today would not accept this, but perhaps they will someday when the job market slows down. Below is a ``CatterPlot'' of the degrees in our network, cats are in two colors to better show distinction. Note the clowder of cats in the lower-degree levels and the one cat in the top left being the most ``social'' in our Reddit data. One advantage to a plot like this could be how it attracts the reader and adds a element of humor; however, the plot could be easily distracting and obnoxious to use almost anywhere. \index{ggplot}
-
-\begin{center}
-<<what, prompt=TRUE, warning=FALSE, message=FALSE, out.width='5in'>>=
-Degree <- degree(g2)
-x <- c(1:231)
-
-## Creating a catterplot:
-# library(devtools)
-# install_github("Gibbsdavidl/CatterPlots")
-library(CatterPlots)
-
-meow <- multicat(xs=x, Degree,
-                 cat=c(1,2,3,4,5,6,7,8,9,10),
-                 catcolor=list('#0495EE', '#FF0000'),
-                 canvas=c(-0.1,1.1, -0.1, 1.1),
-                 xlab="Index", ylab="Degree Per Node (Cat) in Network",
-                 main="A Catterplot of Network Degrees")
 @
 \end{center}
 
