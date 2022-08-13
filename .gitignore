@@ -9,8 +9,6 @@ Methods.Handbook.log
 Methods.Handbook.synctex.gz
 Methods.Handbook.toc
 Methods.Handbook-concordance.tex
-figure/
-figure/~
 Methods.Handbook.ilg
 ptree.bal.ps
 MLEex.png
@@ -19,4 +17,3 @@ Surv.png
 SurvR.jpg
 testingcodeGLM.r
 branchingCarlo.r
-figure/
