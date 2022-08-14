@@ -129,9 +129,9 @@ Code in this document will appear as follows:
 << setup, include=TRUE, cache=FALSE, echo=FALSE>>=
 # Code Setup/ and Formatting:
 library(knitr)
-## This code is for figures, which may be similarly customized output visualizations:
-## See https://github.com/yihui/knitr/blob/master/inst/examples/knitr-themes.Rnw  for more
-## and https://github.com/yihui/knitr/blob/master/inst/misc/Sweavel.sty to fix arrow <_ issue vs <-
+## This code is for figures, which may be similarly customized output
+## https://github.com/yihui/knitr/blob/master/inst/examples/knitr-themes.Rnw
+## https://github.com/yihui/knitr/blob/master/inst/misc/Sweavel.sty
 options(formatR.arrow=TRUE, width=78)
 
 ##! Changing out Theme to "kellys"
@@ -1994,19 +1994,16 @@ The above table is the coefficients and standard errors for two models (and an e
 In interpretation, The exponential model assumes the scale parameter to be uniform for our hazard model (uniform at 1). This, in a basic sign-and-significance interpretation yields negative relationships for investiture policy and polarization which are both significant but weakly influential. The Weibull model gives us the actual scale parameter (.884) and similar results although slightly weaker when accounting for distributional changes additionally the interpretation changes via in absolute value terms from the exponential to the Weibull model. The Cox model assumes that the two strata within the survival curves will be proportional to each other, which could be an easy assumption to fulfill in some theory. Finally, the exponentiation of the Cox model can be read similarly to the Poisson model and is just a measure \textit{of the effect of the hazard rate}, which again is the risk of failure given that the participant has survived up to a specific time. The Cox model output here does not include our strata (investiture).\footnote{\texttt{coxph(Surv(duration, ciep12) $\sim$ strata(invest) + polar + crisis, data = dat,\\
  method = "efron")}}
 
-
 \begin{center}
 \textbf{Figure 1: Exponential Survival Model of Legislative Investiture}
 \includegraphics[scale=.65]{Surv}
 \end{center}
-
 
 \clearpage
 \begin{center}
 \textbf{Figure 2: Cox Survival Model of Legislative Investiture}
 \includegraphics[scale=.65]{Cox}
 \end{center}
-
 
 <<survmodel, prompt=TRUE, eval=FALSE>>=
 #Survival GGplot Example (not used to replicate above, code as template)
@@ -2034,7 +2031,6 @@ ggsurvplot(fit, data = dataset,
               )
 @
 
-
 \newpage
 
 Survival modeling is a variation of the generalized linear model which accounts for predicted probabilities as a phenomenon or actual actor dies in the course of study. Each depression in the figures is the instance of death in the dependent variable. Exponential modeling holds the hazard as uniform (1) giving us an interpretation of the predicted chance of dying. Weibell, in contrary, is the predicted probability of living and does not make an assumption on the scale parameter and reports this hazard parameter to the researcher (resulting in a loss of one degree of freedom).\footnote{Recall that this is very similar to the scale/variance problem we occurred in Poisson regression. Similarities are very similar here as well, and the math is similar in this respect too.} Confidence intervals for both Figure 1 and 2 are set at 95\% and the number at risk are the remaining participants in the study at each time location. The dotted lines report the median of the data for each strata (Investiture). Finally, given the Kaplan-Meier modeling here each depression is robust in that it controls for a multiple-drop off scenario to where $1/n$ can be calculated. For example, if three people were to die off at the same time point a $1/10, 1/9, 1/8$ would be calculated instead of all three at the same functional moment. The number remaining at risk is shown descriptively below each figure. \\
@@ -2042,7 +2038,6 @@ Survival modeling is a variation of the generalized linear model which accounts 
 Interpretation of the actual coefficients is very similar to Poisson modeling given that our general linear model is following similar distribution as the Poisson (non-negative). Yet, the Poisson uses count-integer level data whereas survival modeling can use continuous data. Because of the similarities, the beta coefficient reported is similar, it is the multiplicative effect holding all else constant of a one unit increase in $X$ onto $Y$. \\
 
 I have been able to plot both of these together in base-R; but I don't like how it looks compared to \texttt{ggplot}. \\
-
 
 \begin{center}
 \textbf{Figure 3: Survival Models of Legislative Investiture in Base R}
@@ -2059,9 +2054,6 @@ Perhaps as an additional note, a unique problem to survival modelings is the iss
 
 \noindent \textit{iid:} \\
 The GLM nature of the survival model does not give it a free pass on the independent and individually distributed (iid) assumption. In fact, much of the time in dealing with survival-type theories (bill-survival, authoritarian regimes, cancer patients) we deal with responses that are not independent of one-another. A doctor seeing cancer patients, for example, may see twenty patients and as they become fully treated or pass away he may have more time to distribute to other patients. These patients may even meet and have group-therapy among themselves (just as bills may co-vary and authoritarians interlock in strategy)! Further methodology (networks for instance) can help circumvent these concerns.
-
-
-
 
 
 
@@ -2111,23 +2103,18 @@ object <- glm.nb(formula)
 
 For interpretation, it is best to exponentiate the coefficients ($e^\beta$) to receive the multiplicative change exerted from each variable (keeping in mind significance). Tables can be created that show readers these effects (pg. 18-19).
 
-
 \hfill \\
 \noindent \textbf{Ordinal Regression:}\\
 Ordinal data requires the interpretation of cut points ($k$) within our regression and is interpreted similarly to logistic regression. Ordinal data between cut points can be thought of as a series of logistic regressions between cut points.
-
 
 <<ord, eval=FALSE, prompt=TRUE>>=
 # Ordinal Regression
 object <- polr(formula)
 @
 
-
 It is important to make note of the ordinal categories, one category is omitted as a reference category within regression and the information received is in refference to the omitted category. Inverse logit subtraction can yield predictive probabilities: $logit^{-1}(\theta_{k+1}) - logit^{-1}(\theta_k) $ these latent space estimates are important to note as, when controlling for all else, the relative change between ordinal responses (feeling ``okay'' to feeling ``great'' for example).
 
 \hfill \\
-
-
 
 
 \noindent \textbf{Multinomial Nominal Modeling:}
@@ -2136,7 +2123,6 @@ It is important to make note of the ordinal categories, one category is omitted 
 library(nnet)
 object <- multinom(formula)
 @
-
 
 Multinomial modeling includes data that is non-ordered, for example religious identity. Mathematically the link function (considering all probabilities for each category need add up to one) is very similar to the logistic link.
 
@@ -2159,15 +2145,9 @@ weibullmod <- survreg(Surv(te, censor) ~ wc + dem + pvote + south,
                   data = dat, dist = "weibull")
 @
 
-
-
 In interpretation of these models' output, we should consider it similar to the Poisson modeling: the multiplicative effect, holding all else constant, of a one unit increase in X onto Y. Although predictive probability plots are (again) superior to present these results.
 
 Mapping graphs as shown in full in Section 7, are a intuitive and attractive way to communicate results to the reader. In these we separate two interesting strata and map the survival data accordingly, controlling for what we deem important with our theory. Kaplan-Meier \index{Kaplan-Meier} checks are also important because multiple ``deaths'' could occur at once and this will scale each of these instead of all at once - which is better.
-
-
-
-
 
 
 
@@ -2204,7 +2184,7 @@ x_2 <- rnorm(N, mean=5, sd=sqrt(16))
 b <- c(2, -1, 3)
 # Perfect-world errors: e~Normal(0, sig^2). set pretty low, Number=1000
 e <- rnorm(N, 0, sd=sqrt(4))
-# This vector of ones is to generate our intercept along with the "2" in our beta
+# This vector of ones is to generate our intercept along with the "2" in beta
 ones <- matrix(1, nrow=1000, ncol=1)
 X <- matrix(c(ones, x_1, x_2), nrow=N)
 # head(X)  # Checked that the Matrix comes out right, and is intuitive
@@ -2238,7 +2218,7 @@ for (i in 1:1000)
   my_data <- data.frame(x_1, x_2, y)
   m1 <- lm(y ~ x_1 + x_2)
 
-  sm1 <- summary(m1)  # summary table is used to easily locate standard errors (se)
+  sm1 <- summary(m1)  # summary table is used to easily locate standard errors
 
   simulation1[i,1] <- m1$coef[1]    # storing models first coef: Intercept
   simulation1[i,2] <- m1$coef[2]    # x_1 coef estimate
@@ -2294,36 +2274,37 @@ for (i in 1:1000)
 \begin{center}
 <<PlottingSimulationML, echo=FALSE, message=FALSE, warning=FALSE>>=
 library(ggplot2)
-#Creating each graph as an object (p) and the location I wish
+# Creating each graph as an object (p) and the location I wish
 #  the multiplot function to place them at. (there are better ways to do this,
-#    I just learned those ways a year later) See additional GGplot content in Networks section.
+#  I just learned those ways a year later) See additional GGplot content in
+#  Networks section.
 
-#Intercept Simulation 1
+# Intercept Simulation 1
 p1 <- qplot(simulation1[,1])+
   theme_bw()+
   ggtitle(expression(paste(beta[0], " Values (Sim. 1)")))+
   xlab(expression(paste("Simulated ", beta[0])))
 
-#X_1 Simulation 1
+# X_1 Simulation 1
 p3 <- qplot(simulation1[,2])+
   theme_bw()+
   ggtitle(expression(paste( x[1], " Values (Sim. 1)")))+
   xlab(expression(paste("Simulated ", beta[1])))
 
-#X_2 Simulation 1
+# X_2 Simulation 1
 p5 <- qplot(simulation1[,3])+
   theme_bw()+
   ggtitle(expression(paste( x[2], " Values (Sim. 1)")))+
   xlab(expression(paste("Simulated ", beta[2])))
 
 
-#Intercept Simulation 2
+# Intercept Simulation 2
 p2 <- qplot(simulation2[,1])+
   theme_bw()+
   ggtitle(expression(paste(beta[0], " Values (Sim. 2)")))+
   xlab(expression(paste("Simulated ", beta[0])))
 
-#X_1 Simulation 2
+# X_1 Simulation 2
 p4 <- qplot(simulation2[,2])+
   theme_bw()+
   ggtitle(expression(paste( x[1], " Values (Sim. 2)")))+
@@ -2453,8 +2434,6 @@ for (i in 1:1000)
   simulation5[i,6] <- sm5$coef[3,2] #se x_2
 }
 
-# head(simulation5) #Check
-
 @
 
 That perhaps seemed too complicated, but I wanted to show the MASS and RLab packages for what they offer in creating simulated data. Similar to before I will plot the results:
@@ -2489,7 +2468,7 @@ predictm5 <- qplot(predict(m5))+
   theme_bw()+
   ggtitle("Pr. Values (Sim. 5)")
 
-#custom multiplot function, I rearranged some of the graph objects to arrange them better
+# Custom multiplot function,
 multiplot(p1, p2, p3, predictm5, cols=3, rows=2)
 
 @
@@ -2998,7 +2977,6 @@ Difference equations, then, are the integrate combination of these operators to 
 <<dataload, warning=FALSE, message=FALSE, echo=TRUE, include=TRUE, prompt=TRUE >>=
 # devtools::install_github("hadley/haven")
 require(haven)
-''
 df <- read_dta('C:/Users/mailk/OneDrive/Documents/R/Graduate_Methods_Handbook/data/anes_timeseries_cdf.dta')
 library(ggplot2)
 library(ggthemes)
@@ -3043,21 +3021,27 @@ year <- as.vector(year)
 
 ggplot(as.data.frame(year), aes(year)) +
      geom_line(aes(y = week), color="black", size=1.3) +
-     geom_point(aes(y= week))+
-     geom_line(aes(y= ayear), color="burlywood4", size=1.3)+
-     geom_point(aes(y= ayear), color="burlywood4")+
-     geom_line(aes(y = month), color="tomato", size=1.3)+
-     geom_point(aes(y = month), color="tomato")+
-     geom_line(aes(y = never), color="orange", size=1.3)+
-     geom_point(aes(y = never), color="orange")+
-     theme_fivethirtyeight()+
-     ggtitle("1970-2012 [VCF0130]\nReligious Attendence (%)")+
-     annotate("text", x = 1977, y = 15, label = "Once/Twice A Month", color = "tomato")+
-     annotate("text", x = 1991, y = 34.5, label = "Never", color = "orange")+
-     annotate("text", x = 1980, y = 23, label = "Every Week")+
-     annotate("text", x = 1980, y = 31, label = "Once/Twice A Year", color = "burlywood4")+
-     annotate("text", x = 1970, y = 38, label = "**", fontface =2)+
-     annotate("text", x = 1989.5, y = 22, label = "*", fontface =2)+
+     geom_point(aes(y= week)) +
+     geom_line(aes(y= ayear), color="burlywood4", size=1.3) +
+     geom_point(aes(y= ayear), color="burlywood4") +
+     geom_line(aes(y = month), color="tomato", size=1.3) +
+     geom_point(aes(y = month), color="tomato") +
+     geom_line(aes(y = never), color="orange", size=1.3) +
+     geom_point(aes(y = never), color="orange") +
+     theme_fivethirtyeight() +
+     ggtitle("1970-2012 [VCF0130]\nReligious Attendence (%)") +
+     annotate("text", x = 1977, y = 15,
+              label = "Once/Twice A Month", color = "tomato") +
+     annotate("text", x = 1991, y = 34.5,
+              label = "Never", color = "orange") +
+     annotate("text", x = 1980, y = 23,
+              label = "Every Week") +
+     annotate("text", x = 1980, y = 31,
+              label = "Once/Twice A Year", color = "burlywood4") +
+     annotate("text", x = 1970, y = 38,
+              label = "**", fontface =2) +
+     annotate("text", x = 1989.5, y = 22,
+              label = "*", fontface =2) +
      labs(caption="Source: ANES Cumulative Data File, @KyleDavisOrg
           *In 1990, filter question was added, if R indicated never attending it was included in code here
           **In 1970 'Every Week' was including 'Almost Every Week' ")
@@ -3087,7 +3071,7 @@ cons <- listcon*100
 
 # getting year total
 totalrel <- aggregate(df$VCF0130~df$VCF0004, FUN = NROW)
-totalrel <- subset(totalrel , totalrel$`df$VCF0004` >= 1972) # subset to get years to line up
+totalrel <- subset(totalrel , totalrel$`df$VCF0004` >= 1972)
 
 
 wk <- aggregate(df$VCF0130==1~df$VCF0004, FUN = sum)
@@ -3239,7 +3223,7 @@ library(igraphdata)
 # There will be some randomness, we'll set a seed to keep things consistent:
 set.seed(8675305)
 
-# Manually entering Network Data/ viewing networks -----------------------------
+# Manually entering Network Data/ viewing networks ----------------------------
 
 # Entering Edge-List data manually (works fine for now).
 # ?graph()
@@ -3318,15 +3302,15 @@ V(g2)$gender <- c("M","F","M","M","F","M","F")
 E(g2)$count <- rep(1:2,5)
 g2 <- set.vertex.attribute(g2, "age", value = c(20,26,19,34,22,30,21))
 # Because we want R to save this addition to the network, when using the
-# set.vertex.attribute() function, we have to assign this again to the graph name.
+# set.vertex.attribute() function, we have to assign this again
 
 # With this new data added, let's summarize the graph:
 summary(g2) # We see the new variables added, and how they are connected.
 
-## Larger data -----------------------------------------------------------------
+## Larger data ----------------------------------------------------------------
 
 # A classical long-standing training dataset for Network Analysis has been
-#  Zachary's Karate Club, some researchers even today test methods on this data.
+#  Zachary's Karate Club, some researchers even today test methods on this data
 
 data("karate")
 summary(karate)
@@ -3374,8 +3358,9 @@ plot(karate,
 
 
 ## Bipartide Networks: ---------------------------------------------------------
-# This is where you have the relationship between nodes be that they are connected
-#   to another party. (I published with X, and so did you, so we're connected)
+# This is where you have the relationship between nodes be that they are
+#   connected to another party.
+#   (I published with X, and so did you, so we're connected)
 
 # Seminar notes on this:
 mem <- matrix(data = c(1,1,1,1,0,
@@ -3435,7 +3420,8 @@ get.adjacency(pr$proj2, sparse = FALSE, attr = "weight")
 aff1 <- mem %*% t(mem)
 diag(aff1) <- 0
 # the diagonal doesn't really have important information for these,
-#   as it's about self-affiliation. With this command, we change those values to 0.
+#   as it's about self-affiliation. With this command,
+#   we change those values to 0.
 aff1
 ##        Group1 Group2 Group3
 ## Group1      0      2      1
@@ -3479,7 +3465,7 @@ lapply(packages, library, character.only = TRUE)
 
 ## I couldn't find the .csv... so I just took the data from the source
 # https://networkdata.ics.uci.edu/netdata/html/davis.html
-#  and hit "download" - open that r.data with Rstudio and it'll put it in your global env.
+#  and hit "download" - open that r.data with your favorite R platform
 
 library(readr)
 data <- read_csv("https://raw.githubusercontent.com/KyleDavisGithub/Graduate_Methods_Handbook/master/swi.csv")
@@ -3487,42 +3473,45 @@ data <- read_csv("https://raw.githubusercontent.com/KyleDavisGithub/Graduate_Met
 davis <- as.data.frame(data)
 
 swi <- as.matrix(davis) # Make incidence matrix - and put as igraph network
-swn <- graph.incidence(swi) # This specifically makes a bipartite igraph from a matrix.
+swn <- graph.incidence(swi) # This specifically makes a bipartite igraph
 swn # UN-B ; 32 89
 plot(swn)
 
 swpr <- bipartite.projection(swn) # This makes the graph two one-mode networks
-# What is this? - instead of just 1:1 node relationships there are two overlapping networks
-#  and the relationships we care about are between people of the other network.
-#   so now our edges are weighted, and igraph strangely calls this a nonbipartite graph? Why?
-#     Well now we don't really have one anymore! Instead we transferred the bipartide relationship
-#     To a weighted relationship using that projection function. - Weights are number of shared
-#     Event interactions. For more, check out this cool illistration:
-#   https://en.wikipedia.org/wiki/Bipartite_network_projection#/media/File:Bipartite_network_projection.png
+# What is this? - instead of just 1:1 node relationships there are two
+# overlapping networks and the relationships we care about are between people
+# of the other network. so now our edges are weighted, and igraph strangely
+# calls this a nonbipartite graph? Why? Well now we don't really have one
+# anymore! Instead we transferred the bipartide relationship To a weighted
+# relationship using that projection function. - Weights are number of shared
+# Event interactions.
 
-plot(swpr$proj2, # Note two proj's we get from that projection, via X or Y projection weights
+# Note two proj's we get from that projection, via X or Y projection weights
+plot(swpr$proj2,
      edge.width = E(swpr$proj2)$weight)
-cor(swi) # Correlation of our matrix object to see structural position relationship. -1 : 1 (weights)
+cor(swi)
+# Correlation of our matrix object to see structural position relationship.
 # Note that Flora and Oliva are structurally similar here and elsewhere
 
 
 #  Going beyond Pearson correlation to see structural similarity:
 # dissimilarity measure (-1 to cor).
-as.dist(1-cor(swi), upper=TRUE) # Upper = T just prints both sides of diag. Doesn't effect analysis
-# We want to move away from just comparing two individuals, but instead find entire clusters
-#  of attendants that exibit similar behavior. And then be able to analyze that more interesting
-#  result. But to do this, we have to find how nodes are dissimilar, so this data is more
-#  valuable to find these clusters! Note we have a wider range now because with the -1
-#  we could have a 1 - a negative -1, or 1+1 (1- -1).
+as.dist(1-cor(swi), upper=TRUE)
+# Upper = T just prints both sides of diag. Doesn't effect analysis
+# We want to move away from just comparing two individuals, but instead
+# find entire clusters of attendants that exibit similar behavior. And then be
+# able to analyze that more interesting result. But to do this, we have to
+# find how nodes are dissimilar, so this data is more valuable to find these
+# clusters! Note we have a wider range now because with the -1 we could have
+# a 1 - a negative -1, or 1+1 (1- -1).
 
 swdend <- hclust(as.dist(1-cor(swi))) # Standard clustering tool
 plot(swdend) # So how do we read this Dendrogram?
-# Height is our value, and as we parse that value down, it's grouped into values.
-#  Similar values become grouped under other values.
-#  So, read from the top down, initial separation was around the 1.0 mark, developing two
-#  clusters, which have unique values apart from one another. as more and more nodes find
-#  similarity. For more:
-#  https://www.displayr.com/what-is-dendrogram/#:~:text=How%20to%20read%20a%20dendrogram,objects%20are%20A%20and%20B.
+# Height is our value, and as we parse that value down,it's grouped into values
+# Similar values become grouped under other values.
+#  So, read from the top down, initial separation was around the 1.0 mark,
+#  developing two clusters, which have unique values apart from one another.
+#  as more and more nodes find similarity.
 
 
 # Here is a heatmap with the same viz on each axis
@@ -3531,21 +3520,22 @@ heatmap.2(as.matrix(as.dist(1-cor(swi))),
           revC=TRUE)
 
 cutree(swdend, k=2) # here we are telling R where we should cut our clusters at.
-#  THEORY and your interpretation of the data drives this decision, a dendrogram will not
-#  tell you where to cut your clusters.
+#  THEORY and your interpretation of the data drives this decision,
+#  a dendrogram will not tell you where to cut your clusters.
 
-# So we identified two groups. Let's graph each of these to show our new network:
-plot(swpr$proj2, edge.width=E(swpr$proj2)$weight, vertex.color=cutree(swdend, k=2))
+# We identified two groups. Let's graph each of these to show our new network:
+plot(swpr$proj2,
+     edge.width=E(swpr$proj2)$weight,
+     vertex.color=cutree(swdend, k=2))
 
 
 ## Let's do the same analysis for a one-mode network.
-
-# Let's just ignore this package and data coding here for now... Copy and Pasted
+# Let's just ignore this package and data coding here for now.. Copy and Pasted
 library(ergm)
 data("florentine")
 require(intergraph)
 require(igraph)
-# igraph back in here to override other packages-might have similarly named functions
+# igraph  here to override other packages-might have similarly named functions
 
 # Igraph objects, thanks to intergraph package (as seen before)
 flo_m <- asIgraph(flomarriage)
@@ -3615,20 +3605,23 @@ legend("topright",
 
 dyad.census(dixon) # Note the $ indicator for each object.
 
-reciprocity(dixon) # We can calculate this via dyad census (above) or through adjacency matrix.
+# We can calculate this via dyad census (above) or through adjacency matrix.
+reciprocity(dixon)
 
 # Dyad Census:
 2*dyad_census(dixon)$mut/ecount(dixon)
-# two times the mutual count to control for the directionality of edges (which we use as denominator
+# two times the mutual count to control for the directionality of edges
+# (which we use as denominator)
 
 # Using the adjacency matrix
 dam <- as.matrix(get.adjacency(dixon))
 
 sum(dam*t(dam))
-## Element-wise multiplation of the adjacency matrix, giving us the full number of mutual edges
-#    (equivalent to 2*dyad_census(dixon)$mut.)
+## Element-wise multiplation of the adjacency matrix, giving us the full number
+#  of mutual edges (equivalent to 2*dyad_census(dixon)$mut.)
 
-sum(dam) ## The count of the total number of edges in the network (equivlaent to ecount(dixon).)
+sum(dam) ## The count of the total number of edges in the network
+#           (equivlaent to ecount(dixon).)
 
 sum(dam*t(dam))/sum(dam)
 
@@ -3636,8 +3629,9 @@ sum(dam*t(dam))/sum(dam)
 reciprocity(dixon) # Simple function
 2*dyad_census(dixon)$mut/ecount(dixon) # Dyad Census utilization
 sum(dam*t(dam))/sum(dam) # Using adjacency matrix
-# 37% chance that if Student A names Student B as their friend; Student B will have also named A.
-#    More generally, we can say that 37% of edges are reciprocated.
+# 37% chance that if Student A names Student B as their friend; Student B will
+# have also named A. More generally, we can say that 37% of edges are
+# reciprocated.
 
 
 # Or we can use an alternative reciprocity calculation:
@@ -3649,8 +3643,9 @@ dyad.census(dixon)$mut/(dyad.census(dixon)$mut + dyad.census(dixon)$asym)
 assortativity.nominal(dixon,V(dixon)$grade)
 assortativity.nominal(dixon,V(dixon)$sex)
 assortativity.nominal(dixon,factor(V(dixon)$race)) # Had to factorize race here
-# .nominal is giving us group-wise assortativity, without that it would treat as continuous.
-# postive number means more assortment (sorting) into like groups with the variable than non-variable.
+# .nominal is giving us group-wise assortativity, without that it would treat
+# as continuous. postive number means more assortment (sorting) into like
+# groups with the variable than non-variable.
 
 
 ## Triads
@@ -3658,8 +3653,8 @@ transitivity(dixon)
 # 18% chance of two neighbors of a vertex are themselves connected.
 #    put another way, 18% of all triads are closed triangles (triads)
 
-# Social networks often have a high level of transitivity, compare this to a completely random graph:
-#   of same size:
+# Social networks often have a high level of transitivity, compare this to a
+# completely random graph: of same size:
 rand <- sample_gnm(vcount(dixon),ecount(dixon),directed=TRUE)
 summary(rand)
 transitivity(rand)
@@ -3675,8 +3670,7 @@ triad.census(dixon)
 
 df <- data.frame(census_labels, triad.census(dixon))
 ## binding the two labels with the output will let us actually interpret this!
-#
-# So most common are unconnected triads, then triads with only one asymmetric edge...
+# Most common are unconnected triads, then triads with only one asymmetric edge
 
 triad.census(rand)
 
@@ -3710,8 +3704,6 @@ library(igraph)
 ##   October:
 # read in the posts data
 library(readr)
-# data <- read_csv("https://raw.githubusercontent.com/KyleDavisGithub/Graduate_Methods_Handbook/master/swi.csv")
-
 
 posts <- read_csv('https://raw.githubusercontent.com/KyleDavisGithub/Graduate_Methods_Handbook/master/2017_10_AskSocialScience_posts.csv')
 # read in the comments data
@@ -3819,25 +3811,25 @@ library(ggplot2)
 library(gridExtra)
 library(grid)
 
-p1 <- qplot(out.degree)+
-     theme_bw()+
-     xlab("Outward Degree")+
-     ylab("N")+
-     geom_vline(xintercept=1.859, linetype="dashed")+
+p1 <- qplot(out.degree) +
+     theme_bw() +
+     xlab("Outward Degree") +
+     ylab("N") +
+     geom_vline(xintercept=1.859, linetype="dashed") +
      annotate("text", x = 50, y = 400, label = "sd = 3.30")
 
-p2 <- qplot(in.degree)+
-     theme_bw()+
-     xlab("Inward Degree")+
-     ylab("N")+
-     geom_vline(xintercept=1.859, linetype="dashed")+
+p2 <- qplot(in.degree) +
+     theme_bw() +
+     xlab("Inward Degree") +
+     ylab("N") +
+     geom_vline(xintercept=1.859, linetype="dashed") +
      annotate("text", x = 16, y = 213, label = "sd = 2.23")
 
-p3 <- qplot(degree)+
-     theme_bw()+
-     xlab("Degree")+
-     ylab("N")+
-     geom_vline(xintercept=3.718, linetype="dashed")+
+p3 <- qplot(degree) +
+     theme_bw() +
+     xlab("Degree") +
+     ylab("N") +
+     geom_vline(xintercept=3.718, linetype="dashed") +
      annotate("text", x = 61, y = 214, label = "sd = 4.76")
 
 grid.arrange(
@@ -3895,16 +3887,14 @@ E(graph.object)[order(e.graph.object$vector, decreasing=T)[1:10]]
 evc_lg_graph.object <- evcent(lg_graph.object)
 E(graph.object)[order(evc_lg_graph.object$vector, decreasing=T)[1:10]]
 
-
 @
-
 
 At least from above we know where to start looking for central nodes within our data. Following this, I compare each measure of centrality by generating a matrix of correlation values, then plot it.
 
 \begin{center}
 <<comp, message=FALSE, warning=FALSE, out.width='6in', prompt=TRUE, eval=FALSE>>=
 
-# Let's whip-up a matrix of just our values, look at the correlation between them.
+# Let's make a matrix of just our values, look at the correlation between them.
 vec.degree <- as.vector(degree)
 vec.in.degree <- as.vector(in.degree)
 vec.out.degree <- as.vector(out.degree)
@@ -3912,10 +3902,13 @@ vec.c.graph.object <- as.vector(c.graph.object)
 vec.b.graph.object <- as.vector(b.graph.object)
 vec.e.graph.object <- as.vector(e.graph.object$vector)
 
-
-Cor.Object <- matrix(c(vec.degree, vec.in.degree, vec.out.degree,
-                       vec.c.graph.object, vec.b.graph.object, vec.e.graph.object),
-                      ncol=6)
+Cor.Object <- matrix(c(vec.degree,
+                       vec.in.degree,
+                       vec.out.degree,
+                       vec.c.graph.object,
+                       vec.b.graph.object,
+                       vec.e.graph.object,
+                       ncol = 6))
 
 colnames(Cor.Object) <- c("Degree", "In Degree", "Out Degree",
                          "Closeness", "Betweeness", "Eigenvector")
@@ -3931,14 +3924,14 @@ corrplot(x, type="upper", order="hclust")
 \end{center}
 
 
-I find it easier to think about correlation by looking at the plot (albiet a very rough plot). The two ``darkest'' or most correlated measures was the in-degree with degree, and the degree with the out-degree. This makes sense because the degree is encapsulating both of those measures. All measures are positively correlated, except the eigenvector centrality measure compared to closeness and betweeness. This is likely because of the different assumptions and properties each of these measures have. For example, eigenvector centrality Trafic moves along unrestricted walks, Trafic can effect subsequent nodes simultaneously, and eigenvector centrality measures long-term and indirect risks. Other measures may not have these properties, so it is probably best that they are not too closely correlated.
+I find it easier to think about correlation by looking at the plot (albeit a very rough plot). The two ``darkest'' or most correlated measures was the in-degree with degree, and the degree with the out-degree. This makes sense because the degree is encapsulating both of those measures. All measures are positively correlated, except the eigenvector centrality measure compared to closeness and betweeness. This is likely because of the different assumptions and properties each of these measures have. For example, eigenvector centrality Trafic moves along unrestricted walks, Trafic can effect subsequent nodes simultaneously, and eigenvector centrality measures long-term and indirect risks. Other measures may not have these properties, so it is probably best that they are not too closely correlated.
 
 
 %--------------------------------------
 \subsubsection{Data Viz}
 
-Perhpas now is a good opportunity to talk about data vizualisation. Using the data from the previous section on centrality:
-In this I will be using the Reddit data from "r/AskSocialScientists" from October and November. These will be ran seperately, and I will look into their largest components. Then, I will plot the degrees in two different ways.
+Perhaps now is a good opportunity to talk about data visualization. Using the data from the previous section on centrality:
+In this I will be using the Reddit data from "r/AskSocialScientists" from October and November. These will be ran separately, and I will look into their largest components. Then, I will plot the degrees in two different ways.
 
 <<dataforviz, prompt=TRUE, warning=FALSE, message=FALSE>>=
 # Using the data set up from the previous section:
@@ -4025,7 +4018,7 @@ title("\n November; 2017",
 @
 \end{center}
 
-For the above, I have chosen to keep plots simple and not too complex to overcomplicate interpretation. In a paper these graphs would likely print and be easily read. Some things that I may consider chaning is making the network bigger, and to have directionality more clear.\\
+For the above, I have chosen to keep plots simple and not too complex to over complicate interpretation. In a paper these graphs would likely print and be easily read. Some things that I may consider changing is making the network bigger, and to have directionality more clear.\\
 
 This is, of course, not the only information we can gain from a network. Below is a plot of the network degrees. A network "degree" is the number of connections each node has - a useful statistic. The following graphs intended purpose is to report the mean, the nodes, and edges in addition to the distribution of degrees in a network.
 
@@ -4036,17 +4029,19 @@ Degree <- degree(g2)
 mean(Degree)
 
 library(ggplot2)
-qplot(Degree)+
-     theme_bw()+
-     ylab("N")+
-     xlab("Degrees")+
-     #ggtitle("Degrees in Large Component of Network 1")+
+qplot(Degree) +
+     theme_bw() +
+     ylab("N") +
+     xlab("Degrees") +
+     # ggtitle("Degrees in Large Component of Network 1")+
      ggtitle(substitute(
           paste( "Large Component Degrees, with: ", N[V], "=", 231,
-                 " and ", N[E], "=", 404)))+
-     annotate("text", x = 35.4, y = 3.7, label = "35")+
-     geom_vline(xintercept=mean(Degree), linetype="dashed")+
-     annotate("text", x = 4.3, y = 71, label = round(mean(Degree),3), angle=-90)
+                 " and ", N[E], "=", 404))) +
+     annotate("text", x = 35.4, y = 3.7, label = "35") +
+     geom_vline(xintercept=mean(Degree), linetype="dashed") +
+     annotate("text", x = 4.3, y = 71,
+              label = round(mean(Degree),3),
+              angle=-90)
 
 @
 \end{center}
@@ -4061,11 +4056,10 @@ qplot(Degree)+
 library(igraph)
 library(igraphdata)
 library(ape)
-## this package will help us easily plot the dendrograms for community detection
-#    algorithms that use hierarchical clustering
+# this package will help us easily plot the dendrograms for community detection
+# algorithms that use hierarchical clustering
 library(Matrix)
-## this package gives us the image() function for quick visualizing adjacency matrices
-
+# this package gives us the image() function for visualizing adjacency matrices
 
 
 data("karate")
@@ -4073,24 +4067,26 @@ summary(karate) #karate$Citation   is attached to this data remember
 
 
 frlay <- layout_with_fr(karate) # preset coordinates generated for us...
-## this will ensure that each time we plot the network, the location of the nodes stays constant
+# this will ensure that each time we plot the network,
+# the location of the nodes stays constant
 plot(karate, edge.width = E(karate)$weight, layout = frlay)
 
 
 
 ## Components
-#   Networks are made up of components, and isolated individuals.
-#  You can identify the components of a graph with the decompose.graph() function.
+#  Networks are made up of components, and isolated individuals.
+#  You can identify the components of a graph with decompose.graph()
 #  This gives a potentially long list of each component.
-#  So, table(sapply(decompose.graph(yournetwork),vcount)) will give you a quick summary
-#       of the size and number of components.
+#  So, table(sapply(decompose.graph(yournetwork),vcount)) will give you
+#  a quick summary of the size and number of components.
 
 is_connected(karate)  # There is only one component within this network.
 
 ## Cores (k)
-#   We could peel away layers of a network, by those who are weekly laching on (degree of 1)
-#      all the way inwards (k-cores).
-#   We could consider these layers individually, or all at once by seeing the greatest k-core for each node
+#   We could peel away layers of a network, by those who are weekly laching
+#   on (degree of 1) all the way inwards (k-cores). We could consider these
+#   layers individually, or all at once by seeing the greatest k-core for
+#   each node
 
 coreness(karate)
 
@@ -4108,61 +4104,66 @@ legend("topright",
 
 ## Cliques
 #   These are the maximal connected subgraphs.
-#   Note: we can relax the definition of this by including non-connected nodes (but at short distance "n")
-#         igraph does not have this functionality (n=1).
-# Visual definition of Clique: https://en.wikipedia.org/wiki/Clique_(graph_theory)#/media/File:VR_complex.svg
+#   Note: we can relax the definition of this by including non-connected nodes
+#   (but at short distance "n") igraph does not have this functionality (n=1).
+# Visual definition of Clique:
+#https://en.wikipedia.org/wiki/Clique_(graph_theory)#/media/File:VR_complex.svg
 
 head(cliques(karate, min=3)) # here we excluded cliques below a certain size.
 table(sapply(cliques(karate),length))
-# This summarizes the full enumeration of cliques, but showing us the number of cliques of each size
+# This summarizes the full enumeration of cliques, showing us the N of cliques
 largest_cliques(karate)
 
 
 #### Community detection
 #    There are so many ways to chop up a network into related nodes.
-#    Generally speaking, we want subsets of nodes that are well connected among them selves, but few
-#       connections from outsiders.
-#    There are mountains of ways to parse this out mathematically, but with R things can be easier.
+#    Generally speaking, we want subsets of nodes that are well connected
+#    among them selves, but few connections from outsiders.
+#     There are mountains of ways to parse this out mathematically,
+#     but with R things can be easier.
 
 ### Hierarchical clustering (see Session 4 for some of this).
 
 ## Edge Betweenness
-#   Calculate betweenness (we did this in centrality session) of each edge, remove the edge
-#      (so divide the network along that edge) with the highest betweeness,
-#      recalculate betweenness, identify the new highest edge... repeat.
-#   Note:  edges with weights get interpreted as additional distance (this is not the case in our network!)
-#          have to adjust this calculation to get the weights on the right emphasis.
+#   Calculate betweenness (we did this in centrality session) of each edge,
+#   remove the edge (so divide the network along that edge) with the highest
+#   betweeness, recalculate betweenness, identify the new highest edge.. repeat
+#   Note:  edges with weights get interpreted as additional distance
+#          (this is not the case in our network!) have to adjust this
+#          calculation to get the weights on the right emphasis.
 
 eb <- cluster_edge_betweenness(karate, weights = 1/E(karate)$weight)
 membership(eb)
 sizes(eb)
-# library(stats) -- used for some alternative plotting options in our dendrograms.
-# ?dendPlot()
+# library(stats)-used for some alternative plotting options in our dendrograms
+
 dendPlot(eb, mode = "phylo")
 plot(eb, karate, edge.width = E(karate)$weight, layout = frlay)
 # by putting the community object (here, "eb") in front of the graph object,
-#    igraph knows to plot both. igraph then colors the nodes by their community membership,
-#    draws bubbles around each community, and colors edges within communities black and between
-#    communities red.
+#    igraph knows to plot both. igraph then colors the nodes by their community
+#    membership, draws bubbles around each community, and colors edges within
+#    communities black and between communities red.
 
 
 ## Fast Greedy (Modularity)
-#    Similar to "modularity" when we measured assorativity before, this can be used to partition communities.
-#      chopping groups up by their assortatitivy scores. Done within, then between all nodes. meaning
-#      there are more edges within groups and fewer between them -- then we find communities.
+#    Similar to "modularity" when we measured assorativity before, this can be
+#    used to partition communities. chopping groups up by their assortatitivy
+#    scores. Done within, then between all nodes. meaning there are more edges
+#    within groups and fewer between them -- then we find communities.
 fg <- cluster_fast_greedy(karate, weights = E(karate)$weight)
 sizes(fg)
 dendPlot(fg, mode="phylo")
 plot(fg, karate, edge.width = E(karate)$weight, layout = frlay)
 
 ## Walktrap
-#   imagine doing many, many, short random walks across a network. You'll likely end up staying in a community
-#   on each random walk since between-communities ties should be rare to find.
-#   So we can use these random walks to find communities (on average) and use that measure
-#   as yet another hierarchical clustering process!
-#     [consider simulation, machine learning, and ways to take these random walks out of your hands]
+#   imagine doing many, many, short random walks across a network. You'll
+#   likely end up staying in a community on each random walk since
+#   between-communities ties should be rare to find. So we can use these random
+#   walks to find communities (on average) and use that measure as yet another
+#   hierarchical clustering process! [consider simulation, machine learning,
+#   and ways to take these random walks out of your hands]
 
-wt <- cluster_walktrap(karate, weights = E(karate)$weight) ## uses edge weight by default
+wt <- cluster_walktrap(karate, weights = E(karate)$weight) # uses edge weight
 dendPlot(wt)
 plot(wt, karate, edge.width = E(karate)$weight, layout = frlay)
 
@@ -4170,12 +4171,14 @@ plot(wt, karate, edge.width = E(karate)$weight, layout = frlay)
 ### Other approaches:
 
 ## Louvain (aka Multilevel)
-#    this one is also trying to quickly optimize modularity. Each node here is assigned to a different
-#    community, then a node is moved to join one of its neighbors with wich it increases the modularity score.
-#    This process of moving nodes around keeps going until modularity cannot be improved anymore.
-#    [see Yang et al 2016] - this performs really well.
-#  This doesn't classify as a heirarchical community deteticion because it is not strictly agglomerative.
-#    (bottom up) compared to "divisive" top-down methodologies.
+#   this one is also trying to quickly optimize modularity. Each node here is
+#   assigned to a different community, then a node is moved to join one of its
+#   neighbors with wich it increases the modularity score. This process of
+#   moving nodes around keeps going until modularity cannot be improved anymore.
+#   [see Yang et al 2016] - this performs really well.
+#   This doesn't classify as a heirarchical community deteticion because it is
+#   not strictly agglomerative. (bottom up) compared to "divisive" top-down
+#   methodologies.
 ml <- cluster_louvain(karate, weights = E(karate)$weight)
 plot(ml, karate, edge.width = E(karate)$weight, layout = frlay)
 
@@ -4186,8 +4189,9 @@ plot(im, karate, edge.width = E(karate)$weight, layout = frlay)
 
 ## Spinglass
 #     Drawing from physics, and magnetism - a spin glass type of magnet.
-#     Each node is similar to an atom, and we want to simulate the annealing process where we minimize energy
-#     and this happens when nodes are grouped in communities with the same spin - than different spin groups.
+#     Each node is similar to an atom, and we want to simulate the annealing
+#     process where we minimize energy and this happens when nodes are grouped
+#     in communities with the same spin - than different spin groups.
 sg <- cluster_spinglass(karate, weights=E(karate)$weight)
 plot(sg, karate, edge.width = E(karate)$weight, layout = frlay)
 
@@ -4195,25 +4199,28 @@ plot(sg, karate, edge.width = E(karate)$weight, layout = frlay)
 
 
 ### Which one do I use?!
-#     often the "big picture" is the same, but often we'll find small changes between methods.
-#     When publishing, it can be better to publish many different methods in a table or easily reportable
-#     Format. (See Seminar notes for some more information on each of these methods)
+#     often the "big picture" is the same, but often we'll find small changes
+#     between methods. When publishing, it can be better to publish many
+#     different methods in a table or easily reportable format.
+#     (See Seminar notes for some more information on each of these methods)
 
 
 ### Graph Partitions and "Ground Truth"
-#     So we can mathematically parse out groups - but how does this align with our theory, and other
-#     data? How does this match with our homophily?
+#     So we can mathematically parse out groups - but how does this align with
+#     our theory, and other data? How does this match with our homophily?
 
 # First step: let's calculate assortativity
 #      (normalized ---  -1 (disassortive) :  1(assortive) [0 = no evidence])
 
 modularity(karate, V(karate)$Faction)
 assortativity(karate, V(karate)$Faction)
-#  So this assortativity measure is very high... and matches the karate club theory and our knowledge of it.
-#    And we've already eye-balled all the graphs, and things seem to line up to these factions.
+#  So this assortativity measure is very high... and matches the karate club
+#  theory and our knowledge of it. And we've already eye-balled all the graphs,
+#  and things seem to line up to these factions.
 
-# In igraph we can compare() different membership vectors using nmi "normalized mutual information"
-#    1 = perfect match!  0 = mutually uninformative of one another.
+#  In igraph we can compare() different membership vectors using nmi or
+#  "normalized mutual information" 1 = perfect match!  0 = mutually
+#  uninformative of one another.
 
 # Compare "Truth" (faction)  with method:
 compare(V(karate)$Faction, eb, method = "nmi")
@@ -4229,48 +4236,36 @@ compare(V(karate)$Faction, im, method = "nmi")
 compare(V(karate)$Faction, sg, method = "nmi")
 ## [1] 0.6543404
 table(V(karate)$Faction, membership(eb))
-##
-##      1  2
-##   1 16  0
-##   2  1 17
+
 table(V(karate)$Faction, membership(fg))
-##
-##      1  2  3
-##   1  0 11  5
-##   2 18  0  0
+
 table(V(karate)$Faction, membership(im))
-##
-##      1  2  3
-##   1  0 11  5
-##   2 18  0  0
 
 
 #  So if our theory is strong in that these factions matter:
-#     we see that edge betweenness does "best" with only one person assigned wrong faction.
-#     with fast_greedy and infomap coming close behind in faction membership detection.
+#     we see that edge betweenness does "best" with only one person
+#     assigned wrong faction. with fast_greedy and infomap coming close
+#     behind in faction membership detection.
 
 
-## we can also compare different partitionings based on different community detection algorithms.
+## we can also compare different partitionings based on different
+#  community detection algorithms.
 compare(eb, sg, method = "nmi")
 ## [1] 0.5622443
 compare(wt, sg, method = "nmi")
 ## [1] 0.8953659
 compare(fg, im, method = "nmi")
-## we can see that these two community detection algorithms produce exactly the same partitioning of the graph
+## we can see that these two community detection algorithms produce
+#  exactly the same partitioning of the graph
 ## [1] 1
 table(membership(fg),membership(im))
-##
-##      1  2  3
-##   1 18  0  0
-##   2  0 11  0
-##   3  0  0  5
 
 
 
 ## Stochastic Block Models.
-#    Just create a model to calculate the probability of ties within each group
-#       (controlling for variables).
-#    (Have to swap packages out of igraph and data out of igraph)
+#   Just create a model to calculate the probability of ties within each group
+#   (controlling for variables).
+#   (Have to swap packages out of igraph and data out of igraph)
 
 require(intergraph)
 detach(package:igraph)
@@ -4282,9 +4277,10 @@ blockmodel(knet, ec = knet %v% "Faction")
 ##            Block 1    Block 2
 ## Block 1 0.27500000 0.03472222
 ## Block 2 0.03472222 0.22875817
-#   We can see that a much higher probability of a tie are within each faction than between them.
+#  We can see that a much higher probability of a tie are within each faction
+#                                                           than between them.
 
-kbm <- blockmodel(knet, ec = knet %v% "Faction")$block.model ## saving these results
+kbm <- blockmodel(knet, ec = knet %v% "Faction")$block.model
 
 # (swap packages back)
 detach(package:sna)
@@ -4295,7 +4291,9 @@ require(igraph)
 #  BlockModels are mostly used for generative models of network formation.
 #    Now we'll use those block model results:
 
-g_kar <- sample_sbm(34, pref.matrix = kbm, block.sizes = c(16,18), directed = FALSE)
+g_kar <- sample_sbm(34, pref.matrix = kbm,
+                    block.sizes = c(16,18),
+                    directed = FALSE)
 assortativity(g_kar, c(rep(1,16), rep(2,18)))
 ## This compares pretty closely to the assortativity of the real karate network
 #      that we calculated above.
