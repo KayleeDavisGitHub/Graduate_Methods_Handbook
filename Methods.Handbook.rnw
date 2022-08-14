@@ -4,20 +4,20 @@
 %%! Document created using R's .rnw document editing, not LaTeX
 %   platform (although both should work). UTF-8
 %   Consider knitr, index, and bibliography when compiling.
-%   Please read preamble, change file locations as neccesary.
+%   Please read preamble, change file locations as necessary.
 %   Similarly, some data are called file a local file-path.
 
 %%! All data are free and fair use, but please consider proper citation.
 %   Some data have been collected via Google Big Query and TwittR;
-%      These data have only partially been deidentified; please consider online
-%      privacy when publishing/sharing data used here.
+%   These data have only partially been deidentified; please consider online
+%   privacy when publishing/sharing data used here.
 
 
 %------------ Quick Note on Coding Conventions -----------------
 
 %  Primarily the intent for the document is in the .pdf output,
 %  however, I have taken measures to add notes and organization
-%  in the coding of this document, for my own use and for openess
+%  in the coding of this document, for my own use and for openness
 %  to future authors.
 
 %  %--- lines typically divide and add some organization
@@ -32,36 +32,29 @@
 \usepackage[top = 1in, left = 1in, right = 1in, bottom = 1in]{geometry}
 
 % Holdover packages from long ago:
-\usepackage{scrextend}
-\usepackage{graphicx, fullpage, relsize, epsfig}    % tex tools
-\usepackage{amsfonts, amsmath, amsthm, amssymb, mathtools, fdsymbol} % Math tools/ symbols
+\usepackage{graphicx, epsfig}                   % tex tools
+\usepackage{amsfonts, amsmath, amsthm, amssymb} % Math tools/ symbols
+\usepackage{relsize}                            % for mathlarger mathsmaller
 
 % Setting local graphics pathing:
-\graphicspath{{C:/Users/Shing/Documents/GLM/Graduate_Methods_Handbook/figure/}}
+\graphicspath{{C:/Users/mailk/OneDrive/Documents/R/Graduate_Methods_Handbook/figure}}
 
 % No idea:
-\usepackage{siunitx}
-\usepackage[compact]{titlesec}
-\usepackage{enumitem}
-\usepackage{textcomp} % Just for tilda's I think \sim?
+\usepackage{textcomp} % Just for tildas I think \sim?
 \usepackage{verbatim} % No Idea
 
 % For images and stuff, I think:
-\usepackage{wrapfig}  % Wrap Figures and caption easier
+\usepackage{wrapfig}                                % Wrap Figures and caption easier
 \usepackage{setspace}
 \usepackage[bookmarks = false, hidelinks]{hyperref} % Hides red box around links
 \usepackage{booktabs}
-\usepackage{subcaption}
+%   \usepackage{subcaption}
 
 %% Type Face/ Font Stuff    % fixed?
-\usepackage[american]{babel}
+\usepackage[english]{babel}
 % \usepackage{baskervald}
 % \usepackage[T1]{fontenc}
 % \usepackage[style = american]{csquotes}
-
-%% using Todo Notes:
-\usepackage{xargs}                      % Use more than one optional parameter in a new commands
-\usepackage[pdftex,dvipsnames]{xcolor}  % Coloured text etc.
 
 %% Making an Index:
 \usepackage{makeidx}
@@ -71,14 +64,14 @@
 % Reference customization is included in the reference section.
 
 %% Footnote Formatting
-\setlist{nolistsep, noitemsep}
+% \setlist{nolistsep, noitemsep}
 \setlength{\footnotesep}{1.2\baselineskip}
-\deffootnote[.2in]{0in}{0em}{\normalsize\thefootnotemark.\enskip}
+% \deffootnote[.2in]{0in}{0em}{\normalsize\thefootnotemark.\enskip}
 
 %% Section Formatting
 \def\ci{\perp\!\!\!\perp}
-\titleformat*{\section}{\large\bfseries}
-\titleformat*{\subsection}{\normalsize\bfseries}
+% \titleformat*{\section}{\large\bfseries}
+% \titleformat*{\subsection}{\normalsize\bfseries}
 
 %% Table of Contents Formatting (babel)
 \addto\captionsamerican{ \renewcommand*\contentsname{Table of Contents:}}
@@ -100,7 +93,7 @@
 \usepackage{longtable}
 \usepackage{array}
 
-% for \thedate and other titling convieniences
+% for \thedate and other titling conveniences
 \usepackage{titling}
 \date{\today} % so that it's today (specified)
 
@@ -109,7 +102,8 @@
 % -------------------------------------------------------------------
 \makeindex
 \begin{document}
-%\graphicspath{Data Files}
+% \SweaveOpts{concordance=TRUE}
+% \graphicspath{Data Files}
 \begin{flushleft}
 \setlength{\parindent}{1cm} %1cm indent
 
@@ -143,10 +137,13 @@ options(formatR.arrow=TRUE, width=78)
 ##! Changing out Theme to "kellys"
 ##! For Printing, consider changing this to "moe" or "edit-xcode"
 ##! Check out Themes at: http://animation.r-forge.r-project.org/knitr/
-theme = knit_theme$get("kellys")
-knit_theme$set(theme)
 
 opts_chunk$set(prompt=TRUE)
+opts_knit$set(out.format = "latex")
+
+theme <- knit_theme$get("kellys")
+knit_theme$set(theme)
+
 @
 
 
@@ -164,7 +161,7 @@ Overall, I hope this document helps someone. It doesn't read too professionally,
 Created by Kyle Davis; https://www.linkedin.com/in/kyledavisln \\
 Summer 2017 --- \thedate ~(last updated)
 
-\
+
 
 For the most recent version:
 
@@ -190,7 +187,7 @@ Any questions or concerns can be sent to me via LinkedIn or GitHub.
 
 What is a \textit{cause}? More specifically, what in social science can really ``cause'' anything, is it ever really measurable? These are the questions that have been plaguing scientists for years, and with increases in methodology and theory we have tried to answer causal questions --- or at the very least, accurately report our assumptions and errors. A lot of the first few pages of this guide will be explicit in describing the assumptions we make with various methods, because these should be explicit for the audience when we find ``causal effects.''
 
-Here we are using one language to define ``cause,'' specifically that used by social scientists, which is the first theoretical assumption. A cause here, in the simplest terms that maximizes the utility of the word -- \textbf{is a treatment}. Anytime you see the word ``cause'' you could also say treatment, and the reverse. Therefore, race, gender, any attribute is \textbf{not} a cause because we can not give people a new race or gender on a fundamental and societal level. But obviously these things matter! Here we would divide up our study, \textit{stratifying} on gender, race, etc for all of those groups which we cannot assign a new race or gender. Being creative in design up front can save a lot of our analysis on the back-end too; for example, creating an online program that generates a name or image for you on some online messenger program may give you a new \textit{perceieved race} or {perceieved gender} which we can randomize and identify. The key point here is that our definition of ``causal'' already introduces some problems, and a lot of what follows is attempting to advert them, understand them, and explain them accurately to the audience through \textit{causal inference}. Causal inference, then, is the way we infer causality through many design and analytic choices. One take-away here is that by broadening our language we strengthen the assumptions we can make, it's a give-and-take that has become convention. \index{cause}
+Here we are using one language to define ``cause,'' specifically that used by social scientists, which is the first theoretical assumption. A cause here, in the simplest terms that maximizes the utility of the word -- \textbf{is a treatment}. Anytime you see the word ``cause'' you could also say treatment, and the reverse. Therefore, race, gender, any attribute is \textbf{not} a cause because we can not give people a new race or gender on a fundamental and societal level. But obviously these things matter! Here we would divide up our study, \textit{stratifying} on gender, race, etc for all of those groups which we cannot assign a new race or gender. Being creative in design up front can save a lot of our analysis on the back-end too; for example, creating an online program that generates a name or image for you on some online messenger program may give you a new \textit{perceieved race} or \textit{perceieved gender} which we can randomize and identify. The key point here is that our definition of ``causal'' already introduces some problems, and a lot of what follows is attempting to advert them, understand them, and explain them accurately to the audience through \textit{causal inference}. Causal inference, then, is the way we infer causality through many design and analytic choices. One take-away here is that by broadening our language we strengthen the assumptions we can make, it's a give-and-take that has become convention. \index{cause}
 
 \begin{longtable}{ll}
 \hline\noalign{\smallskip}
@@ -325,7 +322,6 @@ In its simplest form, we care about the difference between the average treated e
 \hat{\mu}_\text{Naive} = E[Y|D=1] - E[Y|D=0]
 \end{equation}
 
-
 Think for a second, given all of this, when might the $\hat{\mu}_\text{Naive} = \hat{\mu}_\text{ate}$? Or, when might the naive estimator be the same as our average treatment effect (ATE)? Remember that the reason why $\mu_{naive}$ is naive is because it never observes the counterfactual world.
 
 \hfill \\
@@ -342,7 +338,7 @@ Note that the above equation has no decorations on $Y$, we are assuming that all
 
 \begin{itemize}
 \item[1.] That the treated and controlled units are not interacting between one another.
-\item[2.] That the method of how someone gets treated does not varry between units, or is at least eqivelent.
+\item[2.] That the method of how someone gets treated does not vary between units, or is at least equivalent.
 \end{itemize}
 
 \hfill \\
@@ -350,7 +346,7 @@ Note that the above equation has no decorations on $Y$, we are assuming that all
 \noindent Some core assumptions are not only SUTVA (consistency) but also that no \textit{confounding} occurs (also known as selection on observables, ignorability). This is when the people that were to benefit most from the treatment select into the treatment. No confounding formally is: \index{confounding} \index{selection on observables} \index{ignorability}
 
 \begin{equation}
-D \Vbar Y_1, Y_0 = P(D=1 ~ | ~ Y_1, Y_0)
+D ~ | ~ Y_1, Y_0 = P(D=1 ~ | ~ Y_1, Y_0)
 \end{equation}
 
 This language, by the way, is really annoying because: selection on observables $=$ conditional independence $=$ conditional ignorability $=$ no confounding, conditional on covariates $=$ blocking all back door paths. \index{blocking} \index{selection on observables} \index{back door paths} Open backdoor paths, is Pearlsian DAG-speak for having confounding. If we have more treated folk for each $Y_0$'s than $Y_1$'s then we have imbalance. If X is correlated with $Y_1$ and $Y_0$ for \textit{any reason}, then even though we randomized, then $Y_1$ and $Y_0$ would be informative about $X$ - And therefore $Y_1$ and $Y_0$ would be informative about our treatment D! Therefore we have a broken experiment.
@@ -358,13 +354,13 @@ This language, by the way, is really annoying because: selection on observables 
 Some other things to look out for is the plug-in estimator and conditional expectation functions, each of these are just examining average treatment effects around conditions (control variables). The \textit{plug-in estimator} is when we condition on and control for the average treatment effect (ATE) summing up over our controlled $X$'s.
 
 \begin{equation}
-E_X[E[Y |  D = 1, X] − E[Y |D = 0,X]]
+E_X[E[Y | D = 1, X] - E[Y | D = 0,X]]
 \end{equation}
 
 \noindent The conditional expectation function (CEF) is when we take the average treatment effect to see conditional causal effects.
 
 \begin{equation}
-E[Y |D] = E[Y_0] + \mu_{ate}D
+E[Y | D] = E[Y_0] + \mu_{ate}D
 \end{equation}
 
 We could think about taking into account all variables and possible conditions, this is the hope of Rubin's \textit{saturated model}, which has it's roots in imputation for trying to find missing data (the missing data here in our case would be the counterfactuals). Saturated models do come with particular downsides however, mostly in the errors it produces, and our lack of knowing the exact causal pathway given that adding new variables can open up back-door-paths to our causal estimand. \index{saturated modeling} \index{imputation}
@@ -380,7 +376,7 @@ Identification strategies are the attempt to find the missing data that we don't
 There are different types of randomization to help us gain inference. Simple randomization is a probability of treatment per individual ($D$ ``treatment'' being applied) in all possible cases; complete randomization is deciding what fraction of observations we need to fulfill for our total group and then curate our probability of treatment to this. Using randomization, we can hope to ``block'' on these observations (like gender, or X) which we cannot randomly assign.
 
 \begin{equation}
-D \Vbar Y_1, Y_0 | X ~ \text{or,} ~ P(D=1 ~ | ~ Y_1, Y_0; X) = p
+D ~ | ~ Y_1, Y_0 | X ~ \text{or,} ~ P(D=1 ~ | ~ Y_1, Y_0; X) = p
 \end{equation}
 
 \hfill \\
@@ -400,139 +396,14 @@ In hypothesis testing we could just take with and without treatment and see how 
 Cool, what's the p-values that we get from this? It is saying that conditional on the null hypothesis (i.e., conditional on $\mu_{ate} = 0$ ), what is the (frequentist) probability of observing this extreme an estimate of $\hat{\mu}$? This is typically in regards to a sharp null hypothesis of zero average effects, $Y_1 = Y_0$ always. \index{sharp null hypothesis}
 
 
-
 %------------------------------------------------------------------------------------------
 
 \hfill \\
-
 
 % Slide 45 of causal 4 has regression components.
 
 %------------------------------------------------------------------------------------------
 %    Law of iterated expectations? it is when we take the E[E(Y|D)] we can boil it down to E[Y]
-%
-Note that our experiments can lose observations rather quickly not only through design but in human execution (for various reasons). Consider the hypothetical flow chart on the following page for a good way to report these losses to readers (often included in supplemental appendix online). This has the added visual benefit of informing readers (reviewers) of your paper's design,
-
-
-% A CONSORT-style flowchart of a randomized controlled trial
-% using the PGF/TikZ package
-% Author  : Morten Vejs Willert (July 2010)
-% License : Creative Commons attribution license
-\newpage
-\begin{center}
-  % setting the typeface to sans serif and the font size to small
-  % the scope local to the environment
-  \sffamily
-  \footnotesize
-  \begin{tikzpicture}[auto,
-    %decision/.style={diamond, draw=black, thick, fill=white,
-    %text width=8em, text badly centered,
-    %inner sep=1pt, font=\sffamily\small},
-    block_center/.style ={rectangle, draw=black, thick, fill=white,
-      text width=8em, text centered,
-      minimum height=4em},
-    block_left/.style ={rectangle, draw=black, thick, fill=white,
-      text width=16em, text ragged, minimum height=4em, inner sep=6pt},
-    block_noborder/.style ={rectangle, draw=none, thick, fill=none,
-      text width=18em, text centered, minimum height=1em},
-    block_assign/.style ={rectangle, draw=black, thick, fill=white,
-      text width=18em, text ragged, minimum height=3em, inner sep=6pt},
-    block_lost/.style ={rectangle, draw=black, thick, fill=white,
-      text width=16em, text ragged, minimum height=3em, inner sep=6pt},
-      line/.style ={draw, thick, -latex', shorten >=0pt}]
-    % outlining the flowchart using the PGF/TikZ matrix funtion
-    \matrix [column sep=5mm,row sep=3mm] {
-      % enrollment - row 1
-      \node [block_center] (referred) {Referred (n=173)};
-      & \node [block_left] (excluded1) {Excluded (n=17): \\
-        a) Did not wish to participate (n=9) \\
-        b) Did not show for interview (n=5) \\
-        c) Other reasons (n=3)}; \\
-      % enrollment - row 2
-      \node [block_center] (assessment) {Assessed for eligibility (n=156)};
-      & \node [block_left] (excluded2) {Excluded (n=54): \\
-        a) Inclusion criteria not met (n=22) \\
-        b) Exclusion criteria(s) met (n=13) \\
-        c) Not suited for group (n=7) \\
-        d) Not suited for CBT (n=2) \\
-        e) Sought other treatment (n=3) \\
-        f) Other reasons (n=7)}; \\
-      % enrollment - row 3
-      \node [block_center] (random) {Randomised (n=102)};
-      & \\
-      % follow-up - row 4
-      \node [block_noborder] (i) {Intervention group};
-      & \node [block_noborder] (wlc) {Wait-list control group}; \\
-      % follow-up - row 5
-      \node [block_assign] (i_T0) {Allocated to intervention (n=51): \\
-      \h Received intervention (n=49) \\
-      \h Did not receive intervention (n=2, \\
-      \hh 1 with primary anxiety disorder, \\
-      \hh 1 could not find time to participate)};
-	  & \node [block_assign] (wlc_T0) {Allocated to wait-list (n=51): \\
-      \h Stayed on wait-list (n=48) \\
-      \h Did not stay on wait-list (n=3, \\
-      \hh 2 changed jobs and lost motivation, \\
-      \hh 1 was offered treatment elsewhere)}; \\
-      % follow-up - row 6
-      \node [block_lost] (i_T3) {Post-intervention measurement: \\
-      \h Lost to follow-up (n=5, \\
-      \hh 2 dropped out of the intervention, \\
-      \hh 3 did not complete measurement)};
-	  & \node [block_lost] (wlc_T3) {Post-wait-list measurement: \\
-      \h Lost to follow-up (n=6, \\
-      \hh 3 dropped out of the wait-list, \\
-      \hh 3 did not complete measurement)}; \\
-      % follow-up - row 7
-      % empty first column for intervention group
-      & \node [block_assign] (wlc_T36) {Allocated to intervention (n=48): \\
-      \h Received intervention (n=46) \\
-      \h Did not receive intervention (n=2, \\
-      \hh 1 reported low motivation, \\
-      \hh 1 could not find time to participate)}; \\
-      % follow-up - row 8
-      \node [block_lost] (i_T6) {3-months follow-up measurement: \\
-      \h Lost to follow-up (n=9, \\
-      \hh did not complete measurement)};
-      & \node [block_lost] (wlc_T6) {Post-intervention measurement: \\
-      \h Lost to follow-up (n=5, \\
-      \hh 2 dropped out of the intervention, \\
-      \hh 3 did not complete measurement)}; \\
-      % follow-up - row 9
-      % empty first column for intervention group
-      & \node [block_lost] (wlc_T9) {3-months follow-up measurement \\
-      \h Lost to follow-up (n=2, \\
-      \hh did not complete measurement)}; \\
-      % analysis - row 10
-      \node [block_assign] (i_ana) {Analysed (n=51)};
-      & \node [block_assign] (wlc_ana) {Analysed (n=51)}; \\
-    };% end matrix
-    % connecting nodes with paths
-    \begin{scope}[every path/.style=line]
-      % paths for enrollemnt rows
-      \path (referred)   -- (excluded1);
-      \path (referred)   -- (assessment);
-      \path (assessment) -- (excluded2);
-      \path (assessment) -- (random);
-      \path (random)     -- (i);
-      \path (random)     -| (wlc);
-      % paths for i-group follow-up rows
-      \path (i)          -- (i_T0);
-      \path (i_T0)       -- (i_T3);
-      \path (i_T3)       -- (i_T6);
-      \path (i_T6)       -- (i_ana);
-      % paths for wlc-group follow-up rows
-      \path (wlc)        -- (wlc_T0);
-      \path (wlc_T0)     -- (wlc_T3);
-      \path (wlc_T3)     -- (wlc_T36);
-      \path (wlc_T36)    -- (wlc_T6);
-      \path (wlc_T6)     -- (wlc_T9);
-      \path (wlc_T9)     -- (wlc_ana);
-    \end{scope}
-  \end{tikzpicture}
-\end{center}
-
-\newpage
 
 \noindent On hypothesis testing, in most cases we start off with testing against a \textit{sharp null hypothesis of zero average effects}. That is, $\mu_{ate} = 0$. Note that this is probably the most boring, unrealistic, and uninteresting null hypothesis that we could ever test against. Does anything, in social science, really ever have a sharp zero effect? Probably not, but we use our handy friends, the z-test and t-test, to find the statistical significance of our finding compared to the zero effect. For small samples we often assume that, because of the large sample size used, the unknown population variance may be replaced by the sample variance. That is, instead of a z score we use a t score:
 
@@ -545,9 +416,6 @@ z= \frac{\bar{x} - \mu}{\sigma / \sqrt{n}}
 \begin{equation}
 t = \frac{\bar{x} - \mu}{s_x / \sqrt{n}}
 \end{equation}
-
-
-
 
 
 \subsection{Frequentism and Bayesianism: What are we really doing here?}
@@ -571,8 +439,6 @@ To find, mathematically, our MLE (which occurs under-the-hood in R) we compute t
 \item[4.] we then solve for $\hat{\theta}$.
 \item[5.] We then make sure found the maximum and not some minimum peak (note we could have found the other peak in the above image). To do this we check the sign of the second derivative, if negative we know the curve is downward-facing. We finish by calculating the Fisher information (the second derivative) to find our confidence via variance and standard errors.
 \end{list}
-
-
 
 
 
@@ -616,7 +482,7 @@ Some code to look into, (and notes):
 
 library(survey) # this is better for a variety of reasons.
      svydesign(ids = , weights = ~1, data)
-     svyglm( Y ~ D, unweighted_design, family = quasibinomial)
+     svyglm(Y ~ D, unweighted_design, family = quasibinomial)
      coef(The_Model)
 
 @
@@ -633,7 +499,7 @@ library(mgcv)
 # Then we can edit things:
 library(survey) # this is better for a variety of reasons.
      svydesign(ids = , weights = ~weights, data)
-     svyglm( Y ~ D, weighted_design, family = quasibinomial)
+     svyglm(Y ~ D, weighted_design, family = quasibinomial)
      coef(The_Model)
 
      # Might wan to check out package: cbmsm
@@ -775,7 +641,7 @@ $$ t = \frac{\bar{x} - \mu_0}{\sqrt{s^2 / n}} \sim t_{df=n-1} $$
 
 Here $\mu_0$ is our postulated value of the population where as $\bar{x}$ is the sample mean. Our test should, now, not follow a normal distribution but rather a student's t-distribution which is similar to a normal distribution but rather we take into account the degrees of freedom ($n-1$). Why subtract one? Well this is because we ``spend'' one degree of freedom when finding our sample mean, with additional parameters we ``use'' more degrees of freedom in our estimation process. In the denominator we account for our sample variance and the quotient with of our sample size, all square rooted. To find $s$:
 
-$$s = \sqrt{\frac{(X-\bar{x})^2 \text{...} (X_n - \bar{x})^2 }{n-1} } $$
+$$ s = \sqrt{\frac{(X-\bar{x})^2 \text{...} (X_n - \bar{x})^2 }{n-1}} $$
 
 Recall our degrees of freedom being calculated in $s$ not in the actual t-test. Without speeding ahead too fast let's stop and consider an example before opening it up to two sample differences. Suppose we gave a small class an exam from a well-published textbook. The textbook company claims that, on average, students get an 85\% on the exam. Is our class \textit{significantly} better or worse than the national average?
 
@@ -862,7 +728,7 @@ $$ z = \frac{\bar{x}-\bar{y} }{\sigma \sqrt{1/m  + 1/n}} $$
 Finding confidence intervals for all of this are as simple as taking the upper and lower threshold desired (say 95 percent or 90 percent) and then reporting the upper/lower in a table. Some models in the regression segment will do this for variety.
 
 I found a really good article online about confidence intervals if you are looking for more notes on this:
-http://sphweb.bumc.bu.edu/otlt/MPH-Modules/BS/BS704_Confidence_Intervals/BS704_Confidence_Intervals_print.html
+\url{http://sphweb.bumc.bu.edu/otlt/MPH-Modules/BS/BS704_Confidence_Intervals/BS704_Confidence_Intervals_print.html}
 
 \subsection{Chi-Squared Testing}
 
@@ -893,7 +759,6 @@ test # full results
 test$statistic # chi-squared result
 
 test$p.value # p-value
-
 
 @
 
@@ -999,7 +864,7 @@ No matter what the model we're specifying throughout this document, be it logit,
 
 \begin{equation}
 \mathlarger{ \eta = X\beta \text{ \text{  }  or,  }}
-\mathlarger{ \eta_i = \beta_0 + \beta_1 x_{i1} \textbf{...} \beta_q x_{iq}  }
+\mathlarger{ \eta_i = \beta_0 + \beta_1 x_{i1} \textbf{...} \beta_q x_{iq} }
 \end{equation}
 One example of when we might use regression is when trying to determine the best quality of beer based upon mean judged ratings, these are the questions that matter the most. Beer ratings range from $-1$: ``Fair'', to $0$: ``Good'', and $1$: ``Great.'' Consider our first model where we consider how expensive the beer is:
 
@@ -1010,7 +875,7 @@ One example of when we might use regression is when trying to determine the best
 \noindent Given the information from our data regressed in R: (This is shown on the following page)
 
 \begin{equation}
-\mathlarger{ \text{Beer Rating} =  (-0.76) + (.26) \text{Beer Price} + \text{error} }
+\mathlarger{ \text{Beer Rating} = (-0.76) + (.26) \text{Beer Price} + \text{error} }
 \end{equation}
 
 We can solve this to find our beer rating with the substitution of a beer price, we remove the error term because we assume it's normally distributed and centered at zero (an assumption that will come up in the following section). Let's assume we are going out with friends and only have \$2.00:
@@ -1028,7 +893,7 @@ This means, given that our average (``Good'') beer rating is zero, that if we on
 # Data available, email: MailKyleDavis@gmail.com
 
 library(foreign) # For reading data.
-beer_data <- read.dta('C:/Users/Shing/Documents/Previous Course Info/Quant II/beer.dta')
+beer_data <- read.dta('C:/Users/mailk/OneDrive/Documents/R/Graduate_Methods_Handbook/data/beer.dta')
 
 library(car) # for ease of recoding variables
 # Our Beer ratings could be coded more intuitively:
@@ -1038,12 +903,12 @@ nrow(beer_data) # For 35 beers:
 
 # Let's recode our rating dependent variable to be more intuitive:
 # reassign values: where 3 is now 0, etc..
-beer_data$rating <- recode(beer_data$rating,"3=0; 2=1; 1=2")
+beer_data$rating <- recode(beer_data$rating, "3=0; 2=1; 1=2")
 class(beer_data$rating) # numeric and coded intuitively, could be better...
 # From -1 to 1
-beer_data$rating <- recode(beer_data$rating,"0=-1")
-beer_data$rating <- recode(beer_data$rating,"1=0")
-beer_data$rating <- recode(beer_data$rating,"2=1")
+beer_data$rating <- recode(beer_data$rating, "0=-1")
+beer_data$rating <- recode(beer_data$rating, "1=0")
+beer_data$rating <- recode(beer_data$rating, "2=1")
 
 beer_data$rating # Setting median to zero will help our interpretation
 
@@ -1096,7 +961,6 @@ RMSE       & 0.74     \\
 
 \index{texreg package}
 
-
 The above table shows the standard errors (in parentheses) being two standard errors away from our coefficients, therefore being significant at the 95\% confidence level. We have 35 observations and our $\text{R}^2$ explains 14\% of the variation in our dependent variable. The adjusted $\text{R}^2$ accounts for the amount of variables added into a model and is slightly more robust, prevent against ``kitchen sink'' models which add many variables to get a high  $\text{R}^2$. It explains 11\% of the variation.
 \index{R$^2$}
 
@@ -1116,9 +980,9 @@ abline(mod1)  # Add our model line
 # Simulate 100 possible outcomes, take their lines, plot them on top
 m1sim <- sim(mod1)
 for (i in 1:100){
-  curve (coef(m1sim)[i,1] + coef(m1sim)[i,2]*x, add=T, col="grey")
+  curve(coef(m1sim)[i,1] + coef(m1sim)[i,2]*x, add=T, col="grey")
 }
-curve (mod1$coef[1] + mod1$coef[2]*x, add=T, lwd=3)
+curve(mod1$coef[1] + mod1$coef[2]*x, add=T, lwd=3)
 @
 \end{center}
 
@@ -1159,14 +1023,6 @@ RMSE            & 0.74     & 0.69     \\
 \end{table}
 
 We could consider a model where alcohol content is additionally important, Model 2. Here our R$^2$ increases to .28; and our variables remain within two deviations of the error, with the slight exception of beer price. Our intercept loses it's interpretation, we are now looking at where alcohol content is at zero. Our beer rank jumps by .50 every one increase in alcohol content. Both of these effects are controlling for the other.
-
-
-
-
-
-
-
-
 
 
 
@@ -1254,7 +1110,7 @@ Assuming we can use multiple imputation, here we want to run 5 to 10 models of t
 
 Two R packages that make this very easy is both ``mice'' and ``Zelig.'' The functions to run multiple imputation from these packages can usually only take one or two lines of code and will print each individual regression and the mean regression. See the "mice" help file example example below:
 
-<<imputation, prompt=TRUE, message=FALSE, warning=FALSE, echo=TRUE, eval=TRUE, results=FALSE>>=
+<<imputation, prompt=TRUE, message=FALSE, warning=FALSE, echo=TRUE, eval=TRUE>>=
 library(mice)
 ## Refering to the mice help file on imputation on medical data:
 #  Note that all head() is just showing the top row results.
@@ -1484,7 +1340,7 @@ points(jitter(beer_data$price, 1.5), jitter(beer_data$verygood, 0.1),
 \end{center}
 
 
-We can run some diagnostics on this similar to linear regression in that we're using residuals which are calculated similarly but for logit regression we have to ``bin'' these. I've done so for the initial model (only including price) and the full model (including calories and alcoholic content) below.\footnote{For more on why binned residual plotting: see Andrew Gelman (et. al's) article:\\ http://www.stat.columbia.edu/~gelman/research/published/dogs.pdf}
+We can run some diagnostics on this similar to linear regression in that we're using residuals which are calculated similarly but for logit regression we have to ``bin'' these. I've done so for the initial model (only including price) and the full model (including calories and alcoholic content) below.\footnote{For more on why binned residual plotting: see Andrew Gelman (et. al's) article:\\ \url{http://www.stat.columbia.edu/~gelman/research/published/dogs.pdf}}
 
 Here, ideally, we would want to see ``random noise'' around the dotted zero mark more average residuals. Additionally, we want about 95\% of the data to be encapsulated within the light grey lines. Thus, interpreting the graphs, we see a lot of data that stretches outside of the confidence bounds within both graphics. If one were to collect more data in the beer dataset we may be able to analyze this further, but as it is there seems to be not enough samples of very good beer to create a complete image of the ranking process in this dichotomous way. \index{Binned Residuals}
 
@@ -1569,15 +1425,7 @@ print(rl1)
 
 
 
-
-
-
-
 %----------
-
-
-
-
 
 
 
@@ -1827,19 +1675,6 @@ Overall, the AIC, BIC, Log Likelihood, and Deviance are all great indicators for
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 \clearpage
 \subsection{Ordered Logistic Modeling:}
 
@@ -1972,8 +1807,6 @@ texreg::screenreg(mod1,
 @
 
 
-
-
 \noindent \textbf{Model Interpretation} \\
 Using a different dataset, assume R gives us the following raw output involving giving aid to Katrina relief:
 \begin{verbatim}
@@ -2013,15 +1846,7 @@ The more categories we add in initial data collection the easier it becomes to m
 
 
 
-
-
-
-
-
 %------
-
-
-
 
 
 
@@ -2123,7 +1948,7 @@ Survival models (event history models) take data that occurs over a duration of 
 library(survminer)
 library(survival)
 
-# Expoential:
+# Exponential:
 expmod <- survreg(Surv(te, censor) ~ wc + dem + pvote + south,
                   data = dat, dist = "exponential")
 
@@ -2186,7 +2011,8 @@ In interpretation, The exponential model assumes the scale parameter to be unifo
 <<survmodel, prompt=TRUE, eval=FALSE>>=
 #Survival GGplot Example (not used to replicate above, code as template)
 
-    ggsurvplot(fit, data = dataset)
+ggsurvplot(fit, data = dataset)
+
 ggsurvplot(fit, data = dataset,
                 surv.median.line = "hv",  # Add medians survival
                         # Change legends: title & labels
@@ -2233,17 +2059,6 @@ Perhaps as an additional note, a unique problem to survival modelings is the iss
 
 \noindent \textit{iid:} \\
 The GLM nature of the survival model does not give it a free pass on the independent and individually distributed (iid) assumption. In fact, much of the time in dealing with survival-type theories (bill-survival, authoritarian regimes, cancer patients) we deal with responses that are not independent of one-another. A doctor seeing cancer patients, for example, may see twenty patients and as they become fully treated or pass away he may have more time to distribute to other patients. These patients may even meet and have group-therapy among themselves (just as bills may co-vary and authoritarians interlock in strategy)! Further methodology (networks for instance) can help circumvent these concerns.
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -2361,9 +2176,8 @@ Mapping graphs as shown in full in Section 7, are a intuitive and attractive way
 \clearpage
 \section{Machine Learning}
 
-Machine learning has come to be popular among data scientists, chiefly for its ability to remove the researcher and have more streamlined ways to emperically examine categorization and estimands. By definition there are two types of machine learning, supervised and unsupervised. The prior includes researcher influence, classifications and penalizing regressions. The latter includes algarithmic detections of classifications and estimands through a (dare I say) machine-like process.
+Machine learning has come to be popular among data scientists, chiefly for its ability to remove the researcher and have more streamlined ways to empirically examine categorization and estimands. By definition there are two types of machine learning, supervised and unsupervised. The prior includes researcher influence, classifications and penalizing regressions. The latter includes algorithmic detection of classifications and estimands through a (dare I say) machine-like process.
 
-\
 
 \textit{Types of Machine Learning}
 \begin{equation}\nonumber
@@ -2373,7 +2187,7 @@ Machine learning has come to be popular among data scientists, chiefly for its a
 \end{cases}
 \end{equation}
 
-A large benefit of this section will come in making synthetic data to test some fundemental assumptions of the GLM, all before introducing machine learning as a way to help us reach similar or better conclusions without the threat of researcher bias and ensured reproducability. For this reason, even an novice to graduate methods may find helpful the code and testing that exists in this section, as I have.
+A large benefit of this section will come in making synthetic data to test some fundamental assumptions of the GLM, all before introducing machine learning as a way to help us reach similar or better conclusions without the threat of researcher bias and ensured reproducability. For this reason, even an novice to graduate methods may find helpful the code and testing that exists in this section, as I have.
 
 \subsection{Simulation and Replication}
 
@@ -2438,7 +2252,7 @@ for (i in 1:1000)
 
 @
 
-Next, we will do the same simulation but removing x_2 in our model. Then we will plot each of the variables from the two simulations.The code for plotting has been witheld to save space on page, but it is done using ggplot and a function to make the plots appear next to one another.
+Next, we will do the same simulation but removing $x_2$ in our model. Then we will plot each of the variables from the two simulations. The code for plotting has been witheld to save space on page, but it is done using ggplot and a function to make the plots appear next to one another.
 
 <<ThenextSimulationML>>=
 # Removing x_2 now
@@ -2516,8 +2330,7 @@ p4 <- qplot(simulation2[,2])+
   xlab(expression(paste("Simulated ", beta[1])))
 
 
-
-#Multiplot Function, This was created with help from the RBloggers Community
+# Multiplot Function, This was created with help from the RBloggers Community
 
 multiplot <- function(..., plotlist=NULL, file, cols=1, layout=NULL) {
   library(grid)
@@ -2775,7 +2588,7 @@ mean(abs(error))
 ## [1] 2.415841
 @
 
-Using just our training data with the linear model we see our root mean squared error and mean absolute error are about around 3, pretty low. More intutitvely, our errors when plotted are normally distributed with a mean of zero. We can revisit this with a LASSO and Ridge regression to penalize us for having so many parameters for so few observations. Using penalized regression is especially helpful with models that have a large number of predictors relative to our sample size. The ``elastic net'' is particularly useful because it ``switches'' between two other penalties (using $\alpha$), the ``LASSO'' (Least Aboslute Shrinkage and Selection Operator uses a squared transformation) and “Ridge” (using the absolute value of our coefficents), applying both of these in an ever-checking gradient descent down our distribution to the point of least error. Ideally we would like a smooth distribution in this process instead of quick-changing erratic distribution and the elastic net provides the previously mentioned functions to accomplish this via the transformation of our coecents as they travel farther away from zero.\index{LASSO} \index{Ridge} \index{Elastic Net}
+Using just our training data with the linear model we see our root mean squared error and mean absolute error are about around 3, pretty low. More intuitively, our errors when plotted are normally distributed with a mean of zero. We can revisit this with a LASSO and Ridge regression to penalize us for having so many parameters for so few observations. Using penalized regression is especially helpful with models that have a large number of predictors relative to our sample size. The ``elastic net'' is particularly useful because it ``switches'' between two other penalties (using $\alpha$), the ``LASSO'' (Least Absolute Shrinkage and Selection Operator uses a squared transformation) and “Ridge” (using the absolute value of our coefficients), applying both of these in an ever-checking gradient descent down our distribution to the point of least error. Ideally we would like a smooth distribution in this process instead of quick-changing erratic distribution and the elastic net provides the previously mentioned functions to accomplish this via the transformation of our coefficients as they travel farther away from zero.\index{LASSO} \index{Ridge} \index{Elastic Net}
 
 Let's begin with the LASSO:
 
@@ -2879,7 +2692,6 @@ qplot(b, ridge_beta[-1])+
 
 Our ridge regression shows less variability, our training set $y$ values and ridge predicted values are more tightly linear, and there is less variability in our comparative $\beta$ values in the plot above. This is interesting and is perhaps explained in the difference between the mathematical formula between Ridge and LASSO themselves (letting $\lambda$ control the amount of regulation in gradient descent):
 
-\
 
 \textbf{Ridge:} ($\alpha = 0$ )
 
@@ -2893,9 +2705,8 @@ Our ridge regression shows less variability, our training set $y$ values and rid
 \lambda \sum_{j=1}^{p} (\alpha) | \beta_j |
 \end{equation}
 
-We seek a set of sparse solutions because we beleive that many of our 100 $\beta_j$ paramenters should be zero; a large enough $\lambda$ will set these exactly or near zero for us! We saw our LASSO $\lambda$ values become higher than our Ridge $\lambda$ values; this is because, unlike Ridge, our $\beta_{\lambda}^{\text{lass}}}$ lasso values have no closed form – allowing more varriance. A third potential option is to allow our alpha parameter varry between zero and one eectively using both of these penalties and giving us the elastic net (litterally just adding LASSO and Ridge).
+We seek a set of sparse solutions because we believe that many of our 100 $\beta_j$ parameters should be zero; a large enough $\lambda$ will set these exactly or near zero for us! We saw our LASSO $\lambda$ values become higher than our Ridge $\lambda$ values; this is because, unlike Ridge, our $\beta_{\lambda}^{\text{lass}}$ lasso values have no closed form – allowing more variance. A third potential option is to allow our alpha parameter vary between zero and one effectively using both of these penalties and giving us the elastic net (literally just adding LASSO and Ridge).
 
-\
 
 \textbf{Elastic Net:} ($0 < \alpha < 1$)
 
@@ -2916,7 +2727,7 @@ mod_enet = train(trainy~., method = "glmnet",
 # alpha used was .9 and lambda ended up being 1.
 @
 
-This elastic net will give us similarlly better results with a varrying $\alpha$ along with it. However, these models work best for when we have data with many parameters, here we have only started with 100 (``only''). Let's ramp up the number of perameters (P) and really put these models to the test. I'll repost the DGP in full.
+This elastic net will give us similarlly better results with a varrying $\alpha$ along with it. However, these models work best for when we have data with many parameters, here we have only started with 100 (``only''). Let's ramp up the number of perameters (P) and really put these models to the test. I'll report the DGP in full.
 
 <<DGPforML2, prompt=TRUE>>=
 N <- 1000
@@ -2998,12 +2809,11 @@ qplot(b, enet_beta[-1])+
           axis.title = element_text(size=14))
 @
 
-Setting up a standard linear model with more estimators than number of observations is a fundemental assumption violation; it over-inates our coecents and gives us essentially no error. This can be really misleading to readers, and similar to how one might penalize their general linear models utilizing AIC and BIC we can use the elastic net to show more variance in our estimates and report our $\lambda$ values which are much larger than before ($\lambda$ = 10). Penalized regression is the intellectually honest thing to do when you have a model with a large number of parameters, the elastic net in this case has showed some uncertainty in our estimates whereas the normal model inflated our certainty (reported an $R^2$ of 1).
-
+Setting up a standard linear model with more estimators than number of observations is a fundamental assumption violation; it over-inflates our coefficients and gives us essentially no error. This can be really misleading to readers, and similar to how one might penalize their general linear models utilizing AIC and BIC we can use the elastic net to show more variance in our estimates and report our $\lambda$ values which are much larger than before ($\lambda$ = 10). Penalized regression is the intellectually honest thing to do when you have a model with a large number of parameters, the elastic net in this case has showed some uncertainty in our estimates whereas the normal model inflated our certainty (reported an $R^2$ of 1).
 
 \subsection{Support Vector Models, Regression Trees}
 
-Support Vector Models (SVMs) can be used to analize data with the least error given unsupervised machine learning. Many of these models require super computing, or a careful consideration of the data and the underlying calculus going on. Conisder the following DGP: ballanced data, split into a test set and training set. \index{DGP} \index{Test Set Training Set} \index{library() }
+Support Vector Models (SVMs) can be used to analyze data with the least error given unsupervised machine learning. Many of these models require super computing, or a careful consideration of the data and the underlying calculus going on. Consider the following DGP: balanced data, split into a test set and training set. \index{DGP} \index{Test Set Training Set} \index{library() }
 
 <<SVMMLDGP, message=FALSE, warning=FALSE>>=
 # Need a lot of packages for this:
@@ -3066,9 +2876,9 @@ linear.svm.bal$results$Accuracy
 
 @
 
-Dangerously simple, this is how an SVM is ran, and could be ran given the need for a polynomial or radial kernal. The microbenchmark package is included above for any timing related concerns conduciting research with more advanced kernals.
+Dangerously simple, this is how an SVM is ran, and could be ran given the need for a polynomial or radial kernel. The microbenchmark package is included above for any timing related concerns conducting research with more advanced kernels.
 
-So what's going on exactly? Well, an SVM classifies data “better” by calculating the distances between points and a line (or plane) drawn through the data. The minimal errors between these points and the plane generates more reliable classification models. This is different from a strandard regression least-squared-errors approach because this uses Euclidean distance, which is different from a vertically measured residual (commonly seen in linear models). Beyond this, we can specify various kernals to attempt to classify our data throughout various dimensions -- something the standard linear model would struggle to accomplish. Overall our data seem to classify about the same as the elastic net for ballanced data.
+So what's going on exactly? Well, an SVM classifies data “better” by calculating the distances between points and a line (or plane) drawn through the data. The minimal errors between these points and the plane generates more reliable classification models. This is different from a standard regression least-squared-errors approach because this uses Euclidean distance, which is different from a vertically measured residual (commonly seen in linear models). Beyond this, we can specify various kernels to attempt to classify our data throughout various dimensions -- something the standard linear model would struggle to accomplish. Overall our data seem to classify about the same as the elastic net for balanced data.
 
 Another option, however, is to use classification trees for visualization and confirmation of results paired with other machine learning techniques. Below is code to accomplish this if you so choose:
 
@@ -3097,12 +2907,10 @@ post(tree.bal,
 # selecting the best one! (intutively a form of advanced bootstrapping!)
 # prune the tree, by the error that was previously generated above
 
-
 # prune function:
 ptree.bal <- prune(tree.bal,
                    cp=tree.bal$cptable[which.min(tree.bal$cptable[,"xerror"]),
                                        "CP"])
-
 # plot the pruned tree
 plot(ptree.bal, uniform = TRUE,
      main ="Pruned Classification Tree for Ballanced Data")
@@ -3117,10 +2925,7 @@ Overall, regression trees (here they are classification trees) can be used to se
 Those familiar to machine learning will note the similarity between these models to principle components analysis (PCA) -- because it is very close.
 
 
-
 \subsection{K Nearest Neighbors, Nearest Means}
-
-
 
 
 %--------------------------------------
@@ -3174,7 +2979,7 @@ Finally, we have a third operator to help us and that is the ``expectations'' or
 Ey(t) = y(t+1)
 \end{equation}
 
-Difference equations, then, are the intregate combination of these operators to produce particular equalities. Standard regression models often do not consider these nuances, but the study of difference equations helps us understand the dynamics that are implicit in our time series related equations.
+Difference equations, then, are the integrate combination of these operators to produce particular equalities. Standard regression models often do not consider these nuances, but the study of difference equations helps us understand the dynamics that are implicit in our time series related equations.
 
 
 \subsection{Identifying AR;MA - ACF, PACF}
@@ -3194,7 +2999,7 @@ Difference equations, then, are the intregate combination of these operators to 
 # devtools::install_github("hadley/haven")
 require(haven)
 ''
-df <- read_dta('C:/Users/Shing/Documents/^ Data + Projects/GodGap/TS Final/anes_timeseries_cdf.dta')
+df <- read_dta('C:/Users/mailk/OneDrive/Documents/R/Graduate_Methods_Handbook/data/anes_timeseries_cdf.dta')
 library(ggplot2)
 library(ggthemes)
 @
@@ -3304,7 +3109,7 @@ ggplot(as.data.frame(year), aes(year)) +
      geom_point(aes(y = libweek[,2]), color="cornflowerblue")+
      theme_fivethirtyeight()+
      ggtitle("1972-2012 [VCF0130:VCF0804]\nWeekly Religious Attendence by Partisanship (%)")+
-     labs(caption="Source: ANES Cumulative Data File, @KyleDavisOrg")
+     labs(caption="Source: ANES Cumulative Data File")
 
 @
 \end{center}
@@ -3359,7 +3164,7 @@ lagselection$selection
 
 A time series is said to be Granger-causal to an outcome if it (through lagged values) can provide statistically significant information about the outcome. This relationship is based upon two requirements: the cause happens prior to its effect (lagged values), and the cause provides unique information about the future values of its effect. These assumptions are in some-way built into nearly every cause inference test. \index{Vector Auto Regression}
 
-More specifically, a variable $X$ is Granger-causal to some $Y$ if the prediction of $Y_t$ based upon all of its past lagged values $(Y_{t-1}, Y_{t-2}, ...)$ and on lagged values of $X$ does better than just $Y$ based solely on it's past values alone. Put another way, granger-causality compares two predictive models (``worlds''), one where $X$ exists or where $Y$ is soley predictive upon itself. If the model which includes $X$ does better than the $Y$ being predictive of itself, $X$ is said to be Granger-causal of $Y$.
+More specifically, a variable $X$ is Granger-causal to some $Y$ if the prediction of $Y_t$ based upon all of its past lagged values $(Y_{t-1}, Y_{t-2}, ...)$ and on lagged values of $X$ does better than just $Y$ based solely on it's past values alone. Put another way, Granger-causality compares two predictive models (``worlds''), one where $X$ exists or where $Y$ is soley predictive upon itself. If the model which includes $X$ does better than the $Y$ being predictive of itself, $X$ is said to be Granger-causal of $Y$.
 
 <<gcause, warning=FALSE, message=FALSE, prompt=TRUE>>=
 var1 <- VAR(varData, p=4, type="const") # Indicating lag length 4 here.
@@ -3376,19 +3181,17 @@ var1 <- VAR(varData, p=4, type="const") # Indicating lag length 4 here.
 @
 
 
-This hypothesis test takes as the null that $X$ is not a Granger-cause of $Y$ , and as such, a p-value below some $\alpha$ level would lead one to reject the null hypothesis. These tests lead me to confirm that neither series is Granger-causal of the other. Placed back in theory, neither liberals nor conservatives follow each others trends in weekly church attendence -- indicating other sociological, political, or economic forces to be at play.
+This hypothesis test takes as the null that $X$ is not a Granger-cause of $Y$ , and as such, a p-value below some $\alpha$ level would lead one to reject the null hypothesis. These tests lead me to confirm that neither series is Granger-causal of the other. Placed back in theory, neither liberals nor conservatives follow each others trends in weekly church attendance -- indicating other sociological, political, or economic forces to be at play.
 
-A sign-and-significance reading of the Granger causality results conclude that, with 12 degrees of freedom, neither variation of the Granger-causaility test pass statistical significance to declare Granger-causality. The liberal timeseries onto the conservative series holds a p-value of .96, and the conservative series on the liberal holds a p-value of .34. Neither pass conventional .05 thresholds because the series better explains itself than other explains it with respect to the VAR with lag length four.
-
+A sign-and-significance reading of the Granger causality results conclude that, with 12 degrees of freedom, neither variation of the Granger-causality test pass statistical significance to declare Granger-causality. The liberal timeseries onto the conservative series holds a p-value of .96, and the conservative series on the liberal holds a p-value of .34. Neither pass conventional .05 thresholds because the series better explains itself than other explains it with respect to the VAR with lag length four.
 
 \textbf{Innovation Accounting} \index{Innovation Accounting}
 
+Innovation accounting can tell us how a VAR model responds to individual and orthogonalized shocks to each of the variables. This necessitates an assumption that our variable orderings matter as these shocks transition through our structure. However, orthogonalizing the equation allows for us to see the marginal effects, if we didn't do this we would allow the variable to increase its ripples throught the structure without controlling for confounds that could occur.
 
-Innovation accounting can tell us how a VAR model responds to individual and orthogonalized shocks to each of the variables. This necceciates an assumption that our variable orderings matter as these shocks transition through our structure. However, orthogonalizing the equation allows for us to see the marginal effects, if we didn't do this we would allow the variable to increase its ripples throught the structure without controlling for confounds that could occur.
+In this particular case I am not sure if the ordering of variables really matters much, I think respondents from  year-to-year don't really consider their parties past responses to church identification all that much. The figure below kind-of shows this, a moving around 0, insignificant on standard thresholds.
 
-In this particular case I am not sure if the ordering of variables really matters much, I think respondents from  year-to-year don't really consider their parties past responses to church identification all that much. The figure below kind-of shows this, a moving around 0, insignificant on starndard thresholds.
-
-Finally we move to looking at the forecast error variance decomposition, which allows for examining the effect of a particular variable to the future forecast error variance of another variable. To examine this, see the plots below the innovation accounting. These reveal that not one particular variable is contributing to forecast uncertainty. It is notable, however, that the FEVD did detect some variance explained by liberal church attendence on liberal church attendence in the first two horizons.
+Finally we move to looking at the forecast error variance decomposition, which allows for examining the effect of a particular variable to the future forecast error variance of another variable. To examine this, see the plots below the innovation accounting. These reveal that not one particular variable is contributing to forecast uncertainty. It is notable, however, that the FEVD did detect some variance explained by liberal church attendance on liberal church attendance in the first two horizons.
 
 
 \begin{center}
@@ -3410,11 +3213,9 @@ Finally we move to looking at the forecast error variance decomposition, which a
 
 \textbf{Summary, Concluding Thoughts}
 
-Overall, the purpose of this assignment was to test the relationship between two series and report how they may relate or not. I chose to test a fundemental underlying assumption of the ``god gap'' literature, for if these two series did influence one-another then all past examinations would need to take in to account this. However I have found little evidence of this occuring. This makes sense, survey responses of one partisan on church attendence are likely not to consider the other partisan and their historical activites. Rather, I think larger socioeconomic, historical, and geographical variables matter more at moving partisians to church at different levels over time. VAR too can be used to study these variables in realtion to the others.
+Overall, the purpose of this assignment was to test the relationship between two series and report how they may relate or not. I chose to test a fundamental underlying assumption of the ``god gap'' literature, for if these two series did influence one-another then all past examinations would need to take in to account this. However I have found little evidence of this occurring. This makes sense, survey responses of one partisan on church attendance are likely not to consider the other partisan and their historical activites. Rather, I think larger socioeconomic, historical, and geographical variables matter more at moving partisans to church at different levels over time. VAR too can be used to study these variables in relation to the others.
 
-While VAR allows for flexibility in helping determine the data generating process, proper treatment of the error term through lag-length detection, and easy transition to error correction models and OLS it is not without its disadvantages. If a series is nonstationary, statistical testing can become problematic.\footnote{Box-Steffensmeier, Janet M., John R. Freeman, Matthew P. Hitt, and Jon CW Pevehouse. Time series analysis for the social sciences. \textit{Cambridge University Press}, 2014.} If the series is cointegrated differencing may not solve these problems. Finally, as I mentioned before, I think a lot of different variables influence the widening and contraction of the god gap, however including all of them for all of their past lags may easily overfit the model if proper percautions are not used.\footnote{Many thanks to Benjamin Campbell for his help with the coding and theory behind these methods.}
-
-
+While VAR allows for flexibility in helping determine the data generating process, proper treatment of the error term through lag-length detection, and easy transition to error correction models and OLS it is not without its disadvantages. If a series is nonstationary, statistical testing can become problematic.\footnote{Box-Steffensmeier, Janet M., John R. Freeman, Matthew P. Hitt, and Jon CW Pevehouse. Time series analysis for the social sciences. \textit{Cambridge University Press}, 2014.} If the series is cointegrated differencing may not solve these problems. Finally, as I mentioned before, I think a lot of different variables influence the widening and contraction of the god gap, however including all of them for all of their past lags may easily overfit the model if proper precautions are not used.\footnote{Many thanks to Benjamin Campbell for his help with the coding and theory behind these methods.}
 
 %--------------------------------------
 \clearpage
@@ -3692,9 +3493,9 @@ plot(swn)
 
 swpr <- bipartite.projection(swn) # This makes the graph two one-mode networks
 # What is this? - instead of just 1:1 node relationships there are two overlapping networks
-#  and the realtionships we care about are between people of the other network.
+#  and the relationships we care about are between people of the other network.
 #   so now our edges are weighted, and igraph strangely calls this a nonbipartite graph? Why?
-#     Well now we don't really have one anymore! Instead we transfered the bipartide relationship
+#     Well now we don't really have one anymore! Instead we transferred the bipartide relationship
 #     To a weighted relationship using that projection function. - Weights are number of shared
 #     Event interactions. For more, check out this cool illistration:
 #   https://en.wikipedia.org/wiki/Bipartite_network_projection#/media/File:Bipartite_network_projection.png
@@ -3705,12 +3506,12 @@ cor(swi) # Correlation of our matrix object to see structural position relations
 # Note that Flora and Oliva are structurally similar here and elsewhere
 
 
-#  Going beyond Pearson correlation to see structural simularity:
-# dissimularity measure (-1 to cor).
+#  Going beyond Pearson correlation to see structural similarity:
+# dissimilarity measure (-1 to cor).
 as.dist(1-cor(swi), upper=TRUE) # Upper = T just prints both sides of diag. Doesn't effect analysis
 # We want to move away from just comparing two individuals, but instead find entire clusters
-#  of attendants that exibit similar behavior. And then be able to analyize that more interesting
-#  result. But to do this, we have to find how nodes are disimilar, so this data is more
+#  of attendants that exibit similar behavior. And then be able to analyze that more interesting
+#  result. But to do this, we have to find how nodes are dissimilar, so this data is more
 #  valuable to find these clusters! Note we have a wider range now because with the -1
 #  we could have a 1 - a negative -1, or 1+1 (1- -1).
 
@@ -3718,9 +3519,9 @@ swdend <- hclust(as.dist(1-cor(swi))) # Standard clustering tool
 plot(swdend) # So how do we read this Dendrogram?
 # Height is our value, and as we parse that value down, it's grouped into values.
 #  Similar values become grouped under other values.
-#  So, read from the top down, initial seperation was around the 1.0 mark, developing two
+#  So, read from the top down, initial separation was around the 1.0 mark, developing two
 #  clusters, which have unique values apart from one another. as more and more nodes find
-#  simularity. For more:
+#  similarity. For more:
 #  https://www.displayr.com/what-is-dendrogram/#:~:text=How%20to%20read%20a%20dendrogram,objects%20are%20A%20and%20B.
 
 
@@ -3782,7 +3583,7 @@ plot(flo_m,vertex.color=cutree(flo_dend, k=4))
 
 \subsection{Diads and Triads}
 
-\being{center}
+\begin{center}
 <<Diad_Triad, warning=FALSE, message=FALSE, prompt=TRUE, out.width='6in'>>=
 
 library(ergm)
@@ -3884,7 +3685,7 @@ triad.census(rand)
 
 \subsection{Network Centrality}
 
-Measuring the centrality of a network is indicating which node(s) are most central, or critical, to the network remaining the shape it is in. A central node, for example, can be the person inbetween groups, or just a well connected node in general. There are many ways to measure and detect network centrality, some of which I've studied are listed below. Later in this section we will compare each of these finding that they typically correlate with one another (good!). Cannon advice is to report all of the relevant measures of centrality rather than spending too much time choosing any particular one.
+Measuring the centrality of a network is indicating which node(s) are most central, or critical, to the network remaining the shape it is in. A central node, for example, can be the person between groups, or just a well connected node in general. There are many ways to measure and detect network centrality, some of which I've studied are listed below. Later in this section we will compare each of these finding that they typically correlate with one another (good!). Cannon advice is to report all of the relevant measures of centrality rather than spending too much time choosing any particular one.
 
 \textit{Borgatti (2005):}
 \begin{longtable}{m{2.8cm}  m{4cm} m{5.7cm} m{4.7cm}  }
@@ -4500,14 +4301,14 @@ assortativity(g_kar, c(rep(1,16), rep(2,18)))
 #      that we calculated above.
 ## [1] 0.7456716
 
-par(mfrow=c(1,2))
-plot(g_kar, vertex.color = c(rep(1,16), rep(2,18)), main = "Fabricated")
-plot(karate, main = "Real")
 
-image(g_kar[]) ## quick way to visualize the adjacency matrix.
+# plot(g_kar, vertex.color = c(rep(1,16), rep(2,18)), main = "Fabricated")
+# plot(karate, main = "Real")
+
+# image(g_kar[]) ## quick way to visualize the adjacency matrix.
 #   Remember that graph[] calls the adjacency matrix
 
-image(karate[][order(as.vector(order(V(karate)$Faction))),])
+# image(karate[][order(as.vector(order(V(karate)$Faction))),])
 @
 \end{center}
 
@@ -4539,7 +4340,7 @@ image(karate[][order(as.vector(order(V(karate)$Faction))),])
 
 
 \hfill \\
-\subsubsection{The "Don't Know" Option:}
+\subsubsection{The ``Don't Know" Option:}
 
 
 
@@ -4578,7 +4379,7 @@ Certainly most epidemics are stochastic in nature, that is, acting with a degree
 
 \subsection{Deterministic Epidemic Modeling}
 
-Consider the following simplified epidemic model: the SIR model. This model assumes a simplified epidemic where susceptibles (S) become infected (I) and then either become recovered or otherwised removed (R). This model can be complicated, adding conditional variables along the way (which would certainly be the case for the social sciences) but for now we will work with the following SIR model: a compartmented type model in theory. \index{SIR}
+Consider the following simplified epidemic model: the SIR model. This model assumes a simplified epidemic where susceptible (S) become infected (I) and then either become recovered or otherwise removed (R). This model can be complicated, adding conditional variables along the way (which would certainly be the case for the social sciences) but for now we will work with the following SIR model: a compartmented type model in theory. \index{SIR}
 
 \begin{center}
 
@@ -4612,9 +4413,9 @@ The other thing to mention is that for these models we do not consider ``time'' 
 
 The Reed-Frost Model is the simplest example of a deterministic epidemic model, and is typically appicable for small-n scenarios (like a small household infection for example).
 
-Consider $q$ to be the probability of escaping infection from a single infected individual by a given suseptible. $X_i$ and $Y_i$ are the number of susceptibles and infectives at a given generational time.
+Consider $q$ to be the probability of escaping infection from a single infected individual by a given susceptible. $X_i$ and $Y_i$ are the number of susceptible and infectives at a given generational time.
 
-The logic behind this model is to map out all possiblities that could occur for a particular n-size and then calculate the probability of any one possibiliy occuring. Or mathematically:
+The logic behind this model is to map out all possibilities that could occur for a particular n-size and then calculate the probability of any one possibility occurring. Or mathematically:
 
 \begin{align*}
 & P(Y_{j+1} = y_{j+1} | X_0 = x_0, Y_0 = y_0 , ... , X_j = x_j, Y_j =y_j) \\
@@ -4637,9 +4438,9 @@ The final result includes (in the first module) a binomial of individual infecte
 
 \subsection{How can Formal Modeling Help?} \index{DAG}
 
-The late statistician George Box once said ``All models are wrong, but some are useful.'' Formal Modeling (which I'll sometimes call game theory synonymously) can be used to spell out the the particular assumptions leading to an emperical test. Instead of writing long-hand the history, studies, and assumptions that go alongside our theory we explicity state relevent ``variables'' in math notation leading right up to a logical emperical test. This has many obvious benefits, chiefly it diciplines one to be explicit with their assumptions (similar, but more involved than DAG plots from the causal inference chapter). Also, this allows for clear objections and revisions to be made by future scholarship. Indeed many models, such as Downs' ``Median Voter Theorem'' has been revised multiple times given the clear writing from the original mathematical formal modeling.
+The late statistician George Box once said ``All models are wrong, but some are useful.'' Formal Modeling (which I'll sometimes call game theory synonymously) can be used to spell out the the particular assumptions leading to an empirical test. Instead of writing long-hand the history, studies, and assumptions that go alongside our theory we explicitly state relevant ``variables'' in math notation leading right up to a logical empirical test. This has many obvious benefits, chiefly it disciplines one to be explicit with their assumptions (similar, but more involved than DAG plots from the causal inference chapter). Also, this allows for clear objections and revisions to be made by future scholarship. Indeed many models, such as Downs' ``Median Voter Theorem'' has been revised multiple times given the clear writing from the original mathematical formal modeling.
 
-Of course Downs and others who use formal modeling are very frequently ``wrong,'' but the purpose of formal modeling is to do things more systematically and with more academic rigor than prior. Works of this nature become foundational, having long shelf-lifes, and become solid building blocks for future scholarship to sculpt.
+Of course Downs and others who use formal modeling are very frequently ``wrong,'' but the purpose of formal modeling is to do things more systematically and with more academic rigor than prior. Works of this nature become foundational, having long shelf-lives, and become solid building blocks for future scholarship to sculpt.
 
 
 \subsection{Components of Game Theory}
@@ -4649,7 +4450,7 @@ Of course Downs and others who use formal modeling are very frequently ``wrong,'
 \noindent \textbf{Utility, First Best, Nash Equilibrium, Comparative Static}
 
 \index{utility}
-\noindent To begin, utility is one's preferences for one thing over another. For example, prefering guns to butter:
+\noindent To begin, utility is one's preferences for one thing over another. For example, preferring guns to butter:
 
 $$ u_i(\textit{Guns}) = 10 ~~~~ u_i(\textit{Butter}) = 1 $$\\
 
@@ -4687,13 +4488,13 @@ The \textit{First Best} is the bolded sections given the best strategic decision
     \end{tabular}
   \end{table}
 
-The \textit{Nash Equilibrium} is the ``first best of the first bests'' or where all players reach an equilibrium around one set of strategies -- even though they may not have the highest pay-off or reward for a particular player. Note that the process here for solving a 3x3 to NxN matrix is similar to the standard 2x2. Also the Nash Eqilibrium(a) can be solved algebraicly as well; graphically it is the intersection of two lines which represent the strategic continum a player has. A Nash Eqilibrium(a) can be notated by any given variable: $\theta^*$.
+The \textit{Nash Equilibrium} is the ``first best of the first bests'' or where all players reach an equilibrium around one set of strategies -- even though they may not have the highest pay-off or reward for a particular player. Note that the process here for solving a 3x3 to NxN matrix is similar to the standard 2x2. Also the Nash Equilibrium(a) can be solved algebraically as well; graphically it is the intersection of two lines which represent the strategic continuum a player has. A Nash Equilibrium(a) can be notated by any given variable: $\theta^*$.
 
 \index{subgame perfect Nash Equilibrium}
 A variation of the Nash Equilibrium is the \textit{subgame perfect Nash Equilibrium}, or the regular Nash Eqilibria per subgame of a longer, more dynamic, game.
 
 \index{comparative static}
-Another term, the \textit{comparative static} is the component of a model that connects our theory to our emperics through game-theoretic reasoning. Typically the comparative static is deployed in papers to test hypotheses, arrive at novel findings, argue for an expansion of a particular model or theory, or just to describe a phenomenon with more precision than before.
+Another term, the \textit{comparative static} is the component of a model that connects our theory to our empiricism through game-theoretic reasoning. Typically the comparative static is deployed in papers to test hypotheses, arrive at novel findings, argue for an expansion of a particular model or theory, or just to describe a phenomenon with more precision than before.
 
 
 \subsection{Popular Games as Examples}
@@ -4717,7 +4518,8 @@ That is,
 
 \begin{equation}
 \text{Pr}(\text{data}| H_0 \text{true}) = \text{p-values}
-
+\end{equation}
+\begin{equation}
 \text{Pr}(H_0 \text{true} | \text{data}) =/= \text{p-values}
 \end{equation}
 
@@ -4726,12 +4528,13 @@ Effect sizes will be calculated in the sections that follow.
 
 \subsection{The Art of Comparison}
 
-In academia especially, articles are compared and contrasted against each other all time time. This usually occurs in an articles ``literuature review'' section - often around a topic of a theoretically interesting puzzle or unanswered question that the research hopes to illuminate for the reader. However, these sorts of compartisons are often without recognition of bias, random sampling of selected readings, or without recognition of elite scholars being able to more easily market their results. In contrast to literary comparisons meta-analyses apply a more quantitative approach to article examination of a topic and often result in similar advantages.
+In academia especially, articles are compared and contrasted against each other all time time. This usually occurs in an articles ``literature review'' section - often around a topic of a theoretically interesting puzzle or unanswered question that the research hopes to illuminate for the reader. However, these sorts of comparisons are often without recognition of bias, random sampling of selected readings, or without recognition of elite scholars being able to more easily market their results. In contrast to literary comparisons meta-analyses apply a more quantitative approach to article examination of a topic and often result in similar advantages.
 
-To highlight this point, an article by Bushman and Rothstein (2012) notes that often biases occur when one group is given sugguestive and attractive paper titles when others get dull scientific sounding titles. If studnets receive brief training in meta-analysis these biases go away. The article hits home the importance of empericial literature comparisons when something as small as the article title can bias the interpretation of an articles results.
+To highlight this point, an article by Bushman and Rothstein (2012) notes that often biases occur when one group is given suggestive and attractive paper titles when others get dull scientific sounding titles. If students receive brief training in meta-analysis these biases go away. The article hits home the importance of empirical literature comparisons when something as small as the article title can bias the interpretation of an articles results.
 
 \subsection{Examples}
 
+Coming soon.
 
 %-----------------------------------------------------------------------
 \clearpage
@@ -4740,10 +4543,6 @@ To highlight this point, an article by Bushman and Rothstein (2012) notes that o
 
 \begingroup
 	\nocite{*}
-
-	%\setlength{\bibsep}{12pt}
-
-	%\setstretch{2}
 
 	\bibliography{GLM}
 
