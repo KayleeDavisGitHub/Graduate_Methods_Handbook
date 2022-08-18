@@ -4368,61 +4368,8 @@ assortativity(g_kar, c(rep(1,16), rep(2,18)))
 
 \subsection{Network Modeling}
 
-%--------------------------------------
-\clearpage
-\section{Field Research Design: The Qualitative Alternative}
 
-\subsection{Qualitative Value}
-
-\subsection{Advice, Tools, Resources}
-
-\subsection{How to Use Qualitative Evidence}
-
-
-
-%----------------------------------------------------------------------------------
-\clearpage
-\section{Survey Design}
-\hfill \\
-
-\subsection{The Survey Experiment}
-
-\subsection{Types of Questions}
-
-\subsection{Psychology of Design}
-
-
-
-\hfill \\
-\subsubsection{The ``Don't Know" Option:}
-
-
-
-\subsection{Useful Rules of Thumb}
-
-\subsection{Research on Survey Biases}
-
-
-\clearpage
-%-----------------------------------------------------------------------------------
-
-
-%--------------------------------------
-
-\clearpage
-\section{Content Analysis}
-
-\subsection{The Protocol}
-
-\subsection{The Coding Sheet}
-
-\subsection{Reliability Measurements}
-
-\subsection{Analysis}
-
-
-
-%--------------------------------------
+% --------------------------------------
 
 \clearpage
 \section{Stochastic Epidemic Modeling}
@@ -4550,18 +4497,11 @@ A variation of the Nash Equilibrium is the \textit{subgame perfect Nash Equilibr
 \index{comparative static}
 Another term, the \textit{comparative static} is the component of a model that connects our theory to our empiricism through game-theoretic reasoning. Typically the comparative static is deployed in papers to test hypotheses, arrive at novel findings, argue for an expansion of a particular model or theory, or just to describe a phenomenon with more precision than before.
 
-
+\hfill \\
 \subsection{Popular Games as Examples}
 
 
-
-
-
-
-\subsection{Structuring Your Own Formal Model}
-
-
-%-----------------------------------------------------------------------
+% ---------------------------------------------------------------------
 \clearpage
 
 \section{Meta-Analysis}
@@ -4580,7 +4520,7 @@ That is,
 Effect sizes will be calculated in the sections that follow.
 
 
-\subsection{The Art of Comparison}
+\subsection{Theory}
 
 In academia especially, articles are compared and contrasted against each other all time time. This usually occurs in an articles ``literature review'' section - often around a topic of a theoretically interesting puzzle or unanswered question that the research hopes to illuminate for the reader. However, these sorts of comparisons are often without recognition of bias, random sampling of selected readings, or without recognition of elite scholars being able to more easily market their results. In contrast to literary comparisons meta-analyses apply a more quantitative approach to article examination of a topic and often result in similar advantages.
 
@@ -4588,7 +4528,45 @@ To highlight this point, an article by Bushman and Rothstein (2012) notes that o
 
 \subsection{Examples}
 
-Coming soon.
+%--------------------------------------
+\clearpage
+\section{Field Research Design: Qualitative Methods}
+
+\hfill \\
+\subsection{How to Use Qualitative Evidence}
+
+\hfill \\
+\subsection{Survey Design}
+
+\hfill \\
+\subsubsection{Survey Experiments}
+
+\hfill \\
+\subsubsection{Psychology of Design}
+
+\hfill \\
+\subsubsection{The ``Don't Know" Option:}
+
+\hfill \\
+\subsubsection{Research on Survey Biases}
+
+\hfill \\
+\subsection{Content Analysis}
+
+\hfill \\
+\subsubsection{The Protocol}
+
+\hfill \\
+\subsubsection{The Coding Sheet}
+
+\hfill \\
+\subsubsection{Reliability Measurements}
+
+[Krippendorf's Alpha]
+
+\hfill \\
+\subsection{Advice, Tools, Resources}
+
 
 %-----------------------------------------------------------------------
 % \clearpage
