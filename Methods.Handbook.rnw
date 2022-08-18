@@ -4536,13 +4536,10 @@ To highlight this point, an article by Bushman and Rothstein (2012) notes that o
 \subsection{How to Use Qualitative Evidence}
 
 \hfill \\
-\subsection{Survey Design}
+\subsection{Survey Design Psychology}
 
 \hfill \\
 \subsubsection{Survey Experiments}
-
-\hfill \\
-\subsubsection{Psychology of Design}
 
 \hfill \\
 \subsubsection{The ``Don't Know" Option:}
@@ -4563,6 +4560,9 @@ To highlight this point, an article by Bushman and Rothstein (2012) notes that o
 \subsubsection{Reliability Measurements}
 
 [Krippendorf's Alpha]
+
+\hfill \\
+\subsubsection{The Use of Drones}
 
 \hfill \\
 \subsection{Advice, Tools, Resources}
