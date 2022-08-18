@@ -60,7 +60,8 @@
 \usepackage{makeidx}
 
 %% Making a Bibliography:
-\usepackage{natbib}
+% \usepackage{natbib}
+% \bibliographystyle{apsr}
 % Reference customization is included in the reference section.
 
 %% Footnote Formatting
@@ -116,7 +117,7 @@ The purpose of this book is to provide an overview and tutorial for executing an
 
 Beyond the more stream-lined methods courses, there are sections on causal inference, time series modeling, network analysis, and even brief sections devoted to courses on qualitative methods and survey design. This document includes hyperlinks for the table of contents and index for quick access to information. The scope of this book will be only in R, with rare mentions to other tools like Tableau, Power BI, Python, and SQL.
 
-The book follows various datasets and topics from beer rankings to popular Reddit posts. I have tried my best to include copies of all data tables at the GitHub repository below. If the data is not available there the source will usually be mentioned in the text.
+The book follows various data sets and topics from beer rankings to popular Reddit posts. I have tried my best to include copies of all data tables at the GitHub repository below. If the data is not available there the source will usually be mentioned in the text.
 
 \begin{center}
 \url{https://github.com/KyleDavisGithub/Graduate_Methods_Handbook/tree/master/data}
@@ -4590,40 +4591,14 @@ To highlight this point, an article by Bushman and Rothstein (2012) notes that o
 Coming soon.
 
 %-----------------------------------------------------------------------
-\clearpage
-\addcontentsline{toc}{section}{Further Reading:}
-
-
-\begingroup
-	\nocite{*}
-
-	\bibliography{GLM}
-
-	\bibliographystyle{apsr}
-
-\endgroup
-
-
-%\clearpage
-%\bibliographystyle{plain}
-%\bibliography{GLM.bib}
-%\printbibliography
-
-
-
-
+% \clearpage
+% \addcontentsline{toc}{section}{Further Reading:}
+% \bibliography{Methods_Handbook.bib}
 %-----------------------------------------------------------------------
+
 \clearpage
 \addcontentsline{toc}{section}{Index}
 \printindex
-
-
-
-
-
-
-
-
 
 
 
