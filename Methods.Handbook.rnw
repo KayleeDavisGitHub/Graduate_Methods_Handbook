@@ -1,5 +1,6 @@
-%%! Created by: Kyle E. Davis
-%   https://www.linkedin.com/in/kyledavisln/
+%%! Created by: Kaylee Davis
+%   https://www.linkedin.com/in/KayleeDavisIN
+
 
 %%! Document created using R's .rnw document editing, not LaTeX
 %   platform (although both should work). UTF-8
@@ -120,7 +121,7 @@ Beyond the more stream-lined methods courses, there are sections on causal infer
 The book follows various data sets and topics from beer rankings to popular Reddit posts. I have tried my best to include copies of all data tables at the GitHub repository below. If the data is not available there the source will usually be mentioned in the text.
 
 \begin{center}
-\url{https://github.com/KyleDavisGithub/Graduate_Methods_Handbook/tree/master/data}
+\url{https://github.com/KayleeDavisGitHub/Graduate_Methods_Handbook/tree/master/data}
 \end{center}
 
 Code for visualizations is included but sometimes hidden for readability. Ultimately this tutorial is less about replicating my results but to provide easily accessible tools for social scientists to use in their own research. That is, this document is only a first pass at a lot of these methods, to learn them better I would suggest using them and failing over and over until something is learned. This is also not an exhaustive list, I may reference something but never cover it later on. This only covers courses I've taken in my PhD program at Ohio State, but some of my insights from my work later on may be folded in to provide relevance for those in the business or government industry.
@@ -159,13 +160,13 @@ inverse_logit <- function(x){
 Overall, I hope this document helps someone. Feel free to connect with me over any issues or questions you might have. Any questions or concerns can be sent to me via LinkedIn or GitHub issue reporting.
 
 \begin{center}
-Created by Kyle Davis; https://www.linkedin.com/in/kyledavisln \\
+Created by Kaylee Davis; https://www.linkedin.com/in/KayleeDavisIN \\
 Summer 2017 --- \thedate ~(last updated)
 
 
 For the most recent version:
 
-\url{https://github.com/KyleDavisGithub/Graduate_Methods_Handbook}
+\url{https://github.com/KayleeDavisGitHub/Graduate_Methods_Handbook}
 \end{center}
 
 \clearpage
