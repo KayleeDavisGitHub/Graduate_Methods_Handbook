@@ -112,11 +112,11 @@
 
 
 \thispagestyle{empty}
-\noindent \textbf{Introduction: Purpose and Goal}\\
+\noindent \textbf{Graduate Methods Handbook}\\
 \hfill \\
-The purpose of this book is to provide an overview and tutorial for executing and critically interpreting various methods. A key contribution of this document is the ease to which you can switch between topics and search for concepts, this was its initial purpose in helping me study for exams and it may be usuful to you as a primer on graduate-level methods.
+The purpose of this book is to provide an overview and tutorial for executing and critically interpreting various methods. The key contribution of this book is the simplified primer to various data science topics with code for those interested in expanding and learning more.
 
-Beyond the more stream-lined methods courses, there are sections on causal inference, time series modeling, network analysis, and even brief sections devoted to courses on qualitative methods and survey design. This document includes hyperlinks for the table of contents and index for quick access to information. The scope of this book will be only in R, with rare mentions to other tools like Tableau, Power BI, Python, and SQL.
+Beyond the more stream-lined methods topics, there are sections on causal inference, time series modeling, network analysis, and even brief sections devoted to courses on qualitative methods. This book includes hyperlinks for the table of contents and index for quick access to information (useful for reviewing). The scope of this book will be only in R, with rare mentions to other tools like Tableau, Power BI, Python, and SQL.
 
 The book follows various data sets and topics from beer rankings to popular Reddit posts. I have tried my best to include copies of all data tables at the GitHub repository below. If the data is not available there the source will usually be mentioned in the text.
 
@@ -124,7 +124,7 @@ The book follows various data sets and topics from beer rankings to popular Redd
 \url{https://github.com/KayleeDavisGitHub/Graduate_Methods_Handbook/tree/master/data}
 \end{center}
 
-Code for visualizations is included but sometimes hidden for readability. Ultimately this tutorial is less about replicating my results but to provide easily accessible tools for social scientists to use in their own research. That is, this document is only a first pass at a lot of these methods, to learn them better I would suggest using them and failing over and over until something is learned. This is also not an exhaustive list, I may reference something but never cover it later on. This only covers courses I've taken in my PhD program at Ohio State, but some of my insights from my work later on may be folded in to provide relevance for those in the business or government industry.
+To learn the content in this book better I would suggest applying the basic ideas here to a project you care about, and just taking time to run code and teach others what you've done. This is also not an exhaustive list of statistical methods and I may reference something but never cover it later on. This only covers courses I've taken in my PhD program at Ohio State, but some of my insights from my work later on may be folded in to provide relevance for those in the business or government industry.
 
 Code in this document will appear as follows:
 
@@ -157,10 +157,10 @@ inverse_logit <- function(x){
 }
 @
 
-Overall, I hope this document helps someone. Feel free to connect with me over any issues or questions you might have. Any questions or concerns can be sent to me via LinkedIn or GitHub issue reporting.
+Overall, I hope this document helps someone. Feel free to connect with me over any issues or questions you might have. Any questions or concerns can be sent to me on LinkedIn or via GitHub issue reporting.
 
 \begin{center}
-Created by Kaylee Davis; https://www.linkedin.com/in/KayleeDavisIN \\
+Created by Kaylee Davis; \url{https://www.linkedin.com/in/KayleeDavisIN} \\
 Summer 2017 --- \thedate ~(last updated)
 
 
