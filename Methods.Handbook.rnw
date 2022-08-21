@@ -450,7 +450,7 @@ Typically we trade-off assumptions but can never completely eliminate them, only
 \item[3.] Probability exists only between 0 and 1, but never zero nor 1.
 \end{itemize}
 
-\noindent If we attempt to "lean-into" one of these assumptions to be able to measure it, we may come across additional assumptions like "parallel paths" or various representation and error assumptions. Some of these will be discussed in the Regression section of this book.
+\noindent If we attempt to ``lean-into'' one of these assumptions to be able to measure it, we may come across additional assumptions like ``parallel paths'' or various representation and error assumptions. Some of these will be discussed in the Regression section of this book.
 
 
 \subsection{Non-parametric Modeling}
