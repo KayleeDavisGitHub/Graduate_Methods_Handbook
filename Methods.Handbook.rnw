@@ -1109,30 +1109,35 @@ Two R packages that make this very easy is both ``mice'' and ``Zelig.'' The func
 
 <<imputation, prompt=TRUE, message=FALSE, warning=FALSE, echo=TRUE, eval=TRUE>>=
 library(mice)
-## Refering to the mice help file on imputation on medical data:
-#  Note that all head() is just showing the top row results.
+## Referring to the mice help file on imputation on medical data:
 
 # do default multiple imputation on a numeric matrix
 imp <- mice(nhanes)
-head(imp)  # Checking, lots of useful information in here
-
 @
 
 <<imp2, prompt=TRUE, message=FALSE, warning=TRUE>>=
 # Our data: note the NA missing values
-head(nhanes$bmi)
+head(nhanes$bmi, 3)
 
 # list the actual imputations for BMI, with predicted imputed values
-head(imp$imp$bmi)
+head(imp$imp$bmi, 3)
 
 # first completed data matrix, can save this for analysis
-head(complete(imp))
+head(complete(imp), 3)
 
 ## imputation on mixed data with a different method per column:
 # mice(nhanes2, meth=c('sample','pmm','logreg','norm'))
 ## This will give you all information per column like before.
 
 @
+
+\hfill \\
+\subsubsection{Outliers}
+
+
+\begin{center}
+\includegraphics[scale=.65]{Boxplot infographic}
+\end{center}
 
 
 \clearpage
@@ -1838,7 +1843,7 @@ This question has come up in the previous model's interpretation. What we obtain
 The more categories we add in initial data collection the easier it becomes to measure these latent spaces, for example age (a continuous variable) could be categorized as Teen, Young Adult, Adult, Elderly. Or, we could collect more data and have it by year - or by day! Measuring the difference between groups, say form Adult to Elderly, would take the probability at the stage of being an adult and everything greater than it ($k+1$) minus being Elderly and everything less than it ($k$) and then we find the effect from one threshold to the next. As this crude sketch shows, this is important because our distribution \textit{between} cut points could be interesting to understand.\\
 
 \begin{center}
-\includegraphics[scale=.65]{yeah}
+\includegraphics[scale=.65]{rate of change between points}
 \end{center}
 
 
