@@ -1134,13 +1134,39 @@ head(complete(imp), 3)
 \hfill \\
 \subsubsection{Outliers}
 
+An outlier is an observation which is significantly different than the main system or bulk of a data set. An outlier differs from a standard ``influential point'' but is instead a pejorative data point which needs to be addressed. How exactly we ``address'' outlier points is up to debate, and largely depends upon theory and the data set as a whole, including the data collection methodology. In many cases outliers are true observations that really are part of an overall data generation process (DGP). To remove this point, then, poses a theoretical problem. On one hand removing the point is essential for many mean-based analytic methods (mean, standard deviation, variance) but on the other hand removing the observation essentially deludes ourselves from observing the ``real world'' where these observations exist. In the exercise below we take the most standard outlier detection methodology, the interquartile range, then practice analyzing the particular outlier observation. As standard practice, whenever outliers are removed they should be careful examined, questioned qualitatively, and then communicated in any technical communication.\\
+
+Consider the graph below of a standard boxplot. These calculations are replicated mathematically in the code below for how to detect outlier data. \index{outlier} \index{boxplot}
 
 \begin{center}
-\includegraphics[scale=.65]{Boxplot infographic}
+\includegraphics[scale=.9]{Boxplot infographic}
 \end{center}
 
+<<outlier_detection, prompt=TRUE, message=FALSE, warning=FALSE>>=
+library(dplyr) # for filter later
+set.seed(1)    # set randomness of dgp for replication
 
-\clearpage
+# Generate random normal distribution data for test:
+df <- as.data.frame(rnorm(1000))
+df[1,] <- -14   # create outliers
+df[2,] <- 14
+
+# Compute first and third quartiles and IQR for our data:
+q1 <- quantile(df$`rnorm(1000)`, 0.25)
+q3 <- quantile(df$`rnorm(1000)`, 0.75)
+iqr <- q3 - q1
+
+# Calculate lower and upper cutoffs:
+lower <- q1 - 1.5 * iqr
+upper <- q3 + 1.5 * iqr
+
+# Filter data to find outliers given above cutoffs:
+df %>%
+     filter(df$`rnorm(1000)` < lower | df$`rnorm(1000)` > upper)
+
+@
+
+The above observations are then our outliers and we can address each of those and make calculated decisions on whether to remove or include them in our data set.
 
 \subsubsection{Model Specificiation, Distributional Functions}
 
