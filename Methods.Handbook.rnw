@@ -2034,10 +2034,7 @@ In interpretation, The exponential model assumes the scale parameter to be unifo
 \end{center}
 
 <<survmodel, prompt=TRUE, eval=FALSE>>=
-#Survival GGplot Example (not used to replicate above, code as template)
-
-ggsurvplot(fit, data = dataset)
-
+# Survival GGplot Example (not used to replicate above, code as template)
 ggsurvplot(fit, data = dataset,
                 surv.median.line = "hv",  # Add medians survival
                         # Change legends: title & labels
@@ -2050,12 +2047,12 @@ ggsurvplot(fit, data = dataset,
                 risk.table = TRUE,
                 tables.height = 0.2,
                 tables.theme = theme_cleantable(),
-                #Load "GrandBudapest" color scheme
+                # Load "GrandBudapest" color scheme
                 palette = c(wes_palette("GrandBudapest", 2,
                 type = "discrete")[1],
                 wes_palette("GrandBudapest", 2,
                 type = "discrete")[2]),
-                ggtheme = theme_bw()  #Change ggplot2 theme
+                ggtheme = theme_bw()  # Change ggplot2 theme
               )
 @
 
