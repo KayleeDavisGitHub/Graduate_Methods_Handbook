@@ -2230,8 +2230,7 @@ We find that our estimates in our model come very close to our defined beta esti
 simulation1 <- matrix(nrow = 1000, ncol = 6)
 # head(simulation1)  # Matrix of NA's to fill in simulated values later.
 
-for (i in 1:1000)
-{
+for (i in 1:1000) {
   N <- 1000
   x_1 <- rnorm(N, mean=5, sd=sqrt(16))
   x_2 <- rnorm(N, mean=5, sd=sqrt(16))
@@ -2265,8 +2264,7 @@ Next, we will do the same simulation but removing $x_2$ in our model. Then we wi
 simulation2 <- matrix(nrow = 1000, ncol = 4)
 # head(simulation2)
 
-for (i in 1:1000)
-{
+for (i in 1:1000) {
   N <- 1000
   x_1 <- rnorm(N, mean=5, sd=sqrt(16))
   x_2 <- rnorm(N, mean=5, sd=sqrt(16))
