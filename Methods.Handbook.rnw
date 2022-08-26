@@ -2399,7 +2399,7 @@ Let us start with just making a fun function that creates inverse logit estimand
 
 <<InverseLogitFunction>>=
 
-inv.logit = function(x){
+inv.logit = function(x) {
   if(!is.numeric(x)){return("Error 404: Numbers Not Found")}
   exp(x)/(1+exp(x))
 }
@@ -2416,8 +2416,7 @@ library(Rlab) # for rbern() function
 simulation5 <- matrix(nrow = 1000, ncol = 6)
 # head(simulation5)
 
-for (i in 1:1000)
-{
+for (i in 1:1000) {
   N <- 1000
   mu <- c(5,5)
   Sigma <- matrix( c(2, .5, .5, 3 ), nrow = 2, ncol= 2)
@@ -2469,26 +2468,26 @@ library(ggplot2)
 #  the multiplot function to place them at.
 
 #Intercept Simulation 5
-p1 <- qplot(simulation5[,1])+
-  theme_bw()+
-  ggtitle(expression(paste(beta[0], " Values (Sim. 5)")))+
+p1 <- qplot(simulation5[,1]) +
+  theme_bw() +
+  ggtitle(expression(paste(beta[0], " Values (Sim. 5)"))) +
   xlab(expression(paste("Simulated ", beta[0])))
 
 #X_1 Simulation 5
 p2 <- qplot(simulation5[,2])+
-  theme_bw()+
-  ggtitle(expression(paste( x[1], " Values (Sim. 5)")))+
+  theme_bw() +
+  ggtitle(expression(paste( x[1], " Values (Sim. 5)"))) +
   xlab(expression(paste("Simulated ", beta[1])))
 
 #X_2 Simulation 5
-p3 <- qplot(simulation5[,3])+
-  theme_bw()+
-  ggtitle(expression(paste( x[2], " Values (Sim. 5)")))+
+p3 <- qplot(simulation5[,3]) +
+  theme_bw() +
+  ggtitle(expression(paste( x[2], " Values (Sim. 5)"))) +
   xlab(expression(paste("Simulated ", beta[2])))
 
 
-predictm5 <- qplot(predict(m5))+
-  theme_bw()+
+predictm5 <- qplot(predict(m5)) +
+  theme_bw() +
   ggtitle("Pr. Values (Sim. 5)")
 
 # Custom multiplot function,
@@ -2549,12 +2548,12 @@ Let us first plot the correlation between the true $\beta$ and our model's predi
 <<betabetatestPenRegress1, out.width='5in'>>=
 library(ggplot2) # Graphing
 
-qplot(b, coef(m1)[-1])+
-     xlab( expression(paste("True " , beta)))+
-     ylab( expression(paste("Model " , hat(beta), " Values")))+
-     theme_bw()+
-     theme(axis.text=element_text(size=12),
-           axis.title=element_text(size=14,face="bold"))
+qplot(b, coef(m1)[-1]) +
+     xlab(expression(paste("True " , beta))) +
+     ylab(expression(paste("Model " , hat(beta), " Values"))) +
+     theme_bw() +
+     theme(axis.text = element_text(size=12),
+           axis.title = element_text(size=14, face="bold"))
 @
 \end{center}
 
@@ -2571,10 +2570,10 @@ error <- train_data$trainy - predict(trainmod)
 # head(error) # Check this makes sense
 
 # Ideally we want normality here, mean zero
-qplot(error, bins=50, fill=I("grey10"))+
-     xlab( "Model Errors")+
-     ylab( "Count")+
-     theme_bw()+
+qplot(error, bins=50, fill=I("grey10")) +
+     xlab("Model Errors") +
+     ylab("Count") +
+     theme_bw() +
      theme(axis.text=element_text(size=12),
            axis.title=element_text(size=14))
 @
@@ -2600,7 +2599,7 @@ Let's begin with the LASSO:
 train_data = data.frame(trainx, trainy)
 
 mod_lasso = train(trainy~., method="glmnet",# formula and method
-     tuneGrid=expand.grid(alpha = 0, # alpha=0 is the LASSO
+     tuneGrid = expand.grid(alpha = 0, # alpha=0 is the LASSO
                lambda = seq(0,100,1)), #gradient descent to zero
      data = train_data,
      preProcess = c("center"),# centering standardization of points
@@ -2621,10 +2620,10 @@ mod_lasso = train(trainy~., method = "glmnet",
 ## Predictions:
 yhat = predict(mod_lasso)
 # alpha allows transparent points to see density
-qplot(trainy, yhat, alpha=I(0.25))+
-     xlab( expression(paste("Training ", y)))+
-     ylab( expression(paste("Ridge ", hat(y))))+
-     theme_bw()+
+qplot(trainy, yhat, alpha=I(0.25)) +
+     xlab(expression(paste("Training ", y))) +
+     ylab(expression(paste("Ridge ", hat(y)))) +
+     theme_bw() +
      theme(axis.text = element_text(size=12),
           axis.title = element_text(size=14))
 @
@@ -2636,10 +2635,10 @@ qplot(trainy, yhat, alpha=I(0.25))+
 # best values using best lambda:
 lasso_beta = coef(mod_lasso$finalModel, mod_lasso$bestTune$lambda)
 
-qplot(b, lasso_beta[-1])+ # removing intercept
-     xlab( expression(paste("True ", beta)))+
-     ylab( expression(paste("LASSO ", beta)))+
-     theme_bw()+
+qplot(b, lasso_beta[-1]) + # removing intercept
+     xlab(expression(paste("True ", beta))) +
+     ylab(expression(paste("LASSO ", beta))) +
+     theme_bw() +
      theme(axis.text = element_text(size=12),
           axis.title = element_text(size=14))
 @
@@ -2652,27 +2651,31 @@ Similarly, let’s see how the Ridge and elastic net’s hold up:
 <<RidgeNetML1, out.width='5in'>>=
 ## Running Ridge:
 mod_ridge = train(trainy~., method="glmnet",
-          tuneGrid=expand.grid(alpha=1,
-               lambda=seq(0,10,0.01)),
-          data=train_data,
-          preProcess=c("center"),
-          trControl=trainControl(method="cv",number=2, search="grid"))
+          tuneGrid = expand.grid(alpha=1,
+               lambda = seq(0,10,0.01)),
+          data = train_data,
+          preProcess = c("center"),
+          trControl = trainControl(method = "cv",
+                                   number = 2,
+                                   search = "grid"))
 # Best lambda (RMSE) is 1.01
 
 mod_ridge = train(trainy~., method="glmnet",
-          tuneGrid=expand.grid(alpha=1,
-               lambda=seq(0,3,0.01)),
-          data=train_data,
-          preProcess=c("center"),
-          trControl=trainControl(method="cv",number=2, search="grid"))
+          tuneGrid = expand.grid(alpha=1,
+               lambda = seq(0,3,0.01)),
+          data = train_data,
+          preProcess = c("center"),
+          trControl = trainControl(method = "cv",
+                                   number = 2,
+                                   search = "grid"))
 
 # New best lambda of .94
 yhat = predict(mod_ridge)
 
-qplot(trainy, yhat, alpha=I(0.25))+
-     xlab( expression(paste("Training ", y)))+
-     ylab( expression(paste("Ridge ", hat(y))))+
-     theme_bw()+
+qplot(trainy, yhat, alpha=I(0.25)) +
+     xlab(expression(paste("Training ", y))) +
+     ylab(expression(paste("Ridge ", hat(y)))) +
+     theme_bw() +
      theme(axis.text = element_text(size=12),
           axis.title = element_text(size=14))
 
@@ -2683,10 +2686,10 @@ qplot(trainy, yhat, alpha=I(0.25))+
 <<Ridgenet2MLthing, out.width='5in'>>=
 ridge_beta = coef(mod_ridge$finalModel, mod_ridge$bestTune$lambda)
 
-qplot(b, ridge_beta[-1])+
-     xlab( expression(paste("True ", beta)))+
-     ylab( expression(paste("Ridge ", beta)))+
-     theme_bw()+
+qplot(b, ridge_beta[-1]) +
+     xlab(expression(paste("True ", beta))) +
+     ylab(expression(paste("Ridge ", beta))) +
+     theme_bw() +
      theme(axis.text = element_text(size=12),
           axis.title = element_text(size=14))
 @
@@ -2725,11 +2728,13 @@ mod_enet = train(trainy~., method = "glmnet",
                                    lambda = seq(0, 100, 1)),
             data = train_data,
             preProcess = c("center"),
-            trControl = trainControl(method="cv", number=2, search="grid"))
+            trControl = trainControl(method = "cv",
+                                     number = 2,
+                                     search = "grid"))
 # alpha used was .9 and lambda ended up being 1.
 @
 
-This elastic net will give us similarlly better results with a varrying $\alpha$ along with it. However, these models work best for when we have data with many parameters, here we have only started with 100 (``only''). Let's ramp up the number of perameters (P) and really put these models to the test. I'll report the DGP in full.
+This elastic net will give us similarly better results with a varying $\alpha$ along with it. However, these models work best for when we have data with many parameters, here we have only started with 100 (``only''). Let's ramp up the number of parameters (P) and really put these models to the test. I'll report the DGP in full.
 
 <<DGPforML2, prompt=TRUE>>=
 N <- 1000
@@ -2749,10 +2754,10 @@ With this DGP, let's see how our regular linear model holds up graphically:
 
 <<lmoutputML2, out.width='5in'>>=
 ## Problematic:
-qplot(b, coef(m1)[-1], alpha=I(0.25))+
-     xlab( expression(paste("True " , beta)))+
-     ylab( expression(paste("Model " , hat(beta), " Values")))+
-     theme_bw()+
+qplot(b, coef(m1)[-1], alpha=I(0.25)) +
+     xlab(expression(paste("True " , beta))) +
+     ylab(expression(paste("Model " , hat(beta), " Values"))) +
+     theme_bw() +
      theme(axis.text = element_text(size=12),
           axis.title = element_text(size=14))
 @
@@ -2786,7 +2791,9 @@ mod_enet = train(trainy~., method = "glmnet",
                                 lambda = seq(0,100,1)),
           data = train_data,
           preProcess = c("center"),
-          trControl = trainControl(method="cv",number=2, search="grid"))
+          trControl = trainControl(method = "cv",
+                                   number = 2,
+                                   search = "grid"))
 # alpha used was 1 and lambda ended up being 8.
 
 mod_enet = train(trainy~., method = "glmnet",
@@ -2794,7 +2801,9 @@ mod_enet = train(trainy~., method = "glmnet",
                               lambda = seq(0,10,0.5)),
           data = train_data,
           preProcess = c("center"),
-          trControl = trainControl(method="cv",number=2, search="grid"))
+          trControl = trainControl(method = "cv",
+                                   number = 2,
+                                   search = "grid"))
 # alpha ended up at .6 and lambda at 10.
 @
 
@@ -2803,10 +2812,10 @@ Great!
 <<plonewbetafromenetML2, out.width='5in'>>=
 
 enet_beta = coef(mod_enet$finalModel, mod_enet$bestTune$lambda)
-qplot(b, enet_beta[-1])+
-     xlab( expression(paste("True ", beta)))+
-     ylab( expression(paste("Elastic Net ", beta)))+
-     theme_bw()+
+qplot(b, enet_beta[-1]) +
+     xlab( expression(paste("True ", beta))) +
+     ylab( expression(paste("Elastic Net ", beta))) +
+     theme_bw() +
      theme(axis.text = element_text(size=12),
           axis.title = element_text(size=14))
 @
@@ -2854,15 +2863,15 @@ library(kernlab)
 library(microbenchmark)
 # Linear SVM
 linear.svm.bal <- train(Y~.,
-                       data=train.data.1.Bal,
+                       data = train.data.1.Bal,
                        method = "svmLinear")
 
 linear.svm.bal$results$Accuracy
 
 # A polynomial kernal: (long computation!)
 # poly.svm.bal <- train(Y~.,
-#                      data=train.data.1.Bal,
-#                      method="svmPoly")
+#                      data = train.data.1.Bal,
+#                      method = "svmPoly")
 
 # poly.svm.bal$results[as.numeric(rownames(poly.svm.bal$bestTune)),]
 # .951 Accuracy; .902 Kappa; AccuracySD of .011
@@ -2870,8 +2879,8 @@ linear.svm.bal$results$Accuracy
 
 # Radial kernal:
 # radial.svm.bal = train(Y~.,
-#                        data=train.data.1.Bal,
-#                        method="svmRadialCost")
+#                        data = train.data.1.Bal,
+#                        method = "svmRadialCost")
 
 # radial.svm.bal$results[as.numeric(rownames(radial.svm.bal$bestTune)),]
 # Accuracy of .54; AccuracySD .017
