@@ -215,7 +215,7 @@ $X_{it}$ & All Rows Within X (i) and At Each Time (t)\\
 \subsection{Pearl vs. Rubin Models of Causal Inference}
 \hfill \\
 
-Working with similar definitions of ``cause'' Rubin and Pearl are two scholars that have had different approaches to tackling causal inference. Both focus on weighted averages (means) to make the jump between data to the ``real world.'' Note that we could care about the distribution or variance instead of weighted means, but this won't be covered here. Rubin's approach is more algebraic, focusing on how attributes cannot be causal, and specifically stating when errors originate and cross between variables. Pearl leans on graphing theories, creating ``DAG'' plots (this will be covered later) to draw out for readers which variables influence others. Pearl's approach is intuitive and straightforward and seems to encapsulate theory just as well as Rubin's approach but has been criticized for not being explicit enough in error tracking between nodes of the theory plots. However, in some ways Pearl is more explicit algebraically, consider a fundamental mean difference in means between treatment and controls:
+We frequently hear the saying ``correlation does not equal causation.''\footnote{For a particularly hilarious article involving correlation versus causation see: Maltzman, Forrest, James H. Lebovic, Elizabeth N. Saunders, and Emma Furth. ``Unleashing presidential power: The politics of pets in the White House.'' PS: Political Science \& Politics 45, no. 3 (2012): 395-400.} Working with similar definitions of ``cause'' Rubin and Pearl are two scholars that have had different approaches to tackling causal inference. Both focus on weighted averages (means) to make the jump between data to the ``real world.'' Note that we could care about the distribution or variance instead of weighted means, but this won't be covered here. Rubin's approach is more algebraic, focusing on how attributes cannot be causal, and specifically stating when errors originate and cross between variables. Pearl leans on graphing theories, creating ``DAG'' plots (this will be covered later) to draw out for readers which variables influence others. Pearl's approach is intuitive and straightforward and seems to encapsulate theory just as well as Rubin's approach but has been criticized for not being explicit enough in error tracking between nodes of the theory plots. However, in some ways Pearl is more explicit algebraically, consider a fundamental mean difference in means between treatment and controls:
 
 \begin{equation}
 \text{Rubin approach:} ~~~~ E[Y_1] - E[Y_0]
@@ -268,7 +268,7 @@ Pearl's approach, using the \textit{do()} operator explicitly states what the re
 \end{center}
 \hfill
 
-Consider our first plot (above), and imagine that it is some causal ``story'' we wish to convey to the reader. Here C influences both O and D which both influence Y. If we care about the effect of D on Y then we ought be careful that we are not measuring any effect of O on Y as well. This is the backbone to more complex DAG plots, or dynamic acyclic graphs. As a few definitions with these going forward, a \textbf{back door path} is any possible influence that goes into our causal variable rather than coming \textit{from} our causal variable to the dependent variable. Here C is a backdoor path, because Y could influence O (thus C) against the arrow, which in turn gives us false results if we merely measure D on Y. A \textbf{collider} is a node which has multiple variables running into it (in social science most variables will be colliders). Colliders hand-off information into these ``hubs'' which can greatly complicate our findings if not accounted for. Sometimes we may see broken lines or different shapes and subscripts to denote errors in these graphs (take THAT Rubin!) and how these are thought to exist between nodes. Note that DAG plots are made entirely from theory, and that qualitative and quantitative data alike can sculpt how we might model our causal phenomena of interest. Ultimately we care about a few things, (1) identifying exogenous variation, (2) blocking backdoor paths, (3) sum up the front door paths. But how do we ``block'' these dangerous paths? Well there are many ways, the most common in experiments is to stratify the experiment by the node, but the \textbf{curse of dimensionality} tells us that as we do this more and more we will run out of respondents (countries, etc) to be able to afford all of the strata we may want. Thus, many methods such as matching, and design choices help us account for blocking difficulties. \index{Curse of Dimensionality} \index{DAG} \index{Back-Door-Paths} \index{colliders}
+Consider our first plot (above), and imagine that it is some causal ``story'' we wish to convey to the reader. Here C influences both O and D which both influence Y. If we care about the effect of D on Y then we ought be careful that we are not measuring any effect of O on Y as well. This is the backbone to more complex DAG plots, or dynamic acyclic graphs. As a few definitions with these going forward, a \textbf{back door path} is any possible influence that goes into our causal variable rather than coming \textit{from} our causal variable to the dependent variable. Here C is a backdoor path, because Y could influence O (thus C) against the arrow, which in turn gives us false results if we merely measure D on Y. A \textbf{collider} is a node which has multiple variables running into it (in social science most variables will be colliders). Colliders hand-off information into these ``hubs'' which can greatly complicate our findings if not accounted for. Sometimes we may see broken lines or different shapes and subscripts to denote errors in these graphs and how these are thought to exist between nodes. Note that DAG plots are made entirely from theory, and that qualitative and quantitative data alike can sculpt how we might model our causal phenomena of interest. Ultimately we care about a few things, (1) identifying exogenous variation, (2) blocking backdoor paths, (3) sum up the front door paths. But how do we ``block'' these dangerous paths? Well there are many ways, the most common in experiments is to stratify the experiment by the node, but the \textbf{curse of dimensionality} tells us that as we do this more and more we will run out of respondents (countries, etc) to be able to afford all of the strata we may want. Thus, many methods such as matching, and design choices help us account for blocking difficulties. \index{Curse of Dimensionality} \index{DAG} \index{Back-Door-Paths} \index{colliders}
 
 Another great way to account for back-door-paths is to simply randomize, randomize everything in many different ways. By randomizing we shuffle who might get treated or not, with no interaction between them (SUTVA), and no selection into treatment. Although this will be mentioned in detail later. A final note is that sometimes researchers will put coefficients and effect sizes on the edges between nodes to show effects between and within variables of a study. Also when we see circles and dotted lines these are not easily observable variables that are not measurable, or observable.
 
@@ -887,7 +887,6 @@ This means, given that our average (``Good'') beer rating is zero, that if we on
 \noindent Showing this in R, let's load and set up our data and run the model that we used to get the numbers above: \index{loading data} \index{recoding data}
 <<BeerData, warning=FALSE, prompt=TRUE>>=
 ## Initial pass: reading data, looking at variables.
-# Data available, email: MailKyleDavis@gmail.com
 
 library(foreign) # For reading data.
 beer_data <- read.dta('C:/Users/mailk/OneDrive/Documents/R/Graduate_Methods_Handbook/data/beer.dta')
@@ -3560,7 +3559,7 @@ lapply(packages, library, character.only = TRUE)
 #  and hit "download" - open that r.data with your favorite R platform
 
 library(readr)
-data <- read_csv("https://raw.githubusercontent.com/KyleDavisGithub/Graduate_Methods_Handbook/master/swi.csv")
+data <- read_csv("https://raw.githubusercontent.com/KayleeDavisGithub/Graduate_Methods_Handbook/master/swi.csv")
 
 davis <- as.data.frame(data)
 
@@ -3797,9 +3796,9 @@ library(igraph)
 # read in the posts data
 library(readr)
 
-posts <- read_csv('https://raw.githubusercontent.com/KyleDavisGithub/Graduate_Methods_Handbook/master/2017_10_AskSocialScience_posts.csv')
+posts <- read_csv('https://raw.githubusercontent.com/KayleeDavisGithub/Graduate_Methods_Handbook/master/2017_10_AskSocialScience_posts.csv')
 # read in the comments data
-comments <- read_csv('https://raw.githubusercontent.com/KyleDavisGithub/Graduate_Methods_Handbook/master/2017_10_AskSocialScience_comments.csv')
+comments <- read_csv('https://raw.githubusercontent.com/KayleeDavisGithub/Graduate_Methods_Handbook/master/2017_10_AskSocialScience_comments.csv')
 comments$id2 <- paste("t1_", comments$id, sep="")
 posts$id2 <- paste("t3_", posts$id, sep="")
 for_el <- data.frame(
@@ -3815,8 +3814,8 @@ el <- as.matrix(el)
 
 #---------------------------------------------------------------------------
 ##   Nov:
-posts2 <- read_csv('https://raw.githubusercontent.com/KyleDavisGithub/Graduate_Methods_Handbook/master/2017_11_AskSocialScience_posts.csv')
-comments2 <- read_csv('https://raw.githubusercontent.com/KyleDavisGithub/Graduate_Methods_Handbook/master/2017_11_AskSocialScience_comments.csv')
+posts2 <- read_csv('https://raw.githubusercontent.com/KayleeDavisGithub/Graduate_Methods_Handbook/master/2017_11_AskSocialScience_posts.csv')
+comments2 <- read_csv('https://raw.githubusercontent.com/KayleeDavisGithub/Graduate_Methods_Handbook/master/2017_11_AskSocialScience_comments.csv')
 comments2$id2 <- paste("t1_", comments2$id, sep="")
 posts2$id2 <- paste("t3_", posts2$id, sep="")
 
