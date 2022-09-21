@@ -442,15 +442,15 @@ To find, mathematically, our MLE (which occurs under-the-hood in R) we compute t
 \subsection{Running Assumptions}
 
 
-Typically we trade-off assumptions but can never completely eliminate them, only show or \textit{prove} that we have fulfilled them -- all to get closer to causation (causal inference). Some running assumptions are:
+Typically we trade-off assumptions but can never completely eliminate them, only show or \textit{prove} that we have fulfilled them -- all to get closer to causation (causal inference). Some running assumptions and axioms are:
 
 \begin{itemize}
 \item[1.] SUTVA
 \item[2.] No confounding
-\item[3.] Probability exists only between 0 and 1, but never zero nor 1.
+\item[3.] Probability exists only between 0 and 1 (probability axiom).
 \end{itemize}
 
-\noindent If we attempt to ``lean-into'' one of these assumptions to be able to measure it, we may come across additional assumptions like ``parallel paths'' or various representation and error assumptions. Some of these will be discussed in the Regression section of this book.
+\noindent If we attempt to ``lean-into'' one of these assumptions to be able to measure it, we may come across additional assumptions like ``parallel paths'' or various representation and error assumptions. Some of these will be discussed in the Regression section of this book. Probabilistic axioms can be broken, and probability ranges can be reinterpreted to be from 0 to 200\%, for example, but there's usually no reason for this.
 
 
 \subsection{Non-parametric Modeling}
