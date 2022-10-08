@@ -106,17 +106,52 @@
 \begin{document}
 % \SweaveOpts{concordance=TRUE}
 % \graphicspath{Data Files}
+\begin{titlepage}
+    \begin{center}
+        \vspace*{1cm}
+
+        \Huge
+        \textbf{Introduction to Data Science With R}
+
+        \vspace{0.5cm}
+        \LARGE
+        A Survey of Statistical Methodology
+
+        \vspace{1.5cm}
+        \textbf{Kaylee L. Davis}
+
+        \vfill
+
+        \Large
+        For the most recent version: \\
+        \normalsize
+        \url{https://github.com/KayleeDavisGitHub/Graduate_Methods_Handbook} \\
+        \Large
+        Summer 2017 --- \thedate ~(last updated) \\
+
+    \end{center}
+\end{titlepage}
+
+% FlushLeft Start:
 \begin{flushleft}
 \setlength{\parindent}{1cm} %1cm indent
 
+\clearpage
 
-
+%%! Page for Table of Contents:
+\tableofcontents
 \thispagestyle{empty}
-\noindent \textbf{Graduate Methods Handbook}\\
+\clearpage
+
+\section{Introduction}
+\setcounter{page}{1}
+
+\subsection{Who Should Read This Book}
 \hfill \\
+
 The purpose of this book is to provide an overview and tutorial for executing and critically interpreting various methods. The key contribution of this book is the simplified primer to various data science topics with code for those interested in expanding and learning more.
 
-Beyond the more stream-lined methods topics, there are sections on causal inference, time series modeling, network analysis, and even brief sections devoted to courses on qualitative methods. This book includes hyperlinks for the table of contents and index for quick access to information (useful for reviewing). The scope of this book will be only in R, with rare mentions to other tools like Tableau, Power BI, Python, and SQL.
+Beyond the more stream-lined methods topics, there are sections on causal inference, time series modeling, network analysis, and even brief sections devoted to qualitative methodology. The online .pdf version of the book includes hyperlinks for the table of contents and index for quick access to information (useful for reviewing). The scope of this book will be only in R, with rare mentions to other tools like Tableau, Power BI, Python, and SQL.
 
 The book follows various data sets and topics from beer rankings to popular Reddit posts. I have tried my best to include copies of all data tables at the GitHub repository below. If the data is not available there the source will usually be mentioned in the text.
 
@@ -153,31 +188,52 @@ knit_theme$set(theme)
 #  Example Code:
 X <- "String"
 inverse_logit <- function(x){
-     exp(x)/(1+exp(x))
+     base::exp(x)/(1 + base::exp(x))
 }
 @
 
-Overall, I hope this document helps someone. Feel free to connect with me over any issues or questions you might have. Any questions or concerns can be sent to me on LinkedIn or via GitHub issue reporting.
 
-\begin{center}
-Created by Kaylee Davis; \url{https://www.linkedin.com/in/KayleeDavisIN} \\
-Summer 2017 --- \thedate ~(last updated)
+\newpage
+\subsection{Why R?}
+\hfill \\
+<<GoogleTrends, include=TRUE, cache=FALSE, echo=FALSE, message=FALSE, warning=FALSE, out.height= "70%", out.width= "105%">>=
+library(tidyverse)
+library(readr)
+# data download from Google Trends:
+df <- read_csv("https://raw.githubusercontent.com/KayleeDavisGithub/Graduate_Methods_Handbook/master/data/multiTimeline.csv")
 
+# Rename, convert to tibble
+df$SPSS <- df$...4
+df <- as_tibble(df)
 
-For the most recent version:
+# Fix date variable:
+df$Month <- paste0(df$Month, '-01')
+df$Month <- as.Date(df$Month)
 
-\url{https://github.com/KayleeDavisGitHub/Graduate_Methods_Handbook}
-\end{center}
+# Group join for plotting:
+df2 <- df %>%
+     select(Month, R, SAS, SPSS) %>%
+     gather(key = "variable", value = "value", -Month)
 
-\clearpage
-%%! Page for Table of Contents:
-\tableofcontents
-\thispagestyle{empty}
+ggplot(df2, aes(x=Month, y=value)) +
+     geom_line(aes(color = variable)) +
+     scale_color_manual(values = c("steelblue", "darkred", "grey40"),
+                        name = "Program") +
+     labs(title = "Worldwide Google Search Trends: Science Category",
+          subtitle = "R, SAS, SPSS  [Jan. 2004 | Sept. 2022]",
+          caption = "https://trends.google.com/trends/") +
+     xlab(" ") +
+     ylab("Search Interest Percent (%)") +
+     geom_vline(xintercept=as.Date("2010-06-01"), linetype="dashed") +
+     annotate("text", x = as.Date("2010-06-01"), y = 80,
+              label = "June, 2010\nR Passes SPSS",
+              angle = 90, size = 3) +
+     theme_minimal()
+@
 
 
 %%! Clear page; set page counter at page "1"
 \clearpage
-\setcounter{page}{1}
 %----------------------------------------------------------------------------------
 
 \section{Causal Inference and Assumptions}
@@ -308,6 +364,61 @@ Another great way to account for back-door-paths is to simply randomize, randomi
 %------------------------------------------------------------------------
 
 
+\subsection{Formal Modeling}
+
+The late statistician George Box once said ``All models are wrong, but some are useful.'' Formal Modeling (which I'll sometimes call game theory interchangeably) can be used to define the the particular assumptions leading to an empirical test. Instead of writing long-hand the history, studies, and assumptions that go alongside our theory we explicitly state relevant ``variables'' in math notation leading right up to a logical empirical test. This has many obvious benefits, chiefly it disciplines one to be explicit with their assumptions (similar, but more involved than DAG plots from the causal inference chapter). Also, this allows for clear objections and revisions to be made by future scholarship. Indeed many models, such as Downs' ``Median Voter Theorem'' has been revised multiple times given the clear writing from the original mathematical formal modeling.
+
+
+\hfill \\
+
+\noindent \textbf{Utility, First Best, Nash Equilibrium, Comparative Static}
+
+\index{utility}
+\noindent To begin, utility is one's preferences for one thing over another. For example, preferring guns to butter:
+
+$$ u_i(\textit{Guns}) = 10 ~~~~ u_i(\textit{Butter}) = 1 $$\\
+
+\noindent Which, note, is the same as this \textit{utility function}:
+
+$$ u_i(\textit{Guns}) = 8,675,309 ~~~~ u_i(\textit{Butter}) = 1,337 $$\\
+
+One's \textit{expected utility} is the mathematical calculation of one's probability of each event happening multiplied by each utility per outcome.\footnote{pg. 339 of Bueno de Mesquita's ``Political Economy for Public Policy has a great example of this. }
+
+\index{First Best} \index{Nash Equilibrium}
+\noindent Considering the standard 2x2 matrix format:
+
+  \begin{table}[h!]
+  \centering
+    \setlength{\extrarowheight}{2pt}
+    \begin{tabular}{cc|c|c|}
+      & \multicolumn{1}{c}{} & \multicolumn{2}{c}{Player $Y$}\\
+      & \multicolumn{1}{c}{} & \multicolumn{1}{c}{$A$}  & \multicolumn{1}{c}{$B$} \\\cline{3-4}
+      {Player $X$}  & $A$ & $(x,y)$ & $(x,y)$ \\\cline{3-4} % \multirow{2}* was in front of {player}
+      & $B$ & $(x,y)$ & $(x,y)$ \\\cline{3-4}
+    \end{tabular}
+  \end{table}
+
+The \textit{First Best} is the bolded sections given the best strategic decisions per potential choice by the other player.
+
+
+  \begin{table}[h!] % here!
+  \centering        % I guess this is the only way to center the table?
+    \setlength{\extrarowheight}{2pt}
+    \begin{tabular}{cc|c|c|}
+      & \multicolumn{1}{c}{} & \multicolumn{2}{c}{Country $Y$}\\
+      & \multicolumn{1}{c}{} & \multicolumn{1}{c}{Don't Arm}  & \multicolumn{1}{c}{Arm} \\\cline{3-4}
+      {Country $X$}  & Don't Arm & $\textbf{4, 4} $ & 0,\textbf{3} \\\cline{3-4}
+      & Arm & \textbf{3},0 & 1,1 \\\cline{3-4}
+    \end{tabular}
+  \end{table}
+
+The \textit{Nash Equilibrium} is the ``first best of the first bests'' or where all players reach an equilibrium around one set of strategies -- even though they may not have the highest pay-off or reward for a particular player. Note that the process here for solving a 3x3 to NxN matrix is similar to the standard 2x2. Also the Nash Equilibrium(a) can be solved algebraically as well; graphically it is the intersection of two lines which represent the strategic continuum a player has. A Nash Equilibrium(a) can be notated by any given variable: $\theta^*$.
+
+\index{subgame perfect Nash Equilibrium}
+A variation of the Nash Equilibrium is the \textit{subgame perfect Nash Equilibrium}, or the regular Nash Eqilibria per subgame of a longer, more dynamic, game.
+
+\index{comparative static}
+Another term, the \textit{comparative static} is the component of a model that connects our theory to our empiricism through game-theoretic reasoning. Typically the comparative static is deployed in papers to test hypotheses, arrive at novel findings, argue for an expansion of a particular model or theory, or just to describe a phenomenon with more precision than before.
 
 
 
@@ -415,7 +526,7 @@ t = \frac{\bar{x} - \mu}{s_x / \sqrt{n}}
 \end{equation}
 
 
-\subsection{Frequentism and Bayesianism: What are we really doing here?}
+\subsection{Frequentism and Bayesianism}
 
 ``Statistics'' has its roots, interestingly, in social sciences as the origins of the word derives from ``state-istics'' or the study of the state. This methodology, uniquely bred for States to understand it's citizenry, statistics have become fascinatingly turned for the \textit{people} to now understand their State. Following World War II this was more important than ever, a social science with deep philosophical, theoretical, and qualitative research began to explode with quantitative methodology in through the 1950's. These methodologies, deeply aided by fields like biology, computer science, and econometric, have both drawn us closer to understanding public and governmental behavior \textit{and} has driven us farther from these concepts as methodology has been misused (e.g. p-hacking), misunderstood, and miscommunicated.
 
@@ -888,8 +999,9 @@ This means, given that our average (``Good'') beer rating is zero, that if we on
 <<BeerData, warning=FALSE, prompt=TRUE>>=
 ## Initial pass: reading data, looking at variables.
 
-library(foreign) # For reading data.
-beer_data <- read.dta('C:/Users/mailk/OneDrive/Documents/R/Graduate_Methods_Handbook/data/beer.dta')
+library(readr) # For reading data.
+# KayleeDavisGithub/Graduate_Methods_Handbook/master/data/beer.csv
+beer_data <- read_csv("https://raw.githubusercontent.com/KayleeDavisGithub/Graduate_Methods_Handbook/master/data/beer.csv")
 
 library(car) # for ease of recoding variables
 # Our Beer ratings could be coded more intuitively:
@@ -2502,7 +2614,7 @@ Here we see the three estimates from our simulation and our model's prediction b
 
 Let's use simulation to test out a few penalized regression models in R, starting with making a new DGP:
 
-<<PenRegressDGP1>>=
+<<PenRegressDGP1, message=FALSE>>=
 set.seed(12345)
 library(caret) #! for train() and Penalized Regression Functions
 library(MASS) # mvrnorm()
@@ -3538,7 +3650,7 @@ set.seed(123)
 
 # Let's try something fancy:
 # List all packages:
-packages <- c("NetCluster", "blockmodeling", "gplots", "igraph")
+packages <- c("blockmodeling", "gplots", "igraph")
 
 # Install all packages in one function:
 #   lapply(packages, install.packages, character.only = TRUE)
@@ -3554,12 +3666,9 @@ lapply(packages, library, character.only = TRUE)
 #  row.names = 1 uses the first column as the row names
 #    (if we put row.names = 2, it would use the second column, etc.)
 
-## I couldn't find the .csv... so I just took the data from the source
 # https://networkdata.ics.uci.edu/netdata/html/davis.html
-#  and hit "download" - open that r.data with your favorite R platform
 
-library(readr)
-data <- read_csv("https://raw.githubusercontent.com/KayleeDavisGithub/Graduate_Methods_Handbook/master/swi.csv")
+data <- readr::read_csv("https://raw.githubusercontent.com/KayleeDavisGithub/Graduate_Methods_Handbook/master/data/swi.csv")
 
 davis <- as.data.frame(data)
 
@@ -3605,10 +3714,6 @@ plot(swdend) # So how do we read this Dendrogram?
 #  as more and more nodes find similarity.
 
 
-# Here is a heatmap with the same viz on each axis
-heatmap.2(as.matrix(as.dist(1-cor(swi))),
-          trace="none",
-          revC=TRUE)
 
 cutree(swdend, k=2) # here we are telling R where we should cut our clusters at.
 #  THEORY and your interpretation of the data drives this decision,
@@ -3654,7 +3759,6 @@ plot(flo_dend)
 
 
 ## With gplots
-heatmap.2(as.matrix(flo_dist),trace="none",revC=TRUE)
 plot(flo_m,vertex.color=cutree(flo_dend, k=4))
 
 # lots of explaination and data reading in the seminar notes from the course!
@@ -3796,9 +3900,9 @@ library(igraph)
 # read in the posts data
 library(readr)
 
-posts <- read_csv('https://raw.githubusercontent.com/KayleeDavisGithub/Graduate_Methods_Handbook/master/2017_10_AskSocialScience_posts.csv')
+posts <- read_csv('https://raw.githubusercontent.com/KayleeDavisGithub/Graduate_Methods_Handbook/master/data/2017_10_AskSocialScience_posts.csv')
 # read in the comments data
-comments <- read_csv('https://raw.githubusercontent.com/KayleeDavisGithub/Graduate_Methods_Handbook/master/2017_10_AskSocialScience_comments.csv')
+comments <- read_csv('https://raw.githubusercontent.com/KayleeDavisGithub/Graduate_Methods_Handbook/master/data/2017_10_AskSocialScience_comments.csv')
 comments$id2 <- paste("t1_", comments$id, sep="")
 posts$id2 <- paste("t3_", posts$id, sep="")
 for_el <- data.frame(
@@ -3814,8 +3918,8 @@ el <- as.matrix(el)
 
 #---------------------------------------------------------------------------
 ##   Nov:
-posts2 <- read_csv('https://raw.githubusercontent.com/KayleeDavisGithub/Graduate_Methods_Handbook/master/2017_11_AskSocialScience_posts.csv')
-comments2 <- read_csv('https://raw.githubusercontent.com/KayleeDavisGithub/Graduate_Methods_Handbook/master/2017_11_AskSocialScience_comments.csv')
+posts2 <- read_csv('https://raw.githubusercontent.com/KayleeDavisGithub/Graduate_Methods_Handbook/master/data/2017_11_AskSocialScience_posts.csv')
+comments2 <- read_csv('https://raw.githubusercontent.com/KayleeDavisGithub/Graduate_Methods_Handbook/master/data/2017_11_AskSocialScience_comments.csv')
 comments2$id2 <- paste("t1_", comments2$id, sep="")
 posts2$id2 <- paste("t3_", posts2$id, sep="")
 
@@ -4074,7 +4178,7 @@ Above we have both of our complete networks for both months. In these graphs we 
 \begin{center}
 <<plot2, prompt=TRUE, warning=FALSE, out.width='5in'>>=
 
-giant.component <- function(graph) {
+giant.component <- function(graph){
      cl <- clusters(graph)
      induced.subgraph(graph, which(cl$membership == which.max(cl$csize)))
 }
@@ -4374,7 +4478,6 @@ blockmodel(knet, ec = knet %v% "Faction")
 kbm <- blockmodel(knet, ec = knet %v% "Faction")$block.model
 
 # (swap packages back)
-detach(package:sna)
 detach(package:intergraph)
 require(igraph)
 
@@ -4402,138 +4505,6 @@ assortativity(g_kar, c(rep(1,16), rep(2,18)))
 \end{center}
 
 \subsection{Network Modeling}
-
-
-% --------------------------------------
-
-\clearpage
-\section{Stochastic Epidemic Modeling}
-
-Stochastic Epidemic Modeling, at it's core, is the ability to track, predict, and ultimiately intervene upon epidemics during their lifespan. This has obvious applications in public health, but could also be applied to the social sciences. Consider an example where voters who identify as ``independent'' are not ``infected'' with the Republican or Democrat ``virus.'' Does framing public opinion this way yield interesting results? Perhaps! In the same way the H1N1 virus can only travel from person to person, geography too is important for political projections. Similarly for political communication online, the fact that we reference ``viral'' sensations and memes is forshadowing epidemic modeling's utility on the social sciences.
-
-Certainly most epidemics are stochastic in nature, that is, acting with a degree of randomness and variation. Deterministic models have additional assumptions and too can be useful as a first-pass analysis. Epidemics usually start as a stochastic event in the first place, but at a larger volume they reach deterministic levels. However, if we wish to comment on the degree of uncertainty we have about an epidemic we requie stochastic models. For these purposes we will primarily focus on stochastic models, however the first subsection will include a deterministic model to outline some useful definitions and practices.
-
-\subsection{Deterministic Epidemic Modeling}
-
-Consider the following simplified epidemic model: the SIR model. This model assumes a simplified epidemic where susceptible (S) become infected (I) and then either become recovered or otherwise removed (R). This model can be complicated, adding conditional variables along the way (which would certainly be the case for the social sciences) but for now we will work with the following SIR model: a compartmented type model in theory. \index{SIR}
-
-\begin{center}
-
-\begin{tikzpicture}[%
-    ->,
-    shorten >=2pt,
-    >=stealth,
-    node distance=3cm,
-    noname/.style={%
-      rectangle,
-      minimum width=2em,
-      minimum height=2em,
-      draw
-    }
-  ]
-  % Nodes:
-    \node[noname] (S)                                   {S};
-    \node[noname] (I) [right=of S]        				{I};
-    \node[noname] (R) [right=of I]                      {R};
-
-  % Paths:
-    \path (S) edge     node {} (I);
-    \path (I) edge     node {} (R);
-\end{tikzpicture}
-\end{center}
-
-The other thing to mention is that for these models we do not consider ``time'' in the same sense as timeseries or as we usually think of it. Instead, ``time'' passes as each generational infection occurs, someone could remain dormant with a virus for a long time, but all that matters is the conversion periods not the waiting periods inbetween. Similarly, these are Markov models which only care about the probability of infection between generations, so one's history doesn't matter.
-
-
-\subsubsection{Reed-Frost Model}
-
-The Reed-Frost Model is the simplest example of a deterministic epidemic model, and is typically appicable for small-n scenarios (like a small household infection for example).
-
-Consider $q$ to be the probability of escaping infection from a single infected individual by a given susceptible. $X_i$ and $Y_i$ are the number of susceptible and infectives at a given generational time.
-
-The logic behind this model is to map out all possibilities that could occur for a particular n-size and then calculate the probability of any one possibility occurring. Or mathematically:
-
-\begin{align*}
-& P(Y_{j+1} = y_{j+1} | X_0 = x_0, Y_0 = y_0 , ... , X_j = x_j, Y_j =y_j) \\
-&= P(Y_{j+1} = y_{j+1} | X_j = x_j, Y_j = y_j)\\
-&= \binom{x_i}{y_{j+1}} (1-q^{y_j})^{y_{j+1}} (q^{y_j})^{x_j - y_{j+1}}
-\end{align*}
-
-The final result includes (in the first module) a binomial of individual infected, those who didn't escape infection ($1-q$) and then the compliment of this ($q$).
-
-
-\subsection{Stochastic SIR Models}
-
-
-
-
-
-%--------------------------------------------------------------------
-\clearpage
-\section{Formal Modeling}
-
-\subsection{How can Formal Modeling Help?} \index{DAG}
-
-The late statistician George Box once said ``All models are wrong, but some are useful.'' Formal Modeling (which I'll sometimes call game theory synonymously) can be used to spell out the the particular assumptions leading to an empirical test. Instead of writing long-hand the history, studies, and assumptions that go alongside our theory we explicitly state relevant ``variables'' in math notation leading right up to a logical empirical test. This has many obvious benefits, chiefly it disciplines one to be explicit with their assumptions (similar, but more involved than DAG plots from the causal inference chapter). Also, this allows for clear objections and revisions to be made by future scholarship. Indeed many models, such as Downs' ``Median Voter Theorem'' has been revised multiple times given the clear writing from the original mathematical formal modeling.
-
-Of course Downs and others who use formal modeling are very frequently ``wrong,'' but the purpose of formal modeling is to do things more systematically and with more academic rigor than prior. Works of this nature become foundational, having long shelf-lives, and become solid building blocks for future scholarship to sculpt.
-
-
-\subsection{Components of Game Theory}
-
-\hfill \\
-
-\noindent \textbf{Utility, First Best, Nash Equilibrium, Comparative Static}
-
-\index{utility}
-\noindent To begin, utility is one's preferences for one thing over another. For example, preferring guns to butter:
-
-$$ u_i(\textit{Guns}) = 10 ~~~~ u_i(\textit{Butter}) = 1 $$\\
-
-\noindent Which, note, is the same as this \textit{utility function}:
-
-$$ u_i(\textit{Guns}) = 8,675,309 ~~~~ u_i(\textit{Butter}) = 1,337 $$\\
-
-One's \textit{expected utility} is the mathematical calculation of one's probability of each event happening multiplied by each utility per outcome.\footnote{pg. 339 of Bueno de Mesquita's ``Political Economy for Public Policy has a great example of this. }
-
-\index{First Best} \index{Nash Equilibrium}
-\noindent Considering the standard 2x2 matrix format:
-
-  \begin{table}[h!]
-  \centering
-    \setlength{\extrarowheight}{2pt}
-    \begin{tabular}{cc|c|c|}
-      & \multicolumn{1}{c}{} & \multicolumn{2}{c}{Player $Y$}\\
-      & \multicolumn{1}{c}{} & \multicolumn{1}{c}{$A$}  & \multicolumn{1}{c}{$B$} \\\cline{3-4}
-      {Player $X$}  & $A$ & $(x,y)$ & $(x,y)$ \\\cline{3-4} % \multirow{2}* was in front of {player}
-      & $B$ & $(x,y)$ & $(x,y)$ \\\cline{3-4}
-    \end{tabular}
-  \end{table}
-
-The \textit{First Best} is the bolded sections given the best strategic decisions per potential choice by the other player.
-
-
-  \begin{table}[h!] % here!
-  \centering        % I guess this is the only way to center the table?
-    \setlength{\extrarowheight}{2pt}
-    \begin{tabular}{cc|c|c|}
-      & \multicolumn{1}{c}{} & \multicolumn{2}{c}{Country $Y$}\\
-      & \multicolumn{1}{c}{} & \multicolumn{1}{c}{Don't Arm}  & \multicolumn{1}{c}{Arm} \\\cline{3-4}
-      {Country $X$}  & Don't Arm & $\textbf{4, 4} $ & 0,\textbf{3} \\\cline{3-4}
-      & Arm & \textbf{3},0 & 1,1 \\\cline{3-4}
-    \end{tabular}
-  \end{table}
-
-The \textit{Nash Equilibrium} is the ``first best of the first bests'' or where all players reach an equilibrium around one set of strategies -- even though they may not have the highest pay-off or reward for a particular player. Note that the process here for solving a 3x3 to NxN matrix is similar to the standard 2x2. Also the Nash Equilibrium(a) can be solved algebraically as well; graphically it is the intersection of two lines which represent the strategic continuum a player has. A Nash Equilibrium(a) can be notated by any given variable: $\theta^*$.
-
-\index{subgame perfect Nash Equilibrium}
-A variation of the Nash Equilibrium is the \textit{subgame perfect Nash Equilibrium}, or the regular Nash Eqilibria per subgame of a longer, more dynamic, game.
-
-\index{comparative static}
-Another term, the \textit{comparative static} is the component of a model that connects our theory to our empiricism through game-theoretic reasoning. Typically the comparative static is deployed in papers to test hypotheses, arrive at novel findings, argue for an expansion of a particular model or theory, or just to describe a phenomenon with more precision than before.
-
-\hfill \\
-\subsection{Popular Games as Examples}
 
 
 % ---------------------------------------------------------------------
