@@ -1,0 +1,36 @@
+"","rating","beer","origin","avail","price","cost","calories","sodium","alcohol","class","light","us","quality","good","verygood"
+"1","VeryGood","Anchor Steam","USA",1,7.19,1.2,154,17,4.7,"Super-pr","NONLIGHT",1,3,1,1
+"2","VeryGood","Labatts","Canada",1,3.15,0.53,147,17,5,"Premium","NONLIGHT",0,3,1,1
+"3","VeryGood","Molson","Canada",1,3.35,0.56,154,17,5.1,"Premium","NONLIGHT",0,3,1,1
+"4","VeryGood","Budweiser","USA",0,2.59,0.43,144,15,4.7,"Premium","NONLIGHT",1,3,1,1
+"5","VeryGood","Heineken","Holland",0,4.59,0.77,152,11,5,"Super-pr","NONLIGHT",0,3,1,1
+"6","VeryGood","Kronenbourg","France",1,4.39,0.73,170,7,5.2,"Super-pr","NONLIGHT",0,3,1,1
+"7","VeryGood","Michelob","USA",0,2.99,0.5,162,10,5,"Super-pr","NONLIGHT",1,3,1,1
+"8","VeryGood","Miller High Life","USA",0,2.49,0.42,149,17,4.7,"Premium","NONLIGHT",1,3,1,1
+"9","VeryGood","Henry Weinhard","USA",1,3.65,0.61,149,7,4.7,"Super-pr","NONLIGHT",1,3,1,1
+"10","VeryGood","Schlitz","USA",0,2.59,0.43,151,19,4.9,"Premium","NONLIGHT",1,3,1,1
+"11","VeryGood","Lowenbrau","USA",0,2.89,0.48,157,15,4.9,"Super-pr","NONLIGHT",1,3,1,1
+"12","Good","Michelob Light","USA",0,2.99,0.5,135,11,4.2,"Premium","LIGHT",1,2,1,0
+"13","Good","Pabst Blue Ribbon","USA",0,2.29,0.38,152,8,4.9,"Premium","NONLIGHT",1,2,1,0
+"14","Good","Kirin","Japan",1,4.75,0.79,149,6,5,"Super-pr","NONLIGHT",0,2,1,0
+"15","Good","Old Milwaukee","USA",1,1.69,0.28,145,23,4.6,"Popular","NONLIGHT",1,2,1,0
+"16","Good","Miller Light","USA",0,2.55,0.43,99,10,4.3,"Premium","LIGHT",1,2,1,0
+"17","Good","Dos Equis","Mexico",1,4.22,0.7,145,14,4.5,"Super-pr","NONLIGHT",0,2,1,0
+"18","Good","Budweiser Light","USA",0,2.63,0.44,113,8,3.7,"Premium","LIGHT",1,2,1,0
+"19","Good","Coors Light","USA",1,2.73,0.46,102,15,4.1,"Premium","LIGHT",1,2,1,0
+"20","Good","Schmidts","USA",1,1.79,0.3,147,7,4.7,"Popular","NONLIGHT",1,2,1,0
+"21","Good","Coors","USA",1,2.65,0.44,140,18,4.6,"Premium","NONLIGHT",1,2,1,0
+"22","Good","Augsberger","USA",1,2.39,0.4,175,24,5.5,"Super-pr","NONLIGHT",1,2,1,0
+"23","Good","Strohs Bohemian Style","USA",1,2.49,0.42,149,27,4.7,"Premium","NONLIGHT",1,2,1,0
+"24","Good","Becks","Germany",1,4.55,0.76,150,19,4.7,"Super-pr","NONLIGHT",0,2,1,0
+"25","Good","Olympia","USA",1,2.65,0.44,153,27,4.6,"Premium","NONLIGHT",1,2,1,0
+"26","Fair","Blatz","USA",1,1.79,0.3,144,13,4.6,"Popular","NONLIGHT",1,1,0,0
+"27","Fair","Scotch Buy (Safeway)","USA",1,1.59,0.27,145,18,4.5,"Popular","NONLIGHT",1,1,0,0
+"28","Fair","Schlitz Light","USA",0,2.79,0.47,97,7,4.2,"Popular","LIGHT",1,1,0,0
+"29","Fair","Olympia Gold Light","USA",1,2.75,0.46,72,6,2.9,"Popular","LIGHT",1,1,0,0
+"30","Fair","Tuborg","USA",1,2.59,0.43,155,13,5,"Premium","NONLIGHT",1,1,0,0
+"31","Fair","Hamms","USA",1,2.59,0.43,136,19,4.4,"Premium","NONLIGHT",1,1,0,0
+"32","Fair","Rolling Rock","USA",1,2.15,0.36,144,8,4.7,"Premium","NONLIGHT",1,1,0,0
+"33","Fair","St Pauli Girl","Germany",1,4.59,0.77,144,21,4.7,"Super-pr","NONLIGHT",0,1,0,0
+"34","Fair","Heilmans Old Style","USA",1,2.59,0.43,144,24,4.9,"Premium","NONLIGHT",1,1,0,0
+"35","Fair","Pabst Extra Light","USA",0,2.29,0.38,68,15,2.3,"Premium","LIGHT",1,1,0,0
