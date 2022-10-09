@@ -1,5 +1,5 @@
-### Graduate_Methods_Handbook
-A working handbook/guide following every methods class I've ever taken. Feel free to use this to learn LaTeX, R, or methods. Download the .pdf above to give it a read! Contact information found in document.
+### Introduction to Data Science With R
+Download the .pdf above to give it a read! Contact information for various resources found in document.
 
 
 #### Licensing and Citation
