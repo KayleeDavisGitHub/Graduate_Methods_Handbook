@@ -153,11 +153,7 @@ The purpose of this book is to provide an overview and tutorial for executing an
 
 Beyond the more stream-lined methods topics, there are sections on causal inference, time series modeling, network analysis, and even brief sections devoted to qualitative methodology. The online .pdf version of the book includes hyperlinks for the table of contents and index for quick access to information (useful for reviewing). The scope of this book will be only in R, with rare mentions to other tools like Tableau, Power BI, Python, and SQL.
 
-The book follows various data sets and topics from beer rankings to popular Reddit posts. I have tried my best to include copies of all data tables at the GitHub repository below. If the data is not available there the source will usually be mentioned in the text.
-
-\begin{center}
-\url{https://github.com/KayleeDavisGitHub/Graduate_Methods_Handbook/tree/master/data}
-\end{center}
+The book follows various data sets and topics from beer rankings to popular Reddit posts. I have tried my best to include copies of all data tables at the GitHub repository.\footnote{\url{https://github.com/KayleeDavisGitHub/Graduate_Methods_Handbook/tree/master/data}} If the data is not available there the source will be mentioned in the text.
 
 To learn the content in this book better I would suggest applying the basic ideas here to a project you care about, and just taking time to run code and teach others what you've done. This is also not an exhaustive list of statistical methods and I may reference something but never cover it later on. This only covers courses I've taken in my PhD program at Ohio State, but some of my insights from my work later on may be folded in to provide relevance for those in the business or government industry.
 
@@ -194,9 +190,9 @@ inverse_logit <- function(x){
 
 
 \newpage
-\subsection{Why R?}
+\subsection{Why Choose R?}
 \hfill \\
-<<GoogleTrends, include=TRUE, cache=FALSE, echo=FALSE, message=FALSE, warning=FALSE, out.height= "70%", out.width= "105%">>=
+<<GoogleTrends, include=TRUE, cache=FALSE, echo=FALSE, message=FALSE, warning=FALSE, out.height= "80%">>=
 library(tidyverse)
 library(readr)
 # data download from Google Trends:
@@ -996,7 +992,7 @@ This means, given that our average (``Good'') beer rating is zero, that if we on
 
 \clearpage
 \noindent Showing this in R, let's load and set up our data and run the model that we used to get the numbers above: \index{loading data} \index{recoding data}
-<<BeerData, warning=FALSE, prompt=TRUE>>=
+<<BeerData, warning=FALSE, prompt=TRUE, message=FALSE>>=
 ## Initial pass: reading data, looking at variables.
 
 library(readr) # For reading data.
@@ -1279,23 +1275,15 @@ df %>%
 
 The above observations are then our outliers and we can address each of those and make calculated decisions on whether to remove or include them in our data set.
 
+\clearpage
+
 \subsubsection{Model Specificiation, Distributional Functions}
 
-Some important continuous distributions:
+Some important distributional notes:\footnote{Much thanks to Soubhik Barari, Ph.D. Candidate at Harvard University for sharing these notes with me during class.}
 
-\begin{longtable}{  m{2.5cm}  m{5.5cm} m{2cm}  m{2cm}  m{2cm}  m{2cm} }
-\hline\noalign{\smallskip}
-\textbf{Name} & \textbf{Density} & \textbf{Parameters} & \textbf{Mean} & \textbf{Variance} \\
-\noalign{\smallskip}\hline\noalign{\smallskip}
-Uniform &    $\frac{1}{b-a} \text{~ for~ } a < x < b$ & a,b & $\frac{a +b}{2}$ & $\frac{(b-a)^2}{12}$ \\
-Triangular &  $\frac{1}{a} \left( 1- \frac{| x - b |}{a} \right) \text{, ~ for~} |x-b| < a $  &  a,b  &   b  & $\frac{a^2}{6}$  \\
-Laplace \hspace{1cm} (Exponential) &   $ke^{-kx} \text{, ~ for~} x > 0 $ &  k  & $\frac{1}{k}$ &  $\frac{1}{k^2}$  \\
-Normal (Gaussian) &   $\mathlarger{ \frac{1}{ \sqrt{2 \pi} \sigma} e^{- \frac{1}{2} \left(\frac{x-\mu}{\sigma} \right)^2} }$ &
-$\mu, \sigma^2 $ & $\mu$ & $ \sigma^2 $ \\
-Chi-Square  & $ \mathlarger{ \frac{x^{r/2-1} e^{-x/2}}{(v/2 - 1)! 2^{v/2}} }$  & $v$ & $v$ & $2v$ \\
-Cauchy & $ \mathlarger{ \frac{1/\pi}{1+ (x-m)^2} }$ & m & (none) & (none)\\
-\noalign{\smallskip}\hline\noalign{\smallskip}
-\end{longtable}
+\begin{center}
+\includegraphics[scale=0.80]{table_Soubhik Barari}
+\end{center}
 
 In the following sections each of these should be illuminated as we use them in regression and think about how these relate to the natural world.
 
